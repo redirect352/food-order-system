@@ -1,0 +1,20 @@
+.option{
+	padding: 10px;
+	font-size: 16px;
+	font-weight: 400;
+	text-align: left;
+	text-decoration: none;
+	color: light-dark(var(--mantine-color-grey-9), var(--mantine-color-text));
+}
+
+.option:hover{
+	transition: 0.2s ease-in all;
+	color: var(--mantine-color-primary-7);
+}
+.optionActive, .optionActive:hover{
+	border-radius: 12px;
+	color: light-dark(var(--mantine-color-primary-4), var(--mantine-color-white));
+	font-weight: 700;
+	background: light-dark(var(--mantine-color-primary-1), var(--mantine-color-primary-7)) ;
+	font-weight: 700;
+}

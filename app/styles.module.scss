@@ -1,0 +1,16 @@
+.notFoundImageBox{
+  @media (max-width: $mantine-breakpoint-xs) {
+    width: 300px;
+    height: 300px;
+  }
+  @media (min-width: $mantine-breakpoint-xs) and (max-width:$mantine-breakpoint-md) {
+    width: 400px;
+    height: 400px;
+  }
+  width: 500px;
+  height: 500px;
+}
+
+.bodyColor{
+  background-color: light-dark(var(--mantine-color-white), var(--mantine-color-black));;
+}

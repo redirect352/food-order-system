@@ -1,11 +1,12 @@
 import '@mantine/core/styles.css';
 import React from 'react';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
-import { theme } from '../theme';
+import { resolver, theme } from '../theme';
+import ResponsiveSizes from './ResponsiveSizes';
 
 export const metadata = {
-  title: 'Mantine Next.js template',
-  description: 'I am using Mantine with Next.js!',
+  title: 'Система заказа',
+  description: 'Система автоматизированного заказа товаров государственного предприятия "Минсктранс"',
 };
 
 export default function RootLayout({ children }: { children: any }) {
@@ -20,7 +21,11 @@ export default function RootLayout({ children }: { children: any }) {
         />
       </head>
       <body>
-        <MantineProvider theme={theme}>{children}</MantineProvider>
+      <MantineProvider theme={theme} cssVariablesResolver={resolver}>
+        <ResponsiveSizes>
+          {children}
+        </ResponsiveSizes>
+      </MantineProvider>
       </body>
     </html>
   );
