@@ -3,7 +3,6 @@
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import React from 'react';
-import { Box, Divider } from '@mantine/core';
 import classes from './Sidebar.module.scss';
 
 export default function SidebarOption({ children, href } :
