@@ -1,0 +1,11 @@
+.pageHeader{
+  width: 100%;
+  text-align: left;
+  @media (max-width: $mantine-breakpoint-xs) {
+    font-size: var(--mantine-h2-font-size);
+  }
+}
+.headerContainer{
+  height: 52px;
+  margin-bottom: 40px;
+}

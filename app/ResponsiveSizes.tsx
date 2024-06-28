@@ -25,7 +25,7 @@ function ResponsiveSizes({ children }: { children: any }) {
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
         </Group>
       </AppShell.Header>
-      <AppShell.Navbar p="md" className={classes.bodyColor}>
+      <AppShell.Navbar p="md" bg="light-dark(var(--mantine-color-grey-1), var(--mantine-color-black))">
         <AppShell.Section>
           <Group px="md">
             <Image src="/logo.png" alt="" width={37} height={52} />
@@ -42,7 +42,9 @@ function ResponsiveSizes({ children }: { children: any }) {
         </AppShell.Section>
       </AppShell.Navbar>
 
-      <AppShell.Main>{children}</AppShell.Main>
+      <AppShell.Main>
+          {children}
+      </AppShell.Main>
     </AppShell>
   );
 }

@@ -1,5 +1,4 @@
 import { Flex } from '@mantine/core';
-import classes from './Sidebar.module.scss';
 import SidebarOption from './SidebarOption';
 
 export default function Sidebar() {

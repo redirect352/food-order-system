@@ -4,15 +4,15 @@ import { Button, CSSVariablesResolver, Input, MantineColorsTuple, colorsTuple, c
 
 const greyScale: MantineColorsTuple = [
     '#FFFFFF',
-    '#F5F5F6',
-    '#EAEBED',
-    '#D5D6DC',
-    '#D5D6DC',
-    '#ACADB9',
-    '#7B7C88',
-    '#7B7C88',
-    '#7B7C88',
-    '#000000',
+    '#f3f3fe',
+    '#e4e6ed',
+    '#c8cad3',
+    '#a9adb9',
+    '#9093a4',
+    '#808496',
+    '#767c91',
+    '#656a7e',
+    '#585e72',
 ];
 const primaryColorDefinition: MantineColorsTuple =
 [
