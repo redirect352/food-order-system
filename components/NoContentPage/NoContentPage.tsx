@@ -25,7 +25,7 @@ const NoContentPage: FunctionComponent<EmptyDishListProps> =
         {
           buttonLabel &&
           <Link href={href!} replace>
-            <Button size="md">{buttonLabel}о</Button>
+            <Button size="md">{buttonLabel}</Button>
           </Link>
         }
       </Flex>

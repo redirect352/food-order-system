@@ -134,6 +134,7 @@ export const resolver: CSSVariablesResolver = (theme) => ({
         // '--star-default-color': theme.colors.grey[4],
         '--text-color': theme.black,
         '--mantine-color-dimmed': theme.colors.grey[6],
+        '--mantine-color-discount': '#fb4918',
         // '--pagination-control-radius': rem(4),
     },
     light: {

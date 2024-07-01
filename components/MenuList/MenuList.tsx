@@ -1,8 +1,8 @@
 import { Flex } from '@mantine/core';
 import { FunctionComponent } from 'react';
-import classes from './styles.module.scss';
 import MenuItem from './MenuItem';
 import img from '@/testData/foodImage.jpg';
+// import classes from './styles.module.scss';
 
 interface MenuListProps {
 
@@ -13,11 +13,12 @@ const defProps = {
   name: 'Борщ холодный',
   description: 'свекла маринованная, сметана, огурцы свежие, лук зеленый, яйцо, сахар песок',
   quantity: '250/20',
+  discount: 0,
 };
 
 const MenuList: FunctionComponent<MenuListProps> = () => (
   <Flex gap={16} wrap="wrap" align="center" justify="center">
-    <MenuItem {...defProps} />
+    <MenuItem {...defProps} discount={30} />
     <MenuItem {...defProps} />
     <MenuItem {...defProps} />
     <MenuItem {...defProps} />

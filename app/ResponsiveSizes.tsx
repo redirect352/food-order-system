@@ -1,8 +1,10 @@
 'use client';
 
-import { AppShell, Burger, Divider, Group, Text, Title } from '@mantine/core';
+import { ActionIcon, Affix, AppShell, Burger, Divider, Group, Text, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import Image from 'next/image';
+import { IconShoppingBag } from '@tabler/icons-react';
+import Link from 'next/link';
 import { Sidebar } from '@/components';
 import classes from './styles.module.scss';
 
@@ -44,6 +46,14 @@ function ResponsiveSizes({ children }: { children: any }) {
 
       <AppShell.Main>
           {children}
+          <Affix position={{ bottom: 20, right: 20 }} hiddenFrom="sm">
+            <Link
+              href="/cart">
+              <ActionIcon size={60} radius="xl">
+                <IconShoppingBag />
+              </ActionIcon>
+            </Link>
+          </Affix>
       </AppShell.Main>
     </AppShell>
   );

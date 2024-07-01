@@ -9,7 +9,7 @@ interface PageHeaderContainerProps {
 const PageHeaderContainer: FunctionComponent<React.PropsWithChildren<PageHeaderContainerProps>> =
   ({ children, title }) => (
   <Flex direction="column" justify="center" align="center">
-    <Flex  className={classes.headerContainer}>
+    <Flex className={classes.headerContainer}>
       <Title order={1} className={classes.pageHeader}>{title}</Title>
     </Flex>
     {children}
