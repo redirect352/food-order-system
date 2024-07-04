@@ -21,6 +21,21 @@ const MenuList: FunctionComponent<MenuListProps> = () => (
     <MenuItem {...defProps} discount={30} />
     <MenuItem {...defProps} />
     <MenuItem {...defProps} />
+    <MenuItem {...defProps} discount={10} />
+    <MenuItem {...defProps} />
+     <MenuItem {...defProps} discount={20} />
+    <MenuItem {...defProps} />
+    <MenuItem {...defProps} discount={10} />
+    <MenuItem {...defProps} />
+    <MenuItem {...defProps} />
+     <MenuItem {...defProps} discount={10} />
+    <MenuItem {...defProps} />
+    <MenuItem {...defProps} />
+    <MenuItem {...defProps} />
+    <MenuItem {...defProps} />
+     <MenuItem {...defProps} discount={30} />
+    <MenuItem {...defProps} />
+    <MenuItem {...defProps} />
     <MenuItem {...defProps} />
     <MenuItem {...defProps} />
   </Flex>

@@ -46,7 +46,7 @@ function ResponsiveSizes({ children }: { children: any }) {
 
       <AppShell.Main>
           {children}
-          <Affix position={{ bottom: 20, right: 20 }} hiddenFrom="sm">
+          <Affix position={{ bottom: 10, right: 10 }} hiddenFrom="sm">
             <Link
               href="/cart">
               <ActionIcon size={60} radius="xl">

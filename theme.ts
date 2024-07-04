@@ -135,7 +135,11 @@ export const resolver: CSSVariablesResolver = (theme) => ({
         '--text-color': theme.black,
         '--mantine-color-dimmed': theme.colors.grey[6],
         '--mantine-color-discount': '#fb4918',
+        '--mantine-color-disabled': theme.colors.grey[6],
         // '--pagination-control-radius': rem(4),
+        '--first-modal-z-index': '210',
+        '--second-modal-z-index': '220',
+
     },
     light: {
     },

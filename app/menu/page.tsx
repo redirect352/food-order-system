@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
-import { MenuList, NoContentPage, PageHeaderContainer } from '@/components';
+import { MenuFilterBar, MenuList, NoContentPage, PageHeaderContainer } from '@/components';
 import noMenuImage from '@/public/204Menu.png';
+import { Flex } from '@mantine/core';
 
 interface MenuProps {
 
@@ -21,7 +22,10 @@ const Menu : FunctionComponent<MenuProps> = () => {
         />
       :
       <PageHeaderContainer title="Меню на 28.06.2024">
-        <MenuList />
+        <Flex direction="column" gap={24}>
+          <MenuFilterBar />
+          <MenuList />
+        </Flex>
       </PageHeaderContainer>
     }
   </>
