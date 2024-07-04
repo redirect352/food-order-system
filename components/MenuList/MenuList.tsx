@@ -17,12 +17,12 @@ const defProps = {
 };
 
 const MenuList: FunctionComponent<MenuListProps> = () => (
-  <Flex gap={16} wrap="wrap" align="center" justify="center">
+  <Flex gap={16} wrap="wrap" align="center" justify="flex-start" h="100%">
     <MenuItem {...defProps} discount={30} />
     <MenuItem {...defProps} />
     <MenuItem {...defProps} />
     <MenuItem {...defProps} discount={10} />
-    <MenuItem {...defProps} />
+    {/* <MenuItem {...defProps} />
      <MenuItem {...defProps} discount={20} />
     <MenuItem {...defProps} />
     <MenuItem {...defProps} discount={10} />
@@ -37,7 +37,7 @@ const MenuList: FunctionComponent<MenuListProps> = () => (
     <MenuItem {...defProps} />
     <MenuItem {...defProps} />
     <MenuItem {...defProps} />
-    <MenuItem {...defProps} />
+    <MenuItem {...defProps} /> */}
   </Flex>
   );
 

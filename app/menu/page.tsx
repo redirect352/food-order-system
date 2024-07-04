@@ -1,7 +1,9 @@
 import { FunctionComponent } from 'react';
-import { MenuFilterBar, MenuList, NoContentPage, PageHeaderContainer } from '@/components';
+import { Flex, Stack } from '@mantine/core';
+import { MenuFilterBar, MenuList, NoContentPage } from '@/components';
 import noMenuImage from '@/public/204Menu.png';
-import { Flex } from '@mantine/core';
+import classes from './styles.module.scss';
+import { Pagination } from '@/UI';
 
 interface MenuProps {
 
@@ -14,19 +16,20 @@ const Menu : FunctionComponent<MenuProps> = () => {
     {
       menuItemsData.length === 0
       ?
-      <NoContentPage
-        buttonLabel="На главную"
-        href="/"
-        label="К сожалению меню временно отсутствует, попробуйте позже :("
-        img={noMenuImage}
+        <NoContentPage
+          buttonLabel="На главную"
+          href="/"
+          label="К сожалению меню временно отсутствует, попробуйте позже :("
+          img={noMenuImage}
         />
       :
-      <PageHeaderContainer title="Меню на 28.06.2024">
-        <Flex direction="column" gap={24}>
+        <Stack className={classes.menuContainer} gap={24} align="center" pb={'md'}>
           <MenuFilterBar />
           <MenuList />
-        </Flex>
-      </PageHeaderContainer>
+          <Flex w="100%" justify="flex-end" align="flex-end" flex="1 1 auto">
+            <Pagination total={10} boundaries={0} gap={4} size="sm" />
+          </Flex>
+        </Stack>
     }
   </>
 );

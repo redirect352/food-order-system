@@ -25,7 +25,7 @@ const MenuFilterBar: FunctionComponent<MenuFilterBarProps> = () => {
   const theme = useMantineTheme();
 
   return (
-    <Flex w="100%" justify="center">
+    <Flex w="100%" justify="flex-end">
       <Flex className={classes.filterBarContainer} gap={24} justify="flex-end" align="center">
         <Flex direction="column" gap={8}>
           <Title order={4}>Тип продукции</Title>

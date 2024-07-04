@@ -1,16 +1,4 @@
 .filterBarContainer{
-  @media (min-width: 1746px) {
-    width: 1314px;
-  }
-  @media (min-width: 1480px) and (max-width: 1745px) {
-    width: 1048px;
-  }
-  @media (min-width: 1114px) and (max-width: 1480px) {
-    width: 782px;
-  }
-  @media (min-width:$mantine-breakpoint-sm ) and (max-width: 1114px) {
-    width: 516px;
-  }
   @media (max-width:$mantine-breakpoint-sm ){
     display: none
   }
