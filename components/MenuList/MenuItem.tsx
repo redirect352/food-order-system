@@ -1,9 +1,9 @@
 import { Flex, Indicator, Paper, Text, Title } from '@mantine/core';
 import { FunctionComponent } from 'react';
-import Image from 'next/image';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import classes from './styles.module.scss';
 import MenuItemAddButton from './MenuItemAddButton';
+import { ImageWithFallback } from '@/UI';
 
 interface MenuListItemProps {
   price: number,
@@ -20,8 +20,8 @@ const MenuListItem: FunctionComponent<MenuListItemProps> =
         <Flex direction="column" align="center" justify="space-between" h="100%">
           <Flex direction="column" gap={8}>
             <Indicator label={`-${discount}%`} size={24} offset={12} position="top-end" inline disabled={discount === 0}>
-              <Paper className={classes.imageBox} pos="relative" bg="dark">
-                <Image
+              <Paper className={classes.imageBox} pos="relative">
+                <ImageWithFallback
                   className={classes.image}
                   src={image}
                   alt="123"

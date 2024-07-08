@@ -13,24 +13,27 @@
   }
 }
 
+.cartCont{
+  flex-wrap: nowrap;
+  @media (max-width: 1650px){
+    flex-wrap: wrap;
+  }
+}
 .cartItemsContainer{
   // background-color: aquamarine;
-  flex-grow: 7;
-
 }
 .cartTotal{
-  @media (min-width: 1905px){
+  @media (min-width: 1650px){
     flex: 0 0 375px;
     align-self: stretch;
   }
-  @media (max-width: 1905px){
+  @media (max-width: 1650px){
     flex: 1 0 375px;
     width: 100%;
     align-self: stretch;
     justify-self: stretch;
   }
   @media (max-width: $mantine-breakpoint-sm){
-
     flex-shrink: 1;
   }
 }

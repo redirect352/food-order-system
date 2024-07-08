@@ -15,7 +15,7 @@ const Cart : FunctionComponent<CartProps> = () => {
   const cartItems: Array<any> = [123, 123, 123, 123, 123, 213123];
   const cartCount = cartItems.length;
   return (
-    <Group gap="xl">
+    <Group gap="xl" className={classes.cartCont}>
       <Stack className={classes.cartItemsContainer} gap="lg">
         <Group justify="space-between">
           <Title order={1}>Корзина <Text c="dimmed" span fz="h2">{cartCount}</Text></Title>

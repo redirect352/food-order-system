@@ -1,11 +1,11 @@
 'use client';
 
 import { Box, Group, Stack, Text, Checkbox } from '@mantine/core';
-import Image from 'next/image';
 import { FunctionComponent } from 'react';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import classes from './styles.module.scss';
 import CartItemDescription from './CartItemDescription';
+import { ImageWithFallback } from '@/UI';
 
 interface CartItemProps {
   price: number,
@@ -21,7 +21,7 @@ const CartItem: FunctionComponent<CartItemProps> =
 ({ price, quantity, name, description, image, discount, startCount }) => (
     <Group className={classes.cartItemContainer}>
       <Box className={classes.image}>
-        <Image
+        <ImageWithFallback
           style={{ borderRadius: '10px' }}
           src={image}
           alt="123"
