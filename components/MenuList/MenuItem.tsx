@@ -4,6 +4,7 @@ import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import classes from './styles.module.scss';
 import MenuItemAddButton from './MenuItemAddButton';
 import { ImageWithFallback } from '@/UI';
+import ItemExtraInfoCart from '../ItemExtraInfoCard/ItemCart';
 
 interface MenuListItemProps {
   price: number,
@@ -41,6 +42,7 @@ const MenuListItem: FunctionComponent<MenuListItemProps> =
           </Flex>
           <MenuItemAddButton price={price} discount={discount} />
         </Flex>
+        {/* <ItemExtraInfoCart /> */}
       </Paper>
   );
 export default MenuListItem;

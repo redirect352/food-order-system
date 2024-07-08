@@ -6,6 +6,15 @@
     width: 220px;
     height: 220px;
   }
+  
+  &:has(.imageBox:hover){
+    scale: 1.05;
+    transition: all 0.3s;
+  }
+  &:not(hover){
+    scale: 1;
+    transition: all 0.3s;
+  }
   .image{
     border-radius: 10px;
   }
