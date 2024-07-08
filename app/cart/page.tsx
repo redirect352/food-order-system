@@ -1,19 +1,17 @@
 'use client';
 
-import { Group, Stack, Title, Text, Button, Affix, Transition } from '@mantine/core';
+import { Group, Stack, Title, Text, Button } from '@mantine/core';
 import { FunctionComponent } from 'react';
-import { IconArrowDown } from '@tabler/icons-react';
-import { useWindowScroll } from '@mantine/hooks';
 import classes from './styles.module.scss';
 import { CartList } from '@/components';
 import CartTotal from '@/components/CartTotal/CartTotal';
+import { MobileScrollToAffix } from '@/UI';
 
 interface CartProps {
 
 }
 
 const Cart : FunctionComponent<CartProps> = () => {
-  const [scroll, scrollTo] = useWindowScroll();
   const cartItems: Array<any> = [123, 123, 123, 123, 123, 213123];
   const cartCount = cartItems.length;
   return (
@@ -30,20 +28,11 @@ const Cart : FunctionComponent<CartProps> = () => {
       <Stack className={classes.cartTotal}>
         <CartTotal />
       </Stack>
-      <Affix position={{ bottom: 10, right: 10 }} hiddenFrom="sm" zIndex={95}>
-        <Transition transition="slide-left" duration={400} mounted={scroll.y < (document.body.scrollHeight - window.screen.height - 400)}>
-        {
-          (transitionStyles) => (
-          <Button
-            onClick={() => scrollTo({ y: document.body.clientHeight })}
-            rightSection={<IconArrowDown size={14} />}
-            style={{...transitionStyles}}
-          >
-            К оформлению заказа
-          </Button>)
-          }
-        </Transition>
-      </Affix>
+      <MobileScrollToAffix
+        buttonLabel="К оформлению заказа"
+        scrollDirection="bottom"
+        position={{ right: 10, bottom: 10 }}
+      />
     </Group>
 );
 };
