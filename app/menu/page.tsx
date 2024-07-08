@@ -23,7 +23,7 @@ const Menu : FunctionComponent<MenuProps> = () => {
           img={noMenuImage}
         />
       :
-        <Stack className={classes.menuContainer} gap={24} align="center" pb={'md'}>
+        <Stack className={classes.menuContainer} gap={24} align="center" pb="md">
           <MenuFilterBar />
           <MenuList />
           <Flex w="100%" justify="flex-end" align="flex-end" flex="1 1 auto">

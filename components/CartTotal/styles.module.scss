@@ -1,0 +1,33 @@
+.cartTotalContainer{
+  background-color: var(--mantine-color-background) ;
+  border-radius: 48px;
+  .header{
+    font-size: var((--mantine-h1-font-size));
+    font-weight: 500;
+  }
+  .subheader{
+    font-size: var((--mantine-font-size-lg));
+    font-weight: 500;
+  }
+  @media (max-width: $mantine-breakpoint-sm){
+    .header{
+      font-size: var((--mantine-h2-font-size));
+    }
+    .subheader{
+      font-size: var((--mantine-font-size-md));
+    }
+  }
+  @media (min-width: 1905px){
+    margin-top: 12px;
+    position: sticky;
+    top: 12px;
+    width: 100%;
+    .acceptButton{
+      width: 200px;
+    }
+  }
+  .acceptButton{
+    flex: 1 1 auto;
+    width: 100%;
+  }
+}

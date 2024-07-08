@@ -1,0 +1,36 @@
+.cartContainer{
+  margin-top: 12px;
+  margin-inline: 100px;
+  min-height: 100px;
+  @media (max-width: $mantine-breakpoint-xl){
+    margin-inline: 50px;
+  }
+  @media (max-width: $mantine-breakpoint-lg){
+    margin-inline: 25px;
+  }
+  @media (max-width: $mantine-breakpoint-md){
+    margin-inline: 10px;
+  }
+}
+
+.cartItemsContainer{
+  // background-color: aquamarine;
+  flex-grow: 7;
+
+}
+.cartTotal{
+  @media (min-width: 1905px){
+    flex: 0 0 375px;
+    align-self: stretch;
+  }
+  @media (max-width: 1905px){
+    flex: 1 0 375px;
+    width: 100%;
+    align-self: stretch;
+    justify-self: stretch;
+  }
+  @media (max-width: $mantine-breakpoint-sm){
+
+    flex-shrink: 1;
+  }
+}

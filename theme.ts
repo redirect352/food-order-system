@@ -139,9 +139,10 @@ export const resolver: CSSVariablesResolver = (theme) => ({
         // '--pagination-control-radius': rem(4),
         '--first-modal-z-index': '210',
         '--second-modal-z-index': '220',
-
+        '--indicator-z-index': '90',
     },
     light: {
+        '--mantine-color-background': '#FCEDEF',
     },
     dark: {
     },

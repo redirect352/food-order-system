@@ -1,8 +1,8 @@
 'use client';
 
-import { ActionIcon, Button, Flex, Text } from '@mantine/core';
-import { IconMinus, IconPlus } from '@tabler/icons-react';
+import { Button, Flex, Text } from '@mantine/core';
 import { FunctionComponent, useState } from 'react';
+import { CountInput } from '@/UI';
 
 interface MenuItemAddButtonProps {
   price: number,
@@ -23,15 +23,7 @@ const MenuItemAddButton: FunctionComponent<MenuItemAddButtonProps> = ({ price, d
           {(finalPrice * count).toFixed(2)}
           <Text span fz={14}> руб.</Text>
         </Text>
-        <Flex justify="flex-end" align="center">
-          <ActionIcon size={32} variant="transparent" onClick={() => changeCount(count - 1)}>
-            <IconMinus />
-          </ActionIcon>
-          <Text fw={500}>{count} шт.</Text>
-          <ActionIcon size={32} variant="transparent" onClick={() => changeCount(count + 1)}>
-            <IconPlus />
-          </ActionIcon>
-        </Flex>
+        <CountInput count={count} changeCount={changeCount} />
       </>
       :
       <>
