@@ -1,48 +1,34 @@
-import { Flex, Indicator, Paper, Text, Title } from '@mantine/core';
+import { Flex, Paper, Text, Title } from '@mantine/core';
 import { FunctionComponent } from 'react';
-import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import classes from './styles.module.scss';
 import MenuItemAddButton from './MenuItemAddButton';
-import { ImageWithFallback } from '@/UI';
-import ItemExtraInfoCart from '../ItemExtraInfoCard/ItemCart';
+import MenuItemClickableImage from './MenuItemClickableImage';
+import { Dish } from '@/shared/types';
 
 interface MenuListItemProps {
-  price: number,
-  name: string,
-  description: string,
-  quantity: string,
-  image: string | StaticImport,
-  discount : number
+  dishDescription: Dish
 }
 
-const MenuListItem: FunctionComponent<MenuListItemProps> =
-  ({ price, quantity, name, description, image, discount }) => (
-      <Paper className={classes.menuItemBox} p="md">
-        <Flex direction="column" align="center" justify="space-between" h="100%">
-          <Flex direction="column" gap={8}>
-            <Indicator label={`-${discount}%`} size={24} offset={12} position="top-end" inline disabled={discount === 0}>
-              <Paper className={classes.imageBox} pos="relative">
-                <ImageWithFallback
-                  className={classes.image}
-                  src={image}
-                  alt="123"
-                  fill
-                  />
-              </Paper>
-            </Indicator>
-            <Flex align="flex-start" w="100%" direction="column" gap={8}>
-              <Title order={4}>{name}</Title>
-              <Flex gap={15} align="center">
-                <Text flex="4 1 auto" c="dimmed" size="xs" lineClamp={3} ta="justify">
-                  {description}
-                </Text>
-                <Text flex="4 1 auto" fw={500} size="xs" ta="center">{quantity}</Text>
-              </Flex>
+const MenuListItem: FunctionComponent<MenuListItemProps> = (props) => {
+  const { price, quantity, name, description, discount } = props.dishDescription;
+  return (
+    <Paper className={classes.menuItemBox} p="md">
+      <Flex direction="column" align="center" justify="space-between" h="100%">
+        <Flex direction="column" gap={8}>
+          <MenuItemClickableImage dishDescription={props.dishDescription} />
+          <Flex align="flex-start" w="100%" direction="column" gap={8}>
+            <Title order={4}>{name}</Title>
+            <Flex gap={15} align="center">
+              <Text flex="4 1 auto" c="dimmed" size="xs" lineClamp={3} ta="justify">
+                {description}
+              </Text>
+              <Text flex="4 1 auto" fw={500} size="xs" ta="center">{quantity}</Text>
             </Flex>
           </Flex>
-          <MenuItemAddButton price={price} discount={discount} />
         </Flex>
-        {/* <ItemExtraInfoCart /> */}
-      </Paper>
+        <MenuItemAddButton price={price} discount={discount} />
+      </Flex>
+    </Paper>
   );
+};
 export default MenuListItem;

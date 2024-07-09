@@ -7,7 +7,8 @@
     height: 220px;
   }
   
-  &:has(.imageBox:hover){
+
+  &:has(.imageBox:hover), &:has(.imageBox[data-modal-opened=true]){
     scale: 1.05;
     transition: all 0.3s;
   }

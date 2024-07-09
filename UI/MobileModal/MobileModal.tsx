@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, Modal, ModalProps } from '@mantine/core';
+import { Box, Button, Modal, ModalProps } from '@mantine/core';
 import { IconChevronLeft } from '@tabler/icons-react';
 import { FunctionComponent } from 'react';
 import classes from './styles.module.scss';
@@ -9,6 +9,7 @@ interface MobileModalProps extends React.PropsWithChildren<ModalProps> {
   acceptAction?: () => void,
   showAccept?: boolean
   cancelAction?: () => void,
+  buttonText?: string,
 }
 
 const MobileModal: FunctionComponent<MobileModalProps> = ({
@@ -16,6 +17,7 @@ const MobileModal: FunctionComponent<MobileModalProps> = ({
   cancelAction = () => {},
   children,
   showAccept = false,
+  buttonText = 'Применить',
 ...modalProps
 }) => (
     <Modal.Root
@@ -36,12 +38,14 @@ const MobileModal: FunctionComponent<MobileModalProps> = ({
       </Modal.Body>
       {
       showAccept &&
-      <Button
-        className={classes.submitModalButton}
-        onClick={() => { modalProps.onClose(); acceptAction(); }}
-      >
-        Применить
-      </Button>
+      <Box className={classes.submitModalButtonContainer}>
+        <Button
+          className={classes.submitModalButton}
+          onClick={() => { modalProps.onClose(); acceptAction(); }}
+        >
+          {buttonText}
+        </Button>
+      </Box>
       }
     </Modal.Content>
     </Modal.Root>
