@@ -2,14 +2,14 @@
 
 import { Box, Button, Modal, ModalProps } from '@mantine/core';
 import { IconChevronLeft } from '@tabler/icons-react';
-import { FunctionComponent } from 'react';
+import React, { FunctionComponent } from 'react';
 import classes from './styles.module.scss';
 
 interface MobileModalProps extends React.PropsWithChildren<ModalProps> {
   acceptAction?: () => void,
   showAccept?: boolean
   cancelAction?: () => void,
-  buttonText?: string,
+  buttonText?: string | React.ReactNode,
 }
 
 const MobileModal: FunctionComponent<MobileModalProps> = ({

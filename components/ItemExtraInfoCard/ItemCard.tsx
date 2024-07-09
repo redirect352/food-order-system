@@ -1,7 +1,7 @@
 'use client';
 
-import { Box, Group, Modal, ModalProps, Stack, Title, Text, Button, NumberFormatter } from '@mantine/core';
-import { FunctionComponent } from 'react';
+import { Box, Group, Modal, ModalProps, Stack, Title, Text, Button } from '@mantine/core';
+import React, { FunctionComponent } from 'react';
 import { useMediaQuery } from '@mantine/hooks';
 import { ImageWithFallback, MobileModal } from '@/UI';
 import classes from './styles.module.scss';
@@ -10,14 +10,16 @@ import MobileModalBody from './MobileModalContent';
 import { Dish } from '@/shared/types';
 
 interface ItemExtraInfoCartProps extends ModalProps {
-  dish: Dish
+  dish: Dish,
+  buttonText: string | React.ReactNode,
+  buttonAction: (onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined) => void,
 }
 
-const ItemExtraInfoCart: FunctionComponent<ItemExtraInfoCartProps> =
-  ({ dish, ...modalProps }) => {
+const ItemExtraInfoCard: FunctionComponent<ItemExtraInfoCartProps> =
+  ({ dish, buttonAction, ...modalProps }) => {
   const matches = useMediaQuery('(min-width: 48em');
-  const { price, discount, description, name, quantity, producerName, calorieContent } = dish;
-  const finalPrice = (price * (100 - discount)) / 100;
+  const { description, name, quantity, producerName, calorieContent } = dish;
+  const clickAction = () => { modalProps.onClose(); buttonAction(); };
   return (
     <>
       {matches ?
@@ -65,13 +67,8 @@ const ItemExtraInfoCart: FunctionComponent<ItemExtraInfoCartProps> =
                         }
                       </Text>
                   </Group>
-                  <Button onClick={modalProps.onClose}>
-                    <span>В корзину за&nbsp;</span>
-                    <NumberFormatter
-                      value={finalPrice}
-                      decimalScale={2}
-                      suffix=" рубля"
-                    />
+                  <Button onClick={clickAction}>
+                    {modalProps.buttonText}
                   </Button>
                 </Stack>
               </Stack>
@@ -83,7 +80,7 @@ const ItemExtraInfoCart: FunctionComponent<ItemExtraInfoCartProps> =
       <MobileModal
         title={dish.name}
         showAccept
-        buttonText={`В корзину за ${finalPrice.toFixed(2)} рубля`}
+        acceptAction={clickAction}
         {...modalProps}
       >
         <MobileModalBody dish={dish} />
@@ -92,4 +89,4 @@ const ItemExtraInfoCart: FunctionComponent<ItemExtraInfoCartProps> =
   );
 };
 
-export default ItemExtraInfoCart;
+export default ItemExtraInfoCard;

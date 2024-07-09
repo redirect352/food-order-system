@@ -1,10 +1,10 @@
 'use client';
 
-import { Indicator, Paper } from '@mantine/core';
+import { Indicator, NumberFormatter, Paper } from '@mantine/core';
 import { FunctionComponent } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { ImageWithFallback } from '@/UI';
-import ItemExtraInfoCart from '../ItemExtraInfoCard/ItemCart';
+import ItemExtraInfoCard from '../ItemExtraInfoCard/ItemCard';
 import classes from './styles.module.scss';
 import { Dish } from '@/shared/types';
 
@@ -13,7 +13,8 @@ interface MenuItemImageProps {
 }
 
 const MenuItemClickableImage: FunctionComponent<MenuItemImageProps> = (props) => {
-  const { image, discount } = props.dishDescription;
+  const { image, discount, price } = props.dishDescription;
+  const finalPrice = (price * (100 - discount)) / 100;
   const [opened, { open, close }] = useDisclosure(false);
   return (
     <>
@@ -27,11 +28,22 @@ const MenuItemClickableImage: FunctionComponent<MenuItemImageProps> = (props) =>
             />
         </Paper>
       </Indicator>
-      <ItemExtraInfoCart
+      <ItemExtraInfoCard
         opened={opened}
         onClose={close}
+        buttonAction={close}
         title={props.dishDescription.name}
         dish={props.dishDescription}
+        buttonText={
+          <>
+            <span>В корзину за&nbsp;</span>
+            <NumberFormatter
+              value={finalPrice}
+              decimalScale={2}
+              suffix=" рубля"
+            />
+          </>
+        }
         />
     </>
   );

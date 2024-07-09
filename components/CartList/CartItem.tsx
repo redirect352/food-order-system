@@ -2,25 +2,25 @@
 
 import { Box, Group, Stack, Text, Checkbox } from '@mantine/core';
 import { FunctionComponent } from 'react';
-import { StaticImport } from 'next/dist/shared/lib/get-img-props';
+import { useDisclosure } from '@mantine/hooks';
 import classes from './styles.module.scss';
 import CartItemDescription from './CartItemDescription';
 import { ImageWithFallback } from '@/UI';
+import { Dish } from '@/shared/types';
+import ItemExtraInfoCard from '../ItemExtraInfoCard/ItemCard';
 
 interface CartItemProps {
-  price: number,
-  name: string,
-  description: string,
-  quantity: string,
-  image: string | StaticImport,
-  discount : number,
+  dish: Dish
   startCount: number
 }
 
 const CartItem: FunctionComponent<CartItemProps> =
-({ price, quantity, name, description, image, discount, startCount }) => (
+({ dish, startCount }) => {
+  const { price, quantity, name, description, image, discount } = dish;
+  const [opened, { open, close }] = useDisclosure(false);
+  return (
     <Group className={classes.cartItemContainer}>
-      <Box className={classes.image}>
+      <Box className={classes.image} onClick={open} data-modal-opened={opened}>
         <ImageWithFallback
           style={{ borderRadius: '10px' }}
           src={image}
@@ -55,8 +55,15 @@ const CartItem: FunctionComponent<CartItemProps> =
         }
         <Checkbox />
       </Group>
-
+      <ItemExtraInfoCard
+        dish={dish}
+        buttonText="Удалить из корзины"
+        buttonAction={close}
+        opened={opened}
+        onClose={close}
+      />
     </Group>
   );
+};
 
 export default CartItem;
