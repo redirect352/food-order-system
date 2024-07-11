@@ -19,12 +19,13 @@ const CartItem: FunctionComponent<CartItemProps> =
   const { price, quantity, name, description, image, discount } = dish;
   const [opened, { open, close }] = useDisclosure(false);
   return (
-    <Group className={classes.cartItemContainer}>
+    <ScalingCard className={classes.cartItemContainer} p={0}>
       <Box className={classes.image} onClick={open} data-modal-opened={opened}>
         <ImageWithFallback
           style={{ borderRadius: '10px' }}
           src={image}
           alt="123"
+          sizes="(max-width:62em) 80px, 120px"
           fill
         />
       </Box>
@@ -62,7 +63,7 @@ const CartItem: FunctionComponent<CartItemProps> =
         opened={opened}
         onClose={close}
       />
-    </Group>
+    </ScalingCard>
   );
 };
 

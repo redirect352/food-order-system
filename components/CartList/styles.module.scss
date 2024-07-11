@@ -1,6 +1,12 @@
 .cartItemContainer{
   height: 150px;
+  display: flex;
+  flex-direction: row;
+  gap: var(--mantine-spacing-md);
+  align-items: center;
+  justify-items: flex-start;
   flex-wrap: nowrap;
+ 
   @media (max-width: $mantine-breakpoint-md){
     // background-color: aqua;
   }
@@ -16,12 +22,8 @@
     position: relative;
     flex-shrink: 0;
   }
-  &:has(.image:hover),  &:has(.image[data-modal-opened=true]){
-    scale: 1.02;
-    transition: 0.3s;
-  }
-  &:not(hover){
-    scale: 1;
+  &:has(.image[data-modal-opened=true]){
+    scale: 1.05;
     transition: 0.3s;
   }
   .cartItemHeader{
@@ -42,7 +44,7 @@
   }
   @media (max-width: $mantine-breakpoint-md){
     .image{
-      width: 80px;
+      width: 100px;
       height: 120px;
     }
     .cartItemHeader{
