@@ -1,23 +1,29 @@
 'use client';
 
-import { Box, Group, Stack, Text, Checkbox } from '@mantine/core';
+import { Box, Group, Stack, Text, Checkbox, NumberFormatter } from '@mantine/core';
 import { FunctionComponent } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import classes from './styles.module.scss';
 import CartItemDescription from './CartItemDescription';
 import { ImageWithFallback, ScalingCard } from '@/UI';
-import { Dish } from '@/shared/types';
 import ItemExtraInfoCard from '../ItemExtraInfoCard/ItemCard';
+import { useAppDispatch, useAppSelector } from '@/shared/hooks';
+import { removeFromCart, selectCartItemCount } from '@/lib/features/cart/cartSlice';
+import { selectMenuItem } from '@/lib/features/menu/menuSlice';
+import PriceHelper from '@/shared/helpers/priceHelper';
 
 interface CartItemProps {
-  dish: Dish
-  startCount: number
+  dishId: number
 }
 
 const CartItem: FunctionComponent<CartItemProps> =
-({ dish, startCount }) => {
-  const { price, quantity, name, description, image, discount } = dish;
+({ dishId }) => {
+  const { price, image, discount } =
+  useAppSelector(state => selectMenuItem(state, dishId))!;
   const [opened, { open, close }] = useDisclosure(false);
+  const count = useAppSelector((state) => selectCartItemCount(state, dishId));
+  const dispatch = useAppDispatch();
+  const removeItem = () => dispatch(removeFromCart(dishId));
   return (
     <ScalingCard className={classes.cartItemContainer} p={0}>
       <Box className={classes.image} onClick={open} data-modal-opened={opened}>
@@ -30,36 +36,45 @@ const CartItem: FunctionComponent<CartItemProps> =
         />
       </Box>
       <CartItemDescription
-        price={price}
-        name={name}
-        description={description}
-        quantity={quantity}
-        discount={discount}
-        startCount={startCount}
+        dishId={dishId}
       />
       <Group align="flex-start" className={classes.priceBlock} visibleFrom="sm">
         {
           discount === 0 ?
-          <Text className={classes.cartItemHeader}>{price} руб.</Text>
+          <Text className={classes.cartItemHeader}>
+            <NumberFormatter
+              value={count * price}
+              decimalScale={2}
+              suffix=" руб."
+            />
+          </Text>
           :
           <Stack gap="xs">
             <Text
               className={classes.cartItemHeader}
               c="var(--mantine-color-discount)"
             >
-              {((price * (100 - discount)) / 100).toFixed(2)} руб.
+              <NumberFormatter
+                value={PriceHelper.getPriceWithDiscount(price, discount, count)}
+                decimalScale={2}
+                suffix=" руб"
+              />
             </Text>
             <Text className={classes.cartItemDescription} td="line-through">
-              {price} руб.
+              <NumberFormatter
+                value={count * price}
+                decimalScale={2}
+                suffix=" руб."
+              />
             </Text>
           </Stack>
         }
         <Checkbox />
       </Group>
       <ItemExtraInfoCard
-        dish={dish}
+        dishId={dishId}
         buttonText="Удалить из корзины"
-        buttonAction={close}
+        buttonAction={() => { removeItem(); close(); }}
         opened={opened}
         onClose={close}
       />

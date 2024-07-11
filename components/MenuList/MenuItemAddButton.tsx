@@ -1,18 +1,25 @@
 'use client';
 
 import { Button, Flex, Text } from '@mantine/core';
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent } from 'react';
 import { CountInput } from '@/UI';
+import { useAppDispatch, useAppSelector } from '@/shared/hooks';
+import { changeDishCount, selectCartItemCount } from '@/lib/features/cart/cartSlice';
+import PriceHelper from '@/shared/helpers/priceHelper';
 
 interface MenuItemAddButtonProps {
+  dishId: number,
   price: number,
   discount: number
 }
 
-const MenuItemAddButton: FunctionComponent<MenuItemAddButtonProps> = ({ price, discount }) => {
+const MenuItemAddButton: FunctionComponent<MenuItemAddButtonProps> =
+({ dishId, price, discount }) => {
   const color = discount === 0 ? '' : 'var(--mantine-color-discount)';
-  const finalPrice = +(price * ((100 - discount) / 100)).toFixed(2);
-  const [count, changeCount] = useState(0);
+  const finalPrice = PriceHelper.getPriceWithDiscount(price, discount);
+  const count = useAppSelector((state) => selectCartItemCount(state, dishId));
+  const dispatch = useAppDispatch();
+  const changeCount = (newCount:number) => dispatch(changeDishCount({ dishId, newCount }));
   return (
     <Flex justify="space-between" align="center" w="100%">
       {
@@ -20,7 +27,7 @@ const MenuItemAddButton: FunctionComponent<MenuItemAddButtonProps> = ({ price, d
       ?
       <>
         <Text fw={500}>
-          {(finalPrice * count).toFixed(2)}
+          {(PriceHelper.getPriceWithDiscount(price, discount, count))}
           <Text span fz={14}> руб.</Text>
         </Text>
         <CountInput count={count} changeCount={changeCount} />

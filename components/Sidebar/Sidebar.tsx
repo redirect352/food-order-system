@@ -1,5 +1,6 @@
-import { Flex, Indicator } from '@mantine/core';
+import { Flex } from '@mantine/core';
 import SidebarOption from './SidebarOption';
+import CartIndicator from './CartIndicator';
 
 export default function Sidebar() {
 return (
@@ -15,9 +16,9 @@ return (
       Заказ полуфабрикатов
     </SidebarOption>
     <SidebarOption href="/cart">
-      <Indicator label="112,33 руб" size={24} position="middle-end" offset={25}>
+      <CartIndicator>
         Корзина
-      </Indicator>
+      </CartIndicator>
     </SidebarOption>
     <SidebarOption href="/activeOrders">
       Активные заказы

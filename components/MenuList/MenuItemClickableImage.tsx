@@ -7,15 +7,20 @@ import { ImageWithFallback } from '@/UI';
 import ItemExtraInfoCard from '../ItemExtraInfoCard/ItemCard';
 import classes from './styles.module.scss';
 import { Dish } from '@/shared/types';
+import { useAppDispatch } from '@/shared/hooks';
+import { increaseDishCount } from '@/lib/features/cart/cartSlice';
+import PriceHelper from '@/shared/helpers/priceHelper';
 
 interface MenuItemImageProps {
   dishDescription: Dish
 }
 
 const MenuItemClickableImage: FunctionComponent<MenuItemImageProps> = (props) => {
-  const { image, discount, price } = props.dishDescription;
-  const finalPrice = (price * (100 - discount)) / 100;
+  const { id, image, discount, price } = props.dishDescription;
+  const finalPrice = PriceHelper.getPriceWithDiscount(price, discount);
   const [opened, { open, close }] = useDisclosure(false);
+  const dispatch = useAppDispatch();
+  const addToCart = () => dispatch(increaseDishCount(id));
   return (
     <>
       <Indicator label={`-${discount}%`} size={24} offset={12} position="top-end" inline disabled={discount === 0}>
@@ -31,10 +36,10 @@ const MenuItemClickableImage: FunctionComponent<MenuItemImageProps> = (props) =>
       </Indicator>
       <ItemExtraInfoCard
         opened={opened}
-        onClose={close}
+        onClose={() => { close(); addToCart(); }}
         buttonAction={close}
         title={props.dishDescription.name}
-        dish={props.dishDescription}
+        dishId={props.dishDescription.id}
         buttonText={
           <>
             <span>В корзину за&nbsp;</span>

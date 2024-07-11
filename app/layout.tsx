@@ -6,6 +6,7 @@ import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import { Roboto } from 'next/font/google';
 import { resolver, theme } from '../theme';
 import ResponsiveSizes from './ResponsiveSizes';
+import StoreProvider from './StoreProvider';
 
 export const metadata = {
   title: 'Система заказа',
@@ -42,11 +43,13 @@ export default function RootLayout({ children }: { children: any }) {
         />
       </head>
       <body>
-      <MantineProvider theme={theme} cssVariablesResolver={resolver}>
-        <ResponsiveSizes className={!IS_DEV ? roboto.className : ''}>
-          {children}
-        </ResponsiveSizes>
-      </MantineProvider>
+      <StoreProvider>
+        <MantineProvider theme={theme} cssVariablesResolver={resolver}>
+          <ResponsiveSizes className={!IS_DEV ? roboto.className : ''}>
+            {children}
+          </ResponsiveSizes>
+        </MantineProvider>
+      </StoreProvider>
       </body>
     </html>
   );

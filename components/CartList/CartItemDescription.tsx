@@ -2,22 +2,25 @@
 
 import { Stack, Group, ActionIcon, Text } from '@mantine/core';
 import { IconTrash } from '@tabler/icons-react';
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent } from 'react';
 import { CountInput } from '@/UI';
 import classes from './styles.module.scss';
+import { selectCartItemCount, changeDishCount, removeFromCart } from '@/lib/features/cart/cartSlice';
+import { useAppSelector, useAppDispatch } from '@/shared/hooks';
+import { selectMenuItem } from '@/lib/features/menu/menuSlice';
 
 interface CartItemDescriptionProps {
-  price: number,
-  name: string,
-  description: string,
-  quantity: string,
-  discount : number,
-  startCount: number
+  dishId: number
 }
 
 const CartItemDescription: FunctionComponent<CartItemDescriptionProps> =
-({ price, name, discount, startCount, quantity, description }) => {
-  const [count, changeCount] = useState(startCount);
+({ dishId }) => {
+  const { price, quantity, name, description, discount } =
+  useAppSelector(state => selectMenuItem(state, dishId))!;
+  const count = useAppSelector((state) => selectCartItemCount(state, dishId));
+  const dispatch = useAppDispatch();
+  const changeCount = (newCount:number) => dispatch(changeDishCount({ dishId, newCount }));
+  const deleteItem = () => dispatch(removeFromCart(dishId));
   return (
     <>
     {/* mobile */}
@@ -43,7 +46,11 @@ const CartItemDescription: FunctionComponent<CartItemDescriptionProps> =
         <Text className={classes.cartItemDescription}>{quantity}</Text>
         <Group>
           <CountInput count={count} changeCount={changeCount} />
-          <ActionIcon variant="transparent" className={classes.removeIcon}>
+          <ActionIcon
+            variant="transparent"
+            className={classes.removeIcon}
+            onClick={deleteItem}
+          >
             <IconTrash stroke={1} />
           </ActionIcon>
         </Group>
@@ -55,7 +62,7 @@ const CartItemDescription: FunctionComponent<CartItemDescriptionProps> =
       <Text className={classes.cartItemDescription}>{quantity}</Text>
       <Group>
         <CountInput count={count} changeCount={changeCount} />
-        <ActionIcon variant="transparent" className={classes.removeIcon}>
+        <ActionIcon variant="transparent" className={classes.removeIcon} onClick={deleteItem}>
           <IconTrash stroke={1} />
         </ActionIcon>
       </Group>

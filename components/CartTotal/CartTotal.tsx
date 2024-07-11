@@ -1,15 +1,26 @@
 import { Group, Stack, Title, Text, Button } from '@mantine/core';
 import { FunctionComponent } from 'react';
 import classes from './styles.module.scss';
+import { useAppSelector } from '@/shared/hooks';
+import { selectCartItems, selectCartTotalCount } from '@/lib/features/cart/cartSlice';
+import { selectMenuItems } from '@/lib/features/menu/menuSlice';
+import PriceHelper from '@/shared/helpers/priceHelper';
 
 interface CartTotalProps {
 
 }
 
 const CartTotal: FunctionComponent<CartTotalProps> = () => {
-  const totalPrice = 19.12;
-  const totalDiscount = 3.12;
-  const totalCount = 12;
+  const items = useAppSelector(selectCartItems);
+  const menuItems = useAppSelector(state => selectMenuItems(state, items.map(item => item.dishId)));
+  const totalPrice = items.reduce((sum, item) =>
+    sum + item.dishCount * (menuItems.find(dish => dish.id === item.dishId)?.price ?? 0), 0);
+  const totalDiscount = items.reduce((sum, item) => {
+    const dish = menuItems.find(dishItem => dishItem.id === item.dishId);
+    if (!dish) return sum;
+    return sum + PriceHelper.getDiscountValue(dish.price, dish.discount, item.dishCount);
+  }, 0);
+  const totalCount = useAppSelector(selectCartTotalCount);
   return (
   <Stack className={classes.cartTotalContainer} align="center" px="50px" gap="xs" pb="12px" pt="12px">
     <Group justify="space-between" w="100%">

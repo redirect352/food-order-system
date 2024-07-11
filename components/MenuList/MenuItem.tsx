@@ -10,7 +10,7 @@ interface MenuListItemProps {
 }
 
 const MenuListItem: FunctionComponent<MenuListItemProps> = (props) => {
-  const { price, quantity, name, description, discount } = props.dishDescription;
+  const { id, price, quantity, name, description, discount } = props.dishDescription;
   return (
     <Paper className={classes.menuItemBox} p="md">
       <Flex direction="column" align="center" justify="space-between" h="100%">
@@ -28,7 +28,7 @@ const MenuListItem: FunctionComponent<MenuListItemProps> = (props) => {
             </Flex>
           </Flex>
         </Flex>
-        <MenuItemAddButton price={price} discount={discount} />
+        <MenuItemAddButton dishId={id} price={price} discount={discount} />
       </Flex>
     </Paper>
   );
