@@ -1,0 +1,10 @@
+.hoverCardWrapper{
+  &:hover{
+    scale: 1.05;
+    transition: 0.3s;
+  }
+  &:not(hover){
+    scale: 1;
+    transition: 0.3s;
+  }
+}

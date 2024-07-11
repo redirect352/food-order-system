@@ -6,6 +6,7 @@ import CountInput from './CountInput/CountInput';
 import MobileScrollToAffix from './MobileScrollToAffix/MobileScrollToAffix';
 import ImageWithFallback from './ImageWithFallback/ImageWithFallback';
 
+export { default as ScalingCard } from './ScalingCard/ScalingCard';
 export {
   Select,
   MobilePillsInput,

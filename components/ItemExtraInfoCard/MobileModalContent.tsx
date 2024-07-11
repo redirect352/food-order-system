@@ -15,6 +15,7 @@ const MobileModalBody: FunctionComponent<MobileModalBodyProps> = ({ dish }) => {
       <Box className={classes.image}>
         <ImageWithFallback
           src={image}
+          sizes="97vw"
           alt=""
           fill
           style={{ borderRadius: '8px' }}

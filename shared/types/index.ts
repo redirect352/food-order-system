@@ -1,6 +1,7 @@
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 
 export type Dish = {
+  id: number,
   price: number,
   name: string,
   description: string,

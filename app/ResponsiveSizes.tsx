@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { Sidebar } from '@/components';
 import classes from './styles.module.scss';
 
-function ResponsiveSizes({ children }: { children: any }) {
+function ResponsiveSizes({ children, className }: { children: any, className?: string }) {
   const [opened, { toggle }] = useDisclosure();
 
   return (
@@ -42,7 +42,7 @@ function ResponsiveSizes({ children }: { children: any }) {
         </AppShell.Section>
       </AppShell.Navbar>
 
-      <AppShell.Main>
+      <AppShell.Main className={className}>
           {children}
       </AppShell.Main>
     </AppShell>

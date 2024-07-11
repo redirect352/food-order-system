@@ -5,7 +5,6 @@ import React, { FunctionComponent } from 'react';
 import { useMediaQuery } from '@mantine/hooks';
 import { ImageWithFallback, MobileModal } from '@/UI';
 import classes from './styles.module.scss';
-import img from '@/testData/foodImage.jpg';
 import MobileModalBody from './MobileModalContent';
 import { Dish } from '@/shared/types';
 
@@ -16,7 +15,7 @@ interface ItemExtraInfoCartProps extends ModalProps {
 }
 
 const ItemExtraInfoCard: FunctionComponent<ItemExtraInfoCartProps> =
-  ({ dish, buttonAction, ...modalProps }) => {
+  ({ dish, buttonAction, buttonText, ...modalProps }) => {
   const matches = useMediaQuery('(min-width: 48em');
   const { description, name, quantity, producerName, calorieContent } = dish;
   const clickAction = () => { modalProps.onClose(); buttonAction(); };
@@ -30,16 +29,18 @@ const ItemExtraInfoCard: FunctionComponent<ItemExtraInfoCartProps> =
             <Group gap="lg" wrap="nowrap" align="center">
               <Box className={classes.imageBox}>
                 <ImageWithFallback
-                  src={img}
+                  src={dish.image}
                   alt={name}
+                  sizes="(max-width:62em) 300px 300px, (min-width:62em) 400px 400px,"
+                  priority={false}
                   fill
                   style={{ borderRadius: '36px' }}
                 />
               </Box>
-              <Stack className={classes.descriptionBox} gap={0} justify="space-between">
-                <Stack gap={0}>
+              <Stack className={classes.descriptionBox} gap={0} justify="space-between" maw="100%">
+                <Stack gap={0} maw="100%">
                   <Group w="100%" justify="space-between">
-                    <Title order={2}>{name}</Title>
+                    <Title w="80%" order={2} lineClamp={3}>{name}</Title>
                     <Modal.CloseButton />
                   </Group>
                   <Stack gap={0} w={350}>
@@ -68,7 +69,7 @@ const ItemExtraInfoCard: FunctionComponent<ItemExtraInfoCartProps> =
                       </Text>
                   </Group>
                   <Button onClick={clickAction}>
-                    {modalProps.buttonText}
+                    {buttonText}
                   </Button>
                 </Stack>
               </Stack>
@@ -81,6 +82,7 @@ const ItemExtraInfoCard: FunctionComponent<ItemExtraInfoCartProps> =
         title={dish.name}
         showAccept
         acceptAction={clickAction}
+        buttonText={buttonText}
         {...modalProps}
       >
         <MobileModalBody dish={dish} />

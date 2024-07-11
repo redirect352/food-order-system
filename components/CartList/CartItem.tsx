@@ -5,7 +5,7 @@ import { FunctionComponent } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import classes from './styles.module.scss';
 import CartItemDescription from './CartItemDescription';
-import { ImageWithFallback } from '@/UI';
+import { ImageWithFallback, ScalingCard } from '@/UI';
 import { Dish } from '@/shared/types';
 import ItemExtraInfoCard from '../ItemExtraInfoCard/ItemCard';
 

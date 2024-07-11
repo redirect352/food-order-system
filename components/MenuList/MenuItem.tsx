@@ -1,4 +1,4 @@
-import { Flex, Paper, Text, Title } from '@mantine/core';
+import { Box, Flex, Paper, Text, Title } from '@mantine/core';
 import { FunctionComponent } from 'react';
 import classes from './styles.module.scss';
 import MenuItemAddButton from './MenuItemAddButton';
@@ -14,11 +14,13 @@ const MenuListItem: FunctionComponent<MenuListItemProps> = (props) => {
   return (
     <Paper className={classes.menuItemBox} p="md">
       <Flex direction="column" align="center" justify="space-between" h="100%">
-        <Flex direction="column" gap={8}>
+        <Flex direction="column" gap={8} maw="100%">
           <MenuItemClickableImage dishDescription={props.dishDescription} />
           <Flex align="flex-start" w="100%" direction="column" gap={8}>
-            <Title order={4}>{name}</Title>
-            <Flex gap={15} align="center">
+            <Box w="100%">
+              <Title order={4} lineClamp={2}>{name}</Title>
+            </Box>
+            <Flex gap={15} align="center" justify="space-between" w="100%">
               <Text flex="4 1 auto" c="dimmed" size="xs" lineClamp={3} ta="justify">
                 {description}
               </Text>
