@@ -16,7 +16,7 @@ interface MenuItemAddButtonProps {
 const MenuItemAddButton: FunctionComponent<MenuItemAddButtonProps> =
 ({ dishId, price, discount }) => {
   const color = discount === 0 ? '' : 'var(--mantine-color-discount)';
-  const finalPrice = PriceHelper.getPriceWithDiscount(price, discount);
+  const finalPrice = discount === 0 ? undefined : PriceHelper.getPriceWithDiscount(price, discount);
   const count = useAppSelector((state) => selectCartItemCount(state, dishId));
   const dispatch = useAppDispatch();
   const changeCount = (newCount:number) => dispatch(changeDishCount({ dishId, newCount }));
