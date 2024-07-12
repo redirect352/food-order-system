@@ -8,7 +8,7 @@ interface CartState {
 }
 
 const initialState: CartState = {
-  cartItems: [],
+  cartItems: [{ dishId: 1, dishCount: 1 }],
 };
 
 export const cartSlice = createSlice({

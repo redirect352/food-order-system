@@ -14,7 +14,7 @@ interface EmptyDishListProps {
 
 const NoContentPage: FunctionComponent<EmptyDishListProps> =
   ({ label, buttonLabel, href, img }) => (
-    <Flex direction="column" gap="48px" justify="flex-start" align="center" h="100vh">
+    <Flex direction="column" gap="48px" justify="flex-start" align="center">
       <Box pos="relative" className={classes.noDishPicture}>
         <Image src={img} alt="menu is empty" fill></Image>
       </Box>

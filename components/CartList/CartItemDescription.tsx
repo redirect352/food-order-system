@@ -39,7 +39,7 @@ const CartItemDescription: FunctionComponent<CartItemDescriptionProps> =
           </Group>
         }
 
-        <Text fz="md">
+        <Text fz="lg">
           {name}
         </Text>
         <Text className={classes.cartItemDescription} lineClamp={2}>{description}</Text>

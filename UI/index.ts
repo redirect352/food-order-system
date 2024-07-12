@@ -7,6 +7,8 @@ import MobileScrollToAffix from './MobileScrollToAffix/MobileScrollToAffix';
 import ImageWithFallback from './ImageWithFallback/ImageWithFallback';
 
 export { default as ScalingCard } from './ScalingCard/ScalingCard';
+export { default as TransitionList } from './TransitionList/TransitionList';
+
 export {
   Select,
   MobilePillsInput,

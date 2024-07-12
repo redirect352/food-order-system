@@ -43,7 +43,7 @@ function ResponsiveSizes({ children, className }: { children: any, className?: s
       </AppShell.Navbar>
 
       <AppShell.Main className={className}>
-          {children}
+        {children}
       </AppShell.Main>
     </AppShell>
   );

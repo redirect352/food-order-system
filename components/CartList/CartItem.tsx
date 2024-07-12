@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Group, Stack, Text, Checkbox, NumberFormatter } from '@mantine/core';
+import { Box, Group, Stack, Text, NumberFormatter } from '@mantine/core';
 import { FunctionComponent } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import classes from './styles.module.scss';
@@ -69,7 +69,6 @@ const CartItem: FunctionComponent<CartItemProps> =
             </Text>
           </Stack>
         }
-        <Checkbox />
       </Group>
       <ItemExtraInfoCard
         dishId={dishId}

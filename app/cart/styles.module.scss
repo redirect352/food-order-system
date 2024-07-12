@@ -1,7 +1,6 @@
 .cartContainer{
   margin-top: 12px;
   margin-inline: 100px;
-  min-height: 100px;
   @media (max-width: $mantine-breakpoint-xl){
     margin-inline: 50px;
   }
@@ -23,6 +22,7 @@
   width: 100%;
 }
 .cartTotal{
+  align-self: flex-end;
   @media (min-width: 1650px){
     flex: 0 0 375px;
     align-self: stretch;
@@ -30,8 +30,6 @@
   @media (max-width: 1650px){
     flex: 1 0 375px;
     width: 100%;
-    align-self: stretch;
-    justify-self: stretch;
   }
   @media (max-width: $mantine-breakpoint-sm){
     flex-shrink: 1;

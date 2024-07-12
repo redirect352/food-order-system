@@ -1,6 +1,6 @@
 'use client';
 
-import { Group, Stack, Title, Text, Button } from '@mantine/core';
+import { Group, Stack, Title, Text, Button, Flex } from '@mantine/core';
 import { FunctionComponent } from 'react';
 import classes from './styles.module.scss';
 import { CartList, NoContentPage } from '@/components';
@@ -20,7 +20,11 @@ const Cart : FunctionComponent<CartProps> = () => {
     <>
       {
         cartCount !== 0 &&
-        <Group gap="xl" className={classes.cartCont}>
+        <Flex
+          gap="xl"
+          className={classes.cartCont}
+          mih="var(--app-shell-full-height-container)"
+        >
           <Stack className={classes.cartItemsContainer} gap="lg">
             <Group justify="space-between">
               <Title order={1}>Корзина <Text c="dimmed" span fz="h2">{cartCount}</Text></Title>
@@ -38,7 +42,7 @@ const Cart : FunctionComponent<CartProps> = () => {
             scrollDirection="bottom"
             position={{ right: 10, bottom: 10 }}
           />
-        </Group>
+        </Flex>
         }
         {
           cartCount === 0 &&

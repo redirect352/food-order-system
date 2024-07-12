@@ -140,6 +140,7 @@ export const resolver: CSSVariablesResolver = (theme) => ({
         '--first-modal-z-index': '210',
         '--second-modal-z-index': '220',
         '--indicator-z-index': '90',
+        '--app-shell-full-height-container': 'calc(100dvh - var(--app-shell-header-offset, 0rem) - var(--app-shell-padding) - var(--app-shell-footer-offset, 0rem) - var(--app-shell-padding) - 12px)',
     },
     light: {
         '--mantine-color-background': '#FCEDEF',
