@@ -2,9 +2,9 @@ import { Group, Stack, Title, Text, Button } from '@mantine/core';
 import { FunctionComponent } from 'react';
 import classes from './styles.module.scss';
 import { useAppSelector } from '@/shared/hooks';
-import { selectCartItems, selectCartTotalCount } from '@/lib/features/cart/cartSlice';
-import { selectMenuItems } from '@/lib/features/menu/menuSlice';
+import { selectCartItems, selectCartItemsIds, selectCartTotalCount } from '@/lib/features/cart/cartSlice';
 import PriceHelper from '@/shared/helpers/priceHelper';
+import { selectMenuItems } from '@/lib/features/menu/menuSlice';
 
 interface CartTotalProps {
 
@@ -12,7 +12,8 @@ interface CartTotalProps {
 
 const CartTotal: FunctionComponent<CartTotalProps> = () => {
   const items = useAppSelector(selectCartItems);
-  const menuItems = useAppSelector(state => selectMenuItems(state, items.map(item => item.dishId)));
+  const itemsIds = useAppSelector(selectCartItemsIds);
+  const menuItems = useAppSelector(state => selectMenuItems(state, itemsIds));
   const totalPrice = items.reduce((sum, item) =>
     sum + item.dishCount * (menuItems.find(dish => dish.id === item.dishId)?.price ?? 0), 0);
   const totalDiscount = items.reduce((sum, item) => {

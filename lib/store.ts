@@ -6,9 +6,10 @@ import menuSlice from './features/menu/menuSlice';
 
 export const makeStore = () => configureStore({
       reducer: {
-        cartSlice,
-        menuSlice,
+        cart: cartSlice,
+        menu: menuSlice,
       },
+      middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
     });
 export type AppStore = ReturnType<typeof makeStore>;
 export type RootState = ReturnType<AppStore['getState']>;

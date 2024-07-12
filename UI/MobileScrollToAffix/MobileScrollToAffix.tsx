@@ -3,7 +3,7 @@
 import { Affix, AffixBaseProps, BoxProps, Button, Transition, TransitionProps } from '@mantine/core';
 import { useWindowScroll } from '@mantine/hooks';
 import { IconArrowDown, IconArrowUp } from '@tabler/icons-react';
-import { FunctionComponent } from 'react';
+import React, { FunctionComponent } from 'react';
 
 interface MobileScrollToAffixProps {
   buttonLabel: string,
@@ -25,11 +25,9 @@ const MobileScrollToAffix: FunctionComponent<MobileScrollToAffixProps> = ({
   transitionDuration = 300,
 }) => {
   const [scroll, scrollTo] = useWindowScroll();
+  const [mounted, setMounted] = React.useState(false);
+  React.useEffect(() => setMounted(scrollDirection === 'top' ? scroll.y > 0 : scroll.y < (document.body.scrollHeight - window.screen.height - 400)), [scroll]);
   const buttonIcon = scrollDirection === 'top' ? <IconArrowUp size={14} /> : <IconArrowDown size={14} />;
-  const mounted = scrollDirection === 'top' ?
-  scroll.y > 0
-  :
-  scroll.y < (document.body.scrollHeight - window.screen.height - 400);
   return (
     <Affix
       position={position}

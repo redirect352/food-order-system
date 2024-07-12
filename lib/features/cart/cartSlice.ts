@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@/lib/store';
 
@@ -57,11 +57,14 @@ export const {
 } = cartSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
-export const selectCartItems = (state: RootState) => state.cartSlice.cartItems;
-export const selectCartItemsLenght = (state: RootState) => state.cartSlice.cartItems.length;
+export const selectCartItems = (state: RootState) => state.cart.cartItems;
+export const selectCartItemsIds = createSelector(
+  (state:RootState) => state.cart.cartItems,
+  items => items.map(item => item.dishId));
+export const selectCartItemsLenght = (state: RootState) => state.cart.cartItems.length;
 export const selectCartTotalCount = (state: RootState) =>
-  state.cartSlice.cartItems.reduce((sum, item) => sum + item.dishCount, 0);
+  state.cart.cartItems.reduce((sum, item) => sum + item.dishCount, 0);
 export const selectCartItemCount = (state: RootState, dishId: number) =>
-  state.cartSlice.cartItems.find(item => item.dishId === dishId)?.dishCount ?? 0;
+  state.cart.cartItems.find(item => item.dishId === dishId)?.dishCount ?? 0;
 
 export default cartSlice.reducer;
