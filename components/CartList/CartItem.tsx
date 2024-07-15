@@ -44,7 +44,7 @@ const CartItem: FunctionComponent<CartItemProps> =
       />
       <Stack gap="xs" className={classes.priceBlock}>
         <PriceLabel
-          fullPrice={price}
+          fullPrice={price * count}
           priceWithDiscount={priceWithDiscount}
           classes={{ mainPrice: classes.cartItemHeader, oldPrice: classes.cartItemDescription }}
       />
