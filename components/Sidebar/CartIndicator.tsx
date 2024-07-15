@@ -17,7 +17,7 @@ const CartIndicator: FunctionComponent<CartIndicatorProps> = (props) => {
   const totalPrice = items.reduce((sum, item) =>
     sum + item.dishCount * (menuItems.find(dish => dish.id === item.dishId)?.price ?? 0), 0);
   return (
-    <Indicator label={`${totalPrice.toFixed(2)} руб.`} size={24} position="middle-end" offset={25} {...props} />
+    <Indicator label={`${totalPrice.toFixed(2)} руб.`} size={24} position="middle-end" offset={30} {...props} />
   );
 };
 

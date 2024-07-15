@@ -1,20 +1,24 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import Link from 'next/link';
 import React from 'react';
+import { NavLink } from '@mantine/core';
+import Link from 'next/link';
 import classes from './Sidebar.module.scss';
 
-export default function SidebarOption({ children, href } :
-  React.PropsWithChildren<{ href: string }>) {
+export default function SidebarOption({ children, href, leftSection } :
+  React.PropsWithChildren<{ href: string, leftSection?: React.ReactNode }>) {
 const path = usePathname();
 const isChoosen = path.includes(href);
 return (
-      <Link
-        href={href}
-        className={isChoosen ? [classes.option, classes.optionActive].join(' ') : classes.option}
-        >
-        {children}
-      </Link>
+  <NavLink
+    href={href}
+    component={Link}
+    className={isChoosen ? [classes.option, classes.optionActive].join(' ') : classes.option}
+    label={children}
+    fz="h2"
+    styles={{ label: { fontSize: 'var(--mantine-font-size-md)' } }}
+    leftSection={leftSection}
+  />
 );
 }

@@ -1,4 +1,5 @@
 import { Flex } from '@mantine/core';
+import { IconBasket, IconFridge, IconHistory, IconMenu, IconMenu2, IconNotes, IconTruckDelivery } from '@tabler/icons-react';
 import SidebarOption from './SidebarOption';
 import CartIndicator from './CartIndicator';
 
@@ -6,24 +7,24 @@ export default function Sidebar() {
 return (
   <Flex
     direction="column"
-    gap={16}
+    gap={8}
     w="100%"
     >
-    <SidebarOption href="/menu">
+    <SidebarOption href="/menu" leftSection={<IconNotes size={20} />}>
       Меню
     </SidebarOption>
-    <SidebarOption href="/prepackMenu">
+    <SidebarOption href="/prepackMenu" leftSection={<IconFridge size={20} />}>
       Заказ полуфабрикатов
     </SidebarOption>
-    <SidebarOption href="/cart">
+    <SidebarOption href="/cart" leftSection={<IconBasket size={20} />}>
       <CartIndicator>
         Корзина
       </CartIndicator>
     </SidebarOption>
-    <SidebarOption href="/activeOrders">
+    <SidebarOption href="/activeOrders" leftSection={<IconTruckDelivery size={20} />}>
       Активные заказы
     </SidebarOption>
-    <SidebarOption href="/ordersHistory">
+    <SidebarOption href="/ordersHistory" leftSection={<IconHistory size={20} />}>
       История заказов
     </SidebarOption>
   </Flex>
