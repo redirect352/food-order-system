@@ -18,10 +18,10 @@ const MenuListItem: FunctionComponent<MenuListItemProps> = (props) => {
           <MenuItemClickableImage dishDescription={props.dishDescription} />
           <Flex align="flex-start" w="100%" direction="column" gap={8}>
             <Box w="100%">
-              <Title order={4} lineClamp={2}>{name}</Title>
+              <Title order={3} lineClamp={2}>{name}</Title>
             </Box>
             <Flex gap={15} align="center" justify="space-between" w="100%">
-              <Text flex="4 1 auto" c="dimmed" size="sm" lineClamp={3} ta="justify">
+              <Text flex="4 1 auto" c="dimmed" size="sm" lineClamp={2} ta="justify">
                 {description}
               </Text>
               <Text flex="4 1 auto" fw={500} size="sm" ta="center">{quantity}</Text>

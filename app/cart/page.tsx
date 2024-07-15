@@ -8,7 +8,7 @@ import CartTotal from '@/components/CartTotal/CartTotal';
 import { MobileScrollToAffix } from '@/UI';
 import { useAppSelector } from '@/shared/hooks';
 import { selectCartItemsLenght } from '@/lib/features/cart/cartSlice';
-import noMenuImage from '@/public/204Menu.png';
+import noMenuImage from '@/public/emptyCart.png';
 
 interface CartProps {
 
@@ -49,7 +49,7 @@ const Cart : FunctionComponent<CartProps> = () => {
           <NoContentPage
             buttonLabel="В меню"
             href="/menu"
-            label="Пока что корзина пуста"
+            label="Ваша Корзина пуста. Выберите блюда для заказа в меню "
             img={noMenuImage}
           />
         }
