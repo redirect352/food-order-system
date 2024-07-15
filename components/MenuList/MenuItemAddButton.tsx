@@ -16,7 +16,7 @@ interface MenuItemAddButtonProps {
 const MenuItemAddButton: FunctionComponent<MenuItemAddButtonProps> =
 ({ dishId, price, discount }) => {
   const color = discount === 0 ? '' : 'var(--mantine-color-discount)';
-  const finalPrice = discount === 0 ? undefined : PriceHelper.getPriceWithDiscount(price, discount);
+  const finalPrice = PriceHelper.getPriceWithDiscount(price, discount);
   const count = useAppSelector((state) => selectCartItemCount(state, dishId));
   const dispatch = useAppDispatch();
   const changeCount = (newCount:number) => dispatch(changeDishCount({ dishId, newCount }));
@@ -26,7 +26,7 @@ const MenuItemAddButton: FunctionComponent<MenuItemAddButtonProps> =
       count > 0
       ?
       <>
-        <Text fw={500}>
+        <Text fw={500} size="md" fz="xl">
           {(PriceHelper.getPriceWithDiscount(price, discount, count))}
           <Text span fz={14}> руб.</Text>
         </Text>
@@ -35,8 +35,8 @@ const MenuItemAddButton: FunctionComponent<MenuItemAddButtonProps> =
       :
       <>
         <Flex align="flex-end" gap={4}>
-        <Text fw={500} c={color}>{finalPrice} <Text span fz={14} c={color}> руб.</Text></Text>
-        {discount !== 0 && <Text c="dimmed" size="xs" td="line-through">{price} руб.</Text>}
+          <Text fw={500} size="md" fz="xl" c={color}>{finalPrice} <Text span fz={14} c={color}> руб.</Text></Text>
+          {discount !== 0 && <Text c="dimmed" size="xs" td="line-through">{price} руб.</Text>}
         </Flex>
         <Button variant="outline" size="xs" onClick={() => changeCount(1)}>Добавить</Button>
       </>

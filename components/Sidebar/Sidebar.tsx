@@ -1,5 +1,5 @@
 import { Flex } from '@mantine/core';
-import { IconBasket, IconFridge, IconHistory, IconMenu, IconMenu2, IconNotes, IconTruckDelivery } from '@tabler/icons-react';
+import { IconBasket, IconFridge, IconHistory, IconNotes, IconTruckDelivery } from '@tabler/icons-react';
 import SidebarOption from './SidebarOption';
 import CartIndicator from './CartIndicator';
 

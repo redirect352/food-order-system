@@ -21,10 +21,10 @@ const MenuListItem: FunctionComponent<MenuListItemProps> = (props) => {
               <Title order={4} lineClamp={2}>{name}</Title>
             </Box>
             <Flex gap={15} align="center" justify="space-between" w="100%">
-              <Text flex="4 1 auto" c="dimmed" size="xs" lineClamp={3} ta="justify">
+              <Text flex="4 1 auto" c="dimmed" size="sm" lineClamp={3} ta="justify">
                 {description}
               </Text>
-              <Text flex="4 1 auto" fw={500} size="xs" ta="center">{quantity}</Text>
+              <Text flex="4 1 auto" fw={500} size="sm" ta="center">{quantity}</Text>
             </Flex>
           </Flex>
         </Flex>

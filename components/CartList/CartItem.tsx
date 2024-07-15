@@ -42,7 +42,7 @@ const CartItem: FunctionComponent<CartItemProps> =
       <CartItemDescription
         dishId={dishId}
       />
-      <Stack gap="xs" className={classes.priceBlock}>
+      <Stack gap="xs" className={classes.priceBlock} visibleFrom="sm">
         <PriceLabel
           fullPrice={price * count}
           priceWithDiscount={priceWithDiscount}
