@@ -1,9 +1,13 @@
+'use client';
+
 import { Flex } from '@mantine/core';
-import { IconBasket, IconFridge, IconHistory, IconNotes, IconTruckDelivery } from '@tabler/icons-react';
+import { IconBasket, IconFridge, IconHistory, IconLogout2, IconNotes, IconTruckDelivery, IconUserCircle } from '@tabler/icons-react';
 import SidebarOption from './SidebarOption';
 import CartIndicator from './CartIndicator';
+import { useLogout } from '@/shared/hooks';
 
 export default function Sidebar() {
+const { logout } = useLogout();
 return (
   <Flex
     direction="column"
@@ -21,11 +25,24 @@ return (
         Корзина
       </CartIndicator>
     </SidebarOption>
-    <SidebarOption href="/activeOrders" leftSection={<IconTruckDelivery size={20} />}>
+    <SidebarOption href="/active-orders" leftSection={<IconTruckDelivery size={20} />}>
       Активные заказы
     </SidebarOption>
     <SidebarOption href="/ordersHistory" leftSection={<IconHistory size={20} />}>
       История заказов
+    </SidebarOption>
+    <SidebarOption
+      href="/profile"
+      leftSection={<IconUserCircle size={20} />}
+    >
+      Мой профиль
+    </SidebarOption>
+    <SidebarOption
+      href="/login"
+      leftSection={<IconLogout2 size={20} />}
+      onClick={logout}
+    >
+      Выйти
     </SidebarOption>
   </Flex>
   );

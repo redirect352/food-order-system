@@ -15,3 +15,6 @@ export {
   CartList,
   OrderCard,
 };
+export { AuthenticationForm } from './AuthenticationForm/AuthenticationForm';
+export { default as FirstAuthForm } from './FirstAuthForm/FirstAuthForm';
+export { SuccessMessageCard } from './SuccessMessageCard/SuccessMessageCard';

@@ -1,11 +1,12 @@
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable @next/next/no-page-custom-font */
 import '@mantine/core/styles.css';
+import '@mantine/notifications/styles.css';
 import React from 'react';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import { Roboto } from 'next/font/google';
+import { Notifications } from '@mantine/notifications';
 import { resolver, theme } from '../theme';
-import ResponsiveSizes from './ResponsiveSizes';
 import StoreProvider from './StoreProvider';
 
 export const metadata = {
@@ -42,14 +43,13 @@ export default function RootLayout({ children }: { children: any }) {
           content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
         />
       </head>
-      <body>
-      <StoreProvider>
+      <body className={IS_DEV ? '' : roboto.className}>
         <MantineProvider theme={theme} cssVariablesResolver={resolver}>
-          <ResponsiveSizes className={!IS_DEV ? roboto.className : ''}>
+          <StoreProvider>
+            <Notifications />
             {children}
-          </ResponsiveSizes>
+          </StoreProvider>
         </MantineProvider>
-      </StoreProvider>
       </body>
     </html>
   );

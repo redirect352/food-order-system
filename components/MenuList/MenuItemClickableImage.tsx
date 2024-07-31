@@ -29,7 +29,7 @@ const MenuItemClickableImage: FunctionComponent<MenuItemImageProps> = (props) =>
             className={classes.image}
             src={image}
             alt="123"
-            sizes="(max-width: 460px) 270px 270px, (max-width: 564px) 370px 370px, (mix-width: 565px) 220px 220px,"
+            sizes="(max-width: 460px) 270px 270px, (max-width: 564px) 370px 370px, (min-width: 565px) 220px 220px,"
             fill
             />
         </Paper>

@@ -8,7 +8,6 @@ import classes from './styles.module.scss';
 
 function ResponsiveSizes({ children, className }: { children: any, className?: string }) {
   const [opened, { toggle }] = useDisclosure();
-
   return (
     <AppShell
       header={{ height: { base: 50, sm: 0, md: 0, lg: 0 } }}

@@ -2,14 +2,16 @@
 import { configureStore } from '@reduxjs/toolkit';
 import cartSlice from './features/cart/cartSlice';
 import menuSlice from './features/menu/menuSlice';
+import { authApi } from './api/authApi';
 // ...
 
 export const makeStore = () => configureStore({
       reducer: {
         cart: cartSlice,
         menu: menuSlice,
+        [authApi.reducerPath]: authApi.reducer,
       },
-      middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+      middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(authApi.middleware),
     });
 export type AppStore = ReturnType<typeof makeStore>;
 export type RootState = ReturnType<AppStore['getState']>;
