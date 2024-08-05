@@ -6,11 +6,11 @@ import { useDisclosure } from '@mantine/hooks';
 import classes from './styles.module.scss';
 import CartItemDescription from './CartItemDescription';
 import { ImageWithFallback, PriceLabel, ScalingCard } from '@/UI';
-import ItemExtraInfoCard from '../ItemExtraInfoCard/ItemCard';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks';
 import { removeFromCart, selectCartItemCount } from '@/lib/features/cart/cartSlice';
 import { selectMenuItem } from '@/lib/features/menu/menuSlice';
 import PriceHelper from '@/shared/helpers/priceHelper';
+import { ItemExtraInfoCard } from '@/components';
 
 interface CartItemProps {
   dishId: number

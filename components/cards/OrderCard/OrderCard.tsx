@@ -1,5 +1,4 @@
-
-import { Button, Card, Grid, List, NumberFormatter, Text, CardSection, GridCol, ListItem } from '@mantine/core';
+import { Button, Grid, List, NumberFormatter, Text, CardSection, GridCol, ListItem } from '@mantine/core';
 import { FunctionComponent } from 'react';
 import classes from './styles.module.scss';
 import { ScalingCard } from '@/UI';

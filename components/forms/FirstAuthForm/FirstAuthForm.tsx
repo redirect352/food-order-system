@@ -34,8 +34,8 @@ const FirstAuthForm: FunctionComponent<FirstAuthFormProps> = ({ userBasicData, o
       newPasswordRepeat: '',
     },
     validate: {
-      newLogin: (val) => val.length < 5 ?
-      'Логин должен содержать не менее 5 символов' : null,
+      newLogin: (val) => val.length < 5 && val.includes('@') ?
+      'Логин должен содержать не менее 5 символов и не должен содержать символ @' : null,
       newPassword: (val) => (passwordStrength(val).id < 2 ?
       'Пароль должен содержать не менее 8 символов,  1 цифру, маленькую и большую буквы и 1 спецсимвол (!№%*&).' : null),
       newPasswordRepeat: (val, { newPassword }) => (val !== newPassword ?
@@ -78,6 +78,10 @@ const FirstAuthForm: FunctionComponent<FirstAuthFormProps> = ({ userBasicData, o
       </Text>
       <Text c="dimmed" size="xs" ta="center">
         для окончания регистрации придумайте логин и пароль и нажмите &apos;Далее&apos;
+      </Text>
+      <Text
+        size="sm"
+        fz={400}>
       </Text>
       <Divider mb="sm" />
       <form onSubmit={onSubmit}>

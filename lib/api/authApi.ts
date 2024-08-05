@@ -5,7 +5,7 @@ export const authApi = createApi({
   reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:5000/api/auth',
-    prepareHeaders: (headers) => {
+    prepareHeaders: async (headers) => {
       const token = CookieService.getCurrentUser()?.token;
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
@@ -35,6 +35,21 @@ export const authApi = createApi({
         body,
       })),
     }),
+    resetPassword: builder.mutation({
+      query: (body: { email?: string, login?: string }) => ({
+        url: '/reset-password',
+        method: 'POST',
+        body,
+      }),
+    }),
+    changePassword: builder.mutation({
+      query: (({ token, ...body }: { token : string, newPassword: string }) => ({
+        url: '/change-password',
+        method: 'PATCH',
+        params: { token },
+        body,
+      })),
+    }),
   }),
 });
 
@@ -42,4 +57,6 @@ export const {
   useSignInMutation,
   useLazyCheckFirstAuthTokenQuery,
   useChangeCredentialsMutation,
+  useResetPasswordMutation,
+  useChangePasswordMutation,
 } = authApi;

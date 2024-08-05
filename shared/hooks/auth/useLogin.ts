@@ -1,13 +1,7 @@
-import Cookies from 'js-cookie';
+import { handleLogin } from '@/shared/actions/cookie-actions';
 
 export const useLogin = () => {
-  const login = async (token: string) => {
-    const user = { token };
-    if (user) {
-      Cookies.set('currentUser', JSON.stringify({ token }), { expires: 14 });
-    }
-    return user;
-  };
+  const login = async (token: string) => handleLogin(token);
 
   return { login };
 };

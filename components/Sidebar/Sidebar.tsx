@@ -14,25 +14,25 @@ return (
     gap={8}
     w="100%"
     >
-    <SidebarOption href="/menu" leftSection={<IconNotes size={20} />}>
+    <SidebarOption href="/client/menu" leftSection={<IconNotes size={20} />}>
       Меню
     </SidebarOption>
-    <SidebarOption href="/prepackMenu" leftSection={<IconFridge size={20} />}>
+    <SidebarOption href="/client/prepack-menu" leftSection={<IconFridge size={20} />}>
       Заказ полуфабрикатов
     </SidebarOption>
-    <SidebarOption href="/cart" leftSection={<IconBasket size={20} />}>
+    <SidebarOption href="/client/cart" leftSection={<IconBasket size={20} />}>
       <CartIndicator>
         Корзина
       </CartIndicator>
     </SidebarOption>
-    <SidebarOption href="/active-orders" leftSection={<IconTruckDelivery size={20} />}>
+    <SidebarOption href="/client/active-orders" leftSection={<IconTruckDelivery size={20} />}>
       Активные заказы
     </SidebarOption>
-    <SidebarOption href="/ordersHistory" leftSection={<IconHistory size={20} />}>
+    <SidebarOption href="/client/orders-history" leftSection={<IconHistory size={20} />}>
       История заказов
     </SidebarOption>
     <SidebarOption
-      href="/profile"
+      href="/client/profile"
       leftSection={<IconUserCircle size={20} />}
     >
       Мой профиль

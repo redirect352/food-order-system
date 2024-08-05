@@ -14,6 +14,7 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { useLogin } from '@/shared/hooks';
 import { useSignInMutation } from '@/lib/api/authApi';
 
@@ -35,9 +36,8 @@ export function AuthenticationForm({ onFirstAuth, ...props }
   const { login } = useLogin();
   const [signIn] = useSignInMutation({});
   const onSubmit = form.onSubmit(({ username, password }) => {
-    // login(email, password);
     const queryBody = username.includes('@') ? { email: username, password } : { login: username, password };
-    signIn(queryBody).then(res => {
+    signIn(queryBody).then(async (res) => {
       if (res.error) {
         // eslint-disable-next-line prefer-destructuring
         const error: any = res.error;
@@ -92,9 +92,11 @@ export function AuthenticationForm({ onFirstAuth, ...props }
         </Stack>
 
         <Group justify="space-between" mt="xl">
-          <Anchor component="button" type="button" c="dimmed" size="xs">
-            Я не помню пароль
-          </Anchor>
+          <Link href="/reset-password">
+            <Anchor component="button" type="button" c="dimmed" size="xs">
+              Я не помню пароль
+            </Anchor>
+          </Link>
           <Button type="submit" radius="xl">
             Войти
           </Button>

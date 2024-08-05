@@ -1,22 +1,36 @@
 import type { NextRequest } from 'next/server';
+import { decodeJwt } from 'jose';
+import { cookies } from 'next/headers';
+import { CryptoService } from './shared/services/CryptoService';
 
 export const protectedRoutes = [
   '/menu', '/prepackMenu', '/cart', '/active-orders',
 ];
-export const authRoutes = ['/login'];
+export const authRoutes = ['/login', '/change-password', '/reset-password', '/password-confirmation', '/email-confirmation'];
 export const publicRoutes = ['/'];
 
 export const config = {
-  matcher: ['/menu', '/prepackMenu', '/cart', '/active-orders', '/login'],
+  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
 };
 
 // eslint-disable-next-line consistent-return
-export function middleware(request: NextRequest) {
-  const currentUser = request.cookies.get('currentUser')?.value;
-  if (currentUser && request.nextUrl.pathname.startsWith('/login')) {
-    return Response.redirect(new URL('/menu', request.url));
-  }
-  if (!currentUser && !request.nextUrl.pathname.startsWith('/login')) {
+export async function middleware(request: NextRequest) {
+  const token = request.cookies.get('token')?.value;
+  const pathName = request.nextUrl.pathname;
+  if (token) {
+    const payload = await decodeJwt(CryptoService.decryptObject(token));
+    const { role } = payload;
+    if (!role) {
+      cookies().delete('token');
+      return Response.redirect(new URL('/login', request.url));
+    }
+    if (!pathName.startsWith(`/${role}`) && !publicRoutes.includes(pathName)) {
+      return Response.redirect(new URL('/', request.url));
+    }
+  } else if (
+    !publicRoutes.includes(pathName) &&
+    !authRoutes.find(route => pathName.startsWith(route))
+  ) {
     return Response.redirect(new URL('/login', request.url));
   }
 }

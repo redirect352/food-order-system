@@ -12,7 +12,7 @@ export function ColorSchemeToggle() {
       <Button onClick={() => setColorScheme('light')}>Light</Button>
       <Button onClick={() => setColorScheme('dark')}>Dark</Button>
       <Button onClick={() => setColorScheme('auto')}>Auto</Button>
-      <Button onClick={() => router.push('/menu')}>Menu</Button>
+      <Button onClick={() => router.push('client/menu')}>Menu</Button>
     </Group>
   );
 }

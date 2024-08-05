@@ -1,14 +1,10 @@
 import { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
 
 export const useCurrentUser = () => {
-  const [user, setUser] = useState<any | null>(null);
+  const [user] = useState<any | null>(null);
 
   useEffect(() => {
-    const currentUser = Cookies.get('currentUser');
-    if (currentUser) {
-      setUser(JSON.parse(currentUser));
-    }
+    //not-realized
   }, []);
   return { user };
 };

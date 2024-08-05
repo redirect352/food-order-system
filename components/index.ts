@@ -4,7 +4,7 @@ import MenuList from './MenuList/MenuList';
 import PageHeaderContainer from './PageHeaderContainer/PageHeaderContainer';
 import MenuFilterBar from './MenuFilterBar/MenuFilterBar';
 import CartList from './CartList/CartList';
-import OrderCard from './OrderCard/OrderCard';
+import OrderCard from './cards/OrderCard/OrderCard';
 
 export {
   Sidebar,
@@ -15,6 +15,9 @@ export {
   CartList,
   OrderCard,
 };
-export { AuthenticationForm } from './AuthenticationForm/AuthenticationForm';
-export { default as FirstAuthForm } from './FirstAuthForm/FirstAuthForm';
-export { SuccessMessageCard } from './SuccessMessageCard/SuccessMessageCard';
+export { default as ItemExtraInfoCard } from './cards/ItemExtraInfoCard/ItemCard';
+export { AuthenticationForm } from './forms/AuthenticationForm/AuthenticationForm';
+export { default as FirstAuthForm } from './forms/FirstAuthForm/FirstAuthForm';
+export { SuccessMessageCard } from './cards/SuccessMessageCard/SuccessMessageCard';
+export { default as ResetPasswordForm } from './forms/ResetPasswordForm/ResetPasswordForm';
+export { default as ChangePasswordForm } from './forms/ChangePasswordForm/ChangePasswordForm';

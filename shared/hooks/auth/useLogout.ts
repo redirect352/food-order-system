@@ -1,8 +1,8 @@
-import Cookies from 'js-cookie';
+import { handleLogout } from '@/shared/actions/cookie-actions';
 
 export const useLogout = () => {
-  const logout = () => {
-    Cookies.remove('currentUser');
+  const logout = async () => {
+    await handleLogout();
   };
   return { logout };
 };

@@ -4,7 +4,7 @@ import { Indicator, NumberFormatter, Paper } from '@mantine/core';
 import { FunctionComponent } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { ImageWithFallback } from '@/UI';
-import ItemExtraInfoCard from '../ItemExtraInfoCard/ItemCard';
+import { ItemExtraInfoCard } from '@/components';
 import classes from './styles.module.scss';
 import { Dish } from '@/shared/types';
 import { useAppDispatch } from '@/shared/hooks';
