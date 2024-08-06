@@ -21,3 +21,4 @@ export { default as FirstAuthForm } from './forms/FirstAuthForm/FirstAuthForm';
 export { SuccessMessageCard } from './cards/SuccessMessageCard/SuccessMessageCard';
 export { default as ResetPasswordForm } from './forms/ResetPasswordForm/ResetPasswordForm';
 export { default as ChangePasswordForm } from './forms/ChangePasswordForm/ChangePasswordForm';
+export { UserAvatar } from './UserAvatar/UserAvatar';

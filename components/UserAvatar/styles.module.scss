@@ -1,0 +1,11 @@
+.group{
+  &:hover{
+    .groupText, .groupAvatar{
+      // color: var(--mantine-hover-color);
+      transition: 0.3s ease;
+      
+    }
+      transition: 0.3s ease;
+      scale: 1.01;
+  }
+}

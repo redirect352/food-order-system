@@ -3,14 +3,14 @@
 import { AppShell, Burger, Divider, Group, Text, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import Image from 'next/image';
-import { Sidebar } from '@/components';
+import { Sidebar, UserAvatar } from '@/components';
 import classes from './styles.module.scss';
 
 function ResponsiveSizes({ children, className }: { children: any, className?: string }) {
   const [opened, { toggle }] = useDisclosure();
   return (
     <AppShell
-      header={{ height: { base: 50, sm: 0, md: 0, lg: 0 } }}
+      header={{ height: { base: 50, sm: 70, md: 70, lg: 70 } }}
       navbar={{
         width: { base: 200, md: 300, lg: 400 },
         breakpoint: 'sm',
@@ -19,18 +19,21 @@ function ResponsiveSizes({ children, className }: { children: any, className?: s
       padding="md"
       className={classes.bodyColor}
     >
-      <AppShell.Header hiddenFrom="sm">
-        <Group h="100%" px="md">
+      <AppShell.Header bg="light-dark(var(--mantine-color-grey-1), var(--mantine-color-black))">
+        <Group align="center" justify="space-between" h="100%">
+        <Group px="md" visibleFrom="sm" pl="lg">
+            <Image src="/logo.png" alt="" width={37} height={52} />
+            <Title order={3}>Cистема заказа питания</Title>
+        </Group>
+        <UserAvatar px="md" visibleFrom="sm" pl="lg" />
+        <Group h="100%" px="md" hiddenFrom="sm">
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+        </Group>
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md" bg="light-dark(var(--mantine-color-grey-1), var(--mantine-color-black))">
         <AppShell.Section>
-          <Group px="md">
-            <Image src="/logo.png" alt="" width={37} height={52} />
-            <Title order={3}>Cистема заказа питания</Title>
-          </Group>
-          <Divider my="md" pb="md" />
+          {/* <Divider my="md" pb="md" /> */}
         </AppShell.Section>
         <AppShell.Section grow>
           <Sidebar />

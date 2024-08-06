@@ -23,7 +23,7 @@ export function AuthenticationForm({ onFirstAuth, ...props }
   const form = useForm({
     initialValues: {
       username: 'ponomarev@minsktrans.by',
-      password: '',
+      password: '12345678!ASss',
     },
     validate: {
       username: (val) => val.includes('@') ?
@@ -34,7 +34,7 @@ export function AuthenticationForm({ onFirstAuth, ...props }
   });
   const router = useRouter();
   const { login } = useLogin();
-  const [signIn] = useSignInMutation({});
+  const [signIn, result] = useSignInMutation({});
   const onSubmit = form.onSubmit(({ username, password }) => {
     const queryBody = username.includes('@') ? { email: username, password } : { login: username, password };
     signIn(queryBody).then(async (res) => {
@@ -78,6 +78,7 @@ export function AuthenticationForm({ onFirstAuth, ...props }
             onChange={(event) => form.setFieldValue('username', event.currentTarget.value)}
             error={form.errors.username}
             radius="md"
+            disabled={result.isLoading}
           />
 
           <PasswordInput
@@ -88,6 +89,7 @@ export function AuthenticationForm({ onFirstAuth, ...props }
             onChange={(event) => form.setFieldValue('password', event.currentTarget.value)}
             error={form.errors.password}
             radius="md"
+            disabled={result.isLoading}
           />
         </Stack>
 
@@ -97,7 +99,7 @@ export function AuthenticationForm({ onFirstAuth, ...props }
               Я не помню пароль
             </Anchor>
           </Link>
-          <Button type="submit" radius="xl">
+          <Button type="submit" radius="xl" loading={result.isLoading}>
             Войти
           </Button>
         </Group>

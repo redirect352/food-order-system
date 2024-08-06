@@ -2,9 +2,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { CookieService } from '@/shared/services';
 
 export const authApi = createApi({
-  reducerPath: 'userApi',
+  reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5000/api/auth',
+    baseUrl: `${process.env.NEXT_PUBLIC_API_BASE}/auth`,
     prepareHeaders: async (headers) => {
       const token = CookieService.getCurrentUser()?.token;
       if (token) {
