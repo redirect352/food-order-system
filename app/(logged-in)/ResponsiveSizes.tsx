@@ -21,14 +21,14 @@ function ResponsiveSizes({ children, className }: { children: any, className?: s
     >
       <AppShell.Header bg="light-dark(var(--mantine-color-grey-1), var(--mantine-color-black))">
         <Group align="center" justify="space-between" h="100%">
-        <Group px="md" visibleFrom="sm" pl="lg">
-            <Image src="/logo.png" alt="" width={37} height={52} />
-            <Title order={3}>Cистема заказа питания</Title>
-        </Group>
-        <UserAvatar px="md" visibleFrom="sm" pl="lg" />
-        <Group h="100%" px="md" hiddenFrom="sm">
-          <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-        </Group>
+          <Group px="md" visibleFrom="sm" pl="lg">
+              <Image src="/logo.png" alt="" width={37} height={52} />
+              <Title order={3}>Cистема заказа питания</Title>
+          </Group>
+          <UserAvatar px="md" visibleFrom="sm" pl="lg" />
+          <Group h="100%" px="md" hiddenFrom="sm">
+            <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+          </Group>
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md" bg="light-dark(var(--mantine-color-grey-1), var(--mantine-color-black))">
