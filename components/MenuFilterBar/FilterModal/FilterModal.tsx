@@ -6,12 +6,11 @@ import { MobilePillsInput, MobileModal } from '@/UI';
 
 interface FilterModalProps extends ModalProps {
 }
-const prodTypeData = ['Собственного производства', 'Прочее'];
 const dishTypeData = ['Первые блюда', 'Вторые блюда', 'Третие блюда', 'Холодные закуски', 'Гарнир', 'Сладкие блюда'];
 
 const FilterModal: FunctionComponent<FilterModalProps> = (props) => {
-  const [productCathegory, changeProductCathegory] = useState<string[]>([]);
-  const [dishCathegory, changeDishCathegory] = useState<string[]>([]);
+  const [productCategory, changeProductCategory] = useState<string[]>([]);
+  const [dishCategory, changeDishCategory] = useState<string[]>([]);
 
   return (
     <MobileModal
@@ -25,9 +24,10 @@ const FilterModal: FunctionComponent<FilterModalProps> = (props) => {
         </Grid.Col>
         <Grid.Col span={7}>
           <MobilePillsInput
-            data={prodTypeData}
-            values={productCathegory}
-            setValues={changeProductCathegory}
+            // data={typeOptions}
+            data={[]}
+            values={productCategory}
+            setValues={changeProductCategory}
             w="100%"
             modalTitle="Выберите тип продукции"
           />
@@ -38,8 +38,8 @@ const FilterModal: FunctionComponent<FilterModalProps> = (props) => {
         <Grid.Col span={7}>
           <MobilePillsInput
             data={dishTypeData}
-            values={dishCathegory}
-            setValues={changeDishCathegory}
+            values={dishCategory}
+            setValues={changeDishCategory}
             w="100%"
             modalTitle="Выберите тип продукции"
           />

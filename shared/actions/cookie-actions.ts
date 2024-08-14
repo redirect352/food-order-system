@@ -18,7 +18,7 @@ export async function getToken() {
   if (!tokenEnc) {
     return { token: null };
   }
-  const result = CryptoService.decryptObject(tokenEnc);
+  const result:string = CryptoService.decryptObject(tokenEnc);
   return { token: result };
 }
 export async function handleLogout() {

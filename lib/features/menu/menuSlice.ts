@@ -1,24 +1,34 @@
-import { createSelector, createSlice } from '@reduxjs/toolkit';
-import { Dish } from '@/shared/types';
-import { menuItems } from '@/testData/menuData';
+import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { MenuPositionDto } from '@/shared/types';
 import { RootState } from '@/lib/store';
 
 interface MenuState {
-  menuItems: Dish[]
+  menuItems: MenuPositionDto[]
 
 }
 
 const initialState: MenuState = {
-  menuItems,
+  menuItems: [],
 };
 
 export const menuSlice = createSlice({
   name: 'menu',
   initialState,
   reducers: {
+    setMenu: (state, action: PayloadAction<MenuPositionDto[]>) => {
+      state.menuItems = action.payload.map((item) => ({
+        ...item,
+        dish: {
+          ...item.dish,
+          calorieContent: +item.dish.calorieContent ?
+          +item.dish.calorieContent : item.dish.calorieContent,
+        },
+        price: item.price / 100,
+      }));
+    },
   },
   selectors: {
-    selectMenuItems:
+    selectMenuItemsById:
     createSelector(
       [
         (state: MenuState) => state.menuItems,
@@ -26,12 +36,12 @@ export const menuSlice = createSlice({
       ],
       (items, idList) => items.filter(item => idList.includes(item.id))
     ),
+    selectMenuItems: (state: MenuState) => state.menuItems,
   },
 });
-export const { selectMenuItems } = menuSlice.selectors;
+export const { selectMenuItemsById, selectMenuItems } = menuSlice.selectors;
 export const selectMenuItem = (state: RootState, id : number) =>
   state.menu.menuItems.find(item => item.id === id);
-// export const selectMenuItems = (state: RootState, idList : number[]) =>
-//   state.menuSlice.menuItems.filter(item => idList.includes(item.id));
+export const { setMenu } = menuSlice.actions;
 
 export default menuSlice.reducer;

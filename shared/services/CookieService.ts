@@ -8,4 +8,15 @@ export class CookieService {
     }
     return null;
   }
+  static getDefaultMenuPageSize() {
+    const pageSizeCookie = Cookies.get('menuPageSize');
+    if (pageSizeCookie) {
+       const pageSize = JSON.parse(pageSizeCookie);
+       if (+pageSize && +pageSize > 0 && +pageSize < 25) {
+        return +pageSize;
+       }
+    }
+    Cookies.set('menuPageSize', '10');
+    return 10;
+  }
 }

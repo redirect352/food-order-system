@@ -9,7 +9,8 @@ export { default as ScalingCard } from './ScalingCard/ScalingCard';
 export { default as TransitionList } from './TransitionList/TransitionList';
 export { default as MobileScrollToAffix } from './MobileScrollToAffix/MobileScrollToAffix';
 export { default as PriceLabel } from './PriceLabel/PriceLabel';
-
+export { default as PFCLabel } from './PFCLabel/PFCLabel';
+export { MultiSelect } from './MultiSelect/MultiSelect';
 export {
   Select,
   MobilePillsInput,

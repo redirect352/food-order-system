@@ -18,7 +18,7 @@ interface CartItemProps {
 
 const CartItem: FunctionComponent<CartItemProps> =
 ({ dishId }) => {
-  const { price, image, discount } =
+  const { price, dish, discount } =
   useAppSelector(state => selectMenuItem(state, dishId))!;
   const [opened, { open, close }] = useDisclosure(false);
   const count = useAppSelector((state) => selectCartItemCount(state, dishId));
@@ -33,7 +33,7 @@ const CartItem: FunctionComponent<CartItemProps> =
       <Box className={classes.image} onClick={open} data-modal-opened={opened}>
         <ImageWithFallback
           style={{ borderRadius: '10px' }}
-          src={image}
+          src={`${process.env.NEXT_PUBLIC_IMAGE_BASE}/${dish.image?.path}`}
           alt="123"
           sizes="(max-width:62em) 80px, 120px"
           fill

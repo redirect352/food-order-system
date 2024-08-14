@@ -1,52 +1,53 @@
 'use client';
 
 import { ActionIcon, Affix, CloseButton, Flex, Title, useMantineTheme } from '@mantine/core';
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { IconFilter } from '@tabler/icons-react';
-import { Select } from '@/UI';
 import classes from './styles.module.scss';
 import FilterModal from '@/components/MenuFilterBar/FilterModal/FilterModal';
+import { typeOptions, useFilters } from './useFilters';
+import { MultiSelect } from '@/UI';
 
 interface MenuFilterBarProps {
 
 }
-const cathegorySelectOptions = ['Продукция собственного производства', 'Готовая продукция'];
-const subcathegorySelectOptions = ['Первые блюда', 'Вторые блюда', 'Третие блюда', 'Холодные закуски', 'Гарнир', 'Сладкие блюда'];
-
 const MenuFilterBar: FunctionComponent<MenuFilterBarProps> = () => {
-  const [cathegoryValue, changeCathegory] = useState<string | null>(null);
-  const [subcathegoryValue, changeSubcathegory] = useState<string | null>(null);
-  const resetFilters = () => {
-    changeCathegory(null);
-    changeSubcathegory(null);
-  };
+  const {
+    categoryOptions,
+    categoryValue, changeCategory,
+    typeValue, changeType,
+    resetFilters,
+  } = useFilters({});
+
   const [opened, { open, close }] = useDisclosure(false);
   const theme = useMantineTheme();
 
   return (
     <Flex w="100%" justify="flex-end">
-      <Flex className={classes.filterBarContainer} gap={24} justify="flex-end" align="center">
+      <Flex className={classes.filterBarContainer} gap={24} justify="flex-end" align="flex-start">
         <Flex direction="column" gap={8}>
           <Title order={4}>Тип продукции</Title>
-          <Select
-            data={cathegorySelectOptions}
-            value={cathegoryValue}
-            onChange={e => changeCathegory(e)}
+          <MultiSelect
+            className={classes.select}
+            data={typeOptions}
+            value={typeValue}
+            onChange={changeType}
           />
         </Flex>
         <Flex direction="column" gap={8}>
           <Title order={4}>Тип блюда</Title>
-          <Select
-            data={subcathegorySelectOptions}
-            value={subcathegoryValue}
-            onChange={e => changeSubcathegory(e)}
+          <MultiSelect
+            className={classes.select}
+            data={categoryOptions}
+            value={categoryValue}
+            onChange={changeCategory}
           />
         </Flex>
         <Flex direction="column" gap={8}>
           <Title order={4} className={classes.resetButtonHeader}>ы</Title>
           <CloseButton
-            disabled={cathegoryValue === null && subcathegoryValue === null}
+            disabled={categoryValue?.length === 0 && typeValue?.length === 0}
             onClick={resetFilters}
             className={classes.resetButton}
           />
@@ -58,7 +59,13 @@ const MenuFilterBar: FunctionComponent<MenuFilterBarProps> = () => {
         title="Фильтры"
       />
       <Affix position={{ top: 10, right: theme.spacing.md }} hiddenFrom="sm" hidden={opened}>
-        <ActionIcon onClick={open} hiddenFrom="sm" radius="xl" variant="transparent" size={25}>
+        <ActionIcon
+          onClick={open}
+          hiddenFrom="sm"
+          radius="xl"
+          variant="transparent"
+          size={25}
+        >
           <IconFilter />
         </ActionIcon>
       </Affix>

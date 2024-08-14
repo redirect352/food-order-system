@@ -7,7 +7,7 @@ import { CartList, NoContentPage } from '@/components';
 import CartTotal from '@/components/CartTotal/CartTotal';
 import { MobileScrollToAffix } from '@/UI';
 import { useAppSelector } from '@/shared/hooks';
-import { selectCartItemsLenght } from '@/lib/features/cart/cartSlice';
+import { selectCartItemsLength } from '@/lib/features/cart/cartSlice';
 import noMenuImage from '@/public/emptyCart.png';
 
 interface CartProps {
@@ -15,7 +15,7 @@ interface CartProps {
 }
 
 const Cart : FunctionComponent<CartProps> = () => {
-  const cartCount = useAppSelector(selectCartItemsLenght);
+  const cartCount = useAppSelector(selectCartItemsLength);
   return (
     <>
       {

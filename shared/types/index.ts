@@ -1,13 +1,4 @@
-import { StaticImport } from 'next/dist/shared/lib/get-img-props';
-
-export type Dish = {
-  id: number,
-  price: number,
-  name: string,
-  description: string,
-  quantity: string,
-  image: string | StaticImport,
-  discount : number,
-  calorieContent: number | string,
-  producerName: string,
-};
+export type { DishDto } from './dish.dto';
+export type { DishCategoryDto } from './dish-category.dto';
+export type { ImageDto } from './image.dto';
+export type { MenuPositionDto } from './menu-position.dto';

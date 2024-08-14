@@ -15,8 +15,9 @@ interface CartItemDescriptionProps {
 
 const CartItemDescription: FunctionComponent<CartItemDescriptionProps> =
 ({ dishId }) => {
-  const { price, quantity, name, description, discount } =
+  const { price, dish, discount } =
   useAppSelector(state => selectMenuItem(state, dishId))!;
+  const { quantity, name, description } = dish;
   const count = useAppSelector((state) => selectCartItemCount(state, dishId));
   const dispatch = useAppDispatch();
   const changeCount = (newCount:number) => dispatch(changeDishCount({ dishId, newCount }));

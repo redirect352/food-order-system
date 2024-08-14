@@ -4,11 +4,26 @@ export default function useUpdatePageURL() {
   const searchParams = useSearchParams();
   const { replace } = useRouter();
   const pathname = usePathname();
-  const updateURL = (paramName:string, paramValue: string) => {
-      const params = new URLSearchParams(searchParams);
-      params.set(paramName, paramValue);
-      replace(`${pathname}?${params.toString()}`);
-  };
+  function updateURL(paramName:string[], paramValue: string[]): void;
+  function updateURL(paramName:string, paramValue: string): void;
+  function updateURL(paramName: unknown, paramValue: unknown): void {
+    const params = new URLSearchParams(searchParams);
+    if (typeof paramName === 'string' && typeof paramValue === 'string') {
+      if (paramValue !== '') {
+          params.set(paramName, paramValue);
+      } else params.delete(paramName);
+    } else if (Array.isArray(paramName) && Array.isArray(paramValue)) {
+      paramName.forEach((value, index) => {
+        params.delete(value);
+        if (paramValue[index] !== '') {
+          params.set(value, paramValue[index].toString());
+      }
+      });
+    }
+    // if (paramValue !== '') params.set(paramName, paramValue);
+    // else params.delete(paramName);
+    replace(`${pathname}?${params.toString()}`);
+  }
   return {
     updateURL,
   };

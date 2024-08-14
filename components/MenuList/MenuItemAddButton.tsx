@@ -8,18 +8,21 @@ import { changeDishCount, selectCartItemCount } from '@/lib/features/cart/cartSl
 import PriceHelper from '@/shared/helpers/priceHelper';
 
 interface MenuItemAddButtonProps {
-  dishId: number,
+  menuPositionId: number,
   price: number,
   discount: number
 }
 
 const MenuItemAddButton: FunctionComponent<MenuItemAddButtonProps> =
-({ dishId, price, discount }) => {
+({ menuPositionId, price, discount }) => {
   const color = discount === 0 ? '' : 'var(--mantine-color-discount)';
   const finalPrice = PriceHelper.getPriceWithDiscount(price, discount);
-  const count = useAppSelector((state) => selectCartItemCount(state, dishId));
+  const count = useAppSelector((state) => selectCartItemCount(state, menuPositionId));
   const dispatch = useAppDispatch();
-  const changeCount = (newCount:number) => dispatch(changeDishCount({ dishId, newCount }));
+  const changeCount = (newCount:number) => dispatch(changeDishCount({
+    dishId: menuPositionId,
+    newCount,
+  }));
   return (
     <Flex justify="space-between" align="center" w="100%">
       {

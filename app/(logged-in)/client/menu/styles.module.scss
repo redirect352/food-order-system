@@ -14,8 +14,12 @@
   @media (min-width:$mantine-breakpoint-xs ) and (max-width:$mantine-breakpoint-sm ){
     width: 516px;
   }
-  @media  (max-width:$mantine-breakpoint-xs ){
-    width: 250px;
+  @media (min-width: 460px) and (max-width: 564px) {
+    width: 400px;
+  }
+
+  @media  (max-width:460px ){
+    width: 300px;
   }
   flex-grow: 1;
 }

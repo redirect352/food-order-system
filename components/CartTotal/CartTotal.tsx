@@ -4,7 +4,7 @@ import classes from './styles.module.scss';
 import { useAppSelector } from '@/shared/hooks';
 import { selectCartItems, selectCartItemsIds, selectCartTotalCount } from '@/lib/features/cart/cartSlice';
 import PriceHelper from '@/shared/helpers/priceHelper';
-import { selectMenuItems } from '@/lib/features/menu/menuSlice';
+import { selectMenuItemsById } from '@/lib/features/menu/menuSlice';
 
 interface CartTotalProps {
 
@@ -13,7 +13,7 @@ interface CartTotalProps {
 const CartTotal: FunctionComponent<CartTotalProps> = () => {
   const items = useAppSelector(selectCartItems);
   const itemsIds = useAppSelector(selectCartItemsIds);
-  const menuItems = useAppSelector(state => selectMenuItems(state, itemsIds));
+  const menuItems = useAppSelector(state => selectMenuItemsById(state, itemsIds));
   const totalPrice = items.reduce((sum, item) =>
     sum + item.dishCount * (menuItems.find(dish => dish.id === item.dishId)?.price ?? 0), 0);
   const totalDiscount = items.reduce((sum, item) => {

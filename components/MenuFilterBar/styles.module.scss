@@ -12,3 +12,21 @@
 .resetButtonHeader{
   visibility: hidden;
 }
+.select{
+  width: 300px;
+  @media (min-width: 1480px) and (max-width: 1745px) {
+    width: 250px;
+  }
+  @media (min-width:$mantine-breakpoint-sm ) and (max-width: 1480px) {
+    width: 200px;
+  }
+  @media (min-width:$mantine-breakpoint-sm ) and (max-width: 1114px) {
+  }
+  @media (min-width:$mantine-breakpoint-xs ) and (max-width:$mantine-breakpoint-sm ){
+  }
+  @media (min-width: 460px) and (max-width: 564px) {
+  }
+
+  @media  (max-width:460px ){
+  }
+}

@@ -15,4 +15,13 @@ export default withBundleAnalyzer({
   sassOptions: {
     prependData: `@import "./_mantine.scss";`,
   },
+  images:{
+    remotePatterns:[
+      process.env.NODE_ENV === 'development' && {
+        protocol: 'http',
+        hostname: '192.168.1.100',
+        pathname: '/images/**',
+      }
+    ]
+  }
 });

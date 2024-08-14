@@ -8,7 +8,7 @@ interface CartState {
 }
 
 const initialState: CartState = {
-  cartItems: [{ dishId: 1, dishCount: 1 }],
+  cartItems: [],
 };
 
 export const cartSlice = createSlice({
@@ -61,7 +61,7 @@ export const selectCartItems = (state: RootState) => state.cart.cartItems;
 export const selectCartItemsIds = createSelector(
   (state:RootState) => state.cart.cartItems,
   items => items.map(item => item.dishId));
-export const selectCartItemsLenght = (state: RootState) => state.cart.cartItems.length;
+export const selectCartItemsLength = (state: RootState) => state.cart.cartItems.length;
 export const selectCartTotalCount = (state: RootState) =>
   state.cart.cartItems.reduce((sum, item) => sum + item.dishCount, 0);
 export const selectCartItemCount = (state: RootState, dishId: number) =>

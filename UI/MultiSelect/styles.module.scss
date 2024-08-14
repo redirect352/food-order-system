@@ -1,0 +1,16 @@
+.selectInput:hover{
+	cursor: copy;
+	--input-bd: var(--input-bd-focus)
+}
+.selectOption:hover{
+	color: var(--mantine-color-black);
+	background-color: var(--mantine-color-primary-1);
+	transition: 0.4s ease all;
+}
+
+.selectSection{
+	color: var(--mantine-color-primary-5);
+}
+.pill{
+	background-color: var(--mantine-color-primary-1);
+}

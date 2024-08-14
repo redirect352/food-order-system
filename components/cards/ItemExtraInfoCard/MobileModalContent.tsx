@@ -1,30 +1,36 @@
-import { Box, Grid, Stack, Text, Title } from '@mantine/core';
+import { Badge, Box, Grid, Group, Stack, Text, Title } from '@mantine/core';
 import { FunctionComponent } from 'react';
 import classes from './styles.module.scss';
-import { ImageWithFallback } from '@/UI';
-import { Dish } from '@/shared/types';
+import { ImageWithFallback, PFCLabel } from '@/UI';
+import { MenuPositionDto } from '@/shared/types';
 
 interface MobileModalBodyProps {
-  dish: Dish
+  menuPosition: MenuPositionDto
 }
 
-const MobileModalBody: FunctionComponent<MobileModalBodyProps> = ({ dish }) => {
-  const { name, description, calorieContent, producerName, quantity, image } = dish;
+const MobileModalBody: FunctionComponent<MobileModalBodyProps> = ({ menuPosition }) => {
+  const { dish } = menuPosition;
+  const { name, description, calorieContent, quantity, image,
+    providingCanteen, externalProducer, proteins, carbohydrates, fats } = dish;
+  const producerName = externalProducer ?? providingCanteen.name;
   return (
     <Stack className={classes.mobileModalBody} align="center" px="sm" gap="xs">
       <Box className={classes.image}>
         <ImageWithFallback
-          src={image}
+          src={`${process.env.NEXT_PUBLIC_IMAGE_BASE}/${image?.path}`}
           sizes="97vw"
-          alt=""
+          alt={image?.name ?? ''}
           fill
           style={{ borderRadius: '8px' }}
         />
       </Box>
       <Stack gap={0} w="100%" align="flex-start">
-        <Title order={2} ta="left" w="100%">
-          {name}
-        </Title>
+        <Group w="100%" justify="space-between" gap={2} mb="xs">
+          <Title order={2} ta="left" lineClamp={3}>
+            {name}
+          </Title>
+          <Badge>{dish.category.name}</Badge>
+        </Group>
         <Text c="dimmed" size="xs">{quantity}</Text>
         <Grid gutter={10} align="flex-start" mt="xs">
           <Grid.Col span={6}>
@@ -51,6 +57,16 @@ const MobileModalBody: FunctionComponent<MobileModalBodyProps> = ({ dish }) => {
           </Grid.Col>
           <Grid.Col span={6}>
           <Text size="sm"> {producerName}</Text>
+          </Grid.Col>
+          <Grid.Col span={6}>
+            <Text size="sm"></Text>
+          </Grid.Col>
+          <Grid.Col span={6}>
+            <PFCLabel
+              proteins={proteins}
+              carbohydrates={carbohydrates}
+              fats={fats}
+            />
           </Grid.Col>
         </Grid>
       </Stack>

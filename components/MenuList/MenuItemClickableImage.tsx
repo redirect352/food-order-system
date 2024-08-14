@@ -6,17 +6,17 @@ import { useDisclosure } from '@mantine/hooks';
 import { ImageWithFallback } from '@/UI';
 import { ItemExtraInfoCard } from '@/components';
 import classes from './styles.module.scss';
-import { Dish } from '@/shared/types';
+import { MenuPositionDto } from '@/shared/types';
 import { useAppDispatch } from '@/shared/hooks';
 import { increaseDishCount } from '@/lib/features/cart/cartSlice';
 import PriceHelper from '@/shared/helpers/priceHelper';
 
 interface MenuItemImageProps {
-  dishDescription: Dish
+  menuPositionDto: MenuPositionDto
 }
 
 const MenuItemClickableImage: FunctionComponent<MenuItemImageProps> = (props) => {
-  const { id, image, discount, price } = props.dishDescription;
+  const { id, discount, price, dish } = props.menuPositionDto;
   const finalPrice = PriceHelper.getPriceWithDiscount(price, discount);
   const [opened, { open, close }] = useDisclosure(false);
   const dispatch = useAppDispatch();
@@ -27,8 +27,8 @@ const MenuItemClickableImage: FunctionComponent<MenuItemImageProps> = (props) =>
         <Paper className={classes.imageBox} pos="relative" onClick={open} data-modal-opened={opened}>
           <ImageWithFallback
             className={classes.image}
-            src={image}
-            alt="123"
+            src={`${process.env.NEXT_PUBLIC_IMAGE_BASE}/${dish.image?.path}`}
+            alt={dish.image?.name ?? ''}
             sizes="(max-width: 460px) 270px 270px, (max-width: 564px) 370px 370px, (min-width: 565px) 220px 220px,"
             fill
             />
@@ -38,8 +38,8 @@ const MenuItemClickableImage: FunctionComponent<MenuItemImageProps> = (props) =>
         opened={opened}
         onClose={() => { close(); addToCart(); }}
         buttonAction={close}
-        title={props.dishDescription.name}
-        dishId={props.dishDescription.id}
+        title={props.menuPositionDto.dish.name}
+        dishId={props.menuPositionDto.id}
         buttonText={
           <>
             <span>В корзину за&nbsp;</span>
