@@ -1,47 +1,53 @@
 'use client';
 
 import { Grid, ModalProps, Title } from '@mantine/core';
-import { FunctionComponent, useState } from 'react';
+import { FunctionComponent, useContext } from 'react';
 import { MobilePillsInput, MobileModal } from '@/UI';
+import { FilterContext } from '../MenuFilterBar';
 
 interface FilterModalProps extends ModalProps {
 }
-const dishTypeData = ['Первые блюда', 'Вторые блюда', 'Третие блюда', 'Холодные закуски', 'Гарнир', 'Сладкие блюда'];
 
 const FilterModal: FunctionComponent<FilterModalProps> = (props) => {
-  const [productCategory, changeProductCategory] = useState<string[]>([]);
-  const [dishCategory, changeDishCategory] = useState<string[]>([]);
+  const {
+    categoryOptions, categoryValue, changeCategory,
+    typeOptions, typeValue, changeType,
+    resetFilters,
+  } = useContext(FilterContext);
 
   return (
     <MobileModal
       {...props}
       zIndex="var(--first-modal-z-index)"
       showAccept
+      resetText="Сбросить"
+      resetAction={() => resetFilters()}
     >
-      <Grid gutter={10} align="center" px="sm">
+      <Grid gutter="lg" align="flex-start" px="sm">
         <Grid.Col span={5}>
-          <Title order={4}>Тип продукции:</Title>
+          <Title order={3}>Тип продукции:</Title>
         </Grid.Col>
         <Grid.Col span={7}>
           <MobilePillsInput
-            // data={typeOptions}
-            data={[]}
-            values={productCategory}
-            setValues={changeProductCategory}
+            data={typeOptions}
+            values={typeValue}
+            setValues={changeType}
             w="100%"
             modalTitle="Выберите тип продукции"
+            size="md"
           />
         </Grid.Col>
         <Grid.Col span={5}>
-          <Title order={4}>Тип блюда:</Title>
+          <Title order={3}>Тип блюда:</Title>
         </Grid.Col>
         <Grid.Col span={7}>
           <MobilePillsInput
-            data={dishTypeData}
-            values={dishCategory}
-            setValues={changeDishCategory}
+            data={categoryOptions}
+            values={categoryValue}
+            setValues={changeCategory}
             w="100%"
-            modalTitle="Выберите тип продукции"
+            modalTitle="Выберите тип блюда"
+            size="md"
           />
         </Grid.Col>
       </Grid>

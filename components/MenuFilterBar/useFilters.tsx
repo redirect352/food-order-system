@@ -2,17 +2,26 @@ import { useEffect, useState } from 'react';
 import { ComboboxItem } from '@mantine/core';
 import { useGetMenuCategoriesQuery } from '@/lib/api/menuApi';
 import { useArraySearchParamValue, useUpdatePageURL } from '@/shared/hooks';
+import { NotificationService } from '@/shared/services';
 
-export function useFilters(param :object) {
-  const { data, error } = useGetMenuCategoriesQuery(param);
+export function useFilters() {
+  const { data, error } = useGetMenuCategoriesQuery({});
   const [categoryOptions, setCategoryOptions] = useState<ComboboxItem[]>([]);
   const type = useArraySearchParamValue<string>('type');
   const categoryParam = useArraySearchParamValue<string>('category');
   const [categoryValue, changeCategory] = useState<string[] | undefined>();
   const [typeValue, changeType] = useState<string[] | undefined>();
+  const [isFiltersActive, setActive] = useState(false);
 
   const { updateURL } = useUpdatePageURL();
-
+  useEffect(() => {
+    if (error) {
+      NotificationService.showErrorNotification({
+        title: 'Ошибка получения категорий',
+        message: `${error?.statusCode} ${error?.message} ` ?? '',
+      });
+    }
+  }, [error]);
   useEffect(() => {
     if (data) {
       const options = data.map(({ id, name }) => ({
@@ -28,22 +37,18 @@ export function useFilters(param :object) {
   }, [data]);
 
   useEffect(() => {
-    if (!categoryValue) return;
-    if (categoryValue.length === 0) updateURL(['category', 'page'], ['', '']);
-    updateURL(['category', 'page'], [categoryValue.toString(), '']);
-  }, [categoryValue]);
-
-  useEffect(() => {
-    if (!typeValue) return;
-    if (typeValue.length > 0) {
-      updateURL(['type', 'page'], [typeValue.toString(), '1']);
-    } else updateURL(['type', 'page'], ['', '']);
-  }, [typeValue]);
+    setActive(((categoryValue?.length ?? 0) === 0 &&
+    ((typeValue?.length ?? 0) === 0)));
+    if (!categoryValue && !typeValue) return;
+    updateURL(['category', 'type', 'page'], [
+      categoryValue?.toString() ?? '',
+      typeValue?.toString() ?? '',
+      '']);
+  }, [categoryValue, typeValue]);
 
   const resetFilters = () => {
     changeCategory([]);
     changeType([]);
-    updateURL(['category', 'type', 'page'], ['', '', '']);
   };
 
   return {
@@ -51,13 +56,15 @@ export function useFilters(param :object) {
     categoryOptions,
     categoryValue,
     changeCategory,
+    typeOptions,
     typeValue,
     changeType,
     resetFilters,
+    isFiltersActive,
   };
 }
 
-export const typeOptions: Array<ComboboxItem> = [
+const typeOptions: Array<ComboboxItem> = [
   { value: 'ownProduct', label: 'Блюда собственного производства' },
   { value: 'alien', label: 'Готовая продукция' },
 ];

@@ -1,4 +1,4 @@
-.selectInput:hover{
+.selectInput:hover:not([data-disabled=true]){
 	cursor: copy;
 	--input-bd: var(--input-bd-focus)
 }

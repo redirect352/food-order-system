@@ -25,7 +25,7 @@ const MultiSelect: FunctionComponent<SelectProps> = (props) => {
         section: classes.selectSection,
         pill: classes.pill,
       }}
-      onDropdownOpen={() => setIsOpened(true)}
+      onDropdownOpen={() => setIsOpened(true && !props.disabled)}
       onDropdownClose={() => setIsOpened(false)}
       comboboxProps={{ transitionProps: { transition: 'pop', duration: 200 } }}
       rightSection={

@@ -38,6 +38,7 @@ export const menuApi = createApi({
         url: '/actual/menu-categories',
       }),
       transformResponse: (res) => res as DishCategoryDto[],
+      transformErrorResponse: (error) => error.data,
     }),
 }) });
 

@@ -20,8 +20,6 @@ export default function useUpdatePageURL() {
       }
       });
     }
-    // if (paramValue !== '') params.set(paramName, paramValue);
-    // else params.delete(paramName);
     replace(`${pathname}?${params.toString()}`);
   }
   return {
