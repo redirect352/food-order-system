@@ -18,7 +18,7 @@ const CartTotal: FunctionComponent<CartTotalProps> = () => {
       <Group justify="space-between" w="100%">
         <Title className={classes.header}>Итого</Title>
         <Title className={classes.header}>
-          {`${(finalPrice).toFixed(2)} ${(fullPrice - totalDiscount).toFixed(2)}`} руб.
+          {`${(finalPrice).toFixed(2)}`} руб.
         </Title>
       </Group>
       <Group justify="space-between" w="100%">
