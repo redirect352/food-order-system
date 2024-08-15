@@ -2,26 +2,24 @@
 
 import { Stack, Group, ActionIcon, Text } from '@mantine/core';
 import { IconTrash } from '@tabler/icons-react';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useContext } from 'react';
 import { CountInput } from '@/UI';
 import classes from './styles.module.scss';
-import { selectCartItemCount, changeDishCount, removeFromCart } from '@/lib/features/cart/cartSlice';
-import { useAppSelector, useAppDispatch } from '@/shared/hooks';
-import { selectMenuItem } from '@/lib/features/menu/menuSlice';
+import { changeDishCount, removeFromCart } from '@/lib/features/cart/cartSlice';
+import { useAppDispatch } from '@/shared/hooks';
+import { CartItemContext } from './context/CartItemContext';
 
 interface CartItemDescriptionProps {
-  dishId: number
 }
 
-const CartItemDescription: FunctionComponent<CartItemDescriptionProps> =
-({ dishId }) => {
-  const { price, dish, discount } =
-  useAppSelector(state => selectMenuItem(state, dishId))!;
+const CartItemDescription: FunctionComponent<CartItemDescriptionProps> = () => {
+  const { menuPosition, count } = useContext(CartItemContext);
+  const { price, dish, discount, id } = menuPosition;
   const { quantity, name, description } = dish;
-  const count = useAppSelector((state) => selectCartItemCount(state, dishId));
   const dispatch = useAppDispatch();
-  const changeCount = (newCount:number) => dispatch(changeDishCount({ dishId, newCount }));
-  const deleteItem = () => dispatch(removeFromCart(dishId));
+  const changeCount = (newCount:number) =>
+    dispatch(changeDishCount({ menuPositionId: id, newCount }));
+  const deleteItem = () => dispatch(removeFromCart(id));
   return (
     <>
     {/* mobile */}

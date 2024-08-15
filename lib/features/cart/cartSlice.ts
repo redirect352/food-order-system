@@ -1,10 +1,13 @@
-import { createSelector, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@/lib/store';
+import { MenuPositionDto } from '@/shared/types';
+import { PriceHelper } from '@/shared/helpers';
+
+export type CartItem = { menuPosition: MenuPositionDto, count: number };
 
 interface CartState {
-  cartItems: Array<{ dishId: number, dishCount: number }>,
-
+  cartItems: Array<CartItem>,
 }
 
 const initialState: CartState = {
@@ -15,56 +18,78 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    increaseDishCount: (state, action: PayloadAction<number>) => {
-      const index = state.cartItems.findIndex(item => item.dishId === action.payload);
+    addToCart: (state, action: PayloadAction<MenuPositionDto>) => {
+      const index = state.cartItems.findIndex(item => item.menuPosition.id === action.payload.id);
       if (index !== -1) {
-        state.cartItems[index].dishCount += 1;
+        state.cartItems[index].count += 1;
       } else {
-        state.cartItems.push({ dishId: action.payload, dishCount: 1 });
+        state.cartItems.push({ menuPosition: action.payload, count: 1 });
+      }
+    },
+    increaseDishCount: (state, action: PayloadAction<number>) => {
+      const index = state.cartItems.findIndex(item => item.menuPosition.id === action.payload);
+      if (index !== -1) {
+        state.cartItems[index].count += 1;
       }
     },
     decreaseDishCount: (state, action: PayloadAction<number>) => {
-      const index = state.cartItems.findIndex(item => item.dishId === action.payload);
+      const index = state.cartItems.findIndex(item => item.menuPosition.id === action.payload);
       if (index !== -1) {
-        state.cartItems[index].dishCount -= 1;
-        if (state.cartItems[index].dishCount <= 0) {
-          state.cartItems = state.cartItems.filter(item => item.dishId !== action.payload);
+        state.cartItems[index].count -= 1;
+        if (state.cartItems[index].count <= 0) {
+          state.cartItems = state.cartItems.filter(item => item.menuPosition.id !== action.payload);
         }
       }
     },
-    changeDishCount: (state, action: PayloadAction<{ dishId:number, newCount:number }>) => {
-      const { dishId, newCount } = action.payload;
-      const index = state.cartItems.findIndex(item => item.dishId === dishId);
-      if (index === -1 && newCount > 0) {
-        state.cartItems.push({ dishId, dishCount: newCount });
-      } else if (newCount > 0) {
-        state.cartItems[index].dishCount = newCount;
-      } else {
-        state.cartItems = state.cartItems.filter(item => item.dishId !== dishId);
+    changeDishCount: (state, action: PayloadAction<{ menuPositionId:number, newCount:number }>) => {
+      const { menuPositionId, newCount } = action.payload;
+      const index = state.cartItems.findIndex(
+        item => item.menuPosition.id === menuPositionId
+      );
+      if (index !== -1 && newCount > 0) {
+        state.cartItems[index].count = newCount;
+      } else if (index !== -1 && newCount <= 0) {
+        state.cartItems = state.cartItems.filter(item => item.menuPosition.id !== menuPositionId);
       }
     },
     removeFromCart: (state, action: PayloadAction<number>) => {
-      state.cartItems = state.cartItems.filter(item => item.dishId !== action.payload);
+      state.cartItems = state.cartItems.filter(item =>
+        item.menuPosition.id !== action.payload);
     },
   },
-});
+  selectors: {
+    selectFullPrice: (state) => state.cartItems.reduce(
+      (sum, { menuPosition, count: dishCount }) =>
+        sum + dishCount * (menuPosition.price), 0),
+    selectTotalDiscount: (state) => state.cartItems.reduce(
+      (sum, { menuPosition, count }) =>
+        sum + PriceHelper.getDiscountValue(menuPosition.price, menuPosition.discount, count), 0),
+    selectFinalPrice: (state) =>
+      selectFullPrice({ cart: state }) - selectTotalDiscount({ cart: state }),
+  },
 
+});
 export const {
   increaseDishCount,
   removeFromCart,
   decreaseDishCount,
   changeDishCount,
+  addToCart,
 } = cartSlice.actions;
-
+export const {
+  selectFullPrice,
+  selectTotalDiscount,
+  selectFinalPrice,
+} = cartSlice.selectors;
 // Other code such as selectors can use the imported `RootState` type
 export const selectCartItems = (state: RootState) => state.cart.cartItems;
-export const selectCartItemsIds = createSelector(
-  (state:RootState) => state.cart.cartItems,
-  items => items.map(item => item.dishId));
+// export const selectCartItemsIds = createSelector(
+//   (state:RootState) => state.cart.cartItems,
+//   items => items.map(item => item.dishId));
 export const selectCartItemsLength = (state: RootState) => state.cart.cartItems.length;
 export const selectCartTotalCount = (state: RootState) =>
-  state.cart.cartItems.reduce((sum, item) => sum + item.dishCount, 0);
-export const selectCartItemCount = (state: RootState, dishId: number) =>
-  state.cart.cartItems.find(item => item.dishId === dishId)?.dishCount ?? 0;
+  state.cart.cartItems.reduce((sum, item) => sum + item.count, 0);
+export const selectCartItemCount = (state: RootState, menuPositionId: number) =>
+  state.cart.cartItems.find(item => item.menuPosition.id === menuPositionId)?.count ?? 0;
 
 export default cartSlice.reducer;

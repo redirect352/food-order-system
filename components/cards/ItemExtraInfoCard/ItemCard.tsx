@@ -6,19 +6,17 @@ import { useMediaQuery } from '@mantine/hooks';
 import { ImageWithFallback, MobileModal, PFCLabel } from '@/UI';
 import classes from './styles.module.scss';
 import MobileModalBody from './MobileModalContent';
-import { useAppSelector } from '@/shared/hooks';
-import { selectMenuItem } from '@/lib/features/menu/menuSlice';
+import { MenuPositionDto } from '@/shared/types';
 
 interface ItemExtraInfoCartProps extends ModalProps {
-  dishId: number,
+  menuPosition: MenuPositionDto,
   buttonText: string | React.ReactNode,
   buttonAction: (onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined) => void,
 }
 
 const ItemExtraInfoCard: FunctionComponent<ItemExtraInfoCartProps> =
-  ({ dishId, buttonAction, buttonText, ...modalProps }) => {
+  ({ menuPosition, buttonAction, buttonText, ...modalProps }) => {
   const matches = useMediaQuery('(min-width: 48em');
-  const menuPosition = useAppSelector(state => selectMenuItem(state, dishId))!;
   const {
     description, name, quantity, calorieContent, image,
     externalProducer, providingCanteen, category,

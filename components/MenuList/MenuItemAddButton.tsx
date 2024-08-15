@@ -1,26 +1,26 @@
 'use client';
 
 import { Button, Flex, Text } from '@mantine/core';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useContext } from 'react';
 import { CountInput } from '@/UI';
 import { useAppDispatch, useAppSelector } from '@/shared/hooks';
-import { changeDishCount, selectCartItemCount } from '@/lib/features/cart/cartSlice';
+import { addToCart, changeDishCount, selectCartItemCount } from '@/lib/features/cart/cartSlice';
 import PriceHelper from '@/shared/helpers/priceHelper';
+import { MenuListItemContext } from './MenuItemContext';
 
 interface MenuItemAddButtonProps {
-  menuPositionId: number,
-  price: number,
-  discount: number
 }
 
-const MenuItemAddButton: FunctionComponent<MenuItemAddButtonProps> =
-({ menuPositionId, price, discount }) => {
+const MenuItemAddButton: FunctionComponent<MenuItemAddButtonProps> = () => {
+  const menuPosition = useContext(MenuListItemContext);
+  const { id, price, discount } = menuPosition;
   const color = discount === 0 ? '' : 'var(--mantine-color-discount)';
   const finalPrice = PriceHelper.getPriceWithDiscount(price, discount);
-  const count = useAppSelector((state) => selectCartItemCount(state, menuPositionId));
+  const count = useAppSelector((state) => selectCartItemCount(state, id));
   const dispatch = useAppDispatch();
+  const addNewPositionToCart = () => dispatch(addToCart(menuPosition));
   const changeCount = (newCount:number) => dispatch(changeDishCount({
-    dishId: menuPositionId,
+    menuPositionId: id,
     newCount,
   }));
   return (
@@ -41,7 +41,7 @@ const MenuItemAddButton: FunctionComponent<MenuItemAddButtonProps> =
           <Text fw={500} size="md" fz="xl" c={color}>{finalPrice} <Text span fz={14} c={color}> руб.</Text></Text>
           {discount !== 0 && <Text c="dimmed" size="xs" td="line-through">{price} руб.</Text>}
         </Flex>
-        <Button variant="outline" size="xs" onClick={() => changeCount(1)}>Добавить</Button>
+        <Button variant="outline" size="xs" onClick={addNewPositionToCart}>Добавить</Button>
       </>
       }
     </Flex>

@@ -16,9 +16,9 @@ const CartList: FunctionComponent<CartListProps> = () => {
   return (
   <Stack miw="100%" mih={100}>
     <TransitionList
-      items={items.map(({ dishId }) => ({
-        key: dishId,
-        item: (<CartItem dishId={dishId} key={dishId} />),
+      items={items.map((item) => ({
+        key: item.menuPosition.id,
+        item: (<CartItem cartItem={item} key={item.menuPosition.id} />),
       }))}
     />
   </Stack>

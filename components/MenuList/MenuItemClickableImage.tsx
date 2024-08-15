@@ -1,26 +1,26 @@
 'use client';
 
 import { Indicator, NumberFormatter, Paper } from '@mantine/core';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useContext } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { ImageWithFallback } from '@/UI';
 import { ItemExtraInfoCard } from '@/components';
 import classes from './styles.module.scss';
-import { MenuPositionDto } from '@/shared/types';
 import { useAppDispatch } from '@/shared/hooks';
-import { increaseDishCount } from '@/lib/features/cart/cartSlice';
+import { addToCart } from '@/lib/features/cart/cartSlice';
 import PriceHelper from '@/shared/helpers/priceHelper';
+import { MenuListItemContext } from './MenuItemContext';
 
 interface MenuItemImageProps {
-  menuPositionDto: MenuPositionDto
 }
 
-const MenuItemClickableImage: FunctionComponent<MenuItemImageProps> = (props) => {
-  const { id, discount, price, dish } = props.menuPositionDto;
+const MenuItemClickableImage: FunctionComponent<MenuItemImageProps> = () => {
+  const menuPosition = useContext(MenuListItemContext);
+  const { discount, price, dish } = menuPosition;
   const finalPrice = PriceHelper.getPriceWithDiscount(price, discount);
   const [opened, { open, close }] = useDisclosure(false);
   const dispatch = useAppDispatch();
-  const addToCart = () => dispatch(increaseDishCount(id));
+  const addItemToCart = () => dispatch(addToCart(menuPosition));
   return (
     <>
       <Indicator label={`-${discount}%`} size={24} offset={12} position="top-end" inline disabled={discount === 0}>
@@ -36,10 +36,10 @@ const MenuItemClickableImage: FunctionComponent<MenuItemImageProps> = (props) =>
       </Indicator>
       <ItemExtraInfoCard
         opened={opened}
-        onClose={() => { close(); addToCart(); }}
+        onClose={() => { close(); addItemToCart(); }}
         buttonAction={close}
-        title={props.menuPositionDto.dish.name}
-        dishId={props.menuPositionDto.id}
+        title={menuPosition.dish.name}
+        menuPosition={menuPosition}
         buttonText={
           <>
             <span>В корзину за&nbsp;</span>
@@ -50,7 +50,7 @@ const MenuItemClickableImage: FunctionComponent<MenuItemImageProps> = (props) =>
             />
           </>
         }
-        />
+      />
     </>
   );
 };
