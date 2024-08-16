@@ -48,7 +48,7 @@ const Cart : FunctionComponent<CartProps> = () => {
           cartCount === 0 &&
           <NoContentPage
             buttonLabel="В меню"
-            href="/menu"
+            href="menu"
             label="Ваша Корзина пуста. Выберите блюда для заказа в меню "
             img={noMenuImage}
           />

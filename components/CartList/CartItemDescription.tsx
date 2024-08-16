@@ -3,6 +3,7 @@
 import { Stack, Group, ActionIcon, Text } from '@mantine/core';
 import { IconTrash } from '@tabler/icons-react';
 import { FunctionComponent, useContext } from 'react';
+import { useMediaQuery } from '@mantine/hooks';
 import { CountInput } from '@/UI';
 import classes from './styles.module.scss';
 import { changeDishCount, removeFromCart } from '@/lib/features/cart/cartSlice';
@@ -14,55 +15,46 @@ interface CartItemDescriptionProps {
 
 const CartItemDescription: FunctionComponent<CartItemDescriptionProps> = () => {
   const { menuPosition, count } = useContext(CartItemContext);
-  const { price, dish, discount, id } = menuPosition;
+  const { dish, id } = menuPosition;
   const { quantity, name, description } = dish;
+  const isMobile = useMediaQuery('(max-width: 62em)');
   const dispatch = useAppDispatch();
   const changeCount = (newCount:number) =>
     dispatch(changeDishCount({ menuPositionId: id, newCount }));
   const deleteItem = () => dispatch(removeFromCart(id));
   return (
     <>
-    {/* mobile */}
-    <Stack align="flex-start" gap={3} className={classes.centralSegment} hiddenFrom="sm">
-        {
-          discount === 0 ?
-          <Text className={classes.cartItemHeader}>{price} руб.</Text>
-          :
-          <Group gap={0} align="flex-end">
-          <Text className={classes.cartItemHeader} c="var(--mantine-color-discount)">
-            {((price * (100 - discount)) / 100).toFixed(2)} руб.
-          </Text>
-          <Text span className={classes.cartItemDescription} td="line-through" lh="xs">
-              {price} руб.
-          </Text>
-          </Group>
-        }
-
-        <Text fz="lg">
-          {name}
+    <Stack
+      className={classes.centralSegment}
+      align="flex-start"
+      gap="xs"
+      justify="space-between"
+    >
+      <Stack gap="xs">
+        <Text className={classes.cartItemHeader}>{name}</Text>
+        <Text
+          className={classes.cartItemDescription}
+          lineClamp={isMobile ? 2 : 4}
+        >
+          {description}
         </Text>
-        <Text className={classes.cartItemDescription} lineClamp={2}>{description}</Text>
         <Text className={classes.cartItemDescription}>{quantity}</Text>
-        <Group>
-          <CountInput count={count} changeCount={changeCount} />
-          <ActionIcon
-            variant="transparent"
-            className={classes.removeIcon}
-            onClick={deleteItem}
-          >
-            <IconTrash stroke={1} />
-          </ActionIcon>
-        </Group>
-    </Stack>
-    {/* desktop */}
-    <Stack align="flex-start" gap="xs" className={classes.centralSegment} visibleFrom="sm">
-      <Text className={classes.cartItemHeader}>{name}</Text>
-      <Text className={classes.cartItemDescription} lineClamp={2}>{description}</Text>
-      <Text className={classes.cartItemDescription}>{quantity}</Text>
+      </Stack>
+
       <Group>
-        <CountInput count={count} changeCount={changeCount} />
-        <ActionIcon variant="transparent" className={classes.removeIcon} onClick={deleteItem}>
-          <IconTrash stroke={1} />
+        <CountInput
+          size={isMobile ? 24 : 32}
+          labelProps={{ fz: isMobile ? 'sm' : 'lg' }}
+          count={count}
+          changeCount={changeCount}
+        />
+        <ActionIcon
+          variant="transparent"
+          className={classes.removeIcon}
+          onClick={deleteItem}
+          visibleFrom="sm"
+        >
+          <IconTrash stroke={1.5} size={24} />
         </ActionIcon>
       </Group>
     </Stack>

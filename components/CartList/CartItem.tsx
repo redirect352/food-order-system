@@ -1,8 +1,9 @@
 'use client';
 
-import { Box, Stack } from '@mantine/core';
+import { ActionIcon, Box, Stack } from '@mantine/core';
 import { FunctionComponent } from 'react';
 import { useDisclosure } from '@mantine/hooks';
+import { IconTrash } from '@tabler/icons-react';
 import classes from './styles.module.scss';
 import CartItemDescription from './CartItemDescription';
 import { ImageWithFallback, PriceLabel, ScalingCard } from '@/UI';
@@ -29,7 +30,7 @@ const CartItem: FunctionComponent<CartItemProps> =
   const removeItem = () => dispatch(removeFromCart(id));
   return (
     <CartItemContext.Provider value={cartItem}>
-      <ScalingCard className={classes.cartItemContainer} p={0}>
+      <ScalingCard className={classes.cartItemContainer} p={0} mb="xs">
         <Box className={classes.image} onClick={open} data-modal-opened={opened}>
           <ImageWithFallback
             style={{ borderRadius: '10px' }}
@@ -40,12 +41,33 @@ const CartItem: FunctionComponent<CartItemProps> =
           />
         </Box>
         <CartItemDescription />
-        <Stack gap="xs" className={classes.priceBlock} visibleFrom="sm">
-          <PriceLabel
-            fullPrice={price * count}
-            priceWithDiscount={priceWithDiscount}
-            classes={{ mainPrice: classes.cartItemHeader, oldPrice: classes.cartItemDescription }}
-        />
+        <Stack
+          gap="xs"
+          className={classes.priceBlock}
+          justify="space-between"
+          align="flex-end"
+        >
+          <Stack
+            gap="xs"
+          >
+            <PriceLabel
+              fullPrice={price * count}
+              priceWithDiscount={priceWithDiscount}
+              classes={{
+                mainPrice: classes.cartItemHeader,
+                oldPrice: classes.cartItemDescription,
+              }}
+            />
+          </Stack>
+
+        <ActionIcon
+          variant="transparent"
+          className={classes.removeIcon}
+          hiddenFrom="sm"
+          onClick={removeItem}
+        >
+          <IconTrash stroke={1.5} size={24} />
+        </ActionIcon>
         </Stack>
         <ItemExtraInfoCard
           menuPosition={cartItem.menuPosition}

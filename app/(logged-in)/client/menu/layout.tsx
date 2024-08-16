@@ -10,7 +10,7 @@ export default function MenuLayout({ children }: { children: any }) {
       {children}
       <Affix position={{ bottom: 10, right: 10 }} hiddenFrom="sm" zIndex={95}>
         <Link
-          href="/cart">
+          href="cart">
           <ActionIcon size={60} radius="xl">
             <IconShoppingBag />
           </ActionIcon>
