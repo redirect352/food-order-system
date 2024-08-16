@@ -10,6 +10,7 @@
     flex-grow: 1;
     height: 100%;
     // padding-bottom: var(--mantine-spacing-md);
+    padding-bottom: 20px;
   }
   .image{
     align-self: flex-start;
@@ -42,6 +43,9 @@
   @media (max-width: $mantine-breakpoint-sm){
     &{
       height: 160px;
+    }
+    .centralSegmentText{
+      max-height: 100px;
     }
     .image{
       width: 140px;

@@ -46,6 +46,7 @@ const CartItem: FunctionComponent<CartItemProps> =
           className={classes.priceBlock}
           justify="space-between"
           align="flex-end"
+          pb={20}
         >
           <Stack
             gap="xs"

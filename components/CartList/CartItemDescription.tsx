@@ -30,7 +30,7 @@ const CartItemDescription: FunctionComponent<CartItemDescriptionProps> = () => {
       gap="xs"
       justify="space-between"
     >
-      <Stack gap="xs">
+      <Stack gap="xs" className={classes.centralSegmentText}>
         <Text className={classes.cartItemHeader}>{name}</Text>
         <Text
           className={classes.cartItemDescription}
