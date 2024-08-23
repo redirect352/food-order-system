@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@/lib/store';
 import { MenuPositionDto } from '@/shared/types';
@@ -56,6 +56,9 @@ export const cartSlice = createSlice({
       state.cartItems = state.cartItems.filter(item =>
         item.menuPosition.id !== action.payload);
     },
+    clearCart: (state) => {
+      state.cartItems = [];
+    },
   },
   selectors: {
     selectFullPrice: (state) => state.cartItems.reduce(
@@ -66,6 +69,25 @@ export const cartSlice = createSlice({
         sum + PriceHelper.getDiscountValue(menuPosition.price, menuPosition.discount, count), 0),
     selectFinalPrice: (state) =>
       selectFullPrice({ cart: state }) - selectTotalDiscount({ cart: state }),
+    selectCartItemsIds: createSelector(
+      (state: CartState) => state.cartItems,
+      items => items.map(item => (item.menuPosition.id))
+    ),
+    selectCartItemsCounts: createSelector(
+      (state: CartState) => state.cartItems,
+      items => items.map(item => (item.count))
+    ),
+    selectCreateOrderArgument: createSelector(
+      (state: CartState) => state.cartItems,
+      items => items.reduce((prev, item) => {
+        prev.counts.push(item.count);
+        prev.menuPositions.push(item.menuPosition.id);
+        return prev;
+      }, {
+        menuPositions: new Array<number>(),
+        counts: new Array<number>(),
+      })
+    ),
   },
 
 });
@@ -75,11 +97,13 @@ export const {
   decreaseDishCount,
   changeDishCount,
   addToCart,
+  clearCart,
 } = cartSlice.actions;
 export const {
   selectFullPrice,
   selectTotalDiscount,
   selectFinalPrice,
+  selectCreateOrderArgument,
 } = cartSlice.selectors;
 // Other code such as selectors can use the imported `RootState` type
 export const selectCartItems = (state: RootState) => state.cart.cartItems;

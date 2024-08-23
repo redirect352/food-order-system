@@ -3,11 +3,10 @@
 import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css';
 import React from 'react';
-import { MantineProvider, ColorSchemeScript } from '@mantine/core';
+import { ColorSchemeScript } from '@mantine/core';
 import { Roboto } from 'next/font/google';
 import { Notifications } from '@mantine/notifications';
-import { resolver, theme } from '../theme';
-import StoreProvider from './StoreProvider';
+import { RootProvider } from '@/components/providers';
 
 export const metadata = {
   title: 'Система заказа',
@@ -44,12 +43,10 @@ export default function RootLayout({ children }: { children: any }) {
         />
       </head>
       <body className={IS_DEV ? '' : roboto.className}>
-        <MantineProvider theme={theme} cssVariablesResolver={resolver}>
-          <StoreProvider>
+          <RootProvider>
             <Notifications />
             {children}
-          </StoreProvider>
-        </MantineProvider>
+          </RootProvider>
       </body>
     </html>
   );

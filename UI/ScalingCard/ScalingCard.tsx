@@ -1,8 +1,8 @@
-import { Card, CardProps } from '@mantine/core';
+import { Card, CardProps, PolymorphicComponentProps } from '@mantine/core';
 import React, { FunctionComponent } from 'react';
 import classes from './styles.module.scss';
 
-interface ScalingCardProps extends CardProps {
+interface ScalingCardProps extends PolymorphicComponentProps<'div', CardProps> {
 
 }
 

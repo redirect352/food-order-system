@@ -5,3 +5,4 @@ export { default as useUpdatePageURL } from './useUpdatePageURL';
 export { useLogin } from './auth/useLogin';
 export { useLogout } from './auth/useLogout';
 export { useCurrentUser } from './auth/useCurrentUser';
+export { useCancelOrder } from './useCancelOrder';

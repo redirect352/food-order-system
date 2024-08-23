@@ -11,6 +11,7 @@ export { default as MobileScrollToAffix } from './MobileScrollToAffix/MobileScro
 export { default as PriceLabel } from './PriceLabel/PriceLabel';
 export { default as PFCLabel } from './PFCLabel/PFCLabel';
 export { MultiSelect } from './MultiSelect/MultiSelect';
+export { ErrorPage } from './ErrorPage/ErrorPage';
 export {
   Select,
   MobilePillsInput,

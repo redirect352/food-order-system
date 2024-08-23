@@ -9,8 +9,8 @@ export default function Pagination(props : PaginationProps) {
   const currentPage = useSearchParamValue<number>('page') ?? 1;
   const [activePage, setPage] = useState(currentPage);
   const onChange = (pageNumber: number | string) => {
-      setPage(+pageNumber);
-      updateURL('page', pageNumber.toString());
+    setPage(+pageNumber);
+    updateURL('page', pageNumber.toString());
   };
   return (
       <MantinePagination

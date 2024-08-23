@@ -31,7 +31,7 @@ const NoContentPage: FunctionComponent<EmptyDishListProps> =
         {
           buttonLabel &&
           <Link href={href!} replace>
-            <Button size="md">{buttonLabel}</Button>
+            <Button size="md" radius="xl">{buttonLabel}</Button>
           </Link>
         }
       </Flex>

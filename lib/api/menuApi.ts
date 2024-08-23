@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { getToken } from '@/shared/actions/cookie-actions';
 import { DishCategoryDto, MenuPositionDto } from '@/shared/types';
+import { baseQueryWithExpire } from './baseApi';
 
 export type GetActualMenuQueryParams = {
   page?: number,
@@ -11,7 +12,7 @@ export type GetActualMenuQueryParams = {
 
 export const menuApi = createApi({
   reducerPath: 'menuApi',
-  baseQuery: fetchBaseQuery({
+  baseQuery: baseQueryWithExpire(fetchBaseQuery({
     baseUrl: `${process.env.NEXT_PUBLIC_API_BASE}/menu`,
     prepareHeaders: async (headers) => {
       const { token } = await getToken();
@@ -19,7 +20,7 @@ export const menuApi = createApi({
         headers.set('Authorization', `Bearer ${token}`);
       }
     },
-  }),
+  })),
   endpoints: (builder) => ({
     getActualMenu: builder.query({
       query: (params: GetActualMenuQueryParams) => ({

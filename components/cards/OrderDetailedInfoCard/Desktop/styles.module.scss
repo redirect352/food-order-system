@@ -1,0 +1,7 @@
+.modalBody{
+  width: 800px;
+  min-height: 500px;
+  @media (max-width: 900px) {
+    width: 650px;
+  }
+}

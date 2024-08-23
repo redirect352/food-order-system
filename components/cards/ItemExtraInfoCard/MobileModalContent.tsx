@@ -29,7 +29,7 @@ const MobileModalBody: FunctionComponent<MobileModalBodyProps> = ({ menuPosition
           <Title order={2} ta="left" lineClamp={3}>
             {name}
           </Title>
-          <Badge>{dish.category.name}</Badge>
+          <Badge>{dish?.category?.name}</Badge>
         </Group>
         <Text c="dimmed" size="xs">{quantity}</Text>
         <Grid gutter={10} align="flex-start" mt="xs">
