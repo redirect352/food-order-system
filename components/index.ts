@@ -22,3 +22,4 @@ export { SuccessMessageCard } from './cards/SuccessMessageCard/SuccessMessageCar
 export { default as ResetPasswordForm } from './forms/ResetPasswordForm/ResetPasswordForm';
 export { default as ChangePasswordForm } from './forms/ChangePasswordForm/ChangePasswordForm';
 export { UserAvatar } from './UserAvatar/UserAvatar';
+export { OrderList } from './OrderList/OrderList';

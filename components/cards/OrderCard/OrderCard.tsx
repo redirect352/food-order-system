@@ -1,33 +1,53 @@
 'use client';
 
-import { Button, Grid, List, NumberFormatter, Text, CardSection, GridCol, ListItem, Badge } from '@mantine/core';
-import { FunctionComponent, useEffect } from 'react';
+import { Button, Grid, List, NumberFormatter, Text, CardSection, GridCol, ListItem, Badge, Skeleton } from '@mantine/core';
+import { FunctionComponent } from 'react';
 import moment from 'moment';
 import { useDisclosure } from '@mantine/hooks';
 import classes from './styles.module.scss';
 import { ScalingCard } from '@/UI';
 import { OrderMainInfoDto } from '@/shared/types';
 import OrderDetailedInfoCard from '../OrderDetailedInfoCard/OrderDetailedInfoCard';
-import { useCancelOrderMutation } from '@/lib/api/orderApi';
-import { ModalService, NotificationService } from '@/shared/services';
-import { error } from 'console';
 import { useCancelOrder } from '@/shared/hooks';
 import { orderStatusColor } from '@/shared/settings';
 
 interface OrderCardProps {
+  orderMainInfoDto?: OrderMainInfoDto,
+  isLoading?: boolean,
+}
+interface OrderCardContentProps {
   orderMainInfoDto: OrderMainInfoDto,
 }
 
-const OrderCard: FunctionComponent<OrderCardProps> = ({ orderMainInfoDto }) => {
-  const { number, fullPrice, status, issued, orderPositions,canCancel } = orderMainInfoDto;
+const OrderCard: FunctionComponent<OrderCardProps> = ({
+  orderMainInfoDto,
+  isLoading = false,
+}) => {
+  if (isLoading) {
+    return (
+      <Skeleton mih={300} className={classes.orderCardWrapper} />
+    );
+  }
+  if (orderMainInfoDto) {
+    return (
+      <OrderCardContent orderMainInfoDto={orderMainInfoDto} />
+    );
+  }
+  return <></>;
+};
+
+const OrderCardContent: FunctionComponent<OrderCardContentProps> = ({
+  orderMainInfoDto,
+}) => {
+  const { number, fullPrice, status, issued, orderPositions, canCancel } = orderMainInfoDto;
   const total = fullPrice / 100;
   const statusText = status;
   const [opened, { open, close }] = useDisclosure(false);
-  const {cancelOrder} = useCancelOrder(number, issued);
-  const cancelButtonClick = (e:any) =>{
+  const { cancelOrder } = useCancelOrder(number, issued);
+  const cancelButtonClick = (e:any) => {
     e.stopPropagation();
     cancelOrder();
-  }
+  };
   return (
     <>
       <ScalingCard
