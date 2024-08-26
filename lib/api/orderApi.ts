@@ -2,7 +2,6 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { getToken } from '@/shared/actions/cookie-actions';
 import { baseQueryWithExpire, transformErrorResponse } from './baseApi';
 import { OrderFullInfoDto, OrderMainInfoDto } from '@/shared/types';
-import { error } from 'console';
 
 export type MakeOrderParams = {
   menuPositions: number[],
@@ -11,6 +10,7 @@ export type MakeOrderParams = {
 export type GetActiveOrdersParams = {
   page?: number,
   pageSize?: number,
+  active: 0 | 1
 };
 
 export const orderApi = createApi({
@@ -34,16 +34,13 @@ export const orderApi = createApi({
       }),
       transformErrorResponse,
       invalidatesTags: (result, error, args) => {
-        console.log({result, error, args});
-        if(!error)
-          return ['ActiveOrdersList']
-        else
-          return []
+        if (!error) return ['ActiveOrdersList'];
+        return [];
       },
     })),
-    getActiveOrders: builder.query({
+    getOrdersList: builder.query({
       query: (params:GetActiveOrdersParams) => ({
-        url: '/get/active',
+        url: '/list',
         params,
       }),
       transformResponse: (res) => res as {
@@ -51,7 +48,7 @@ export const orderApi = createApi({
         totalPages: number
       },
       transformErrorResponse,
-      providesTags:['ActiveOrdersList'],
+      providesTags: ['ActiveOrdersList'],
     }),
     getOrderInfo: builder.query({
       query: (params: { issued: string, number: number }) => ({
@@ -70,18 +67,15 @@ export const orderApi = createApi({
       transformResponse: (res) => res,
       transformErrorResponse,
       invalidatesTags: (result, error, args) => {
-        console.log({result, error, args});
-        if(!error)
-          return ['ActiveOrdersList']
-        else
-          return []
+        if (!error) return ['ActiveOrdersList'];
+        return [];
       },
     }),
 }) });
 
 export const {
   useMakeOrderMutation,
-  useGetActiveOrdersQuery,
+  useGetOrdersListQuery,
   useGetOrderInfoQuery,
   useLazyGetOrderInfoQuery,
   useCancelOrderMutation,
