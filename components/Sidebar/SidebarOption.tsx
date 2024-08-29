@@ -13,13 +13,13 @@ export default function SidebarOption({ children, href, leftSection, onClick } :
     onClick?: () => void
   }>) {
 const path = usePathname();
-const isChoosen = path === href;
+const isChosen = path === href;
 return (
   <NavLink
     onClick={onClick}
     href={href}
     component={Link}
-    className={isChoosen ? [classes.option, classes.optionActive].join(' ') : classes.option}
+    className={isChosen ? [classes.option, classes.optionActive].join(' ') : classes.option}
     label={children}
     fz="h2"
     styles={{ label: { fontSize: 'var(--mantine-font-size-md)' } }}

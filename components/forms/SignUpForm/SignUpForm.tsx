@@ -118,9 +118,10 @@ export const SignUpForm: FunctionComponent<SignUpFormProps> = () => {
   return (
     <Card className={classes.signUpContainer}>
       <Title order={2} ta="center">Регистрация</Title>
-      <Divider my="md" />
+      <Divider my="md" visibleFrom="sm" />
       <Stepper
         active={active}
+        classNames={{ steps: classes.steps }}
       >
         <Stepper.Step label="Первый шаг" description="Выбор филиала">
           <OfficeSelect form={form} setLoading={setIsLoading} />
