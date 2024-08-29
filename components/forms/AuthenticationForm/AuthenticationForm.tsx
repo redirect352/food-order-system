@@ -94,15 +94,20 @@ export function AuthenticationForm({ onFirstAuth, ...props }
         </Stack>
 
         <Group justify="space-between" mt="xl">
-          <Link href="/reset-password">
+          <Link href="/sign-up">
             <Anchor component="button" type="button" c="dimmed" size="xs">
-              Я не помню пароль
+              Зарегистрироваться
             </Anchor>
           </Link>
           <Button type="submit" radius="xl" loading={result.isLoading}>
             Войти
           </Button>
         </Group>
+        <Link href="/reset-password">
+          <Anchor component="button" type="button" c="dimmed" size="xs">
+            Я не помню пароль
+          </Anchor>
+        </Link>
       </form>
     </Paper>
   );

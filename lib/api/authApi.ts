@@ -1,5 +1,15 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { CookieService } from '@/shared/services';
+import { transformErrorResponse } from './baseApi';
+
+export interface SignUpParams {
+  password: string,
+  login: string,
+  email: string,
+  surname: string,
+  officeId: string,
+  personnelNumber: string,
+}
 
 export const authApi = createApi({
   reducerPath: 'authApi',
@@ -50,6 +60,14 @@ export const authApi = createApi({
         body,
       })),
     }),
+    signUp: builder.mutation<any, SignUpParams>({
+      query: (body) => ({
+        url: '/sign-up',
+        method: 'POST',
+        body,
+      }),
+      transformErrorResponse,
+    }),
   }),
 });
 
@@ -59,4 +77,5 @@ export const {
   useChangeCredentialsMutation,
   useResetPasswordMutation,
   useChangePasswordMutation,
+  useSignUpMutation,
 } = authApi;

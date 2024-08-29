@@ -23,12 +23,12 @@ const ProfilePage: FunctionComponent<ProfilePageProps> = () => {
         :
         <Stack gap={8}>
           <Text>
-            {`${data?.lastName} ${data?.firstName} ${data?.patronymic}`}
+            {`${data?.surname} ${data?.name} ${data?.patronymic}`}
           </Text>
           <TextInput
             label="ФИО"
             placeholder="Иванов Иван Иванович"
-            value={`${data?.lastName} ${data?.firstName} ${data?.patronymic}`}
+            value={`${data?.surname} ${data?.name} ${data?.patronymic}`}
             disabled
             classNames={{ input: classes.input }}
           />

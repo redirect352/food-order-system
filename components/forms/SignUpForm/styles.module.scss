@@ -1,0 +1,8 @@
+.signUpContainer{
+  @media(min-width: 850px){
+    width: 800px;
+  }
+  display: flex;
+  flex-direction: column;
+  transform: height 0.2s ease;
+}

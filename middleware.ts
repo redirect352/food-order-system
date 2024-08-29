@@ -6,7 +6,7 @@ import { CryptoService } from './shared/services/CryptoService';
 export const protectedRoutes = [
   '/menu', '/prepackMenu', '/cart', '/active-orders',
 ];
-export const authRoutes = ['/login', '/change-password', '/reset-password', '/password-confirmation', '/email-confirmation'];
+export const authRoutes = ['/login', '/change-password', '/reset-password', '/password-confirmation', '/email-confirmation', '/sign-up'];
 export const publicRoutes = ['/'];
 
 export const config = {

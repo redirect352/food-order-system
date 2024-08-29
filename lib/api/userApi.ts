@@ -19,7 +19,6 @@ export const userApi = createApi({
         url: '/',
       }),
     }),
-
 }) });
 
 export const { useGetOwnInfoQuery } = userApi;

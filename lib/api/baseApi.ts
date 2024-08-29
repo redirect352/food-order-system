@@ -1,6 +1,7 @@
 import { QueryReturnValue } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
 import { MaybePromise } from '@reduxjs/toolkit/dist/query/tsHelpers';
 import { BaseQueryApi, FetchArgs, FetchBaseQueryError, FetchBaseQueryMeta } from '@reduxjs/toolkit/query';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { startLogout } from '../features/user/userSlice';
 import { ErrorDto } from '@/shared/types';
 
@@ -14,3 +15,13 @@ export const baseQueryWithExpire = (baseQuery: { (args: string | FetchArgs, api:
 };
 
 export const transformErrorResponse = (response : any) => response.data as ErrorDto;
+
+export const baseApiWithoutAuth = createApi({
+  reducerPath: 'baseApiNoToken',
+  baseQuery: fetchBaseQuery({
+    baseUrl: `${process.env.NEXT_PUBLIC_API_BASE}`,
+  }),
+  endpoints: (builder) => ({
+
+  }),
+});

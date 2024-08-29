@@ -23,3 +23,4 @@ export { default as ResetPasswordForm } from './forms/ResetPasswordForm/ResetPas
 export { default as ChangePasswordForm } from './forms/ChangePasswordForm/ChangePasswordForm';
 export { UserAvatar } from './UserAvatar/UserAvatar';
 export { OrderList } from './OrderList/OrderList';
+export { SignUpForm } from './forms/SignUpForm/SignUpForm';

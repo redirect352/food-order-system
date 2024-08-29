@@ -8,3 +8,4 @@ export type {
   OrderPositionFullInfoDto,
 } from './order-full-info.dto';
 export type { ErrorDto } from './error.dto';
+export type { OfficeDto } from './office.dto';

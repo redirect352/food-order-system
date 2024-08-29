@@ -12,7 +12,7 @@ interface UserAvatarProps extends GroupProps {
 
 export const UserAvatar: FunctionComponent<UserAvatarProps> = (props) => {
   const { isLoading, data } = useGetOwnInfoQuery({});
-  const name = `${data?.lastName} ${data?.firstName}`;
+  const name = `${data?.surname} ${data?.name}`;
   const router = useRouter();
   return (
     <Group
