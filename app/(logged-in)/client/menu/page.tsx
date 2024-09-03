@@ -5,26 +5,21 @@ import { Flex, Stack } from '@mantine/core';
 import { MenuFilterBar, MenuList, NoContentPage } from '@/components';
 import noMenuImage from '@/public/204Menu.png';
 import classes from './styles.module.scss';
-import { Pagination } from '@/UI';
+import { ErrorPage, Pagination } from '@/UI';
 import { useGetActualMenuQuery } from '@/lib/api/menuApi';
 import { useAppDispatch, useSearchParamValue, useArraySearchParamValue } from '@/shared/hooks';
 import { MenuPositionDto } from '@/shared/types';
 import { setMenu } from '@/lib/features/menu/menuSlice';
 import { CookieService } from '@/shared/services';
 
-interface MenuProps {
-
-}
-
-const Menu : FunctionComponent<MenuProps> = () => {
+const Menu : FunctionComponent = () => {
   const pageSize = CookieService.getDefaultMenuPageSize();
-  const menuItemsData: Array<any> = [123];
   const [pageCount, setPageCount] = useState(1);
   const page = useSearchParamValue<number>('page');
   const type = useSearchParamValue<string>('type');
 
   const categoryId = useArraySearchParamValue<number>('category', (s) => +s);
-  const { data, error, isFetching } = useGetActualMenuQuery({
+  const { data, error, isFetching, refetch } = useGetActualMenuQuery({
     page: page ?? 1,
     pageSize,
     dishCategoryId: categoryId?.toString() ?? undefined,
@@ -38,10 +33,15 @@ const Menu : FunctionComponent<MenuProps> = () => {
       setPageCount(data.totalPages);
     }
   }, [data]);
+  if (error) {
+    return (
+      <ErrorPage message={error?.data?.message} onRetry={refetch} />
+    );
+  }
   return (
   <>
     {
-      menuItemsData.length === 0
+      data?.items.length === 0 && (!page) && (!type)
       ?
         <NoContentPage
           buttonLabel="На главную"

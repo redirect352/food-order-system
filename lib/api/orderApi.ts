@@ -71,6 +71,15 @@ export const orderApi = createApi({
         return [];
       },
     }),
+    getOrdersTotal: builder.query({
+      query: (params: { periodStart?: string, periodEnd?: string }) => ({
+        url: '/total/',
+        params,
+      }),
+      providesTags: ['ActiveOrdersList'],
+      transformResponse: (res) => res as { totalCount: number, totalPrice:number },
+      transformErrorResponse,
+    }),
 }) });
 
 export const {
@@ -79,4 +88,5 @@ export const {
   useGetOrderInfoQuery,
   useLazyGetOrderInfoQuery,
   useCancelOrderMutation,
+  useGetOrdersTotalQuery,
 } = orderApi;

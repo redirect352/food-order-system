@@ -1,7 +1,7 @@
 'use client';
 
 import { FunctionComponent, useEffect, useState } from 'react';
-import { NoContentPage, OrderList } from '@/components';
+import { NoContentPage, OrderList, OrdersTotal } from '@/components';
 import noOrdersImage from '@/public/204Order.png';
 import { useSearchParamValue } from '@/shared/hooks';
 import { useGetOrdersListQuery } from '@/lib/api/orderApi';
@@ -39,12 +39,15 @@ const OrdersHistory : FunctionComponent = () => {
           img={noOrdersImage}
         />
       :
-      <OrderList
-        items={data?.items}
-        totalPages={data?.totalPages}
-        pageSize={pageSize}
-        isFetching={isFetching}
-      />
+      <>
+        <OrdersTotal />
+        <OrderList
+          items={data?.items}
+          totalPages={data?.totalPages}
+          pageSize={pageSize}
+          isFetching={isFetching}
+        />
+      </>
     }
     </>
   );

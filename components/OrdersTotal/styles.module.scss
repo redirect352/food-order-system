@@ -1,0 +1,16 @@
+.orderCardWrapper{
+  width: 900px;
+  background-color: var(--mantine-color-background);
+  .bottomAboutButton{
+    border-radius: 0;
+  }
+  @media (max-width: $mantine-breakpoint-xl) {
+    width: 750px;
+  }
+  @media (max-width: $mantine-breakpoint-lg) {
+    width: 500px;
+  }
+  @media (max-width: $mantine-breakpoint-xs) {
+    width: 90%;
+  }
+}
