@@ -15,7 +15,7 @@ const TransitionList: FunctionComponent<TransitionListProps> = ({ items }) => (
     <TransitionGroup>
       {
         items.map(({ item, key }) => (
-          <CSSTransition key={key} timeout={200} classNames="item">
+          <CSSTransition key={key} timeout={250} classNames="my-node">
             {item}
           </CSSTransition>
         ))

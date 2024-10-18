@@ -41,7 +41,8 @@ const MenuItemAddButton: FunctionComponent<MenuItemAddButtonProps> = () => {
           <Text fw={500} size="md" fz="xl" c={color}>{finalPrice} <Text span fz={14} c={color}> руб.</Text></Text>
           {discount !== 0 && <Text c="dimmed" size="xs" td="line-through">{price} руб.</Text>}
         </Flex>
-        <Button variant="outline" size="xs" onClick={addNewPositionToCart}>Добавить</Button>
+        <Button variant="outline" visibleFrom="sm" size="xs" onClick={addNewPositionToCart}>Добавить</Button>
+        <Button variant="outline" hiddenFrom="sm" size="md" onClick={addNewPositionToCart}>Добавить</Button>
       </>
       }
     </Flex>

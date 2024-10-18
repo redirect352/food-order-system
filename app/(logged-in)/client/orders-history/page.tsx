@@ -11,7 +11,7 @@ const OrdersHistory : FunctionComponent = () => {
   const pageFromUrl = useSearchParamValue<number>('page');
   const pageSize = 2;
   const [page, setPage] = useState(pageFromUrl ?? 1);
-  const { data, isFetching, error } = useGetOrdersListQuery({ page, pageSize, active: 0 });
+  const { data, isFetching, error } = useGetOrdersListQuery({ page, pageSize, active: false });
   useEffect(() => {
     if (data?.totalPages && data.totalPages !== 0 && data.items.length === 0) {
       setPage(data.totalPages);

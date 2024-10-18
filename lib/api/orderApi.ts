@@ -10,7 +10,7 @@ export type MakeOrderParams = {
 export type GetActiveOrdersParams = {
   page?: number,
   pageSize?: number,
-  active: 0 | 1
+  active: boolean
 };
 
 export const orderApi = createApi({

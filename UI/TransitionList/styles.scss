@@ -1,18 +1,14 @@
-
-.item-enter {
+.my-node-enter {
   opacity: 0;
 }
-
-.item-enter-active {
+.my-node-enter-active {
   opacity: 1;
-  transition: opacity 300ms ease-in;
+  transition: opacity 200ms;
 }
-
-.item-exit {
-  height: 150px;
+.my-node-exit {
+  opacity: 1;
 }
-
-.item-exit-active {
-  height: 0;
-  transition: height 200ms;
+.my-node-exit-active {
+  opacity: 0;
+  transition: opacity 250ms;
 }

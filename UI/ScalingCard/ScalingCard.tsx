@@ -9,6 +9,6 @@ interface ScalingCardProps extends PolymorphicComponentProps<'div', CardProps> {
 const ScalingCard: FunctionComponent<ScalingCardProps> = (props) => (
     <Card {...props} className={[classes.hoverCardWrapper, props.className].join(' ')}>
     </Card>
-  );
+);
 
 export default ScalingCard;
