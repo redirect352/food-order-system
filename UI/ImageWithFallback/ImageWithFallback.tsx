@@ -12,7 +12,7 @@ export default function ImageWithFallback(props : ImageProps) {
   const boxHeight = props.fill ? '100%' : props.height;
   return (
     <>
-      {props.src === '' || errored ?
+      {!props.src || props.src === '' || errored ?
         <Box
           px={0}
           m={0}

@@ -21,13 +21,14 @@ const MenuItemClickableImage: FunctionComponent<MenuItemImageProps> = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const dispatch = useAppDispatch();
   const addItemToCart = () => dispatch(addToCart(menuPosition));
+  const src = dish.image ? `${process.env.NEXT_PUBLIC_IMAGE_BASE}/${dish.image?.path}` : '';
   return (
     <>
       <Indicator label={`-${discount}%`} size={24} offset={12} position="top-end" inline disabled={discount === 0}>
         <Paper className={classes.imageBox} pos="relative" onClick={open} data-modal-opened={opened}>
           <ImageWithFallback
             className={classes.image}
-            src={`${process.env.NEXT_PUBLIC_IMAGE_BASE}/${dish.image?.path}`}
+            src={src}
             alt={dish.image?.name ?? ''}
             sizes="(max-width: 460px) 270px 270px, (max-width: 564px) 370px 370px, (min-width: 565px) 220px 220px,"
             fill

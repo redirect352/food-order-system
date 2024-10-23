@@ -28,14 +28,15 @@ const CartItem: FunctionComponent<CartItemProps> =
   const [opened, { open, close }] = useDisclosure(false);
   const dispatch = useAppDispatch();
   const removeItem = () => dispatch(removeFromCart(id));
+  const src = dish.image ? `${process.env.NEXT_PUBLIC_IMAGE_BASE}/${dish.image?.path}` : '';
   return (
     <CartItemContext.Provider value={cartItem}>
       <ScalingCard className={classes.cartItemContainer} p={0} mb="xs">
         <Box className={classes.image} onClick={open} data-modal-opened={opened}>
           <ImageWithFallback
             style={{ borderRadius: '10px' }}
-            src={`${process.env.NEXT_PUBLIC_IMAGE_BASE}/${dish.image?.path}`}
-            alt="123"
+            src={src}
+            alt=""
             sizes="(max-width:62em) 80px, 120px"
             fill
           />
