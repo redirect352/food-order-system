@@ -2,8 +2,11 @@ import { Container, Title, Text, Button, Affix, Box } from '@mantine/core';
 import Link from 'next/link';
 import { ColorSchemeToggle } from '../components/ColorSchemeToggle/ColorSchemeToggle';
 import classes from './styles.module.scss';
+import { getRole } from '../shared/actions/cookie-actions';
 
-export default function HomePage() {
+export default async function HomePage() {
+  const { role } = await getRole();
+  const href = role ? `/${role}` : '/login';
   return (
     <Box className={classes.root}>
       <Container size="lg">
@@ -26,7 +29,7 @@ export default function HomePage() {
               Выбирайте блюда и полуфабрикаты из меню обслуживающей столовой ГП «Минсктранс», заказывайте доставку,{' '}
               отслеживайте статус доставки и получайте заказы с помощью системы заказа питания.
             </Text>
-            <Link href="/client/menu">
+            <Link href={href}>
               <Button
                 variant="gradient"
                 gradient={{ from: 'red', to: 'yellow' }}

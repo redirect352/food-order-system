@@ -46,8 +46,8 @@ export function AuthenticationForm({ onFirstAuth, ...props }
         (res.error as any).message || 'Неизвестная ошибка авторизации';
         form.setErrors({ password: errorMessage });
       } else if (res.data.statusCode === 200) {
-        login(res.data.access_token);
-        router.push('/');
+        await login(res.data.access_token, res.data.role);
+        router.push(`/${res.data?.role}`);
       } else if (res.data.success) {
         onFirstAuth();
       }
