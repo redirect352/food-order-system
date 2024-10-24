@@ -34,7 +34,6 @@ export const SignUpForm: FunctionComponent<SignUpFormProps> = () => {
       password: '',
       passwordRepeat: '',
     },
-
     validate: (values) => {
       if (active === 0) {
         return {

@@ -22,9 +22,10 @@ export async function middleware(request: NextRequest) {
     const { role } = payload;
     if (!role) {
       cookies().delete('token');
+      cookies().delete('role');
       return Response.redirect(new URL('/login', request.url));
     }
-    if (!pathName.startsWith(`/${role}`) && !publicRoutes.includes(pathName)) {
+    if (!pathName.startsWith(`/${(role as string).replaceAll('_', '-')}`) && !publicRoutes.includes(pathName)) {
       return Response.redirect(new URL('/', request.url));
     }
   } else if (

@@ -1,6 +1,6 @@
 const Client = () => (
   <>
-    Hello admin
+    Hello Moderator
   </>
 );
 

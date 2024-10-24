@@ -6,7 +6,7 @@ import { getRole } from '../shared/actions/cookie-actions';
 
 export default async function HomePage() {
   const { role } = await getRole();
-  const href = role ? `/${role}` : '/login';
+  const href = role ? `/${role.replaceAll('_', '-')}` : '/login';
   return (
     <Box className={classes.root}>
       <Container size="lg">

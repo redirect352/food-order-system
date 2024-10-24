@@ -1,4 +1,4 @@
-import { IconBasket, IconHistory, IconNotes, IconTruckDelivery, IconUserCircle } from '@tabler/icons-react';
+import { IconBasket, IconHistory, IconNotes, IconTablePlus, IconTruckDelivery, IconUserCircle } from '@tabler/icons-react';
 import { ReactNode } from 'react';
 import CartIndicator from './CartIndicator';
 
@@ -37,5 +37,10 @@ export const options: SidebarOptionDefinition[] = [
     href: '/client/profile',
     label: 'Мой профиль',
     leftSection: (<IconUserCircle size={20} />),
+  },
+  {
+    href: '/menu-moderator/upload-menu',
+    label: 'Добавить меню',
+    leftSection: (<IconTablePlus size={20} />),
   },
 ];

@@ -47,7 +47,8 @@ export function AuthenticationForm({ onFirstAuth, ...props }
         form.setErrors({ password: errorMessage });
       } else if (res.data.statusCode === 200) {
         await login(res.data.access_token, res.data.role);
-        router.push(`/${res.data?.role}`);
+        const path = (res.data?.role as string).replaceAll('_', '-');
+        router.push(`/${path}`);
       } else if (res.data.success) {
         onFirstAuth();
       }

@@ -1,13 +1,17 @@
 import { Space, TextInput } from '@mantine/core';
 import { UseFormReturnType } from '@mantine/form';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useState } from 'react';
 import { SignUpFormValues } from './types';
+import { PasswordStrength } from '../../../UI/PasswordWithStrengthMeter/PasswordWithStrengthMeter';
 
 interface CredentialsInputProps {
   form: UseFormReturnType<SignUpFormValues>
 }
 
-const CredentialsInput: FunctionComponent<CredentialsInputProps> = ({ form }) => (
+const CredentialsInput: FunctionComponent<CredentialsInputProps> = ({ form }) => {
+  const [passValue, setPasswordValue] = useState('');
+  form.watch('password', ({ value }) => setPasswordValue(value));
+  return (
     <>
       <TextInput
         label="логин"
@@ -24,13 +28,21 @@ const CredentialsInput: FunctionComponent<CredentialsInputProps> = ({ form }) =>
         {...form.getInputProps('email')}
       />
       <Space h="xs" />
-      <TextInput
+      <PasswordStrength
+        checkValue={passValue}
         label="Пароль"
         placeholder="********"
         type="password"
         key={form.key('password')}
         {...form.getInputProps('password')}
       />
+      {/* <TextInput
+        label="Пароль"
+        placeholder="********"
+        type="password"
+        key={form.key('password')}
+        {...form.getInputProps('password')}
+      /> */}
       <TextInput
         label="Повторите пароль"
         placeholder="********"
@@ -40,5 +52,6 @@ const CredentialsInput: FunctionComponent<CredentialsInputProps> = ({ form }) =>
       />
     </>
   );
+};
 
 export default CredentialsInput;
