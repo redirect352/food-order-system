@@ -7,6 +7,7 @@ import { ImageWithFallback, MobileModal, PFCLabel } from '@/UI';
 import classes from './styles.module.scss';
 import MobileModalBody from './MobileModalContent';
 import { MenuPositionDto } from '@/shared/types';
+import { ImageHelper } from '../../../shared/helpers';
 
 interface ItemExtraInfoCartProps extends ModalProps {
   menuPosition: MenuPositionDto,
@@ -33,7 +34,7 @@ const ItemExtraInfoCard: FunctionComponent<ItemExtraInfoCartProps> =
             <Group gap="lg" wrap="nowrap" align="center">
               <Box className={classes.imageBox}>
                 <ImageWithFallback
-                  src={`${process.env.NEXT_PUBLIC_IMAGE_BASE}/${image?.path}`}
+                  src={ImageHelper.getImageSrc(image)}
                   alt={image?.name ?? ''}
                   sizes="(max-width:62em) 300px 300px, (min-width:62em) 400px 400px,"
                   priority={false}

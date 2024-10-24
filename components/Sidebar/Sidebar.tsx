@@ -2,21 +2,16 @@
 
 import { Flex } from '@mantine/core';
 import { IconLogout2 } from '@tabler/icons-react';
-import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import SidebarOption from './SidebarOption';
 import { useLogout } from '@/shared/hooks';
 import { options } from './options';
-import { getRole } from '../../shared/actions/cookie-actions';
 
 export default function Sidebar() {
-const { logout } = useLogout();
-const [role, setRole] = useState<string | null>(null);
-useEffect(() => {
-  const changeRole = async () => {
-    setRole((await getRole()).role);
-  };
-  changeRole();
-}, []);
+  const { logout } = useLogout();
+  const path = usePathname();
+  const pathRole = path.split('/')[1];
+
 return (
   <Flex
     direction="column"
@@ -24,7 +19,7 @@ return (
     w="100%"
     >
       {
-      options.map(({ href, label, leftSection }, ind) => role && href.includes(role) ?
+      options.map(({ href, label, leftSection }, ind) => pathRole && href.includes(pathRole) ?
       (<SidebarOption leftSection={leftSection} href={href} key={ind}>
         {label}
        </SidebarOption>) : null)

@@ -3,6 +3,7 @@ import { FunctionComponent } from 'react';
 import classes from './styles.module.scss';
 import { ImageWithFallback, PFCLabel } from '@/UI';
 import { MenuPositionDto } from '@/shared/types';
+import { ImageHelper } from '../../../shared/helpers';
 
 interface MobileModalBodyProps {
   menuPosition: MenuPositionDto
@@ -17,7 +18,7 @@ const MobileModalBody: FunctionComponent<MobileModalBodyProps> = ({ menuPosition
     <Stack className={classes.mobileModalBody} align="center" px="sm" gap="xs">
       <Box className={classes.image}>
         <ImageWithFallback
-          src={`${process.env.NEXT_PUBLIC_IMAGE_BASE}/${image?.path}`}
+          src={ImageHelper.getImageSrc(image)}
           sizes="97vw"
           alt={image?.name ?? ''}
           fill

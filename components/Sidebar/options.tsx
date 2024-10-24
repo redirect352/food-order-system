@@ -1,5 +1,6 @@
-import { IconBasket, IconFridge, IconHistory, IconNotes, IconTruckDelivery, IconUserCircle } from '@tabler/icons-react';
+import { IconBasket, IconHistory, IconNotes, IconTruckDelivery, IconUserCircle } from '@tabler/icons-react';
 import { ReactNode } from 'react';
+import CartIndicator from './CartIndicator';
 
 export type SidebarOptionDefinition = {
   label: ReactNode,
@@ -12,14 +13,14 @@ export const options: SidebarOptionDefinition[] = [
     label: 'Меню',
     leftSection: (<IconNotes size={20} />),
   },
-  {
-    href: '/client/prepack-menu',
-    label: ' Заказ полуфабрикатов',
-    leftSection: (<IconFridge size={20} />),
-  },
+  // {
+  //   href: '/client/prepack-menu',
+  //   label: ' Заказ полуфабрикатов',
+  //   leftSection: (<IconFridge size={20} />),
+  // },
   {
     href: '/client/cart',
-    label: 'Корзина',
+    label: (<CartIndicator>Корзина</CartIndicator>),
     leftSection: (<IconBasket size={20} />),
   },
   {

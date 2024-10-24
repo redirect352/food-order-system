@@ -10,6 +10,7 @@ import { useAppDispatch } from '@/shared/hooks';
 import { addToCart } from '@/lib/features/cart/cartSlice';
 import PriceHelper from '@/shared/helpers/priceHelper';
 import { MenuListItemContext } from './MenuItemContext';
+import { ImageHelper } from '../../shared/helpers';
 
 interface MenuItemImageProps {
 }
@@ -21,7 +22,7 @@ const MenuItemClickableImage: FunctionComponent<MenuItemImageProps> = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const dispatch = useAppDispatch();
   const addItemToCart = () => dispatch(addToCart(menuPosition));
-  const src = dish.image ? `${process.env.NEXT_PUBLIC_IMAGE_BASE}/${dish.image?.path}` : '';
+  const src = ImageHelper.getImageSrc(dish.image);
   return (
     <>
       <Indicator label={`-${discount}%`} size={24} offset={12} position="top-end" inline disabled={discount === 0}>

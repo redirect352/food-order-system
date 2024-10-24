@@ -12,6 +12,7 @@ import { removeFromCart, CartItem as CartItemDef } from '@/lib/features/cart/car
 import PriceHelper from '@/shared/helpers/priceHelper';
 import { ItemExtraInfoCard } from '@/components';
 import { CartItemContext } from './context/CartItemContext';
+import { ImageHelper } from '../../shared/helpers';
 
 interface CartItemProps {
   cartItem: CartItemDef
@@ -28,7 +29,7 @@ const CartItem: FunctionComponent<CartItemProps> =
   const [opened, { open, close }] = useDisclosure(false);
   const dispatch = useAppDispatch();
   const removeItem = () => dispatch(removeFromCart(id));
-  const src = dish.image ? `${process.env.NEXT_PUBLIC_IMAGE_BASE}/${dish.image?.path}` : '';
+  const src = ImageHelper.getImageSrc(dish.image);
   return (
     <CartItemContext.Provider value={cartItem}>
       <ScalingCard className={classes.cartItemContainer} p={0} mb="xs">
