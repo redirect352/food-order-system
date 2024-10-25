@@ -5,8 +5,12 @@ import classes from './styles.module.scss';
 import { getRole } from '../shared/actions/cookie-actions';
 
 export default async function HomePage() {
-  const { role } = await getRole();
-  const href = role ? `/${role.replaceAll('_', '-')}` : '/login';
+  async function getHref(){
+    'use server'
+    const { role } = await getRole();
+    const href = role ? `/${role.replaceAll('_', '-')}` : '/login';
+    return href;
+  }
   return (
     <Box className={classes.root}>
       <Container size="lg">
@@ -29,7 +33,7 @@ export default async function HomePage() {
               Выбирайте блюда и полуфабрикаты из меню обслуживающей столовой ГП «Минсктранс», заказывайте доставку,{' '}
               отслеживайте статус доставки и получайте заказы с помощью системы заказа питания.
             </Text>
-            <Link href={href}>
+            <Link href={await getHref()}>
               <Button
                 variant="gradient"
                 gradient={{ from: 'red', to: 'yellow' }}

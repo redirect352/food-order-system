@@ -21,8 +21,8 @@ export async function middleware(request: NextRequest) {
     const payload = await decodeJwt(CryptoService.decryptObject(token));
     const { role } = payload;
     if (!role) {
-      cookies().delete('token');
-      cookies().delete('role');
+      (await cookies()).delete('token');
+      (await cookies()).delete('role');
       return Response.redirect(new URL('/login', request.url));
     }
     if (!pathName.startsWith(`/${(role as string).replaceAll('_', '-')}`) && !publicRoutes.includes(pathName)) {

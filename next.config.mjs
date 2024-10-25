@@ -13,7 +13,8 @@ export default withBundleAnalyzer({
     optimizePackageImports: ['@mantine/core', '@mantine/hooks'],
   },
   sassOptions: {
-    prependData: `@import "./_mantine.scss";`,
+    prependData: `@use "./_mantine.scss" as *;`,
+    silenceDeprecations: ['legacy-js-api'],
   },
   images:{
     remotePatterns:[

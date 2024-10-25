@@ -1,4 +1,6 @@
 .firstAuthFormBox{
+  min-height: 337px;
+  transform: height 0.2s ease;
   @media(min-width: 550px){
     width: 500px;
     max-width: 500px;
@@ -6,19 +8,19 @@
   @media(max-width: 550px){
     width: 95dvw;
   }
-  min-height: 337px;
-  transform: height 0.2s ease;
   // padding: var(--mantine-spacing-xl);
   // border-radius: var(--mantine-radius-md);
   .header{
-    @media(max-width: 550px){
-      font-size: var(--mantine-font-size-md);
-    }
-    font-size: var(--mantine-font-size-lg);
     font-weight: 500;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 7px;
+    @media(max-width: 550px){
+      font-size: var(--mantine-font-size-md);
+    }
+    &{
+      font-size: var(--mantine-font-size-lg);
+    }
   }
 }

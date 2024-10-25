@@ -1,6 +1,8 @@
+import { DateInput } from "@mantine/dates";
+
 const UploadMenuPage = () => (
   <>
-    Hello Moderator 2
+
   </>
 );
 
