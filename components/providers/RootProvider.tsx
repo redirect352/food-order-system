@@ -6,6 +6,9 @@ import StoreProvider from './StoreProvider';
 import { resolver, theme } from '@/theme';
 import NotificationProvider from './NotificationProvider';
 import { ModalsProvider } from './ModalsProvider';
+import { DatesProvider } from '@mantine/dates';
+import 'dayjs/locale/ru';
+
 
 export default function RootProvider({
   children,
@@ -18,7 +21,9 @@ export default function RootProvider({
         <LogoutProvider>
           <ModalsProvider>
             <NotificationProvider>
-              {children}
+              <DatesProvider settings={{ locale: 'ru' }}>
+                {children}
+              </DatesProvider>
             </NotificationProvider>
           </ModalsProvider>
         </LogoutProvider>

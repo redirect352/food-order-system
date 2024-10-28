@@ -25,3 +25,4 @@ export { UserAvatar } from './UserAvatar/UserAvatar';
 export { OrderList } from './OrderList/OrderList';
 export { SignUpForm } from './forms/SignUpForm/SignUpForm';
 export { OrdersTotal } from './OrdersTotal/OrdersTotal';
+export { MenuFromDocxForm } from './forms/MenuFromDocxForm/MenuFromDocxForm'

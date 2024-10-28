@@ -7,7 +7,7 @@ import { userApi } from './api/userApi';
 import { menuApi } from './api/menuApi';
 import { orderApi } from './api/orderApi';
 import userSlice, { endLogout } from './features/user/userSlice';
-import { baseApiWithoutAuth } from './api/baseApi';
+import { baseApiWithAuth, baseApiWithoutAuth } from './api/baseApi';
 
 const appReducer = combineReducers({
   cart: cartSlice,
@@ -18,6 +18,7 @@ const appReducer = combineReducers({
   [menuApi.reducerPath]: menuApi.reducer,
   [orderApi.reducerPath]: orderApi.reducer,
   [baseApiWithoutAuth.reducerPath]: baseApiWithoutAuth.reducer,
+  [baseApiWithAuth.reducerPath]: baseApiWithAuth.reducer,
 });
 const rootReducer = (state : any, action : Action) => {
   if (action.type === endLogout.type) return appReducer(undefined, action);
@@ -31,7 +32,8 @@ export const makeStore = () => configureStore({
         .concat(userApi.middleware)
         .concat(menuApi.middleware)
         .concat(orderApi.middleware)
-        .concat(baseApiWithoutAuth.middleware),
+        .concat(baseApiWithoutAuth.middleware)
+        .concat(baseApiWithAuth.middleware),
     });
 export type AppStore = ReturnType<typeof makeStore>;
 export type RootState = ReturnType<AppStore['getState']>;

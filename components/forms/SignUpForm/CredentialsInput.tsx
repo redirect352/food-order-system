@@ -36,13 +36,6 @@ const CredentialsInput: FunctionComponent<CredentialsInputProps> = ({ form }) =>
         key={form.key('password')}
         {...form.getInputProps('password')}
       />
-      {/* <TextInput
-        label="Пароль"
-        placeholder="********"
-        type="password"
-        key={form.key('password')}
-        {...form.getInputProps('password')}
-      /> */}
       <TextInput
         label="Повторите пароль"
         placeholder="********"

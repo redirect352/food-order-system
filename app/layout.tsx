@@ -2,6 +2,7 @@
 /* eslint-disable @next/next/no-page-custom-font */
 import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css';
+import '@mantine/dates/styles.css';
 import React from 'react';
 import { ColorSchemeScript } from '@mantine/core';
 import { Roboto } from 'next/font/google';

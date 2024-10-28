@@ -6,7 +6,7 @@ import { useForm } from '@mantine/form';
 import { passwordStrength } from 'check-password-strength';
 import { IconUsers } from '@tabler/icons-react';
 import classes from './styles.module.scss';
-import OfficeSelect from './OfficeSelect';
+import OfficeSelect from '../../OfficeSelect/OfficeSelect';
 import { SignUpFormValues } from './types';
 import EmployeeInput from './EmployeeInput';
 import { useLazyCheckEmployeeQuery } from '@/lib/api/registrationApi';
@@ -123,7 +123,11 @@ export const SignUpForm: FunctionComponent<SignUpFormProps> = () => {
         classNames={{ steps: classes.steps }}
       >
         <Stepper.Step label="Первый шаг" description="Выбор филиала">
-          <OfficeSelect form={form} setLoading={setIsLoading} />
+          <OfficeSelect 
+            inputProps={form.getInputProps('office')} 
+            inputKey={form.key('office')} 
+            setLoading={setIsLoading} 
+          />
         </Stepper.Step>
         <Stepper.Step
           label="Второй шаг"

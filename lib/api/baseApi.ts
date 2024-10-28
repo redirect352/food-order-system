@@ -4,6 +4,7 @@ import { BaseQueryApi, FetchArgs, FetchBaseQueryError, FetchBaseQueryMeta } from
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { startLogout } from '../features/user/userSlice';
 import { ErrorDto } from '@/shared/types';
+import { getToken } from '../../shared/actions/cookie-actions';
 
 export const baseQueryWithExpire = (baseQuery: { (args: string | FetchArgs, api: BaseQueryApi, extraOptions: {}): MaybePromise<QueryReturnValue<unknown, FetchBaseQueryError, FetchBaseQueryMeta>>; (args: string | FetchArgs, api: BaseQueryApi, extraOptions: {}): MaybePromise<QueryReturnValue<unknown, FetchBaseQueryError, FetchBaseQueryMeta>>; (arg0: any, arg1: any, arg2: any): any; }) => async (args: any, api: { dispatch: (arg0: { payload: undefined; type: 'user/startLogout'; }) => void; }, extraOptions: any) => {
   const result = await baseQuery(args, api, extraOptions);
@@ -21,6 +22,22 @@ export const baseApiWithoutAuth = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: `${process.env.NEXT_PUBLIC_API_BASE}`,
   }),
+  endpoints: (builder) => ({
+
+  }),
+});
+
+export const baseApiWithAuth = createApi({
+  reducerPath: 'baseApiWithAuth',
+  baseQuery: baseQueryWithExpire(fetchBaseQuery({
+    baseUrl: `${process.env.NEXT_PUBLIC_API_BASE}`,
+    prepareHeaders: async (headers) => {
+      const { token } = await getToken();
+      if (token) {
+        headers.set('Authorization', `Bearer ${token}`);
+      }
+    },
+  })),
   endpoints: (builder) => ({
 
   }),

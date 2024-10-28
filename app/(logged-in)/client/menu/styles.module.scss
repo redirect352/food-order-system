@@ -1,4 +1,5 @@
 .menuContainer{
+  flex-grow: 1;
   @media (min-width: 1746px) {
     width: 1314px;
   }
@@ -21,5 +22,4 @@
   @media  (max-width:460px ){
     width: 300px;
   }
-  flex-grow: 1;
 }
