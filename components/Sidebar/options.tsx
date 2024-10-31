@@ -1,4 +1,4 @@
-import { IconBasket, IconHistory, IconNotes, IconTablePlus, IconTruckDelivery, IconUserCircle } from '@tabler/icons-react';
+import { IconBasket, IconHistory, IconNotes, IconTablePlus, IconTransferIn, IconTruckDelivery, IconUserCircle } from '@tabler/icons-react';
 import { ReactNode } from 'react';
 import CartIndicator from './CartIndicator';
 
@@ -42,5 +42,10 @@ export const options: SidebarOptionDefinition[] = [
     href: '/menu-moderator/upload-menu',
     label: 'Добавить меню',
     leftSection: (<IconTablePlus size={20} />),
+  },
+  {
+    href: '/menu-moderator/get-orders',
+    label: 'Заказы пользователей',
+    leftSection: (<IconTransferIn size={20} />),
   },
 ];

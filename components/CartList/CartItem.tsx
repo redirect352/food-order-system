@@ -29,7 +29,8 @@ const CartItem: FunctionComponent<CartItemProps> =
   const [opened, { open, close }] = useDisclosure(false);
   const dispatch = useAppDispatch();
   const removeItem = () => dispatch(removeFromCart(id));
-  const src = ImageHelper.getImageSrc(dish.image);
+  const mainImage = dish.images?.at(0);
+  const src = ImageHelper.getImageSrc(mainImage);
   return (
     <CartItemContext.Provider value={cartItem}>
       <ScalingCard className={classes.cartItemContainer} p={0} mb="xs">

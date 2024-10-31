@@ -1,0 +1,11 @@
+.imageBox{
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+.control {
+  &[data-inactive] {
+    opacity: 0;
+    cursor: default;
+  }
+}

@@ -11,16 +11,17 @@ interface MobileModalBodyProps {
 
 const MobileModalBody: FunctionComponent<MobileModalBodyProps> = ({ menuPosition }) => {
   const { dish } = menuPosition;
-  const { name, description, calorieContent, quantity, image,
+  const { name, description, calorieContent, quantity, images,
     providingCanteen, externalProducer, proteins, carbohydrates, fats } = dish;
   const producerName = externalProducer ?? providingCanteen.name;
+  const mainImage = images?.at(0);
   return (
     <Stack className={classes.mobileModalBody} align="center" px="sm" gap="xs">
       <Box className={classes.image}>
         <ImageWithFallback
-          src={ImageHelper.getImageSrc(image)}
+          src={ImageHelper.getImageSrc(mainImage)}
           sizes="97vw"
-          alt={image?.name ?? ''}
+          alt={mainImage?.name ?? ''}
           fill
           style={{ borderRadius: '8px' }}
         />

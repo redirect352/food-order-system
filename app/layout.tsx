@@ -3,6 +3,7 @@
 import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css';
 import '@mantine/dates/styles.css';
+import '@mantine/carousel/styles.css';
 import React from 'react';
 import { ColorSchemeScript } from '@mantine/core';
 import { Roboto } from 'next/font/google';
@@ -22,7 +23,7 @@ const IS_DEV = process.env.NODE_ENV === 'development';
 
 export default function RootLayout({ children }: { children: any }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <ColorSchemeScript />
         {IS_DEV && (

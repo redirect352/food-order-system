@@ -22,7 +22,8 @@ const MenuItemClickableImage: FunctionComponent<MenuItemImageProps> = () => {
   const [opened, { open, close }] = useDisclosure(false);
   const dispatch = useAppDispatch();
   const addItemToCart = () => dispatch(addToCart(menuPosition));
-  const src = ImageHelper.getImageSrc(dish.image);
+  const mainImage = dish?.images?.at(0);
+  const src = ImageHelper.getImageSrc(mainImage);
   return (
     <>
       <Indicator label={`-${discount}%`} size={24} offset={12} position="top-end" inline disabled={discount === 0}>
@@ -30,7 +31,7 @@ const MenuItemClickableImage: FunctionComponent<MenuItemImageProps> = () => {
           <ImageWithFallback
             className={classes.image}
             src={src}
-            alt={dish.image?.name ?? ''}
+            alt={mainImage?.name ?? ''}
             sizes="(max-width: 460px) 270px 270px, (max-width: 564px) 370px 370px, (min-width: 565px) 220px 220px,"
             fill
             />
@@ -38,8 +39,8 @@ const MenuItemClickableImage: FunctionComponent<MenuItemImageProps> = () => {
       </Indicator>
       <ItemExtraInfoCard
         opened={opened}
-        onClose={() => { close(); addItemToCart(); }}
-        buttonAction={close}
+        onClose={close}
+        buttonAction={() => { close(); addItemToCart(); }}
         title={menuPosition.dish.name}
         menuPosition={menuPosition}
         buttonText={

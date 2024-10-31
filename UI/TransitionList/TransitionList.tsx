@@ -1,8 +1,9 @@
 'use client';
 
 import { FunctionComponent, Key } from 'react';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import './styles.scss';
+import * as motion from "framer-motion/client"
+import { AnimatePresence } from 'framer-motion';
 
 interface TransitionListProps {
   items: {
@@ -12,14 +13,19 @@ interface TransitionListProps {
 }
 
 const TransitionList: FunctionComponent<TransitionListProps> = ({ items }) => (
-    <TransitionGroup>
-      {
-        items.map(({ item, key }) => (
-          <CSSTransition key={key} timeout={250} classNames="my-node">
+  <AnimatePresence>
+    {
+      items.map(({ item, key }) => (
+          <motion.div 
+            key={key}            
+            initial={{ opacity: 0, y: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, y: -150 }}
+          >
             {item}
-          </CSSTransition>
+          </motion.div>
         ))
-      }
-    </TransitionGroup>
+    }
+  </AnimatePresence>
   );
 export default TransitionList;

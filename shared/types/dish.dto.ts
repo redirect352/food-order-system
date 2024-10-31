@@ -7,7 +7,7 @@ export type DishDto = {
   name: string,
   description: string,
   quantity: string,
-  image?: ImageDto,
+  images?: ImageDto[],
   discount : number,
   calorieContent: string | number,
   externalProducer?: string,

@@ -8,6 +8,8 @@ import classes from './styles.module.scss';
 import MobileModalBody from './MobileModalContent';
 import { MenuPositionDto } from '@/shared/types';
 import { ImageHelper } from '../../../shared/helpers';
+import { Carousel } from '@mantine/carousel';
+import ImageCarousel from '../../ImageCarousel/ImageCarousel';
 
 interface ItemExtraInfoCartProps extends ModalProps {
   menuPosition: MenuPositionDto,
@@ -19,11 +21,12 @@ const ItemExtraInfoCard: FunctionComponent<ItemExtraInfoCartProps> =
   ({ menuPosition, buttonAction, buttonText, ...modalProps }) => {
   const matches = useMediaQuery('(min-width: 48em');
   const {
-    description, name, quantity, calorieContent, image,
+    description, name, quantity, calorieContent, images,
     externalProducer, providingCanteen, category,
     proteins, carbohydrates, fats } = menuPosition.dish;
   const producerName = externalProducer ?? providingCanteen.name;
   const clickAction = () => { modalProps.onClose(); buttonAction(); };
+  const mainImage = images?.at(0);
   return (
     <>
       {matches ?
@@ -32,16 +35,13 @@ const ItemExtraInfoCard: FunctionComponent<ItemExtraInfoCartProps> =
       <Modal.Content>
           <Modal.Body className={classes.modalBody}>
             <Group gap="lg" wrap="nowrap" align="center">
-              <Box className={classes.imageBox}>
-                <ImageWithFallback
-                  src={ImageHelper.getImageSrc(image)}
-                  alt={image?.name ?? ''}
-                  sizes="(max-width:62em) 300px 300px, (min-width:62em) 400px 400px,"
-                  priority={false}
-                  fill
-                  style={{ borderRadius: '36px' }}
+              {/* <Box className={classes.imageBox}> */}
+                <ImageCarousel 
+                  images={images} 
+                  classNames={{slide: classes.imageBox}}
+                  sizes='(max-width:62em) 300px 300px, (min-width:62em) 400px 400px,'
                 />
-              </Box>
+              {/* </Box> */}
               <Stack className={classes.descriptionBox} gap={0} justify="space-between" maw="100%">
                 <Stack gap={0} maw="100%">
                   <Group w="100%" justify="space-between" align="flex-start" mb="xs">
