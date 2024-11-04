@@ -1,9 +1,7 @@
 import { baseApiWithAuth, baseQueryWithExpire, transformErrorResponse } from "./baseApi";
-import { OfficeDto } from "../../shared/types";
-import { url } from "inspector";
+import { ImageDto, OfficeDto } from "../../shared/types";
 import dayjs from "dayjs";
-import { File } from "buffer";
-import { blob } from "stream/consumers";
+import { ImageTagDto } from "../../shared/types/image-tag.dto";
 
 type CreateMenuFromDocxDto = {
   file: Blob,
@@ -12,6 +10,17 @@ type CreateMenuFromDocxDto = {
   name?: string,
   relevantFrom: dayjs.Dayjs | null,
   expire:  dayjs.Dayjs | null,
+}
+type SearchImageTagDto = {
+  searchString?: string,
+  page?: number,
+  pageSize?: number,
+}
+
+type UploadImagesDto = {
+  files: File[],
+  tags: string[],
+  name?: string,
 }
 
 export const moderatorApi = baseApiWithAuth.injectEndpoints({
@@ -24,7 +33,7 @@ export const moderatorApi = baseApiWithAuth.injectEndpoints({
     }),
     uploadWordMenu: builder.mutation<{menu: any}, CreateMenuFromDocxDto>({
       query: ({file,...body}) => {
-        var bodyFormData = new FormData();
+        const bodyFormData = new FormData();
         bodyFormData.append('file', file);
         for(let [key, value] of Object.entries(body)){
           if(!!value)
@@ -39,10 +48,36 @@ export const moderatorApi = baseApiWithAuth.injectEndpoints({
       },
       transformErrorResponse,
     }),
+    searchImageTags: builder.query<ImageTagDto[], SearchImageTagDto>({
+      query: (params) => ({
+        url: '/image-tag/search',
+        params,
+      }),
+      transformErrorResponse,
+    }),
+    uploadImages: builder.mutation<Array<ImageDto>, UploadImagesDto>({
+      query: ({files,...body}) => {
+        const bodyFormData = new FormData();
+        files.forEach((file) => bodyFormData.append('files', file as Blob));
+        for(let [key, value] of Object.entries(body)){
+          if(!!value)
+            bodyFormData.append(key, value?.toString());
+        }        
+        return ({
+          method: "POST",
+          url:'/image/upload',
+          body: bodyFormData,
+          formData:true,
+        })
+      },
+      transformErrorResponse,
+    }),
   }),
 })
 
 export const {
   useGetCanteenListQuery,
   useUploadWordMenuMutation,
+  useSearchImageTagsQuery,
+  useUploadImagesMutation,
 } = moderatorApi;

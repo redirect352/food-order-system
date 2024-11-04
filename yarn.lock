@@ -1443,6 +1443,13 @@
   dependencies:
     clsx "^2.1.1"
 
+"@mantine/dropzone@^7.13.4":
+  version "7.13.4"
+  resolved "https://registry.npmjs.org/@mantine/dropzone/-/dropzone-7.13.4.tgz"
+  integrity sha512-RmiBfi+u16vh0ZUjJvn8cUfsgScN0o/F/P4mZUFm7AE4ap7jUdIyBWr4aBiHu0v5DXKywNO6ZrsSaoZnpbiUgQ==
+  dependencies:
+    react-dropzone-esm "15.0.1"
+
 "@mantine/form@^7.13.4":
   version "7.13.4"
   resolved "https://registry.npmjs.org/@mantine/form/-/form-7.13.4.tgz"
@@ -7708,6 +7715,13 @@ react-docgen@^7.0.0:
   dependencies:
     loose-envify "^1.1.0"
     scheduler "^0.23.2"
+
+react-dropzone-esm@15.0.1:
+  version "15.0.1"
+  resolved "https://registry.npmjs.org/react-dropzone-esm/-/react-dropzone-esm-15.0.1.tgz"
+  integrity sha512-RdeGpqwHnoV/IlDFpQji7t7pTtlC2O1i/Br0LWkRZ9hYtLyce814S71h5NolnCZXsIN5wrZId6+8eQj2EBnEzg==
+  dependencies:
+    prop-types "^15.8.1"
 
 react-element-to-jsx-string@^15.0.0:
   version "15.0.0"
