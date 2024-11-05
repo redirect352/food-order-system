@@ -42,3 +42,20 @@ export const baseApiWithAuth = createApi({
 
   }),
 });
+
+export const transformFileResponse = async (
+  response : any, meta: FetchBaseQueryMeta | undefined, 
+  args: any, defaultFilename : string,
+) => {
+  const contentDisposition = meta?.response?.headers.get('Content-Disposition');
+  const filename = contentDisposition?.slice(contentDisposition.indexOf('=') + 1)
+  let anchor = document.createElement("a");
+  document.body.appendChild(anchor);			
+  let objectUrl = window.URL.createObjectURL(response);
+  anchor.href = objectUrl;
+  anchor.download = filename ?? defaultFilename;
+  anchor.click();
+  window.URL.revokeObjectURL(objectUrl);
+  document.body.removeChild(anchor);
+  return { status : 200 };
+};
