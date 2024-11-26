@@ -1,6 +1,6 @@
 import { AppShell, AppShellFooter, AppShellHeader, AppShellMain, Flex, Group, NavLink, rem, Text, Title } from '@mantine/core';
 import Image from 'next/image';
-import React from 'react';
+import React, { Suspense } from 'react';
 import Link from 'next/link';
 import classes from './styles.module.scss';
 
@@ -20,13 +20,15 @@ export default function LoginLayout({ children }: { children: any }) {
         pt={`calc(${rem(80)} + var(--mantine-spacing-md))`}
         className={classes.mainBg}
       >
-        <Flex
-          align="center"
-          justify="center"
-          mt="xl"
-        >
-          {children}
-        </Flex>
+        <Suspense>
+          <Flex
+            align="center"
+            justify="center"
+            mt="xl"
+          >
+            {children}
+          </Flex>
+        </Suspense>
       </AppShellMain>
       <AppShellFooter p="md">
         <Text ta="center" size="sm" c="dimmed">

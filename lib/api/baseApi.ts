@@ -1,11 +1,12 @@
-import { QueryReturnValue } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
-import { MaybePromise } from '@reduxjs/toolkit/dist/query/tsHelpers';
-import { BaseQueryApi, FetchArgs, FetchBaseQueryError, FetchBaseQueryMeta } from '@reduxjs/toolkit/query';
+// import { QueryReturnValue } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
+// import { MaybePromise } from '@reduxjs/toolkit/dist/query/tsHelpers';
+import { BaseQueryApi, FetchArgs, FetchBaseQueryError, FetchBaseQueryMeta, QueryReturnValue } from '@reduxjs/toolkit/query';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { startLogout } from '../features/user/userSlice';
 import { ErrorDto } from '@/shared/types';
 import { getToken } from '../../shared/actions/cookie-actions';
 
+type MaybePromise<T> = T | PromiseLike<T>;
 export const baseQueryWithExpire = (baseQuery: { (args: string | FetchArgs, api: BaseQueryApi, extraOptions: {}): MaybePromise<QueryReturnValue<unknown, FetchBaseQueryError, FetchBaseQueryMeta>>; (args: string | FetchArgs, api: BaseQueryApi, extraOptions: {}): MaybePromise<QueryReturnValue<unknown, FetchBaseQueryError, FetchBaseQueryMeta>>; (arg0: any, arg1: any, arg2: any): any; }) => async (args: any, api: { dispatch: (arg0: { payload: undefined; type: 'user/startLogout'; }) => void; }, extraOptions: any) => {
   const result = await baseQuery(args, api, extraOptions);
   if (result.error &&

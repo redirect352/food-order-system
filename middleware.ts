@@ -18,11 +18,10 @@ export async function middleware(request: NextRequest) {
   const token = request.cookies.get('token')?.value;
   const pathName = request.nextUrl.pathname;
   if (token) {
-    const payload = await decodeJwt(CryptoService.decryptObject(token));
+    const payload = await decodeJwt(await CryptoService.decryptObject(token));
     const { role } = payload;
     if (!role) {
-      (await cookies()).delete('token');
-      (await cookies()).delete('role');
+      request.cookies.delete(['role', 'token']);
       return Response.redirect(new URL('/login', request.url));
     }
     if (!pathName.startsWith(`/${(role as string).replaceAll('_', '-')}`) && !publicRoutes.includes(pathName)) {

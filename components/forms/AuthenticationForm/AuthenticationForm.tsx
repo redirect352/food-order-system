@@ -35,7 +35,7 @@ export function AuthenticationForm({ onFirstAuth, ...props }
   const router = useRouter();
   const { login } = useLogin();
   const [signIn, result] = useSignInMutation({});
-  const onSubmit = form.onSubmit(({ username, password }) => {
+  const onSubmit = form.onSubmit(async ({ username, password }) => {
     const queryBody = username.includes('@') ? { email: username, password } : { login: username, password };
     signIn(queryBody).then(async (res) => {
       if (res.error) {

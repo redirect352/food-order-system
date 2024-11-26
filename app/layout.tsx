@@ -15,12 +15,12 @@ export const metadata = {
   title: 'Система заказа',
   description: 'Система автоматизированного заказа товаров государственного предприятия "Минсктранс"',
 };
-const roboto = Roboto({
-  weight: ['300', '400', '500', '700'],
-  subsets: ['latin', 'cyrillic'],
-  fallback: ['Open Sans'],
-});
-const IS_DEV = process.env.NODE_ENV === 'development';
+// const roboto = Roboto({
+//   weight: ['300', '400', '500', '700'],
+//   subsets: ['latin', 'cyrillic'],
+//   fallback: ['Open Sans'],
+// });
+const IS_DEV = process.env.NODE_ENV === 'development' || true;
 
 export default function RootLayout({ children }: { children: any }) {
   return (
@@ -45,7 +45,8 @@ export default function RootLayout({ children }: { children: any }) {
           content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
         />
       </head>
-      <body className={IS_DEV ? '' : roboto.className}>
+      {/* <body className={IS_DEV ? '' : roboto.className}> */}
+      <body>
           <RootProvider>
             <Notifications />
             {children}

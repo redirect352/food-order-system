@@ -18,7 +18,7 @@ export function useFilters() {
     if (error) {
       NotificationService.showErrorNotification({
         title: 'Ошибка получения категорий',
-        message: `${error?.statusCode} ${error?.message} ` ?? '',
+        message: `${error?.statusCode} ${error?.message} `,
       });
     }
   }, [error]);
