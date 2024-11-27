@@ -15,13 +15,13 @@ export const config = {
 
 // eslint-disable-next-line consistent-return
 export async function middleware(request: NextRequest) {
-  const token = request.cookies.get('token')?.value;
+  const token = request.cookies.get('refresh-token')?.value;
   const pathName = request.nextUrl.pathname;
   if (token) {
     const payload = await decodeJwt(await CryptoService.decryptObject(token));
     const { role } = payload;
     if (!role) {
-      request.cookies.delete(['role', 'token']);
+      request.cookies.delete(['role', 'token', 'refresh-token']);
       return Response.redirect(new URL('/login', request.url));
     }
     if (!pathName.startsWith(`/${(role as string).replaceAll('_', '-')}`) && !publicRoutes.includes(pathName)) {

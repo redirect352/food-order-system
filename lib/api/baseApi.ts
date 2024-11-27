@@ -4,13 +4,18 @@ import { BaseQueryApi, FetchArgs, FetchBaseQueryError, FetchBaseQueryMeta, Query
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { startLogout } from '../features/user/userSlice';
 import { ErrorDto } from '@/shared/types';
-import { getToken } from '../../shared/actions/cookie-actions';
+import { getToken, handleRefresh } from '../../shared/actions/cookie-actions';
 
 type MaybePromise<T> = T | PromiseLike<T>;
 export const baseQueryWithExpire = (baseQuery: { (args: string | FetchArgs, api: BaseQueryApi, extraOptions: {}): MaybePromise<QueryReturnValue<unknown, FetchBaseQueryError, FetchBaseQueryMeta>>; (args: string | FetchArgs, api: BaseQueryApi, extraOptions: {}): MaybePromise<QueryReturnValue<unknown, FetchBaseQueryError, FetchBaseQueryMeta>>; (arg0: any, arg1: any, arg2: any): any; }) => async (args: any, api: { dispatch: (arg0: { payload: undefined; type: 'user/startLogout'; }) => void; }, extraOptions: any) => {
   const result = await baseQuery(args, api, extraOptions);
   if (result.error &&
     (result.error.status === 401 || result.error.data.statusCode === 401)) {
+      const newToken = await handleRefresh();
+      if(newToken){
+        const newResult = await baseQuery(args, api, extraOptions);
+        if(!newResult.error) return newResult;
+      }
       api.dispatch(startLogout());
   }
   return result;
@@ -34,6 +39,11 @@ export const baseApiWithAuth = createApi({
     baseUrl: `${process.env.NEXT_PUBLIC_API_BASE}`,
     prepareHeaders: async (headers) => {
       const { token } = await getToken();
+      if(!token){
+        const newToken = await handleRefresh();
+        if(newToken)
+          headers.set('Authorization', `Bearer ${newToken}`);
+      }
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
       }

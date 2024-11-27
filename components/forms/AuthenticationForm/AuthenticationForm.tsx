@@ -46,7 +46,8 @@ export function AuthenticationForm({ onFirstAuth, ...props }
         (res.error as any).message || 'Неизвестная ошибка авторизации';
         form.setErrors({ password: errorMessage });
       } else if (res.data.statusCode === 200) {
-        await login(res.data.access_token, res.data.role);
+        const {access_token, refresh_token, role} = res.data;
+        await login(access_token, role, refresh_token);
         const path = (res.data?.role as string).replaceAll('_', '-');
         router.push(`/${path}`);
       } else if (res.data.success) {
