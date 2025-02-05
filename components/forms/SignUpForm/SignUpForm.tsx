@@ -21,7 +21,7 @@ interface SignUpFormProps {
 }
 
 export const SignUpForm: FunctionComponent<SignUpFormProps> = () => {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(3);
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<SignUpFormValues>({
     mode: 'uncontrolled',
@@ -150,7 +150,8 @@ export const SignUpForm: FunctionComponent<SignUpFormProps> = () => {
           <SuccessMessageCard.Text>
             Аккаунт успешно создан.
             Вам на электронную почту было направлено письмо для подтверждения email.
-            Для окончания Регистрации в системе следуйте инструкциям в письме
+            Для окончания Регистрации в системе следуйте инструкциям в письме.<br />
+            В случае если письмо не пришло войдите в систему с вашим логином и паролем для повторной отправки письма.
           </SuccessMessageCard.Text>
           <SuccessMessageCard.OkButton redirectLink="/">
             На главную

@@ -18,16 +18,10 @@ export default withBundleAnalyzer({
   },
   images:{
     remotePatterns:[
-      process.env.NODE_ENV === 'development' ? {
-        protocol: 'http',
-        hostname: '192.168.1.100',
-        pathname: '/images/**',
-      }
-      :
       {
-        protocol: 'http',
-        hostname: '192.168.1.100',
-        pathname: '/images/**',
+        protocol: process.env.NEXT_PUBLIC_IMAGE_PROTOCOL ?? 'http',
+        hostname: process.env.NEXT_PUBLIC_IMAGE_HOST,
+        pathname: process.env.NEXT_PUBLIC_IMAGE_PATHNAME,
       }
     ]
   }

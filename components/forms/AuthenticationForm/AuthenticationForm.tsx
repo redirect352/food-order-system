@@ -17,13 +17,14 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useLogin } from '@/shared/hooks';
 import { useSignInMutation } from '@/lib/api/authApi';
+import { log } from 'node:console';
 
 export function AuthenticationForm({ onFirstAuth, ...props }
   :{ onFirstAuth: () => void } & PaperProps) {
   const form = useForm({
     initialValues: {
-      username: 'ponomarev@minsktrans.by',
-      password: '12345678!ASss',
+      username: '',
+      password: '',
     },
     validate: {
       username: (val) => val.includes('@') ?
@@ -38,10 +39,12 @@ export function AuthenticationForm({ onFirstAuth, ...props }
   const onSubmit = form.onSubmit(async ({ username, password }) => {
     const queryBody = username.includes('@') ? { email: username, password } : { login: username, password };
     signIn(queryBody).then(async (res) => {
+      console.log(res);
       if (res.error) {
         // eslint-disable-next-line prefer-destructuring
         const error: any = res.error;
-        const errorMessage = error.statusCode === 401
+        console.log(error);
+        const errorMessage = error.statusCode === 401 || error.statusCode === 403 
         ? 'Ошибка авторизации неверный логин или пароль' :
         (res.error as any).message || 'Неизвестная ошибка авторизации';
         form.setErrors({ password: errorMessage });

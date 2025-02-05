@@ -34,7 +34,7 @@ const ProfilePage: FunctionComponent<ProfilePageProps> = () => {
           />
           <TextInput
             label="Email"
-            placeholder="ponomarev@minsktrans.by"
+            placeholder="example@minsktrans.by"
             leftSection={<IconAt style={{ width: rem(16), height: rem(16) }} />}
             value={data?.email}
             disabled
