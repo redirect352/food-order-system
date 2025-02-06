@@ -146,5 +146,6 @@ export const resolver: CSSVariablesResolver = (theme) => ({
         '--mantine-color-background': '#FCEDEF',
     },
     dark: {
+      '--text-color':'white'
     },
     });

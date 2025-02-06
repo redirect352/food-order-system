@@ -8,7 +8,7 @@ export default function LoginLayout({ children }: { children: any }) {
   return (
     <AppShell header={{ height: 80 }} padding="md">
       <AppShellHeader>
-       <Link href="/" style={{ textDecoration: 'none', color: 'black' }}>
+       <Link href="/" style={{ textDecoration: 'none', color:'inherit' }}>
           <Group h="100%" p="md" ml="lg">
             <Image src="/logo.png" alt="" width={37} height={52} />
             <Title visibleFrom="sm" order={3}>Система заказа питания</Title>

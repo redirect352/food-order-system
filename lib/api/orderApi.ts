@@ -1,5 +1,4 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { getToken } from '@/shared/actions/cookie-actions';
+import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQueryWithExpire, transformErrorResponse } from './baseApi';
 import { OrderFullInfoDto, OrderMainInfoDto } from '@/shared/types';
 
@@ -16,19 +15,11 @@ export type GetActiveOrdersParams = {
 export const orderApi = createApi({
   reducerPath: 'orderApi',
   tagTypes: ['ActiveOrdersList'],
-  baseQuery: baseQueryWithExpire(fetchBaseQuery({
-    baseUrl: `${process.env.NEXT_PUBLIC_API_BASE}/order`,
-    prepareHeaders: async (headers) => {
-      const { token } = await getToken();
-      if (token) {
-        headers.set('Authorization', `Bearer ${token}`);
-      }
-    },
-  })),
+  baseQuery: baseQueryWithExpire,
   endpoints: (builder) => ({
     makeOrder: builder.mutation(({
       query: (body: MakeOrderParams) => ({
-        url: '/create',
+        url: 'order/create',
         body,
         method: 'POST',
       }),
@@ -40,7 +31,7 @@ export const orderApi = createApi({
     })),
     getOrdersList: builder.query({
       query: (params:GetActiveOrdersParams) => ({
-        url: '/list',
+        url: 'order/list',
         params,
       }),
       transformResponse: (res) => res as {
@@ -52,7 +43,7 @@ export const orderApi = createApi({
     }),
     getOrderInfo: builder.query({
       query: (params: { issued: string, number: number }) => ({
-        url: `/${params.issued}/${params.number}`,
+        url: `order/${params.issued}/${params.number}`,
         params,
       }),
       transformResponse: (res) => res as OrderFullInfoDto,
@@ -60,7 +51,7 @@ export const orderApi = createApi({
     }),
     cancelOrder: builder.mutation({
       query: (params: { issued: string, number: number }) => ({
-        url: `/cancel/${params.issued}/${params.number}`,
+        url: `order/cancel/${params.issued}/${params.number}`,
         params,
         method: 'DELETE',
       }),
@@ -73,7 +64,7 @@ export const orderApi = createApi({
     }),
     getOrdersTotal: builder.query({
       query: (params: { periodStart?: string, periodEnd?: string }) => ({
-        url: '/total/',
+        url: 'order/total/',
         params,
       }),
       providesTags: ['ActiveOrdersList'],

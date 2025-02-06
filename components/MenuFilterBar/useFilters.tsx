@@ -3,6 +3,8 @@ import { ComboboxItem } from '@mantine/core';
 import { useGetMenuCategoriesQuery } from '@/lib/api/menuApi';
 import { useArraySearchParamValue, useUpdatePageURL } from '@/shared/hooks';
 import { NotificationService } from '@/shared/services';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { SerializedError } from '@reduxjs/toolkit';
 
 export function useFilters() {
   const { data, error } = useGetMenuCategoriesQuery({});
@@ -16,9 +18,10 @@ export function useFilters() {
   const { updateURL } = useUpdatePageURL();
   useEffect(() => {
     if (error) {
+      console.log(error);
       NotificationService.showErrorNotification({
         title: 'Ошибка получения категорий',
-        message: `${error?.statusCode} ${error?.message} `,
+        message: `${(error as FetchBaseQueryError)?.status} ${(error as any)?.message} `,
       });
     }
   }, [error]);

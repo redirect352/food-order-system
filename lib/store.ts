@@ -14,8 +14,6 @@ const appReducer = combineReducers({
   menu: menuSlice,
   user: userSlice,
   [authApi.reducerPath]: authApi.reducer,
-  [userApi.reducerPath]: userApi.reducer,
-  [menuApi.reducerPath]: menuApi.reducer,
   [orderApi.reducerPath]: orderApi.reducer,
   [baseApiWithoutAuth.reducerPath]: baseApiWithoutAuth.reducer,
   [baseApiWithAuth.reducerPath]: baseApiWithAuth.reducer,

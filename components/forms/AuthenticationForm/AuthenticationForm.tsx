@@ -39,11 +39,9 @@ export function AuthenticationForm({ onFirstAuth, ...props }
   const onSubmit = form.onSubmit(async ({ username, password }) => {
     const queryBody = username.includes('@') ? { email: username, password } : { login: username, password };
     signIn(queryBody).then(async (res) => {
-      console.log(res);
       if (res.error) {
         // eslint-disable-next-line prefer-destructuring
         const error: any = res.error;
-        console.log(error);
         const errorMessage = error.statusCode === 401 || error.statusCode === 403 
         ? 'Ошибка авторизации неверный логин или пароль' :
         (res.error as any).message || 'Неизвестная ошибка авторизации';

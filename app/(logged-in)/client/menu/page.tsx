@@ -35,7 +35,10 @@ const Menu : FunctionComponent = () => {
   }, [data]);
   if (error) {
     return (
-      <ErrorPage message={error?.data?.message} onRetry={refetch} />
+      <ErrorPage 
+        message={(error as any)?.data?.message ?? 'Ошибка загрузки меню'} 
+        onRetry={refetch} 
+      />
     );
   }
   return (
