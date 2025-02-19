@@ -8,7 +8,7 @@ export function useCancelOrder(number: number, issued: string) {
     cancel({ issued, number })
     .then((res) => {
       const { error, data } = res;
-      if (error) { NotificationService.showErrorNotification({ message: error.message }); }
+      if (error) { NotificationService.showErrorNotification({ message: (error as any)?.message }); }
       if (data === null || data) NotificationService.showSuccessNotification({ message: `Заказ ${number}-${issued} успешно отменен` });
     });
   };

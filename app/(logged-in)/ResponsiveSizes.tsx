@@ -23,7 +23,7 @@ function ResponsiveSizes({ children, className }: { children: any, className?: s
         <Group align="center" justify="space-between" h="100%">
           <Group px="md" visibleFrom="sm" pl="lg">
               <Image src="/logo.png" alt="" width={37} height={52} />
-              <Title order={3}>Cистема заказа питания</Title>
+              <Title order={3}>Система заказа питания</Title>
           </Group>
           <UserAvatar px="md" visibleFrom="sm" pl="lg" />
           <Group h="100%" px="md" hiddenFrom="sm">

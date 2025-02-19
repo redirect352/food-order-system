@@ -41,7 +41,7 @@ const ExportOrdersForm = (props: ExportOrdersFormProps) => {
     if(error){
       NotificationService.showErrorNotification({
         title:'Ошибка выгрузки заказов',
-        message: error?.message ?? `Возникла непредвиденная ошибка. Невозможно скачать отчет о заказах`
+        message: (error as any)?.message ?? `Возникла непредвиденная ошибка. Невозможно скачать отчет о заказах`
       })
     }else{
       NotificationService.showSuccessNotification({

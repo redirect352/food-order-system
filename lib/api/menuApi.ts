@@ -1,13 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { getToken } from '@/shared/actions/cookie-actions';
-import { DishCategoryDto, MenuPositionDto } from '@/shared/types';
-import { baseApiWithAuth, baseQueryWithExpire } from './baseApi';
+import { DishCategoryDto, MenuPositionDto, OfficeDto } from '@/shared/types';
+import { baseApiWithAuth } from './baseApi';
 
 export type GetActualMenuQueryParams = {
   page?: number,
   pageSize?: number,
   dishCategoryId?: string,
   productType?: string,
+  destinationOfficeId: number,
 };
 export const menuApi = baseApiWithAuth.injectEndpoints({
   endpoints: (builder) => ({
@@ -30,6 +31,17 @@ export const menuApi = baseApiWithAuth.injectEndpoints({
       transformResponse: (res) => res as DishCategoryDto[],
       transformErrorResponse: (error) => error.data,
     }),
+    getDeliveryPoints: builder.query({
+      query: () => ({
+        url: '/branch-office/delivery-points',
+      }),
+      transformResponse: (res) => res as OfficeDto[],
+      transformErrorResponse: (error) => error.data,
+    }),
 }) });
 
-export const { useGetActualMenuQuery, useGetMenuCategoriesQuery } = menuApi;
+export const { 
+  useGetActualMenuQuery,
+  useGetMenuCategoriesQuery,
+  useGetDeliveryPointsQuery 
+} = menuApi;

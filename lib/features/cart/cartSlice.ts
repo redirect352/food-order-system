@@ -1,17 +1,25 @@
+'use client'
+
 import { createSelector, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@/lib/store';
-import { MenuPositionDto } from '@/shared/types';
+import { MenuPositionDto, OfficeDto } from '@/shared/types';
 import { PriceHelper } from '@/shared/helpers';
+import Cookies from 'js-cookie';
+import { initializeUserData, login } from '../user/userSlice';
 
 export type CartItem = { menuPosition: MenuPositionDto, count: number };
 
 interface CartState {
   cartItems: Array<CartItem>,
+  deliveryDestination: OfficeDto | null,
 }
+
+export const deliveryDestinationKey = 'deliveryDestination';
 
 const initialState: CartState = {
   cartItems: [],
+  deliveryDestination: null,
 };
 
 export const cartSlice = createSlice({
@@ -59,6 +67,21 @@ export const cartSlice = createSlice({
     clearCart: (state) => {
       state.cartItems = [];
     },
+    changeDeliveryDestination: (state, action: PayloadAction<OfficeDto | null>) =>{
+      state.cartItems = [];
+      if(action.payload)
+        localStorage.setItem(deliveryDestinationKey, JSON.stringify(action.payload) )
+      else 
+        localStorage.removeItem(deliveryDestinationKey);
+      state.deliveryDestination = action.payload;
+    },
+    initializeStore: (state)=>{
+      const deliveryStr = localStorage.getItem(deliveryDestinationKey);
+      if(deliveryStr){
+        const deliveryOffice = JSON.parse(deliveryStr);
+        if(deliveryOffice as OfficeDto) state.deliveryDestination =  deliveryOffice as OfficeDto;
+      }
+    },
   },
   selectors: {
     selectFullPrice: (state) => state.cartItems.reduce(
@@ -88,8 +111,8 @@ export const cartSlice = createSlice({
         counts: new Array<number>(),
       })
     ),
+    selectDeliveryDestination: ({deliveryDestination}) => deliveryDestination,
   },
-
 });
 export const {
   increaseDishCount,
@@ -98,12 +121,16 @@ export const {
   changeDishCount,
   addToCart,
   clearCart,
+  changeDeliveryDestination,
+  initializeStore,
 } = cartSlice.actions;
+
 export const {
   selectFullPrice,
   selectTotalDiscount,
   selectFinalPrice,
   selectCreateOrderArgument,
+  selectDeliveryDestination,
 } = cartSlice.selectors;
 // Other code such as selectors can use the imported `RootState` type
 export const selectCartItems = (state: RootState) => state.cart.cartItems;

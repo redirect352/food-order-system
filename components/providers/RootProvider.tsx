@@ -8,6 +8,7 @@ import NotificationProvider from './NotificationProvider';
 import { ModalsProvider } from './ModalsProvider';
 import { DatesProvider } from '@mantine/dates';
 import 'dayjs/locale/ru';
+import InitializationProvider from './InitializationProvider';
 
 
 export default function RootProvider({
@@ -18,15 +19,17 @@ export default function RootProvider({
   return (
     <MantineProvider theme={theme} cssVariablesResolver={resolver}>
       <StoreProvider>
-        <LogoutProvider>
-          <ModalsProvider>
-            <NotificationProvider>
-              <DatesProvider settings={{ locale: 'ru' }}>
-                {children}
-              </DatesProvider>
-            </NotificationProvider>
-          </ModalsProvider>
-        </LogoutProvider>
+        <InitializationProvider>
+          <LogoutProvider>
+            <ModalsProvider>
+              <NotificationProvider>
+                <DatesProvider settings={{ locale: 'ru' }}>
+                    {children}
+                </DatesProvider>
+              </NotificationProvider>
+            </ModalsProvider>
+          </LogoutProvider>
+        </InitializationProvider>
       </StoreProvider>
     </MantineProvider>
 

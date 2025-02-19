@@ -6,45 +6,46 @@ import { startLogout } from '../features/user/userSlice';
 import { ErrorDto } from '@/shared/types';
 import { getToken, handleRefresh } from '../../shared/actions/cookie-actions';
 import { Mutex } from 'async-mutex';
+const mutex = new Mutex();
 
 const baseQuery = fetchBaseQuery({ 
   baseUrl: `${process.env.NEXT_PUBLIC_API_BASE}`,     
-  prepareHeaders: async (headers) => {
+  prepareHeaders: async (headers, api) => {
     const res = await getToken();
-    if(!res?.token){
-      const newToken = await handleRefresh();
-      if(newToken)
-        headers.set('Authorization', `Bearer ${newToken}`);
-    }
     if (res?.token) {
       headers.set('Authorization', `Bearer ${res?.token}`);
     }
   }, 
 });
 
-const mutex = new Mutex();
 export const baseQueryWithExpire:BaseQueryFn<
 string | FetchArgs,
 unknown,
 FetchBaseQueryError
 > = async (args, api, extraOptions) => {
   await mutex.waitForUnlock();
-  const result = await baseQuery(args, api, extraOptions);
+  let result = await baseQuery(args, api, extraOptions);
   if (result.error &&
     (result.error.status === 401)) {
       if (!mutex.isLocked()) {
         const release = await mutex.acquire();
-      try{
-        const newToken = await handleRefresh();
-        if(newToken){
-          const newResult = await baseQuery(args, api, extraOptions);
-          if(!newResult.error) return newResult;
+        try{
+          const newToken = await handleRefresh();
+          if(newToken){
+            result = await baseQuery(args, api, extraOptions);
+            if(result.error) api.dispatch(startLogout());
+          }else{
+            api.dispatch(startLogout());
+          }
+        }catch(err){
+          api.dispatch(startLogout());
+        }finally{
+          release();
         }
-        api.dispatch(startLogout());
-      }finally{
-        release();
+      }else{
+        await mutex.waitForUnlock()
+        result = await baseQuery(args, api, extraOptions)
       }
-    }
   }
   return result;
 };

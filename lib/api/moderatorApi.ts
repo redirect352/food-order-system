@@ -59,7 +59,7 @@ export const moderatorApi = baseApiWithAuth.injectEndpoints({
         responseHandler : (res : Response) => res.status === 200 ? res.blob() :res.json(),
       }),
       transformResponse: (response, meta, args) =>
-        transformFileResponse(response, meta, args, 'default.docx'),
+        transformFileResponse(response, meta as any, args, 'default.docx'),
       transformErrorResponse,
     }),
   }),

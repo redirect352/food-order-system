@@ -18,7 +18,6 @@ export function useFilters() {
   const { updateURL } = useUpdatePageURL();
   useEffect(() => {
     if (error) {
-      console.log(error);
       NotificationService.showErrorNotification({
         title: 'Ошибка получения категорий',
         message: `${(error as FetchBaseQueryError)?.status} ${(error as any)?.message} `,

@@ -8,11 +8,13 @@ import classes from './styles.module.scss';
 import FilterModal from '@/components/MenuFilterBar/FilterModal/FilterModal';
 import { useFilters } from './useFilters';
 import { MultiSelect } from '@/UI';
+import DeliveryDestinationInput from '../DeliveryDestinationInput';
+import dynamic from 'next/dynamic';
 
 interface MenuFilterBarProps {
 
 }
-
+const NoSsr = dynamic(() => import('../DeliveryDestinationInput'), {ssr: false});
 const MenuFilterBar: FunctionComponent<MenuFilterBarProps> = () => {
   const filters = useFilters();
   const {
@@ -24,7 +26,9 @@ const MenuFilterBar: FunctionComponent<MenuFilterBarProps> = () => {
   const theme = useMantineTheme();
   return (
     <FilterContext.Provider value={filters}>
-      <Flex w="100%" justify="flex-end">
+      <Flex className={classes.filtersBox}>
+        <DeliveryDestinationInput />
+        {/* <NoSsr /> */}
         <Flex className={classes.filterBarContainer} gap={24} justify="flex-end" align="flex-start">
           <Flex direction="column" gap={8}>
             <Title order={4}>Тип продукции</Title>

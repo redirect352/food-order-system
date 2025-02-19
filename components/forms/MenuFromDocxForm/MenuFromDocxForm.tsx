@@ -60,7 +60,7 @@ export  const MenuFromDocxForm = (props: MenuFromDocxFormProps) => {
     .then(({data, error}) => {
       if(!data) {
         NotificationService.showErrorNotification({
-          message:error.message,
+          message:(error as any)?.message,
         })
         return;
       }

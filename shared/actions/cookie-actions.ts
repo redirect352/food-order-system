@@ -5,28 +5,30 @@ import { CryptoService } from '../services/CryptoService';
 
 const refreshTokenExpireIn = +(process.env.REFRESH_TOKEN_EXPIRE_IN ?? 2 * 60 * 60 * 24 * 14);
 const accessTokenExpireIn = +(process.env.ACCESS_TOKEN_EXPIRE_IN ?? 50*60);
+const secure = process.env.SECURE_COOKIES !== undefined ? process.env.SECURE_COOKIES === 'true': true;
 
 export async function handleLogin(token : string, refreshToken: string, role?: string) {
   const tokenData = await CryptoService.encryptObject(token);
   const refreshTokenData = await CryptoService.encryptObject(refreshToken);
   const roleData = await CryptoService.encryptObject(role)
+
   const cookieStore = await cookies();
   cookieStore.set('token', tokenData, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    maxAge: accessTokenExpireIn, // 55mins
+    secure,
+    maxAge: accessTokenExpireIn, 
     path: '/',
   });
   cookieStore.set('role', roleData, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    maxAge: refreshTokenExpireIn, // One week
+    secure,
+    maxAge: refreshTokenExpireIn, 
     path: '/',
   });
   cookieStore.set('refresh-token', refreshTokenData, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    maxAge: refreshTokenExpireIn, // Two weeks
+    secure,
+    maxAge: refreshTokenExpireIn, 
     path: '/',
   });
   return { statusCode: 200 };
@@ -90,12 +92,11 @@ export async function handleRefresh(){
   if(res.ok){
     const data = await res.json();
     if(data.access_token){
-    const cookieStore = await cookies();
-    const tokenData = await CryptoService.encryptObject(data.access_token);
-      cookieStore.set('token', tokenData, {
+      const tokenData = await CryptoService.encryptObject(data.access_token);
+      await (await cookies()).set('token', tokenData, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        maxAge: accessTokenExpireIn, // 55mins
+        secure,
+        maxAge: accessTokenExpireIn, 
         path: '/',
       });
     }

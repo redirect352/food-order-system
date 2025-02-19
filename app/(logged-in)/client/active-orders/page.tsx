@@ -23,7 +23,7 @@ const ActiveOrders : FunctionComponent = () => {
   if (error) {
     return (
       <ErrorPage
-        message={error?.message}
+        message={(error as any)?.message}
       />
     );
   }

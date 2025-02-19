@@ -24,7 +24,7 @@ const OrderDetailedInfoCard: FunctionComponent<OrderDetailedInfoCardProps> =
   return (
     <OrderDetailedContext.Provider value={{
       IsLoading: isFetching,
-      error,
+      error: error as any,
       order: data,
     }}>
       {

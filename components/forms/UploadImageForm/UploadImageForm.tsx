@@ -51,7 +51,7 @@ const UploadImageForm = (props : UploadImageFormProps) => {
     })
     .then(({data, error}) =>{
       if(error){
-        NotificationService.showErrorNotification({message: error.message ?? 'Ошибка добавления картинки'})
+        NotificationService.showErrorNotification({message: (error as any)?.message ?? 'Ошибка добавления картинки'})
         return;
       }
       if(data){

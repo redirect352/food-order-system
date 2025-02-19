@@ -30,3 +30,15 @@
   @media  (max-width:460px ){
   }
 }
+.filtersBox{
+  width: 100%;
+  justify-content: space-between;
+  @media(max-width: $mantine-breakpoint-lg){
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-end;
+  }
+  @media(max-width: $mantine-breakpoint-sm){
+    align-items: flex-start;
+  }
+}
