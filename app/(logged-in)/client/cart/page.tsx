@@ -7,7 +7,7 @@ import { CartList, NoContentPage } from '@/components';
 import CartTotal from '@/components/CartTotal/CartTotal';
 import { MobileScrollToAffix } from '@/UI';
 import { useAppSelector } from '@/shared/hooks';
-import { selectCartItemsLength } from '@/lib/features/cart/cartSlice';
+import { selectCartItemsLength, selectDeliveryDestination } from '@/lib/features/cart/cartSlice';
 import noMenuImage from '@/public/emptyCart.png';
 
 interface CartProps {
@@ -16,22 +16,29 @@ interface CartProps {
 
 const Cart : FunctionComponent<CartProps> = () => {
   const cartCount = useAppSelector(selectCartItemsLength);
+  const deliveryDestination = useAppSelector(selectDeliveryDestination);
   return (
     <>
       {
         cartCount !== 0 &&
         <Flex
-          gap="xl"
-          className={classes.cartCont}
-          mih="var(--app-shell-full-height-container)"
+          className={classes.cartContainer}
         >
-          <Stack className={classes.cartItemsContainer} gap="lg">
-            <Group justify="space-between">
-              <Title order={1}>Корзина <Text c="dimmed" span fz="h2">{cartCount}</Text></Title>
-              <Button variant="white" size="lg" visibleFrom="sm">
-                Выбрать всё
-              </Button>
-            </Group>
+          <Stack className={classes.cartItemsContainer}>
+            <Stack gap={0}>
+              <Group justify="space-between">
+                <Title order={1}>Корзина <Text c="dimmed" span fz="h2">{cartCount}</Text></Title>
+                <Button variant="white" size="lg" visibleFrom="sm">
+                  Выбрать всё
+                </Button>
+              </Group>
+              <Group>
+                <span className={classes.destinationLabel}>Место доставки:</span>
+                <span className={classes.destinationValue}>
+                  {deliveryDestination?.name?? '<Не установлено>'}
+                </span>
+              </Group>
+            </Stack>
             <CartList />
           </Stack>
           <Stack className={classes.cartTotal}>

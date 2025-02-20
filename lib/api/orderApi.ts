@@ -5,6 +5,7 @@ import { OrderFullInfoDto, OrderMainInfoDto } from '@/shared/types';
 export type MakeOrderParams = {
   menuPositions: number[],
   counts: number[],
+  deliveryDestinationId: number,
 };
 export type GetActiveOrdersParams = {
   page?: number,

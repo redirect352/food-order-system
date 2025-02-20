@@ -102,13 +102,15 @@ export const cartSlice = createSlice({
     ),
     selectCreateOrderArgument: createSelector(
       (state: CartState) => state.cartItems,
-      items => items.reduce((prev, item) => {
+      (state: CartState) => state.deliveryDestination,
+      (items, destination) => items.reduce((prev, item) => {
         prev.counts.push(item.count);
         prev.menuPositions.push(item.menuPosition.id);
         return prev;
       }, {
         menuPositions: new Array<number>(),
         counts: new Array<number>(),
+        deliveryDestinationId:destination?.id ?? -1,
       })
     ),
     selectDeliveryDestination: ({deliveryDestination}) => deliveryDestination,

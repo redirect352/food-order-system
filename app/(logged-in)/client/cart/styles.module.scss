@@ -12,13 +12,16 @@
   }
 }
 
-.cartCont{
+.cartContainer{
   flex-wrap: nowrap;
+  min-height: var(--app-shell-full-height-container);
+  gap: var(--mantine-spacing-xl);
   @media (max-width: 1650px){
     flex-wrap: wrap;
   }
 }
 .cartItemsContainer{
+  gap: var(--mantine-spacing-lg);
   width: 100%;
 }
 .cartTotal{
@@ -34,4 +37,12 @@
   @media (max-width: $mantine-breakpoint-sm){
     flex-shrink: 1;
   }
+}
+
+.destinationLabel{
+  color: var(--mantine-color-dimmed);
+}
+.destinationValue{
+  color: var(--mantine-color-primary-4);
+  font-weight: 500;
 }

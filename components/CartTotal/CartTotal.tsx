@@ -20,7 +20,6 @@ const CartTotal: FunctionComponent<CartTotalProps> = () => {
   const [makeOrder, { isLoading }] = useMakeOrderMutation();
 
   const makeOrderClick = () => {
-    // makeOrder({ counts: [], menuPositions: [] })
     makeOrder(orderArgs)
     .then(res => {
       if (res.error) throw res.error;
