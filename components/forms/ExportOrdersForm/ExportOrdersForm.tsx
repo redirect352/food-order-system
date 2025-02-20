@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 import { useLazyOrderExportDocxQuery, periodStringFormat } from "../../../lib/api/moderatorApi";
 import classes from './styles.module.scss';
 import { NotificationService } from "../../../shared/services";
+import OfficeSelect from "../../OfficeSelect/OfficeSelect";
 
 interface ExportOrdersFormProps extends StackProps {} 
 
@@ -17,6 +18,7 @@ const ExportOrdersForm = (props: ExportOrdersFormProps) => {
     initialValues: {
       periodStart: dayjs(new Date()).set('h', 8).set('m', 15).toDate(),
       periodEnd: dayjs(new Date()).set('m', 60).toDate(),
+      deliveryDestinationId: '',
     },
     validate:{
       periodStart: (val, {periodEnd}) => {
@@ -27,7 +29,8 @@ const ExportOrdersForm = (props: ExportOrdersFormProps) => {
       periodEnd: (val) => {
         if(!val) return 'Дата не установлена';
         return null;
-      }
+      },
+      deliveryDestinationId: (val) => !val ? 'Выберите место доставки' : null,
     }
   });
   const downloadFile = async () => {
@@ -36,6 +39,7 @@ const ExportOrdersForm = (props: ExportOrdersFormProps) => {
     const params = { 
       periodStart: dayjs(values.periodStart).format(periodStringFormat),
       periodEnd: dayjs(values.periodEnd).format(periodStringFormat),
+      deliveryDestinationId: values.deliveryDestinationId,
     };
     const {data, error} = await query(params);
     if(error){
@@ -71,6 +75,12 @@ const ExportOrdersForm = (props: ExportOrdersFormProps) => {
         maxDate={dayjs().set('h',24).set('m',0).toDate()}
         key={form.key('periodEnd')}
         {...form.getInputProps('periodEnd')}
+      />
+      <OfficeSelect 
+        label='Выберите целевой филиал заказов'
+        isCanteen={false}
+        inputProps={form.getInputProps('deliveryDestinationId')}  
+        inputKey={form.key('deliveryDestinationId')} 
       />
       <Button 
         className={classes.submitButton} 

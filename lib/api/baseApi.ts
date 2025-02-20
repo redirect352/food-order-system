@@ -75,12 +75,12 @@ export const transformFileResponse = async (
   args: any, defaultFilename : string,
 ) => {
   const contentDisposition = meta?.response?.headers.get('Content-Disposition');
-  const filename = contentDisposition?.slice(contentDisposition.indexOf('=') + 1)
+  const filename = contentDisposition?.slice(contentDisposition.indexOf('=') + 1) ?? defaultFilename;
   let anchor = document.createElement("a");
   document.body.appendChild(anchor);			
   let objectUrl = window.URL.createObjectURL(response);
   anchor.href = objectUrl;
-  anchor.download = filename ?? defaultFilename;
+  anchor.download = decodeURI(filename ?? '');
   anchor.click();
   window.URL.revokeObjectURL(objectUrl);
   document.body.removeChild(anchor);

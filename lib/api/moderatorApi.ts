@@ -88,6 +88,7 @@ type UploadImagesDto = {
 type ExportOrdersDocxDto = {
   periodStart: string,
   periodEnd: string,
+  deliveryDestinationId: string,
 }
 
 export const periodStringFormat = 'YYYY-MM-DD HH:mm';
