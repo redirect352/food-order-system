@@ -7,7 +7,6 @@ import classes from './styles.module.scss';
 import { OrderDetailedContext } from '../context/OrderDetailedContext';
 import OrderPositionsTable from './OrderPositionsTable/OrderPositionsTable';
 import { ErrorPage } from '@/UI';
-import { ModalService } from '@/shared/services';
 import { useCancelOrder } from '@/shared/hooks';
 import { orderStatusColor } from '@/shared/settings';
 
@@ -19,7 +18,7 @@ const DesktopModal: FunctionComponent<DesktopModalProps> = ({
   onRetry,
   ...modalProps
 }) => {
-  const { order, error, IsLoading } = useContext(OrderDetailedContext);
+  const { order, error, IsLoading, issuedLabel } = useContext(OrderDetailedContext);
   const {cancelOrder} = useCancelOrder(
     order?.number ?? -1,
     order?.issued ?? ""
@@ -46,43 +45,47 @@ const DesktopModal: FunctionComponent<DesktopModalProps> = ({
         <>
         <Modal.Header bg="var(--mantine-color-background)">
           <Modal.Title fz="h3" fw={500}>
-            Заказ № {order?.number} от {order?.issued}
+            Заказ № {order?.number} от {issuedLabel}
           </Modal.Title>
           <Modal.CloseButton />
         </Modal.Header>
-        <Modal.Body className={classes.modalBody} mt="md" mr="xs">
+        <Modal.Body className={classes.modalBody}>
           <Grid gutter="xl">
-              <GridCol span={4} fs="italic" fz="lg">
+              <GridCol span={4} className={classes.gridCaption}>
                 Сумма заказа
               </GridCol>
-              <GridCol span={8} fz="lg" fw={500}>
+              <GridCol span={8} className={classes.importantInfo}>
                 <NumberFormatter value={(order?.fullPrice ?? 0) / 100} decimalScale={2} suffix=" руб." />
               </GridCol>
-              <GridCol span={4} fs="italic" fz="lg">
+              <GridCol span={4} className={classes.gridCaption}>
+                Место доставки
+              </GridCol>
+              <GridCol span={8} className={classes.importantInfo}>
+                {order?.deliveryDestination.name ?? '-'}
+              </GridCol>
+              <GridCol span={4} className={classes.gridCaption}>
                 Статус заказа
               </GridCol>
-              <GridCol span={8} bg="gray.2" fz="lg">
+              <GridCol span={8} className={classes.statusContainer}>
                 <Badge color={orderStatusColor(order?.status)} size="lg">
                   {order?.status}
                 </Badge>
               </GridCol>
-              <GridCol span={4} fs="italic" fz="lg">
+              <GridCol span={4} className={classes.gridCaption}>
                 Изменен
               </GridCol>
-              <GridCol span={8} fz="lg">
-                {moment(order?.updated).format('HH:mm, DD.MM.YYYY')}
+              <GridCol span={8}>
+                { moment(order?.updated).format('HH:mm, DD.MM.YYYY') }
               </GridCol>
-              <GridCol span={4} fs="italic" fz="lg">
+              <GridCol span={4} className={classes.gridCaption}>
                 Создан
               </GridCol>
-              <GridCol span={8} fz="lg">
-                {moment(order?.created).format('HH:mm, DD.MM.YYYY')}
+              <GridCol span={8}>
+                { moment(order?.created).format('HH:mm, DD.MM.YYYY') }
               </GridCol>
               <GridCol
                 span={12}
-                fw={500}
-                fz="lg"
-                bg="var(--mantine-color-background)">
+                className={classes.gridSubheading}>
                 Состав заказа:
               </GridCol>
           </Grid>
@@ -93,9 +96,8 @@ const DesktopModal: FunctionComponent<DesktopModalProps> = ({
           />
           <Flex justify="center" mt="lg">
           <Button 
+            className={classes.cancelButton}
             variant="outline" 
-            w={500} 
-            radius={300} 
             onClick={cancelOrder}
             disabled={!order?.canCancel}
           >

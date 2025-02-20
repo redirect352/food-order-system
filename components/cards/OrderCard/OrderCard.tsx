@@ -25,7 +25,7 @@ const OrderCard: FunctionComponent<OrderCardProps> = ({
 }) => {
   if (isLoading) {
     return (
-      <Skeleton mih={300} className={classes.orderCardWrapper} />
+      <Skeleton className={classes.orderCardWrapper} data-skeleton/>
     );
   }
   if (orderMainInfoDto) {
@@ -39,7 +39,8 @@ const OrderCard: FunctionComponent<OrderCardProps> = ({
 const OrderCardContent: FunctionComponent<OrderCardContentProps> = ({
   orderMainInfoDto,
 }) => {
-  const { number, fullPrice, status, issued, orderPositions, canCancel } = orderMainInfoDto;
+  const { number, fullPrice, status, issued, orderPositions, canCancel,deliveryDestination } = orderMainInfoDto;
+  const {name, address} = deliveryDestination;
   const total = fullPrice / 100;
   const statusText = status;
   const [opened, { open, close }] = useDisclosure(false);
@@ -51,35 +52,40 @@ const OrderCardContent: FunctionComponent<OrderCardContentProps> = ({
   return (
     <>
       <ScalingCard
-        shadow="xl"
         className={classes.orderCardWrapper}
         onClick={open}
       >
-        <CardSection bg="var(--mantine-color-background)" p="md">
-          <Text fw={500} fz="h3">
-            <Text span fs="italic" fz="h3">Заказ №</Text>{' '}
+        <CardSection className={classes.headerSection}>
+          <Text className={classes.headerText}>
+            <Text span className={classes.italicText}>Заказ №</Text>{' '}
             {number}{' '}
-            <Text span fs="italic" fz="h3">от</Text>{' '}
+            <Text span className={classes.italicText}>от</Text>{' '}
             {moment(issued).format('DD.MM.YYYY')}
           </Text>
         </CardSection>
-        <CardSection p="md">
+        <CardSection className={classes.bodySection}>
           <Grid>
-            <GridCol span={4} fs="italic">
+            <GridCol span={4} className={classes.caption}>
               Сумма заказа
             </GridCol>
-            <GridCol span={8}>
+            <GridCol span={8} className={classes.informationLabel}>
               <NumberFormatter value={total} decimalScale={2} suffix=" руб." />
             </GridCol>
-            <GridCol span={4} fs="italic">
+            <GridCol span={4} className={classes.caption}>
+              Место доставки
+            </GridCol>
+            <GridCol span={8} className={classes.informationLabel}>
+              {deliveryDestination.name}
+            </GridCol>
+            <GridCol span={4} className={classes.caption}>
               Статус заказа
             </GridCol>
-            <GridCol span={8} bg="gray.2">
+            <GridCol span={8} className={classes.statusContainer}>
               <Badge color={orderStatusColor(statusText)} size="lg">
                 {statusText}
               </Badge>
             </GridCol>
-            <GridCol span={4} fs="italic">
+            <GridCol span={4} className={classes.caption}>
               Состав заказа
             </GridCol>
             <GridCol span={8}>
@@ -111,13 +117,10 @@ const OrderCardContent: FunctionComponent<OrderCardContentProps> = ({
             </GridCol>
           </Grid>
         </CardSection>
-        <CardSection>
+        <CardSection className={classes.bottomSection}>
           <Button
-            w="100%"
-            variant="transparent"
-            bg="var(--mantine-color-background)"
-            bd={0}
-            className={classes.bottomAboutButton}
+            variant='transparent'
+            className={classes.aboutButton}
             onClick={cancelButtonClick}
             disabled={!canCancel}
           >

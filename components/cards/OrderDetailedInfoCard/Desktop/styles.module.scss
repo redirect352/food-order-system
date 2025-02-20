@@ -1,7 +1,29 @@
 .modalBody{
   width: 800px;
   min-height: 500px;
+  margin-top: var(--mantine-spacing-md);
+  margin-right: var(--mantine-spacing-xs);
+  font-size: var(--mantine-font-size-lg);
   @media (max-width: 900px) {
     width: 650px;
+  }
+  .gridCaption{
+    font-style: italic;
+  }
+  .importantInfo{
+    font-weight: 500;
+  }
+  .gridSubheading{
+    background: var(--mantine-color-background);
+    font-weight: 500;
+  }
+  
+  .statusContainer{
+    background: light-dark(var(--mantine-color-gray-2), var(--mantine-color-gray-8));
+    border-radius: var(--mantine-radius-md);
+  }
+  .cancelButton{
+    width: 500px;
+    border-radius: 100px;
   }
 }

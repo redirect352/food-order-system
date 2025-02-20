@@ -16,8 +16,8 @@ interface MobileOrderModalProps extends ModalProps {
 }
 
 const MobileOrderModal: FunctionComponent<MobileOrderModalProps> = ({ onRetry, ...modalProps }) => {
-  const { order, error, IsLoading } = useContext(OrderDetailedContext);
-  const orderLabel = `Заказ № ${order?.number} от ${order?.issued}`;
+  const { order, error, IsLoading, issuedLabel } = useContext(OrderDetailedContext);
+  const orderLabel = `Заказ № ${order?.number} от ${issuedLabel}`;
   const { cancelOrder } = useCancelOrder(
     order?.number ?? -1,
     order?.issued ?? ''
@@ -70,6 +70,12 @@ const MobileOrderModal: FunctionComponent<MobileOrderModalProps> = ({ onRetry, .
                 decimalScale={2}
                 suffix=" руб."
               />
+            </Grid.Col>
+            <Grid.Col span={6}>
+              <Text fs="italic" fz="lg">Место доставки</Text>
+            </Grid.Col>
+            <Grid.Col span={6} fz="lg" fw={500}>
+              {order?.deliveryDestination.name}
             </Grid.Col>
             <Grid.Col span={6} fs="italic" fz="lg">Изменен</Grid.Col>
             <Grid.Col span={6} fz="lg">

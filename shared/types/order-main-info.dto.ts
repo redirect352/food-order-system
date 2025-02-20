@@ -1,3 +1,5 @@
+import { OfficeDto } from "./office.dto";
+
 export type OrderMainInfoDto = {
    number: number;
   issued: string;
@@ -7,6 +9,7 @@ export type OrderMainInfoDto = {
   updated: Date;
   created: Date;
   orderPositions: Array<OrderPositionMainInfoDto>;
+  deliveryDestination: OfficeDto;
 };
 
 export type OrderPositionMainInfoDto = {

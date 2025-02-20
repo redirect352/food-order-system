@@ -1,4 +1,5 @@
 import { MenuPositionDto } from './menu-position.dto';
+import { OfficeDto } from './office.dto';
 
 export type OrderFullInfoDto = {
   number: number;
@@ -9,6 +10,7 @@ export type OrderFullInfoDto = {
   updated: Date;
   created: Date;
   orderPositions: Array<OrderPositionFullInfoDto>;
+  deliveryDestination: OfficeDto;
 };
 
 export type OrderPositionFullInfoDto = {

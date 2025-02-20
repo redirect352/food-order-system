@@ -7,6 +7,7 @@ import { OrderDetailedContext } from './context/OrderDetailedContext';
 import DesktopModal from './Desktop/DesktopModal';
 import { useLazyGetOrderInfoQuery } from '@/lib/api/orderApi';
 import MobileOrderModal from './Mobile/MobileModal';
+import moment from 'moment';
 
 interface OrderDetailedInfoCardProps extends ModalProps {
   orderNumber: number,
@@ -21,11 +22,13 @@ const OrderDetailedInfoCard: FunctionComponent<OrderDetailedInfoCardProps> =
   useEffect(() => {
     if (!data && modalProps.opened) trigger({ number: orderNumber, issued: orderIssued });
   }, [modalProps.opened]);
+  const issuedLabel = data?.issued ? moment(data.issued).format('DD.MM.YYYY'): '';
   return (
-    <OrderDetailedContext.Provider value={{
+    <OrderDetailedContext.Provider value={{      
       IsLoading: isFetching,
       error: error as any,
       order: data,
+      issuedLabel,
     }}>
       {
       matches ?
