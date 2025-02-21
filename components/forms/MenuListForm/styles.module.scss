@@ -1,0 +1,24 @@
+.select{
+  width: 100%;
+  max-width: 300px;
+}
+.selectGroup{
+  width: 100%;
+  margin-bottom: var(--mantine-spacing-md);
+}
+.formBox{
+  width: 90%;
+  @media(min-width: 1500px){
+    width:  1280px;
+  }
+}
+.paginationBox{
+  width: 100%;
+  justify-content: flex-end;
+  margin-top: var(--mantine-spacing-md);
+}
+.emptyContent{
+  margin-top: 100px;
+  width: 100%;
+  text-align: center;
+}

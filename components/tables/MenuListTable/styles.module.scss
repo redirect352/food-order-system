@@ -1,0 +1,10 @@
+.table{
+  width: 90%;
+  @media(min-width: 1500px){
+    width:  1280px;
+  }
+}
+.header{
+  background: var(--mantine-color-background);
+  height: 80px;
+}

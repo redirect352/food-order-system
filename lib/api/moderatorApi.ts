@@ -2,12 +2,12 @@ import { baseApiWithAuth, baseQueryWithExpire, transformErrorResponse, transform
 import { ImageDto, OfficeDto } from "../../shared/types";
 import dayjs from "dayjs";
 import { ImageTagDto } from "../../shared/types/image-tag.dto";
+import { MenuListDto } from "../../shared/types/menu/menu-list.dto";
 
 export const moderatorApi = baseApiWithAuth.injectEndpoints({
   overrideExisting: true,
   endpoints: (builder) =>({
     getCanteenList: builder.query<OfficeDto[], void>({
-      
       query: () => '/branch-office/canteen-list',
       transformErrorResponse,
     }),
@@ -62,6 +62,13 @@ export const moderatorApi = baseApiWithAuth.injectEndpoints({
         transformFileResponse(response, meta as any, args, 'default.docx'),
       transformErrorResponse,
     }),
+    getMenuList : builder.query<MenuListDto, GetMenuListParams>({
+      query: (params) => ({
+        url:'/menu/list',
+        params,
+      }),
+      transformErrorResponse,
+    }),
   }),
 })
 
@@ -78,7 +85,11 @@ type SearchImageTagDto = {
   page?: number,
   pageSize?: number,
 }
-
+type GetMenuListParams = {
+  page?: number,
+  pageSize?: number,
+  destinationOfficeId: number;
+}
 type UploadImagesDto = {
   files: File[],
   tags: string[],
@@ -98,4 +109,6 @@ export const {
   useSearchImageTagsQuery,
   useUploadImagesMutation,
   useLazyOrderExportDocxQuery,
+  useGetMenuListQuery,
+  useLazyGetMenuListQuery,
 } = moderatorApi;
