@@ -4,7 +4,6 @@ import { RootState } from '@/lib/store';
 
 interface MenuState {
   menuItems: MenuPositionDto[]
-
 }
 
 const initialState: MenuState = {

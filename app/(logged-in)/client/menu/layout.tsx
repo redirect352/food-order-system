@@ -4,10 +4,11 @@ import Link from 'next/link';
 import moment from 'moment';
 import { PageHeaderContainer } from '@/components';
 
-export default function MenuLayout({ children }: { children: any }) {
+export const revalidate = 3600;
+export default  function MenuLayout(props: { children: any}) {
   return (
     <PageHeaderContainer title={`Меню на ${moment().format('DD.MM.yyyy')}`}>
-      {children}
+      {props.children}
       <Affix position={{ bottom: 10, right: 10 }} hiddenFrom="sm" zIndex={95}>
         <Link
           href="cart">

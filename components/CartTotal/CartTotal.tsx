@@ -1,3 +1,5 @@
+'use client';
+
 import { Group, Stack, Title, Text, Button } from '@mantine/core';
 import { FunctionComponent } from 'react';
 import classes from './styles.module.scss';

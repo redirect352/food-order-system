@@ -1,4 +1,3 @@
-/* eslint-disable import/no-named-as-default */
 import { Action, combineReducers, configureStore } from '@reduxjs/toolkit';
 import cartSlice from './features/cart/cartSlice';
 import menuSlice from './features/menu/menuSlice';
@@ -8,6 +7,7 @@ import { menuApi } from './api/menuApi';
 import { orderApi } from './api/orderApi';
 import userSlice, { endLogout } from './features/user/userSlice';
 import { baseApiWithAuth, baseApiWithoutAuth } from './api/baseApi';
+import persistStore from 'redux-persist/es/persistStore';
 
 const appReducer = combineReducers({
   cart: cartSlice,
@@ -32,7 +32,19 @@ export const makeStore = () => configureStore({
         .concat(orderApi.middleware)
         .concat(baseApiWithoutAuth.middleware)
         .concat(baseApiWithAuth.middleware),
-    });
+});
+export const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({serializableCheck:false})
+    .concat(authApi.middleware)
+    .concat(userApi.middleware)
+    .concat(menuApi.middleware)
+    .concat(orderApi.middleware)
+    .concat(baseApiWithoutAuth.middleware)
+    .concat(baseApiWithAuth.middleware),
+});
+export  const persistedStore = persistStore(store);
 export type AppStore = ReturnType<typeof makeStore>;
 export type RootState = ReturnType<AppStore['getState']>;
 export type AppDispatch = AppStore['dispatch'];

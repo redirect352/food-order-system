@@ -5,8 +5,8 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@/lib/store';
 import { MenuPositionDto, OfficeDto } from '@/shared/types';
 import { PriceHelper } from '@/shared/helpers';
-import Cookies from 'js-cookie';
-import { initializeUserData, login } from '../user/userSlice';
+import { sessionStorage } from '@/lib/storage';
+import { persistReducer } from 'redux-persist';
 
 export type CartItem = { menuPosition: MenuPositionDto, count: number };
 
@@ -145,4 +145,13 @@ export const selectCartTotalCount = (state: RootState) =>
 export const selectCartItemCount = (state: RootState, menuPositionId: number) =>
   state.cart.cartItems.find(item => item.menuPosition.id === menuPositionId)?.count ?? 0;
 
-export default cartSlice.reducer;
+
+const cartPersistConfig = {
+  key: "cart",
+  storage: sessionStorage,
+  whitelist: ["cartItems","deliveryDestination"],
+};
+
+const persistedReducer = persistReducer(cartPersistConfig, cartSlice.reducer);
+
+export default persistedReducer;

@@ -24,7 +24,7 @@ const IS_DEV = process.env.NODE_ENV === 'development' || true;
 
 export default function RootLayout({ children }: { children: any }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="ru" suppressHydrationWarning>
       <head>
         <ColorSchemeScript />
         {IS_DEV && (
