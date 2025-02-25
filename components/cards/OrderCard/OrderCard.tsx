@@ -40,7 +40,7 @@ const OrderCardContent: FunctionComponent<OrderCardContentProps> = ({
   orderMainInfoDto,
 }) => {
   const { number, fullPrice, status, issued, orderPositions, canCancel,deliveryDestination } = orderMainInfoDto;
-  const {name, address} = deliveryDestination;
+  const { name, address } = deliveryDestination;
   const total = fullPrice / 100;
   const statusText = status;
   const [opened, { open, close }] = useDisclosure(false);

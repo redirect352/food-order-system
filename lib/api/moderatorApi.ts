@@ -3,6 +3,7 @@ import { ImageDto, OfficeDto } from "../../shared/types";
 import dayjs from "dayjs";
 import { ImageTagDto } from "../../shared/types/image-tag.dto";
 import { MenuListDto } from "../../shared/types/menu/menu-list.dto";
+import { MenuInfoDto } from "../../shared/types/menu/menu-info.dto";
 
 export const moderatorApi = baseApiWithAuth.injectEndpoints({
   overrideExisting: true,
@@ -69,6 +70,12 @@ export const moderatorApi = baseApiWithAuth.injectEndpoints({
       }),
       transformErrorResponse,
     }),
+    getMenuById : builder.query<MenuInfoDto, {id: number}>({
+      query: ({id}) => ({
+        url:`/menu/${id}`,
+      }),
+      transformErrorResponse,
+    }),
   }),
 })
 
@@ -111,4 +118,5 @@ export const {
   useLazyOrderExportDocxQuery,
   useGetMenuListQuery,
   useLazyGetMenuListQuery,
+  useGetMenuByIdQuery,
 } = moderatorApi;
