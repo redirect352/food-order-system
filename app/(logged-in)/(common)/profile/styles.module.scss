@@ -1,0 +1,24 @@
+.box{
+  width: 60%;
+  position: relative;
+  z-index: 1;
+  @media (max-width: $mantine-breakpoint-lg){
+    width: 90%;
+  }
+  .input[data-disabled]{
+    opacity: 1;
+    color: var(--mantine-color-text);
+  }
+}
+.box::before{
+  background: var(--mantine-color-background);
+  content: "";
+  position: absolute;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%;  
+  background-size: contain;
+  opacity: .9; 
+  z-index: -1;
+}

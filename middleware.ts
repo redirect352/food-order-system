@@ -3,15 +3,12 @@ import { decodeJwt } from 'jose';
 import { cookies } from 'next/headers';
 import { CryptoService } from './shared/services/CryptoService';
 
-export const protectedRoutes = [
-  '/menu', '/prepackMenu', '/cart', '/active-orders',
-];
 export const authRoutes = ['/login', '/change-password', '/reset-password', '/password-confirmation', '/email-confirmation', '/sign-up'];
 export const publicRoutes = ['/'];
-
 export const config = {
   matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
 };
+export const commonUserRoutes = ['/profile'];
 
 // eslint-disable-next-line consistent-return
 export async function middleware(request: NextRequest) {
@@ -24,7 +21,11 @@ export async function middleware(request: NextRequest) {
       request.cookies.delete(['role', 'token', 'refresh-token']);
       return Response.redirect(new URL('/login', request.url));
     }
-    if (!pathName.startsWith(`/${(role as string).replaceAll('_', '-')}`) && !publicRoutes.includes(pathName)) {
+    if (
+      !commonUserRoutes.includes(pathName) &&
+      !pathName.startsWith(`/${(role as string).replaceAll('_', '-')}`) && 
+      !publicRoutes.includes(pathName)
+    ) {
       return Response.redirect(new URL('/', request.url));
     }
   } else if (

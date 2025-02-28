@@ -4,13 +4,13 @@ import { Flex } from '@mantine/core';
 import { IconLogout2 } from '@tabler/icons-react';
 import { usePathname } from 'next/navigation';
 import SidebarOption from './SidebarOption';
-import { useLogout } from '@/shared/hooks';
-import { options } from './options';
+import { useAppSelector, useLogout } from '@/shared/hooks';
+import { roleOptions, commonOptions } from './options';
+import { selectUserRole } from '../../lib/features/user/userSlice';
 
 export default function Sidebar() {
   const { logout } = useLogout();
-  const path = usePathname();
-  const pathRole = path.split('/')[1];
+  const role = useAppSelector(selectUserRole);
 
 return (
   <Flex
@@ -19,10 +19,20 @@ return (
     w="100%"
     >
       {
-      options.map(({ href, label, leftSection }, ind) => pathRole && href.includes(pathRole) ?
+      roleOptions.map(({ href, label, leftSection }, ind) => role && href.includes(role.replaceAll('_','-')) ?
       (<SidebarOption leftSection={leftSection} href={href} key={ind}>
         {label}
        </SidebarOption>) : null)
+      }
+      {
+        commonOptions.map(
+          ({ href, label, leftSection }) => 
+          (
+            <SidebarOption leftSection={leftSection} href={href} key={href}>
+              {label}
+            </SidebarOption>
+          ) 
+        )
       }
     <SidebarOption
       href="/login"
