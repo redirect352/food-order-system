@@ -58,10 +58,10 @@ export const theme = createTheme({
     black: '#232134',
     colors: {
     blue: blueScale,
-        grey: greyScale,
-        primary: primaryColorDefinition,
-        myYellow: colorsTuple(
-            Array.from({ length: 10 }, () => '#FAB005')),
+    grey: greyScale,
+    primary: primaryColorDefinition,
+    myYellow: colorsTuple(
+      Array.from({ length: 10 }, () => '#FAB005')),
     },
     radius: {
         sm: rem(8),
