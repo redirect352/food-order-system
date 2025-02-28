@@ -2,6 +2,7 @@ import type { NextRequest } from 'next/server';
 import { decodeJwt } from 'jose';
 import { cookies } from 'next/headers';
 import { CryptoService } from './shared/services/CryptoService';
+import { allowedInterfaces } from './shared/settings';
 
 export const authRoutes = ['/login', '/change-password', '/reset-password', '/password-confirmation', '/email-confirmation', '/sign-up'];
 export const publicRoutes = ['/'];
@@ -21,9 +22,10 @@ export async function middleware(request: NextRequest) {
       request.cookies.delete(['role', 'token', 'refresh-token']);
       return Response.redirect(new URL('/login', request.url));
     }
+    const roleName = (role as string).replaceAll('_', '-') as keyof typeof allowedInterfaces;
     if (
       !commonUserRoutes.includes(pathName) &&
-      !pathName.startsWith(`/${(role as string).replaceAll('_', '-')}`) && 
+      !allowedInterfaces[roleName].some((val) => pathName.startsWith(`/${val}`)) &&
       !publicRoutes.includes(pathName)
     ) {
       return Response.redirect(new URL('/', request.url));

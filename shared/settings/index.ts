@@ -7,3 +7,8 @@ export function orderStatusColor(statusText: string = ' '): string {
       return 'gray.2';
   }
 }
+export const allowedInterfaces = {
+  client: ['client'],
+  'menu-moderator': ['client', 'menu-moderator'],
+  admin: ['client', 'menu-moderator', 'admin'],
+};

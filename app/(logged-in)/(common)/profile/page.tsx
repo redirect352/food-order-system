@@ -1,12 +1,14 @@
 'use client';
 
 import { FunctionComponent } from 'react';
-import { Card, Text, rem, Skeleton, Stack, TextInput, Button } from '@mantine/core';
+import { Card, Text, rem, Skeleton, Stack, TextInput, Button, SegmentedControl } from '@mantine/core';
 import { IconAt } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
 import { useGetOwnInfoQuery } from '@/lib/api/userApi';
 import classes from './styles.module.scss';
 import { useLogout } from '@/shared/hooks';
+import { SwapInput } from '@/UI';
+import { InterfaceControl } from '@/components';
 
 interface ProfilePageProps {
 
@@ -54,6 +56,7 @@ const ProfilePage: FunctionComponent<ProfilePageProps> = () => {
             disabled
             classNames={{ input: classes.input }}
           />
+          <InterfaceControl />
         </Stack>}
       </Card>
       <Button

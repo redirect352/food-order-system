@@ -4,6 +4,7 @@ interface UserState {
   isLoggingOut: boolean,
   isLoggedIn?: boolean,
   role?: string | null,
+  interface?: string | null,
 }
 
 const initialState: UserState = {
@@ -18,7 +19,8 @@ export const userSlice = createSlice({
   reducers: {
     login: (state, action: PayloadAction<string>)=>{
       state.isLoggedIn = true;
-      state.role = action.payload;
+      state.role = action.payload.replaceAll('_','-');
+      state.interface = state.role;
     },
     startLogout: (state) => {
       state.isLoggingOut = true;
@@ -29,18 +31,25 @@ export const userSlice = createSlice({
       state.isLoggingOut = false;
       state.isLoggedIn = false;
       state.role = null;
+      state.interface = null;
     },
     initializeUserData: (state,action: PayloadAction<{ isLoggedIn: boolean, role: string | null}> ) =>{
       state.isLoggedIn = action.payload.isLoggedIn;
-      state.role = action.payload.role;
+      state.role = action.payload.role?.replaceAll('_','-');
+      state.interface = state.role;
+    },
+    changeUserInterface:(state, action: PayloadAction<string>)=>{
+      state.interface = action.payload;
     }
   },
   selectors: {
     selectIsLoggingOut: (state: UserState) => state.isLoggingOut,
     selectIsLoggedIn: (state) => state.isLoggedIn,
     selectUserRole: (state) => state.role,
+    selectUserInterface: (state) => state.interface,
   },
 });
-export const { selectIsLoggingOut, selectIsLoggedIn, selectUserRole } = userSlice.selectors;
-export const { startLogout, endLogout, login, initializeUserData } = userSlice.actions;
+export const { selectIsLoggingOut, selectIsLoggedIn, selectUserRole, selectUserInterface } = userSlice.selectors;
+export const { startLogout, endLogout, login, initializeUserData, changeUserInterface } = userSlice.actions;
+
 export default userSlice.reducer;
