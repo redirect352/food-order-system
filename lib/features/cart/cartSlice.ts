@@ -114,7 +114,7 @@ export const cartSlice = createSlice({
       })
     ),
     selectDeliveryDestination: ({deliveryDestination}) => deliveryDestination,
-  },
+  }
 });
 export const {
   increaseDishCount,
@@ -149,7 +149,7 @@ export const selectCartItemCount = (state: RootState, menuPositionId: number) =>
 const cartPersistConfig = {
   key: "cart",
   storage: sessionStorage,
-  whitelist: ["cartItems","deliveryDestination"],
+  whitelist: ["cartItems", "deliveryDestination"],
 };
 
 const persistedReducer = persistReducer(cartPersistConfig, cartSlice.reducer);

@@ -1,9 +1,9 @@
-import { Box, Progress, Group, Text, Center, TextInputProps, TextInput } from '@mantine/core';
+import { Box, Progress, Group, Text, Center, PasswordInput, PasswordInputProps } from '@mantine/core';
 import { IconCheck, IconX } from '@tabler/icons-react';
 
 export type PasswordStrengthProps = {
   checkValue?: string,
-} & TextInputProps;
+} & PasswordInputProps;
 function PasswordRequirement({ meets, label }: { meets: boolean; label: string }) {
   return (
     <Text component="div" c={meets ? 'teal' : 'red'} mt={5} size="sm">
@@ -60,7 +60,7 @@ export function PasswordStrength({ checkValue, ...props }: PasswordStrengthProps
 
   return (
     <div>
-      <TextInput {...props} />
+      <PasswordInput {...props} />
 
      {!!testValue &&
      <>
