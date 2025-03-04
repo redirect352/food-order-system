@@ -1,6 +1,6 @@
 'use client';
 
-import { ActionIcon, Box, Stack } from '@mantine/core';
+import { ActionIcon, Box, Flex, Stack } from '@mantine/core';
 import { FunctionComponent } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { IconTrash } from '@tabler/icons-react';
@@ -32,25 +32,20 @@ const CartItem: FunctionComponent<CartItemProps> =
   const mainImage = dish.images?.at(0);
   const src = ImageHelper.getImageSrc(mainImage);
   return (
+    <>
     <CartItemContext.Provider value={cartItem}>
-      <ScalingCard className={classes.cartItemContainer} p={0} mb="xs">
-        <Box className={classes.image} onClick={open} data-modal-opened={opened}>
+      <ScalingCard className={classes.cartItemContainer} shadow='md' onClick={open}>
+        <Box className={classes.image} data-modal-opened={opened}>
           <ImageWithFallback
             style={{ borderRadius: '10px' }}
             src={src}
             alt=""
-            sizes="(max-width:62em) 80px, 120px"
+            sizes="(max-width:62em) 200px, 180px"
             fill
           />
         </Box>
         <CartItemDescription />
-        <Stack
-          gap="xs"
-          className={classes.priceBlock}
-          justify="space-between"
-          align="flex-end"
-          pb={20}
-        >
+        <Flex className={classes.priceBlock}>
           <Stack
             gap="xs"
           >
@@ -64,24 +59,26 @@ const CartItem: FunctionComponent<CartItemProps> =
             />
           </Stack>
 
-        <ActionIcon
-          variant="transparent"
-          className={classes.removeIcon}
-          hiddenFrom="sm"
-          onClick={removeItem}
-        >
-          <IconTrash stroke={1.5} size={24} />
-        </ActionIcon>
-        </Stack>
-        <ItemExtraInfoCard
-          menuPosition={cartItem.menuPosition}
-          buttonText="Удалить из корзины"
-          buttonAction={() => { removeItem(); close(); }}
-          opened={opened}
-          onClose={close}
-        />
+          <ActionIcon
+            variant="transparent"
+            className={classes.removeIcon}
+            hiddenFrom="sm"
+            onClick={(e) => {e.stopPropagation();removeItem();}}
+          >
+            <IconTrash stroke={1.5} size={24} />
+          </ActionIcon>
+        </Flex>
       </ScalingCard>
     </CartItemContext.Provider>
+      <ItemExtraInfoCard
+        menuPosition={cartItem.menuPosition}
+        buttonText="Удалить из корзины"
+        buttonAction={() => { removeItem(); close(); }}
+        opened={opened}
+        onClose={close}
+        cartOptionsEnabled
+      />
+    </>
   );
 };
 

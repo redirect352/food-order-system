@@ -1,20 +1,21 @@
 'use client';
 
-import { Stack, Group, ActionIcon, Text } from '@mantine/core';
-import { IconTrash } from '@tabler/icons-react';
 import { FunctionComponent, useContext } from 'react';
+import { Stack, Group, ActionIcon, Text, Chip, TextInput } from '@mantine/core';
+import { IconTrash } from '@tabler/icons-react';
 import { useMediaQuery } from '@mantine/hooks';
 import { CountInput } from '@/UI';
-import classes from './styles.module.scss';
 import { changeDishCount, removeFromCart } from '@/lib/features/cart/cartSlice';
 import { useAppDispatch } from '@/shared/hooks';
 import { CartItemContext } from './context/CartItemContext';
+import CartItemCommentInput from '@/components/inputs/CartItemCommentInput';
+import classes from './styles.module.scss';
 
 interface CartItemDescriptionProps {
 }
 
 const CartItemDescription: FunctionComponent<CartItemDescriptionProps> = () => {
-  const { menuPosition, count } = useContext(CartItemContext);
+  const { menuPosition, count, comment } = useContext(CartItemContext);
   const { dish, id } = menuPosition;
   const { quantity, name, description } = dish;
   const isMobile = useMediaQuery('(max-width: 62em)');
@@ -23,12 +24,9 @@ const CartItemDescription: FunctionComponent<CartItemDescriptionProps> = () => {
     dispatch(changeDishCount({ menuPositionId: id, newCount }));
   const deleteItem = () => dispatch(removeFromCart(id));
   return (
-    <>
     <Stack
       className={classes.centralSegment}
-      align="flex-start"
       gap="xs"
-      justify="space-between"
     >
       <Stack gap="xs" className={classes.centralSegmentText}>
         <Text className={classes.cartItemHeader}>{name}</Text>
@@ -40,8 +38,8 @@ const CartItemDescription: FunctionComponent<CartItemDescriptionProps> = () => {
         </Text>
         <Text className={classes.cartItemDescription}>{quantity}</Text>
       </Stack>
-
-      <Group>
+      <CartItemCommentInput menuPositionId={id} />
+      <Group mt={'auto'} onClick={e=>e.stopPropagation()}>
         <CountInput
           size={isMobile ? 24 : 32}
           labelProps={{ fz: isMobile ? 'sm' : 'lg' }}
@@ -58,7 +56,6 @@ const CartItemDescription: FunctionComponent<CartItemDescriptionProps> = () => {
         </ActionIcon>
       </Group>
     </Stack>
-    </>
   );
 };
 

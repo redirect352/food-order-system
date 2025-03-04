@@ -1,24 +1,25 @@
 'use client';
 
-import { Box, Group, Modal, ModalProps, Stack, Title, Text, Button, Badge } from '@mantine/core';
+import { Group, Modal, ModalProps, Stack, Title, Text, Button, Badge } from '@mantine/core';
 import React, { FunctionComponent } from 'react';
 import { useMediaQuery } from '@mantine/hooks';
-import { ImageWithFallback, MobileModal, PFCLabel } from '@/UI';
+import { MobileModal, PFCLabel } from '@/UI';
 import classes from './styles.module.scss';
 import MobileModalBody from './MobileModalContent';
 import { MenuPositionDto } from '@/shared/types';
-import { ImageHelper } from '../../../shared/helpers';
-import { Carousel } from '@mantine/carousel';
-import ImageCarousel from '../../ImageCarousel/ImageCarousel';
+import ImageCarousel from '@/components/ImageCarousel/ImageCarousel';
+import CartItemCommentInput from '@/components/inputs/CartItemCommentInput';
 
 interface ItemExtraInfoCartProps extends ModalProps {
   menuPosition: MenuPositionDto,
   buttonText: string | React.ReactNode,
   buttonAction: (onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined) => void,
+  cartOptionsEnabled?: boolean,
+  comment?: string,
 }
 
 const ItemExtraInfoCard: FunctionComponent<ItemExtraInfoCartProps> =
-  ({ menuPosition, buttonAction, buttonText, ...modalProps }) => {
+  ({ menuPosition, buttonAction, buttonText, cartOptionsEnabled, comment,...modalProps }) => {
   const matches = useMediaQuery('(min-width: 48em');
   const {
     description, name, quantity, calorieContent, images,
@@ -26,7 +27,6 @@ const ItemExtraInfoCard: FunctionComponent<ItemExtraInfoCartProps> =
     proteins, carbohydrates, fats } = menuPosition.dish;
   const producerName = externalProducer ?? providingCanteen.name;
   const clickAction = () => { modalProps.onClose(); buttonAction(); };
-  const mainImage = images?.at(0);
   return (
     <>
       {matches ?
@@ -35,13 +35,11 @@ const ItemExtraInfoCard: FunctionComponent<ItemExtraInfoCartProps> =
       <Modal.Content>
           <Modal.Body className={classes.modalBody}>
             <Group gap="lg" wrap="nowrap" align="center">
-              {/* <Box className={classes.imageBox}> */}
-                <ImageCarousel 
-                  images={images} 
-                  classNames={{slide: classes.imageBox}}
-                  sizes='(max-width:62em) 300px 300px, (min-width:62em) 400px 400px,'
-                />
-              {/* </Box> */}
+              <ImageCarousel 
+                images={images} 
+                classNames={{slide: classes.imageBox}}
+                sizes='(max-width:62em) 300px 300px, (min-width:62em) 400px 400px,'
+              />
               <Stack className={classes.descriptionBox} gap={0} justify="space-between" maw="100%">
                 <Stack gap={0} maw="100%">
                   <Group w="100%" justify="space-between" align="flex-start" mb="xs">
@@ -59,6 +57,9 @@ const ItemExtraInfoCard: FunctionComponent<ItemExtraInfoCartProps> =
                       {description}
                     </Text>
                   </Stack>
+                  { cartOptionsEnabled && 
+                    <CartItemCommentInput menuPositionId={menuPosition.id} /> 
+                  }
                 </Stack>
                 <Stack>
                   <PFCLabel
@@ -77,10 +78,16 @@ const ItemExtraInfoCard: FunctionComponent<ItemExtraInfoCartProps> =
                         typeof calorieContent === 'number' ?
                         `${calorieContent} ккал/100гр`
                         :
-                        calorieContent
+                        calorieContent ?? '-'
                         }
                       </Text>
                   </Group>
+                  { comment &&
+                  <Group justify="space-between">
+                      <Text size="sm"> Комментарий:</Text>
+                      <Text size="sm"> {comment}</Text>
+                  </Group>
+                  }
                   <Button onClick={clickAction}>
                     {buttonText}
                   </Button>
@@ -98,7 +105,7 @@ const ItemExtraInfoCard: FunctionComponent<ItemExtraInfoCartProps> =
         buttonText={buttonText}
         {...modalProps}
       >
-        <MobileModalBody menuPosition={menuPosition} />
+        <MobileModalBody menuPosition={menuPosition} cartOptionsEnabled={cartOptionsEnabled} />
       </MobileModal>}
     </>
   );

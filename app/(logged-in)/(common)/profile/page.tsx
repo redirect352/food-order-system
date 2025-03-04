@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation';
 import { useGetOwnInfoQuery } from '@/lib/api/userApi';
 import classes from './styles.module.scss';
 import { useLogout } from '@/shared/hooks';
-import { SwapInput } from '@/UI';
 import { InterfaceControl } from '@/components';
 
 interface ProfilePageProps {

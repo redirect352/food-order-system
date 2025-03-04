@@ -53,6 +53,7 @@ const MenuItemClickableImage: FunctionComponent<MenuItemImageProps> = () => {
             />
           </>
         }
+        cartOptionsEnabled
       />
     </>
   );

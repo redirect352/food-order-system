@@ -1,5 +1,5 @@
 'use client';
-import { Input, SegmentedControl } from "@mantine/core";
+import { Input, SegmentedControl, Stack, Text } from "@mantine/core";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks";
 import { changeUserInterface, selectUserInterface, selectUserRole } from "@/lib/features/user/userSlice";
 import { interfaces } from "./interfaces";
@@ -22,15 +22,17 @@ const InterfaceControl = (props: InterfaceControlProps) => {
   );
   if(role === 'client') return (<></>);
   return (
-    <>
-      <Input.Wrapper label="Тип интерфейса:"/>
+    <Stack gap={0}>
+      <Text size="sm" fw={500}>
+        Интерфейс
+      </Text>
       <SegmentedControl
         color="red"
         data={data}
         value={userInterface ?? undefined}
         onChange={(value) => changeInterface(value)}
       />
-    </>
+    </Stack>
   );
 };
 

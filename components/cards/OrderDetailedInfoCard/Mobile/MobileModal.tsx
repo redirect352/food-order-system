@@ -94,6 +94,7 @@ const MobileOrderModal: FunctionComponent<MobileOrderModalProps> = ({ onRetry, .
             >
               Состав заказа:
             </Grid.Col>
+            <Grid.Col span={12}>
             {
               order?.orderPositions.map(item =>
               <OrderPositionItem
@@ -102,6 +103,7 @@ const MobileOrderModal: FunctionComponent<MobileOrderModalProps> = ({ onRetry, .
                 onClick={() => { setCurrentPosition(item.menuPosition); open(); }}
               />)
             }
+            </Grid.Col>
           </Grid>
           </>
       }

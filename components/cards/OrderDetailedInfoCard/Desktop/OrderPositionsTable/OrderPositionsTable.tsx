@@ -98,6 +98,7 @@ const OrderPositionsTable: FunctionComponent<OrderPositionsTableProps> = ({
           title={currentPosition?.dish.name}
           menuPosition={currentPosition}
           buttonText="Закрыть"
+          comment={orderPositions?.find(({menuPosition}) => menuPosition.id === currentPosition.id)?.comment}
         />
       }
     </>

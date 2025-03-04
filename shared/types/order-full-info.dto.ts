@@ -16,4 +16,5 @@ export type OrderFullInfoDto = {
 export type OrderPositionFullInfoDto = {
   count: number;
   menuPosition: MenuPositionDto,
+  comment?: string,
 };

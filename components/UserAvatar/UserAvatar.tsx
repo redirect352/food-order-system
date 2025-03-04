@@ -18,7 +18,7 @@ export const UserAvatar: FunctionComponent<UserAvatarProps> = (props) => {
     <Group
       {...props}
       className={[classes.group, props.className].join(' ')}
-      onClick={() => router.push('profile')}
+      onClick={() => router.push('/profile')}
     >
       {
         isLoading ?

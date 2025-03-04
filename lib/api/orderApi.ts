@@ -2,9 +2,9 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQueryWithExpire, transformErrorResponse } from './baseApi';
 import { OrderFullInfoDto, OrderMainInfoDto } from '@/shared/types';
 
+export type MakeOrderItem = {id: number, count:number, comment?:string};
 export type MakeOrderParams = {
-  menuPositions: number[],
-  counts: number[],
+  menuPositions: MakeOrderItem[],
   deliveryDestinationId: number,
 };
 export type GetActiveOrdersParams = {

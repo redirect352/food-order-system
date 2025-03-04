@@ -7,8 +7,13 @@ import { MenuPositionDto, OfficeDto } from '@/shared/types';
 import { PriceHelper } from '@/shared/helpers';
 import { sessionStorage } from '@/lib/storage';
 import { persistReducer } from 'redux-persist';
+import { MakeOrderItem } from '../../api/orderApi';
 
-export type CartItem = { menuPosition: MenuPositionDto, count: number };
+export type CartItem = { 
+  menuPosition: MenuPositionDto, 
+  count: number,
+  comment: string,
+};
 
 interface CartState {
   cartItems: Array<CartItem>,
@@ -31,7 +36,7 @@ export const cartSlice = createSlice({
       if (index !== -1) {
         state.cartItems[index].count += 1;
       } else {
-        state.cartItems.push({ menuPosition: action.payload, count: 1 });
+        state.cartItems.push({ menuPosition: action.payload, count: 1, comment: '' });
       }
     },
     increaseDishCount: (state, action: PayloadAction<number>) => {
@@ -82,6 +87,15 @@ export const cartSlice = createSlice({
         if(deliveryOffice as OfficeDto) state.deliveryDestination =  deliveryOffice as OfficeDto;
       }
     },
+    changeDishComment: (state, action: PayloadAction<{ menuPositionId:number, newComment:string }>) => {
+      const { menuPositionId, newComment } = action.payload;
+      const index = state.cartItems.findIndex(
+        item => item.menuPosition.id === menuPositionId
+      );
+      if (index !== -1 ) {
+        state.cartItems[index].comment = newComment;
+      }
+    },
   },
   selectors: {
     selectFullPrice: (state) => state.cartItems.reduce(
@@ -103,17 +117,23 @@ export const cartSlice = createSlice({
     selectCreateOrderArgument: createSelector(
       (state: CartState) => state.cartItems,
       (state: CartState) => state.deliveryDestination,
-      (items, destination) => items.reduce((prev, item) => {
-        prev.counts.push(item.count);
-        prev.menuPositions.push(item.menuPosition.id);
+      (items, destination) => items.reduce((prev, {comment, count, menuPosition}) => {
+        prev.menuPositions.push({
+          count,
+          comment,
+          id: menuPosition.id
+        });
         return prev;
       }, {
-        menuPositions: new Array<number>(),
-        counts: new Array<number>(),
+        menuPositions: new Array<MakeOrderItem>(),
         deliveryDestinationId:destination?.id ?? -1,
       })
     ),
     selectDeliveryDestination: ({deliveryDestination}) => deliveryDestination,
+    selectCartItem: createSelector(
+      (state: CartState, id: number) => state.cartItems.find(val => val.menuPosition.id === id),
+      item => item,
+    ),
   }
 });
 export const {
@@ -125,6 +145,7 @@ export const {
   clearCart,
   changeDeliveryDestination,
   initializeStore,
+  changeDishComment,
 } = cartSlice.actions;
 
 export const {
@@ -133,6 +154,7 @@ export const {
   selectFinalPrice,
   selectCreateOrderArgument,
   selectDeliveryDestination,
+  selectCartItem
 } = cartSlice.selectors;
 // Other code such as selectors can use the imported `RootState` type
 export const selectCartItems = (state: RootState) => state.cart.cartItems;

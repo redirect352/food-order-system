@@ -1,21 +1,20 @@
 .cartItemContainer{
-  height: 200px;
+  min-height: calc(200px + 2rem);
   display: flex;
   flex-direction: row;
   gap: var(--mantine-spacing-md);
-  align-items: center;
+  align-items: stretch;
   justify-items: flex-start;
   flex-wrap: nowrap;
+  background: var(--mantine-color-grey-1);
+  padding: var(--mantine-spacing-md);
   .centralSegment{
-    flex-grow: 1;
-    height: 100%;
-    // padding-bottom: var(--mantine-spacing-md);
-    padding-bottom: 20px;
+    
   }
   .image{
     align-self: flex-start;
     width: 180px;
-    height: 180px;
+    height: 240px;
     position: relative;
     flex-shrink: 0;
   }
@@ -32,9 +31,11 @@
     color: var(--mantine-color-dimmed);
   }
   .priceBlock{
-    flex: 0 0 120px;
     height: 100%;
-    align-self: flex-end;
+    flex: 1 0 120px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
   }
   .removeIcon{
     width: 32px;
@@ -49,7 +50,7 @@
     }
     .image{
       width: 140px;
-      height: 140px;
+      height: 200px;
     }
     .cartItemHeader{
       font-size: var(--mantine-font-size-md);
@@ -70,6 +71,7 @@
       height: 160px;
     }
     .image{
+      display: none;
       width: 100px;
       height: 140px;
     }
