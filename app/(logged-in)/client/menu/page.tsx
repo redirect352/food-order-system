@@ -11,16 +11,21 @@ import { MenuPositionDto } from '@/shared/types';
 import { setMenu } from '@/lib/features/menu/menuSlice';
 import { CookieService } from '@/shared/services';
 import { selectDeliveryDestination } from '../../../../lib/features/cart/cartSlice';
+import { useSessionStorage } from '@mantine/hooks';
 
 const Menu : FunctionComponent = () => {
   const pageSize = CookieService.getDefaultMenuPageSize();
-  const [pageCount, setPageCount] = useState(1);
+  const [pageCount, setPageCount] = useSessionStorage({
+    key: 'menu-total-pages',
+    defaultValue: 1,
+    getInitialValueInEffect:false,
+  });
   const page = useSearchParamValue<number>('page');
   const type = useSearchParamValue<string>('type');
   const categoryId = useArraySearchParamValue<number>('category', (s) => +s);
   const destination = useAppSelector(selectDeliveryDestination);
   const { data, error, isFetching, refetch } = useGetActualMenuQuery({
-      page: page ?? 1,
+      page: page ? +page: undefined,
       pageSize,
       dishCategoryId: categoryId?.toString() ?? undefined,
       productType: type ?? undefined,

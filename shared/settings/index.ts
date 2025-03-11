@@ -12,3 +12,8 @@ export const allowedInterfaces = {
   'menu-moderator': ['client', 'menu-moderator'],
   admin: ['client', 'menu-moderator', 'admin'],
 };
+export const rolesSelectOptions = [
+  {label: 'Клиент', value: 'client'},
+  {label: 'Модератор', value: 'menu_moderator'},
+  {label: 'Админ', value: 'admin'},
+]

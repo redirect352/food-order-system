@@ -91,10 +91,10 @@ export default MenuFilterBar;
 export const FilterContext = createContext({
   categoryOptions: [] as ComboboxItem[],
   categoryValue: [] as string[] | undefined,
-  changeCategory: (() => {}) as Dispatch<SetStateAction<string[] | undefined>>,
+  changeCategory: (() => {}) as any,
   typeOptions: [] as ComboboxItem[],
   typeValue: [] as string[] | undefined,
-  changeType: (() => {}) as Dispatch<SetStateAction<string[] | undefined>>,
+  changeType: (() => {}) as any,
   resetFilters: () => {},
   isFiltersActive: false,
 });

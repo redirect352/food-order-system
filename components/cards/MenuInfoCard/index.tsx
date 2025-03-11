@@ -10,15 +10,14 @@ import { orderStatusColor } from '@/shared/settings';
 import { useGetMenuByIdQuery } from '../../../lib/api/moderatorApi';
 import OrderPositionsTable from '../OrderDetailedInfoCard/Desktop/OrderPositionsTable/OrderPositionsTable';
 import MenuPositionsTable from './MenuPositionsTable';
+import { formatDate } from '@/shared/helpers/formatHelper';
 
 interface MenuInfoModalProps extends ModalProps {
   menuId?: number,
-  formatDate: (date: Date) => string,
 }
 
 const MenuInfoModal: FunctionComponent<MenuInfoModalProps> = ({
   menuId,
-  formatDate,
   ...modalProps
 }) => {
   const { data, isLoading, error, refetch } = useGetMenuByIdQuery({'id': menuId ?? 0}, {

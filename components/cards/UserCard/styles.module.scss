@@ -1,0 +1,52 @@
+.card{
+  width: 100%;
+  min-height: 400px;
+  max-width: 1000px;
+  box-shadow: var(--mantine-shadow-md);
+  &:hover{
+    transition: 0.3s ease;
+    border: var(--mantine-color-primary-2) 1px solid;
+  }
+  .headerSection{
+    padding: var(--mantine-spacing-md);
+    background: var(--mantine-color-background);
+
+  }
+  .resetPasswordButton{
+    color: var(--mantine-color-primary-8);
+    position: absolute;
+    right: 1rem;
+    top: 1.25rem;
+  }
+  .importantText{
+    font-size: var(--mantine-font-size-lg);
+    font-weight: 500;
+  }
+  .dimmedText{
+    --text-fz: var(--mantine-font-size-sm);
+    --text-lh: var(--mantine-line-height-sm);
+    color: var(--mantine-color-dimmed);
+  }
+  .centralSection{
+    padding: var(--mantine-spacing-md);
+    background: var(--mantine-color-grey-0);
+  }
+  .buttonsGroup{
+    padding: var(--mantine-spacing-xs) var(--mantine-spacing-md);
+  }
+  .saveBtn{
+    color: var(--mantine-color-green-6);
+  }
+  .cancelBtn{
+    color: var(--mantine-color-yellow-6);
+  }
+  .saveBtn[data-disabled="true"], .cancelBtn[data-disabled="true"]{
+    color: var(--mantine-color-grey-4);
+  }
+  .tableTextInput{
+    font-size: 1rem;
+    line-height: 1.25rem;
+    height: 1.5rem;
+    min-height: 1.5rem;
+  }
+}

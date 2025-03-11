@@ -13,11 +13,12 @@ export default function useUpdatePageURL() {
           params.set(paramName, paramValue);
       } else params.delete(paramName);
     } else if (Array.isArray(paramName) && Array.isArray(paramValue)) {
-      paramName.forEach((value, index) => {
-        params.delete(value);
-        if (paramValue[index] !== '') {
-          params.set(value, paramValue[index].toString());
-      }
+      paramName.forEach((name, index) => {
+        const value = paramValue[index];
+        params.delete(name);
+        if (value!== '') {
+          params.set(name, paramValue[index].toString());
+        }
       });
     }
     replace(`${pathname}?${params.toString()}`);

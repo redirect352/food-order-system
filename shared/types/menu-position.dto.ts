@@ -6,3 +6,8 @@ export type MenuPositionDto = {
   discount: number,
   dish: DishDto,
 };
+export type ResponseWithPagination<T>= {
+  page: number;
+  totalPages: number;
+  data: T,
+}

@@ -4,6 +4,7 @@ import moment from "moment";
 import { useCallback, useState } from "react";
 import React from "react";
 import MenuInfoModal from "@/components/cards/MenuInfoCard";
+import { formatDate } from "@/shared/helpers/formatHelper";
 
 interface TableRowProps {
   item: MenuListItem,
@@ -11,7 +12,6 @@ interface TableRowProps {
 
 const TableRow = ({ item }: TableRowProps) => {
   const {id, name, relevantFrom, expire, menuPositionsCount, author, providingCanteen, created} = item;
-  const formatDate = useCallback((date: Date) => moment(date).format('YYYY-MM-DD HH:mm'),[]);
   const [opened, setOpened] = useState(false);
   return (
     <React.Fragment>
@@ -31,7 +31,6 @@ const TableRow = ({ item }: TableRowProps) => {
           opened={opened} 
           onClose={()=>setOpened(false)} 
           menuId={id} 
-          formatDate={formatDate}
         />
       </React.Fragment>    
   );

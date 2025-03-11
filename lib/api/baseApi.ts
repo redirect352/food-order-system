@@ -1,5 +1,3 @@
-// import { QueryReturnValue } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
-// import { MaybePromise } from '@reduxjs/toolkit/dist/query/tsHelpers';
 import { BaseQueryApi, BaseQueryFn, CreateApi, FetchArgs, FetchBaseQueryError, FetchBaseQueryMeta, QueryReturnValue } from '@reduxjs/toolkit/query';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { startLogout } from '../features/user/userSlice';

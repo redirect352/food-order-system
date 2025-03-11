@@ -8,28 +8,29 @@ import { useGetOwnInfoQuery } from '@/lib/api/userApi';
 import classes from './styles.module.scss';
 import { useLogout } from '@/shared/hooks';
 import { InterfaceControl } from '@/components';
+import { ErrorPage } from '@/UI';
+import { formatFullName } from '@/shared/helpers/formatHelper';
 
 interface ProfilePageProps {
 
 }
 
 const ProfilePage: FunctionComponent<ProfilePageProps> = () => {
-  const { isLoading, data } = useGetOwnInfoQuery({});
+  const { isLoading, data, error } = useGetOwnInfoQuery(undefined);
   const { logout } = useLogout();
   const router = useRouter();
+  if(error) return <ErrorPage message={(error as any)?.message ?? 'Невозможно получить данные пользователя'}/>
+  const fullName = formatFullName(data?.employee);
   return (
     <><Card className={classes.box} radius="xl">
       {isLoading ?
         <Skeleton w="100%" h={300}></Skeleton>
         :
         <Stack gap={8}>
-          <Text>
-            {`${data?.surname} ${data?.name} ${data?.patronymic}`}
-          </Text>
           <TextInput
             label="ФИО"
             placeholder="Иванов Иван Иванович"
-            value={`${data?.surname} ${data?.name} ${data?.patronymic}`}
+            value={fullName}
             disabled
             classNames={{ input: classes.input }}
           />
@@ -44,7 +45,7 @@ const ProfilePage: FunctionComponent<ProfilePageProps> = () => {
           <TextInput
             label="Табельный номер"
             placeholder="000000"
-            value={data?.personnelNumber}
+            value={data?.employee.personnelNumber}
             disabled
             classNames={{ input: classes.input }}
           />

@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, CSSVariablesResolver, Input, MantineColorsTuple, colorsTuple, createTheme, rem } from '@mantine/core';
+import { Button, CSSVariablesResolver, Input, Loader, LoadingOverlay, MantineColorsTuple, Overlay, colorsTuple, createTheme, rem } from '@mantine/core';
 
 const greyScale: MantineColorsTuple = [
     '#FFFFFF',
@@ -93,6 +93,19 @@ export const theme = createTheme({
         md: rem(20),
     },
     components: {
+      LoadingOverlay: LoadingOverlay.extend({
+        defaultProps:{
+          zIndex:1000,
+          loaderProps:{
+            type: 'bars',
+            color: 'pink'
+          },
+          overlayProps: {
+            blur:2,
+            radius:'sm'
+          }
+        }
+      })
         // Button: Button.extend({
         //     vars: (_, props) => {
         //         if (props.size === 'sm' || props.size === 'md') {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ComboboxItem } from '@mantine/core';
 import { useGetMenuCategoriesQuery } from '@/lib/api/menuApi';
 import { useArraySearchParamValue, useUpdatePageURL } from '@/shared/hooks';
@@ -14,7 +14,7 @@ export function useFilters() {
   const [categoryValue, changeCategory] = useState<string[] | undefined>();
   const [typeValue, changeType] = useState<string[] | undefined>();
   const [isFiltersActive, setActive] = useState(false);
-
+  const  needToResetPage = useRef(false);
   const { updateURL } = useUpdatePageURL();
   useEffect(() => {
     if (error) {
@@ -42,13 +42,24 @@ export function useFilters() {
     setActive(((categoryValue?.length ?? 0) === 0 &&
     ((typeValue?.length ?? 0) === 0)));
     if (!categoryValue && !typeValue) return;
-    updateURL(['category', 'type', 'page'], [
-      categoryValue?.toString() ?? '',
-      typeValue?.toString() ?? '',
-      '']);
+    const updatedFields = ['category', 'type'];
+    if(needToResetPage.current) {
+      updatedFields.push('page');
+      needToResetPage.current = false;
+    }
+    updateURL(updatedFields, [
+        categoryValue?.toString() ?? '',
+        typeValue?.toString() ?? '',
+        ''
+      ]
+    );
   }, [categoryValue, typeValue]);
 
+  const changeWithSetPage = (func: (val?:string[]) => any) => {
+    return (arg?:string[]) => { needToResetPage.current= true; func(arg)};
+  }
   const resetFilters = () => {
+    needToResetPage.current = true;
     changeCategory([]);
     changeType([]);
   };
@@ -57,10 +68,10 @@ export function useFilters() {
     data,
     categoryOptions,
     categoryValue,
-    changeCategory,
+    changeCategory:changeWithSetPage(changeCategory),
     typeOptions,
     typeValue,
-    changeType,
+    changeType:changeWithSetPage(changeType),
     resetFilters,
     isFiltersActive,
   };
