@@ -113,7 +113,6 @@ const OrderCardContent: FunctionComponent<OrderCardContentProps> = ({
                   </ListItem>
                 }
               </List>
-
             </GridCol>
           </Grid>
         </CardSection>

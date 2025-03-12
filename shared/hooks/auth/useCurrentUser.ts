@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
+import { useGetOwnInfoQuery } from '../../../lib/api/userApi';
+import { UserOwnInfoDto } from '../../types/user';
 
 export const useCurrentUser = () => {
-  const [user] = useState<any | null>(null);
-
+  const {data, error, isLoading}= useGetOwnInfoQuery(undefined);
+  const [user, setUser] = useState<UserOwnInfoDto | null>(null);
   useEffect(() => {
-    //not-realized
-  }, []);
-  return { user };
+    if(data) setUser(data);
+  }, [data]);
+  return user;
 };
