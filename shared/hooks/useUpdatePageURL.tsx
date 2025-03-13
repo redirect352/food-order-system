@@ -8,7 +8,6 @@ export default function useUpdatePageURL() {
   function updateURL(paramName:string, paramValue: string): void;
   function updateURL(paramName: unknown, paramValue: unknown): void {
     const params = new URLSearchParams(searchParams);
-    console.log([...params.entries()], paramName)
     if (typeof paramName === 'string' && typeof paramValue === 'string') {
       if (paramValue !== '') {
           params.set(paramName, paramValue);
@@ -22,9 +21,7 @@ export default function useUpdatePageURL() {
         }
       });
     }
-    console.log([...params.entries()])
     replace(`${pathname}?${params.toString()}`);
-    // window.history.pushState(null,'',params.toString())
   }
   return {
     updateURL,

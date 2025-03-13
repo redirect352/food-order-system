@@ -17,7 +17,6 @@ interface AdminUserListProps {
 const AdminUserList: FunctionComponent<AdminUserListProps> = () => {
   const pageSize = 3;
   const r = useSearchParamValues(['page','s','order','sort']);
-  console.log(r);
   const { data, isFetching, error, refetch } = useSearchUsersQuery({
     page: r[0] ? +r[0] : 1,
     pageSize,

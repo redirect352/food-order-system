@@ -79,7 +79,6 @@ const EditUserForm = ({updateData, userData}:{updateData: () => any,userData:Use
     function userUpdateConfirmed (afterSuccess?: ()=>void){
       const result = form.validate();
       if(result.hasErrors) return;
-      console.log(Object.keys(form.getDirty()))
       const body: UpdateUserBody = {};
       const formValues = form.getTransformedValues();
       Object.keys(form.getDirty()).forEach((key) =>{

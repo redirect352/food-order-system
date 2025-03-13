@@ -1,9 +1,10 @@
-import { BaseQueryApi, BaseQueryFn, CreateApi, FetchArgs, FetchBaseQueryError, FetchBaseQueryMeta, QueryReturnValue } from '@reduxjs/toolkit/query';
+import {  BaseQueryFn, FetchArgs, FetchBaseQueryError, FetchBaseQueryMeta,   } from '@reduxjs/toolkit/query';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { startLogout } from '../features/user/userSlice';
 import { ErrorDto } from '@/shared/types';
 import { getToken, handleRefresh } from '../../shared/actions/cookie-actions';
 import { Mutex } from 'async-mutex';
+import { RootState } from '../store';
 const mutex = new Mutex();
 
 const baseQuery = fetchBaseQuery({ 
@@ -13,7 +14,7 @@ const baseQuery = fetchBaseQuery({
     if (res?.token) {
       headers.set('Authorization', `Bearer ${res?.token}`);
     }
-  }, 
+  },
 });
 
 export const baseQueryWithExpire:BaseQueryFn<
@@ -21,10 +22,12 @@ string | FetchArgs,
 unknown,
 FetchBaseQueryError
 > = async (args, api, extraOptions) => {
+  const isLoggedIn = (api.getState() as RootState).user.isLoggedIn;
   await mutex.waitForUnlock();
   let result = await baseQuery(args, api, extraOptions);
   if (result.error &&
-    (result.error.status === 401)) {
+      isLoggedIn && 
+      (result.error.status === 401)) {
       if (!mutex.isLocked()) {
         const release = await mutex.acquire();
         try{
