@@ -1,5 +1,5 @@
 import { baseApiWithAuth, transformErrorResponse, transformFileResponse } from "@/lib/api/baseApi";
-import { SearchUsersQueryParams, UpdateUserQueryParams } from "./types";
+import { SearchUsersQueryParams, UpdateUserPasswordParams, UpdateUserQueryParams } from "./types";
 import { ResponseWithPagination } from "@/shared/types/menu-position.dto";
 import { UserMainInfoDto } from "../../../shared/types/user";
 
@@ -26,7 +26,15 @@ export const moderatorApi = baseApiWithAuth.injectEndpoints({
         body
       }),
       transformErrorResponse,
-    })
+    }),
+    updateUserPassword: builder.mutation<any, UpdateUserPasswordParams>({
+      query: ({id,body}) => ({
+        url:`/user/change-password/${id}`,
+        method: 'PATCH',
+        body
+      }),
+      transformErrorResponse,
+    }),
   }),
 })
 
@@ -35,4 +43,5 @@ export const {
   useSearchUsersQuery,
   useGetUserMainInfoQuery,
   useUpdateUserMutation,
+  useUpdateUserPasswordMutation,
 } = moderatorApi;

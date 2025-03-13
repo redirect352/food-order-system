@@ -68,7 +68,7 @@ export function PasswordStrength({ checkValue, ...props }: PasswordStrengthProps
           {bars}
         </Group>
 
-        <PasswordRequirement label="Содержит не менее 8 символов" meets={testValue.length > 5} />
+        <PasswordRequirement label="Содержит не менее 8 символов" meets={testValue.length > 7} />
         {checks}
      </>}
     </div>

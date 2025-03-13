@@ -19,3 +19,9 @@ export type UpdateUserBody = {
   active?: boolean;
   officeId?: number;
 }
+export type UpdateUserPasswordParams = {
+  id:number,
+  body:{
+    newPassword:string,
+  }
+}

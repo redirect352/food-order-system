@@ -11,6 +11,8 @@ import { UserMainInfoDto } from "@/shared/types/user";
 import { UpdateUserBody } from "@/lib/api/adminApi/types";
 import { ModalService, NotificationService } from "@/shared/services";
 import { useCurrentUser, useLogout } from "@/shared/hooks";
+import { useDisclosure } from "@mantine/hooks";
+import PasswordChangeModal from "../../PasswordChangeModal";
 
 interface UserCardProps {
   userId: number
@@ -18,6 +20,7 @@ interface UserCardProps {
 
 const UserCard = ({userId}: UserCardProps) => {
   const { isFetching, error, data, refetch } = useGetUserMainInfoQuery(userId);
+  const [opened, { open, close }] = useDisclosure(false);
   return (
     <Card className={classes.card}  withBorder >
       <LoadingOverlay visible={isFetching} />
@@ -33,6 +36,7 @@ const UserCard = ({userId}: UserCardProps) => {
               className={classes.resetPasswordButton}
               variant='transparent'
               size={32}
+              onClick={open}
             >
               <IconKey size={32}/>
             </ActionIcon>
@@ -45,6 +49,12 @@ const UserCard = ({userId}: UserCardProps) => {
         />
       }
       {data && <EditUserForm updateData={refetch} userData={data} />}
+      <PasswordChangeModal 
+        opened={opened} 
+        onClose={close} 
+        userId={userId} 
+        employee ={data?.employee} 
+      />
     </Card>
   );
 };

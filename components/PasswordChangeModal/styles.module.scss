@@ -1,0 +1,19 @@
+.modalContent{
+  min-width: 300px;
+  .modalTitle{
+    font-size: var(--mantine-font-size-h3);
+    font-weight: 500;
+  }
+  .header{
+    background: var(--mantine-color-background);
+  }
+  @media (min-width: $mantine-breakpoint-lg) {
+      min-width: 600px;
+  }
+}
+.modalBody{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

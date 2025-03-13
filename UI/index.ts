@@ -12,6 +12,7 @@ export { default as PriceLabel } from './PriceLabel/PriceLabel';
 export { default as PFCLabel } from './PFCLabel/PFCLabel';
 export { MultiSelect } from './MultiSelect/MultiSelect';
 export { ErrorPage } from './ErrorPage/ErrorPage';
+export { PasswordStrength } from './PasswordWithStrengthMeter/PasswordWithStrengthMeter'
 export {
   Select,
   MobilePillsInput,

@@ -1,0 +1,10 @@
+.generatorBox{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-content: center;
+}
+.passwordText{
+  font-size: var(--mantine-font-size-lg);
+  font-weight: 500;
+}
