@@ -12,3 +12,13 @@ export default function useSearchParamValue<T>(
   }
   return currentValue;
 }
+export function useSearchParamValues(
+  paramNames: string[],
+) {
+  const searchParams = useSearchParams();
+  let values = paramNames.map((name) => {
+    let result = searchParams.get(name) ?? undefined;
+    return result;
+  });
+  return values;
+}

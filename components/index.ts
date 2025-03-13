@@ -2,7 +2,6 @@ import Sidebar from './Sidebar/Sidebar';
 import NoContentPage from './NoContentPage/NoContentPage';
 import MenuList from './MenuList/MenuList';
 import PageHeaderContainer from './PageHeaderContainer/PageHeaderContainer';
-import MenuFilterBar from './MenuFilterBar/MenuFilterBar';
 import CartList from './CartList/CartList';
 import OrderCard from './cards/OrderCard/OrderCard';
 
@@ -11,7 +10,6 @@ export {
   NoContentPage,
   MenuList,
   PageHeaderContainer,
-  MenuFilterBar,
   CartList,
   OrderCard,
 };
@@ -27,3 +25,5 @@ export { SignUpForm } from './forms/SignUpForm/SignUpForm';
 export { OrdersTotal } from './OrdersTotal/OrdersTotal';
 export { MenuFromDocxForm } from './forms/MenuFromDocxForm/MenuFromDocxForm'
 export { default as InterfaceControl } from './InterfaceControl';
+export { default as MenuFilterBar } from './filters/MenuFilterBar';
+export { default as AdminUsersFiltersBar } from './filters/AdminUsersFiltersBar';

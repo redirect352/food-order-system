@@ -4,3 +4,15 @@
   max-width: 1000px;
   justify-content: flex-end;
 }
+.loadingBox{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  // background-color: var(--mantine-color-grey-3);
+  width: 100%;
+  min-height: 50dvh;
+  position: relative;
+  gap: 1rem;
+  // border: 1px red solid;
+}

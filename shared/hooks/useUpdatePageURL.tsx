@@ -2,12 +2,13 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 export default function useUpdatePageURL() {
   const searchParams = useSearchParams();
-  const { replace } = useRouter();
+  const { replace, push } = useRouter();
   const pathname = usePathname();
   function updateURL(paramName:string[], paramValue: string[]): void;
   function updateURL(paramName:string, paramValue: string): void;
   function updateURL(paramName: unknown, paramValue: unknown): void {
     const params = new URLSearchParams(searchParams);
+    console.log([...params.entries()], paramName)
     if (typeof paramName === 'string' && typeof paramValue === 'string') {
       if (paramValue !== '') {
           params.set(paramName, paramValue);
@@ -21,7 +22,9 @@ export default function useUpdatePageURL() {
         }
       });
     }
+    console.log([...params.entries()])
     replace(`${pathname}?${params.toString()}`);
+    // window.history.pushState(null,'',params.toString())
   }
   return {
     updateURL,

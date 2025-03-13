@@ -2,6 +2,9 @@ export type SearchUsersQueryParams = {
   page: number;
   pageSize: number;
   destinationOfficeId?: number;
+  s?:string;
+  sortOrder?: string;
+  orderBy?: string ;
 };
 
 export type UpdateUserQueryParams = {

@@ -5,16 +5,14 @@ import { createContext, Dispatch, FunctionComponent, SetStateAction } from 'reac
 import { useDisclosure } from '@mantine/hooks';
 import { IconFilter, IconFilterFilled } from '@tabler/icons-react';
 import classes from './styles.module.scss';
-import FilterModal from '@/components/MenuFilterBar/FilterModal/FilterModal';
 import { useFilters } from './useFilters';
 import { MultiSelect } from '@/UI';
-import DeliveryDestinationInput from '../DeliveryDestinationInput';
-import dynamic from 'next/dynamic';
+import DeliveryDestinationInput from '@/components/DeliveryDestinationInput';
+import FilterModal from './FilterModal/FilterModal';
 
 interface MenuFilterBarProps {
 
 }
-const NoSsr = dynamic(() => import('../DeliveryDestinationInput'), {ssr: false});
 const MenuFilterBar: FunctionComponent<MenuFilterBarProps> = () => {
   const filters = useFilters();
   const {
@@ -28,7 +26,6 @@ const MenuFilterBar: FunctionComponent<MenuFilterBarProps> = () => {
     <FilterContext.Provider value={filters}>
       <Flex className={classes.filtersBox}>
         <DeliveryDestinationInput />
-        {/* <NoSsr /> */}
         <Flex className={classes.filterBarContainer} gap={24} justify="flex-end" align="flex-start">
           <Flex direction="column" gap={8}>
             <Title order={4}>Тип продукции</Title>

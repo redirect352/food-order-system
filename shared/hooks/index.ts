@@ -1,5 +1,5 @@
 export { useAppDispatch, useAppSelector } from './storeHooks';
-export { default as useSearchParamValue } from './useSearchParamValue';
+export { default as useSearchParamValue, useSearchParamValues } from './useSearchParamValue';
 export { useArraySearchParamValue } from './useArraySearchParamValue';
 export { default as useUpdatePageURL } from './useUpdatePageURL';
 export { useLogin } from './auth/useLogin';
@@ -7,3 +7,4 @@ export { useLogout } from './auth/useLogout';
 export { useCurrentUser } from './auth/useCurrentUser';
 export { useCancelOrder } from './useCancelOrder';
 export { useDebounce } from './useDebounce';
+export { useSearchParamState, useDebouncedSearchParamState } from './useSearchParamState';

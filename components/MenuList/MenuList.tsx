@@ -8,7 +8,6 @@ import { useAppSelector } from '@/shared/hooks';
 import { selectMenuItems } from '@/lib/features/menu/menuSlice';
 import classes from './styles.module.scss';
 import { selectDeliveryDestination } from '../../lib/features/cart/cartSlice';
-import { img } from 'framer-motion/dist/client';
 import { ImageWithFallback } from '../../UI';
 import noMenuImage from '@/public/204Menu.png';
 import noMenuImage2 from '@/public/dog-cartoon.png';
