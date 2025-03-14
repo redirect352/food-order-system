@@ -6,6 +6,7 @@ const withBundleAnalyzer = bundleAnalyzer({
 
 export default withBundleAnalyzer({
   reactStrictMode: false,
+  basePath:'/food-order-system',
   eslint: {
     ignoreDuringBuilds: true,
   },

@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react';
 import classes from './styles.module.scss';
 
 interface PageHeaderContainerProps {
-  title: string,
+  title: React.ReactNode,
   subtitle?: string
 }
 
