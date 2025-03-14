@@ -33,7 +33,7 @@ export default function Sidebar() {
           )
         }
       <SidebarOption
-        href="/login"
+        href="/"
         leftSection={<IconLogout2 size={20} />}
         onClick={logout}
       >
