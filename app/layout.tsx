@@ -1,10 +1,10 @@
 /* eslint-disable react/no-unknown-property */
 /* eslint-disable @next/next/no-page-custom-font */
-import '@mantine/core/styles.css';
-import '@mantine/notifications/styles.css';
-import '@mantine/dates/styles.css';
-import '@mantine/carousel/styles.css';
-import '@mantine/dropzone/styles.css';
+import '@mantine/core/styles.layer.css';
+import '@mantine/notifications/styles.layer.css';
+import '@mantine/dates/styles.layer.css';
+import '@mantine/carousel/styles.layer.css';
+import '@mantine/dropzone/styles.layer.css';
 import React from 'react';
 import { ColorSchemeScript } from '@mantine/core';
 import { Roboto } from 'next/font/google';

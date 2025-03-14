@@ -4,11 +4,11 @@ import { Group, Modal, ModalProps, Stack, Title, Text, Button, Badge } from '@ma
 import React, { FunctionComponent } from 'react';
 import { useMediaQuery } from '@mantine/hooks';
 import { MobileModal, PFCLabel } from '@/UI';
-import classes from './styles.module.scss';
 import MobileModalBody from './MobileModalContent';
 import { MenuPositionDto } from '@/shared/types';
 import ImageCarousel from '@/components/ImageCarousel/ImageCarousel';
 import CartItemCommentInput from '@/components/inputs/CartItemCommentInput';
+import classes from './styles.module.scss';
 
 interface ItemExtraInfoCartProps extends ModalProps {
   menuPosition: MenuPositionDto,

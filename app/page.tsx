@@ -1,7 +1,8 @@
 import { Container, Title, Text, Affix, Box } from '@mantine/core';
 import { ColorSchemeToggle } from '../components/ColorSchemeToggle/ColorSchemeToggle';
-import classes from './styles.module.scss';
 import MainPageButton from '../components/MainPageButton';
+import classes from './styles.module.scss';
+
 
 export default async function HomePage() {
   return (

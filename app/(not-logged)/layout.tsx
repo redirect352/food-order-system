@@ -3,6 +3,7 @@ import Image from 'next/image';
 import React, { Suspense } from 'react';
 import Link from 'next/link';
 import classes from './styles.module.scss';
+import logo from '@/public/logo.png';
 
 export default function LoginLayout({ children }: { children: any }) {
   return (
@@ -10,7 +11,7 @@ export default function LoginLayout({ children }: { children: any }) {
       <AppShellHeader>
        <Link href="/" style={{ textDecoration: 'none', color:'inherit' }}>
           <Group h="100%" p="md" ml="lg">
-            <Image src="/logo.png" alt="" width={37} height={52} />
+            <Image src={logo} alt="" width={37} height={52} />
             <Title visibleFrom="sm" order={3}>Система заказа питания</Title>
             <Title hiddenFrom="sm" order={5}>Система заказа питания</Title>
           </Group>

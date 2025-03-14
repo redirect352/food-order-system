@@ -2,7 +2,6 @@ import React from "react";
 import { CardSection, ActionIcon, Grid, Radio, Group, Button, CheckIcon, Text, Card, Tooltip, TextInput, LoadingOverlay } from "@mantine/core";
 import { IconDeviceFloppy, IconKey, IconX } from "@tabler/icons-react";
 import { ErrorPage, Select } from "@/UI";
-import classes from './styles.module.scss';
 import { rolesSelectOptions } from "@/shared/settings";
 import { useForm } from "@mantine/form";
 import { useGetUserMainInfoQuery, useUpdateUserMutation } from "@/lib/api/adminApi";
@@ -13,6 +12,7 @@ import { ModalService, NotificationService } from "@/shared/services";
 import { useCurrentUser, useLogout } from "@/shared/hooks";
 import { useDisclosure } from "@mantine/hooks";
 import PasswordChangeModal from "../../PasswordChangeModal";
+import classes from './styles.module.scss';
 
 interface UserCardProps {
   userId: number

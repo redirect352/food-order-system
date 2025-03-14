@@ -4,6 +4,7 @@ import { AppShell, Burger, Divider, Group, Text, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import Image from 'next/image';
 import { Sidebar, UserAvatar } from '@/components';
+import logo from '@/public/logo.png';
 import classes from './styles.module.scss';
 
 function ResponsiveSizes({ children, className }: { children: any, className?: string }) {
@@ -22,7 +23,7 @@ function ResponsiveSizes({ children, className }: { children: any, className?: s
       <AppShell.Header bg="light-dark(var(--mantine-color-grey-1), var(--mantine-color-black))">
         <Group align="center" justify="space-between" h="100%">
           <Group px="md" visibleFrom="sm" pl="lg">
-              <Image src="/logo.png" alt="" width={37} height={52} />
+              <Image src={logo} alt="" width={37} height={52} />
               <Title order={3}>Система заказа питания</Title>
           </Group>
           <UserAvatar px="md" visibleFrom="sm" pl="lg" />

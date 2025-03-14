@@ -4,12 +4,12 @@ import { Button, Grid, List, NumberFormatter, Text, CardSection, GridCol, ListIt
 import { FunctionComponent } from 'react';
 import moment from 'moment';
 import { useDisclosure } from '@mantine/hooks';
-import classes from './styles.module.scss';
 import { ScalingCard } from '@/UI';
 import { OrderMainInfoDto } from '@/shared/types';
 import OrderDetailedInfoCard from '../OrderDetailedInfoCard/OrderDetailedInfoCard';
 import { useCancelOrder } from '@/shared/hooks';
 import { orderStatusColor } from '@/shared/settings';
+import classes from './styles.module.scss';
 
 interface OrderCardProps {
   orderMainInfoDto?: OrderMainInfoDto,

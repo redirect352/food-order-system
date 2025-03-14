@@ -1,16 +1,12 @@
 'use client';
 
-import { Badge, Button, Flex, Grid, GridCol, LoadingOverlay, Modal, ModalProps, NumberFormatter } from '@mantine/core';
+import {  Button, Flex, Grid, GridCol, LoadingOverlay, Modal, ModalProps, NumberFormatter } from '@mantine/core';
 import { FunctionComponent, useContext } from 'react';
-import moment from 'moment';
-import classes from './styles.module.scss';
 import { ErrorPage } from '@/UI';
-import { useCancelOrder } from '@/shared/hooks';
-import { orderStatusColor } from '@/shared/settings';
 import { useGetMenuByIdQuery } from '../../../lib/api/moderatorApi';
-import OrderPositionsTable from '../OrderDetailedInfoCard/Desktop/OrderPositionsTable/OrderPositionsTable';
 import MenuPositionsTable from './MenuPositionsTable';
 import { formatDate } from '@/shared/helpers/formatHelper';
+import classes from './styles.module.scss';
 
 interface MenuInfoModalProps extends ModalProps {
   menuId?: number,
