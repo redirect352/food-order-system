@@ -6,7 +6,6 @@ const withBundleAnalyzer = bundleAnalyzer({
 
 export default withBundleAnalyzer({
   reactStrictMode: false,
-  basePath:'/food-order-system',
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -18,12 +17,13 @@ export default withBundleAnalyzer({
     silenceDeprecations: ['legacy-js-api'],
   },
   images:{
+    formats: ["image/avif"],
     remotePatterns:[
       {
         protocol: process.env.NEXT_PUBLIC_IMAGE_PROTOCOL ?? 'http',
         hostname: process.env.NEXT_PUBLIC_IMAGE_HOST,
         pathname: process.env.NEXT_PUBLIC_IMAGE_PATHNAME,
       }
-    ]
-  }
+    ],
+  },
 });

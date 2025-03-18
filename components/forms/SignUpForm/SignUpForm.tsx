@@ -21,7 +21,7 @@ interface SignUpFormProps {
 }
 
 export const SignUpForm: FunctionComponent<SignUpFormProps> = () => {
-  const [active, setActive] = useState(3);
+  const [active, setActive] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const form = useForm<SignUpFormValues>({
     mode: 'uncontrolled',

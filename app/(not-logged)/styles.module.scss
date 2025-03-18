@@ -11,6 +11,9 @@
   height: 100%;  
   opacity: .90; 
   z-index: -1;
-  background-image: url('/food-order-system/bg12.png');
+  background-image: image-set(
+    url('login_bg.avif') type('image/avif'),
+    url('/bg12.png') type('image/png'),
+  ) ;;
   background-size: contain;
 }

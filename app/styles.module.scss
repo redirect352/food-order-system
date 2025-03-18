@@ -5,12 +5,19 @@
   background-position: center;
   // background-image: linear-gradient(270deg, #580a6400 0%, rgb(255, 234, 216) 70%), url('/_min.png');
   [data-mantine-color-scheme='dark'] &{
-    background-image: linear-gradient(250deg, rgba(130, 201, 30, 0) 0%, #062343 70%), 
-    url('/food-order-system/_min.png');
+    // background-color: ;
+    background-image: linear-gradient(250deg, rgba(130, 201, 30, 0) 0%, #062343 70%),
+    image-set(
+      url('bg.avif') type('image/avif'),
+      url('/_min.png') type('image/png'),
+    ) ;
   }
   [data-mantine-color-scheme='light'] &{
     background-image: linear-gradient(270deg, #580a6400 0%, rgb(255, 234, 216) 70%), 
-    url('/food-order-system/_min.png');
+    image-set(
+      url('bg.avif') type('image/avif'),
+      url('/_min.png') type('image/png'),
+    );
   }
   padding-top: calc(var(--mantine-spacing-xl) * 3);
   padding-bottom: calc(var(--mantine-spacing-xl) * 3);

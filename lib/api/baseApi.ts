@@ -56,7 +56,7 @@ export const transformErrorResponse = (response : any) => response.data as Error
 export const baseApiWithoutAuth = createApi({
   reducerPath: 'baseApiNoToken',
   baseQuery: fetchBaseQuery({
-    baseUrl: `${process.env.NEXT_PUBLIC_API_BASE}`,
+    baseUrl: process.env.NEXT_PUBLIC_API_BASE,
   }),
   endpoints: (builder) => ({
 

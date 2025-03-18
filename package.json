@@ -69,6 +69,7 @@
     "@types/redux-persist": "^4.3.1",
     "@typescript-eslint/eslint-plugin": "^8.13.0",
     "@typescript-eslint/parser": "^8.13.0",
+    "avif-in-css": "^0.2.3",
     "babel-loader": "^9.2.1",
     "eslint": "^9.14.0",
     "eslint-config-airbnb": "19.0.4",
