@@ -65,7 +65,7 @@ export async function handleLogout() {
   const cookieStore = await cookies();
   const refreshToken = await getRefreshToken();
   if(refreshToken){
-    await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/auth/logout`, {
+    await fetch(`${process.env.SERVER_API_BASE}/auth/logout`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${refreshToken}`
@@ -81,7 +81,7 @@ export async function handleLogout() {
 export async function handleRefresh(){
   const refreshToken = await getRefreshToken();
   if(!refreshToken) return undefined;
-  const res = await fetch( `${process.env.NEXT_PUBLIC_API_BASE}/auth/refresh`,
+  const res = await fetch( `${process.env.SERVER_API_BASE}/auth/refresh`,
     {
       method:'POST', 
       headers: {
