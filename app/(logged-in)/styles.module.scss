@@ -4,7 +4,9 @@
 .navbar{
   padding: var(--mantine-spacing-md);
   background-color: light-dark(var(--mantine-color-grey-1), var(--mantine-color-black));
-  z-index: 300;
+  @media(max-width:$mantine-breakpoint-sm){
+    z-index: 300;
+  }
 }
 .bottomText{
   text-align: center;
