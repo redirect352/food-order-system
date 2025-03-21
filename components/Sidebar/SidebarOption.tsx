@@ -6,11 +6,12 @@ import { NavLink } from '@mantine/core';
 import Link from 'next/link';
 import classes from './Sidebar.module.scss';
 
-export default function SidebarOption({ children, href, leftSection, onClick } :
+export default function SidebarOption({ children, href, leftSection, onClick, replace } :
   React.PropsWithChildren<{
     href: string,
     leftSection?: React.ReactNode,
-    onClick?: () => void
+    onClick?: () => void,
+    replace?: boolean
   }>) {
 const path = usePathname();
 const isChosen = path === href;
@@ -24,6 +25,7 @@ return (
     fz="h2"
     styles={{ label: { fontSize: 'var(--mantine-font-size-md)' } }}
     leftSection={leftSection}
+    replace={replace}
   />
 );
 }

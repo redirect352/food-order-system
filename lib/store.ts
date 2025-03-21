@@ -8,6 +8,8 @@ import { orderApi } from './api/orderApi';
 import userSlice, { endLogout } from './features/user/userSlice';
 import { baseApiWithAuth, baseApiWithoutAuth } from './api/baseApi';
 import persistStore from 'redux-persist/es/persistStore';
+import { persistReducer } from 'redux-persist';
+import { localStorage, sessionStorage } from './storage';
 
 const appReducer = combineReducers({
   cart: cartSlice,
@@ -22,8 +24,17 @@ const rootReducer = (state : any, action : Action) => {
   if (action.type === endLogout.type) return appReducer(undefined, action);
   return appReducer(state, action);
 };
+
+const rootPersistConfig = {
+  key: "root",
+  storage: sessionStorage,
+  whitelist: ["cart"],
+};
+
+const rootPersistedReducer = persistReducer(rootPersistConfig, rootReducer);
+
 export const makeStore = () => configureStore({
-      reducer: rootReducer,
+      reducer: rootPersistedReducer,
       middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware()
         .concat(authApi.middleware)
@@ -34,7 +45,7 @@ export const makeStore = () => configureStore({
         .concat(baseApiWithAuth.middleware),
 });
 export const store = configureStore({
-  reducer: rootReducer,
+  reducer: rootPersistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({serializableCheck:false})
     .concat(authApi.middleware)

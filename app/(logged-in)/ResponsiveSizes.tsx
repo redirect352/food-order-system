@@ -20,7 +20,7 @@ function ResponsiveSizes({ children, className }: { children: any, className?: s
       padding="md"
       className={classes.bodyColor}
     >
-      <AppShell.Header bg="light-dark(var(--mantine-color-grey-1), var(--mantine-color-black))">
+      <AppShell.Header className={classes.header}>
         <Group align="center" justify="space-between" h="100%">
           <Group px="md" visibleFrom="sm" pl="lg">
               <Image src={logo} alt="" width={37} height={52} />
@@ -32,7 +32,7 @@ function ResponsiveSizes({ children, className }: { children: any, className?: s
           </Group>
         </Group>
       </AppShell.Header>
-      <AppShell.Navbar p="md" bg="light-dark(var(--mantine-color-grey-1), var(--mantine-color-black))">
+      <AppShell.Navbar className={classes.navbar}>
         <AppShell.Section>
           {/* <Divider my="md" pb="md" /> */}
         </AppShell.Section>
@@ -41,7 +41,9 @@ function ResponsiveSizes({ children, className }: { children: any, className?: s
         </AppShell.Section>
         <AppShell.Section>
           <Divider my="md" />
-          <Text ta="center" size="sm" c="dimmed">© Государственное предприятие &quot;Минсктранс&quot;, 2024</Text>
+          <Text className={classes.bottomText}>
+            © Государственное предприятие &quot;Минсктранс&quot;, 2024
+          </Text>
         </AppShell.Section>
       </AppShell.Navbar>
 

@@ -1,3 +1,17 @@
 .bodyColor{
   background-color: light-dark(var(--mantine-color-white), var(--mantine-color-black));;
 }
+.navbar{
+  padding: var(--mantine-spacing-md);
+  background-color: light-dark(var(--mantine-color-grey-1), var(--mantine-color-black));
+  z-index: 300;
+}
+.bottomText{
+  text-align: center;
+  font-size: var(--mantine-font-size-sm);
+  line-height: var(--mantine-line-height-sm);
+  color: var(--mantine-color-dimmed);
+}
+.header{
+  background: light-dark(var(--mantine-color-grey-1), var(--mantine-color-black));
+}

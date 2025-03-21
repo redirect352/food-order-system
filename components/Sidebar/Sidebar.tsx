@@ -36,6 +36,7 @@ export default function Sidebar() {
         href="/"
         leftSection={<IconLogout2 size={20} />}
         onClick={logout}
+        replace
       >
         Выйти
       </SidebarOption>

@@ -65,6 +65,10 @@ export const SignUpForm: FunctionComponent<SignUpFormProps> = () => {
       }
       return {};
     },
+    transformValues: (values) => ({
+      ...values,
+      surname: values.surname.trim(),
+    })
   });
 
   const [trigger, checkResult] = useLazyCheckEmployeeQuery();
@@ -75,12 +79,16 @@ export const SignUpForm: FunctionComponent<SignUpFormProps> = () => {
       return;
     }
     if (active === 1) {
-      const { office, surname, personnelNumber } = form.getValues();
-      trigger({ officeId: office, surname, personnelNumber });
+      const { office, surname, personnelNumber } = form.getTransformedValues();
+      trigger({ 
+        officeId: office, 
+        surname, 
+        personnelNumber 
+      });
       return;
     }
     if (active === 2) {
-      const { passwordRepeat, office, ...body } = form.getValues();
+      const { passwordRepeat, office, ...body } = form.getTransformedValues();
       signUp({ officeId: office, ...body });
       return;
     }

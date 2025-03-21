@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { selectIsLoggingOut } from '@/lib/features/user/userSlice';
 import { useAppSelector, useLogout } from '@/shared/hooks';
 import { NotificationService } from '@/shared/services';
+import { LoadingOverlay } from '@mantine/core';
 
 export default function LogoutProvider({
   children,
@@ -23,5 +24,13 @@ export default function LogoutProvider({
       logout().then(() => router.replace('/'));
     }
   }, [isLoggingOut]);
-  return <>{children}</>;
+  return (
+    <>
+      <LoadingOverlay 
+        visible={isLoggingOut} 
+        title='Выход'
+      />
+      {children}
+    </>
+  );
 }

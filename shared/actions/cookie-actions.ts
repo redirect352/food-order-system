@@ -11,26 +11,16 @@ export async function handleLogin(token : string, refreshToken: string, role?: s
   const tokenData = await CryptoService.encryptObject(token);
   const refreshTokenData = await CryptoService.encryptObject(refreshToken);
   const roleData = await CryptoService.encryptObject(role)
-
-  const cookieStore = await cookies();
-  cookieStore.set('token', tokenData, {
+  const cookieOptions = {
     httpOnly: true,
     secure,
     maxAge: accessTokenExpireIn, 
     path: '/',
-  });
-  cookieStore.set('role', roleData, {
-    httpOnly: true,
-    secure,
-    maxAge: refreshTokenExpireIn, 
-    path: '/',
-  });
-  cookieStore.set('refresh-token', refreshTokenData, {
-    httpOnly: true,
-    secure,
-    maxAge: refreshTokenExpireIn, 
-    path: '/',
-  });
+  };
+  const cookieStore = await cookies();
+  cookieStore.set('token', tokenData, cookieOptions);
+  cookieStore.set('role', roleData, cookieOptions);
+  cookieStore.set('refresh-token', refreshTokenData,cookieOptions);
   return { statusCode: 200 };
 }
 export async function getToken() {
@@ -64,18 +54,21 @@ export async function getRole() {
 export async function handleLogout() {
   const cookieStore = await cookies();
   const refreshToken = await getRefreshToken();
-  if(refreshToken){
-    await fetch(`${process.env.SERVER_API_BASE}/auth/logout`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${refreshToken}`
-      }
-    })
+  try{
+    if(refreshToken){
+      await fetch(`${process.env.SERVER_API_BASE}/auth/logout`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${refreshToken}`
+        }
+      })
+    }
+  }finally{
+    cookieStore.delete('token');
+    cookieStore.delete('role');
+    cookieStore.delete('refresh-token');
+    return { statusCode: 200 };
   }
-  cookieStore.delete('token');
-  cookieStore.delete('role');
-  cookieStore.delete('refresh-token');  
-  return { statusCode: 200 };
 }
 
 export async function handleRefresh(){

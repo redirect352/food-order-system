@@ -5,7 +5,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@/lib/store';
 import { MenuPositionDto, OfficeDto } from '@/shared/types';
 import { PriceHelper } from '@/shared/helpers';
-import { sessionStorage } from '@/lib/storage';
+import { localStorage } from '@/lib/storage';
 import { persistReducer } from 'redux-persist';
 import { MakeOrderItem } from '../../api/orderApi';
 
@@ -74,18 +74,7 @@ export const cartSlice = createSlice({
     },
     changeDeliveryDestination: (state, action: PayloadAction<OfficeDto | null>) =>{
       state.cartItems = [];
-      if(action.payload)
-        localStorage.setItem(deliveryDestinationKey, JSON.stringify(action.payload) )
-      else 
-        localStorage.removeItem(deliveryDestinationKey);
       state.deliveryDestination = action.payload;
-    },
-    initializeStore: (state)=>{
-      const deliveryStr = localStorage.getItem(deliveryDestinationKey);
-      if(deliveryStr){
-        const deliveryOffice = JSON.parse(deliveryStr);
-        if(deliveryOffice as OfficeDto) state.deliveryDestination =  deliveryOffice as OfficeDto;
-      }
     },
     changeDishComment: (state, action: PayloadAction<{ menuPositionId:number, newComment:string }>) => {
       const { menuPositionId, newComment } = action.payload;
@@ -144,7 +133,6 @@ export const {
   addToCart,
   clearCart,
   changeDeliveryDestination,
-  initializeStore,
   changeDishComment,
 } = cartSlice.actions;
 
@@ -170,8 +158,8 @@ export const selectCartItemCount = (state: RootState, menuPositionId: number) =>
 
 const cartPersistConfig = {
   key: "cart",
-  storage: sessionStorage,
-  whitelist: ["cartItems", "deliveryDestination"],
+  storage: localStorage,
+  whitelist: ["deliveryDestination"],
 };
 
 const persistedReducer = persistReducer(cartPersistConfig, cartSlice.reducer);

@@ -95,10 +95,10 @@ export const theme = createTheme({
     components: {
       LoadingOverlay: LoadingOverlay.extend({
         defaultProps:{
-          zIndex:1000,
+          zIndex:230,
           loaderProps:{
             type: 'bars',
-            color: 'pink'
+            color: 'pink',
           },
           overlayProps: {
             blur:2,
@@ -154,6 +154,7 @@ export const resolver: CSSVariablesResolver = (theme) => ({
         '--second-modal-z-index': '220',
         '--indicator-z-index': '90',
         '--app-shell-full-height-container': 'calc(100dvh - var(--app-shell-header-offset, 0rem) - var(--app-shell-padding) - var(--app-shell-footer-offset, 0rem) - var(--app-shell-padding) - 12px)',
+        '--app-shell-navbar-z-index':'300',
     },
     light: {
         '--mantine-color-background': '#FCEDEF',

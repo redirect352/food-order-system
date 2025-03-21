@@ -1,3 +1,4 @@
+import { WebStorage } from "redux-persist";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 
 const createNoopStorage = () => {
