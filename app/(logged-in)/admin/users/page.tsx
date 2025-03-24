@@ -1,12 +1,12 @@
-import AdminUserList from "@/components/lists/AdminUserList";
-import SearchInput from "@/components/inputs/SearchInput";
+import { SortOrderFilterBar, OfficeFilter, SearchInput, AdminUserList } from "@/components";
 import classes from './styles.module.scss';
-import {AdminUsersFiltersBar} from "@/components";
 
 const Users = () => {
   return (
     <div className={classes.pageContainer}>
-      <AdminUsersFiltersBar />
+      <SortOrderFilterBar>
+        <OfficeFilter searchParam={"office"} />
+      </SortOrderFilterBar>
       <SearchInput 
         placeholder="Введите строку для поиска"
         className={classes.searchInput}  

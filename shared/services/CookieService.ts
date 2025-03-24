@@ -16,7 +16,7 @@ export class CookieService {
         return +pageSize;
        }
     }
-    Cookies.set('menuPageSize', '10',{expires:new Date(new Date().getTime() + 3600)});
-    return 10;
+    Cookies.set('menuPageSize', '15',{expires:new Date(new Date().getTime() + 3600)});
+    return 15;
   }
 }

@@ -1,16 +1,13 @@
 import { Table } from "@mantine/core";
 import { MenuListItem } from "../../../shared/types/menu/menu-list.dto";
-import moment from "moment";
-import { useCallback, useState } from "react";
+import {  useState } from "react";
 import React from "react";
 import MenuInfoModal from "@/components/cards/MenuInfoCard";
 import { formatDate } from "@/shared/helpers/formatHelper";
 
-interface TableRowProps {
-  item: MenuListItem,
-}
 
-const TableRow = ({ item }: TableRowProps) => {
+
+const TableRow = (item: MenuListItem) => {
   const {id, name, relevantFrom, expire, menuPositionsCount, author, providingCanteen, created} = item;
   const [opened, setOpened] = useState(false);
   return (

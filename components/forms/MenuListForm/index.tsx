@@ -41,7 +41,6 @@ const MenuListForm = (props: MenuListFormProps) => {
       <Group className={classes.selectGroup}>
         <OfficeSelect 
           label='Выберите целевой филиал'
-          isCanteen={false}
           inputProps={form.getInputProps('deliveryDestinationId')}  
           inputKey={form.key('deliveryDestinationId')} 
           className={classes.select}

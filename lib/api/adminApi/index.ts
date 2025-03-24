@@ -1,7 +1,9 @@
 import { baseApiWithAuth, transformErrorResponse, transformFileResponse } from "@/lib/api/baseApi";
 import { SearchUsersQueryParams, UpdateUserPasswordParams, UpdateUserQueryParams } from "./types";
 import { ResponseWithPagination } from "@/shared/types/menu-position.dto";
-import { UserMainInfoDto } from "../../../shared/types/user";
+import { UserMainInfoDto } from "@/shared/types/user";
+import { EmployeeFullInfoDto } from "@/shared/types/employee/employee-full-info.dto";
+import { OfficeDto } from "@/shared/types";
 
 export const moderatorApi = baseApiWithAuth.injectEndpoints({
   overrideExisting: true,
@@ -35,6 +37,17 @@ export const moderatorApi = baseApiWithAuth.injectEndpoints({
       }),
       transformErrorResponse,
     }),
+    searchEmployees : builder.query<ResponseWithPagination<EmployeeFullInfoDto[]>, SearchUsersQueryParams>({
+      query: (params) => ({
+        url:'/employee/search',
+        params,
+      }),
+      transformErrorResponse,
+    }),
+    getFullOfficeList: builder.query<OfficeDto[], void>({
+      query: () => '/branch-office/all',
+      transformErrorResponse,
+    }),
   }),
 })
 
@@ -44,4 +57,6 @@ export const {
   useGetUserMainInfoQuery,
   useUpdateUserMutation,
   useUpdateUserPasswordMutation,
+  useSearchEmployeesQuery,
+  useGetFullOfficeListQuery,
 } = moderatorApi;

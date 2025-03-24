@@ -26,4 +26,9 @@ export { OrdersTotal } from './OrdersTotal/OrdersTotal';
 export { MenuFromDocxForm } from './forms/MenuFromDocxForm/MenuFromDocxForm'
 export { default as InterfaceControl } from './InterfaceControl';
 export { default as MenuFilterBar } from './filters/MenuFilterBar';
-export { default as AdminUsersFiltersBar } from './filters/AdminUsersFiltersBar';
+export { default as SortOrderFilterBar } from './filters/SortOrderFilterBar';
+export { default as OfficeFilter } from './filters/OfficeFilter';
+export { default as SearchInput } from './inputs/SearchInput';
+export { default as AdminUserList } from './lists/AdminUserList';
+export { default as EmployeeList } from './lists/EmployeeList';
+export { default as EmployeeStatusFilter } from './filters/EmployeeStatusFilter';

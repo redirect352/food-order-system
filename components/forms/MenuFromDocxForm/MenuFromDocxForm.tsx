@@ -107,7 +107,7 @@ export  const MenuFromDocxForm = (props: MenuFromDocxFormProps) => {
         placeholder="Выберите столовую"
         inputProps={form.getInputProps('providingCanteenId')} 
         inputKey={form.key('providingCanteenId')} 
-        isCanteen
+        officeType='canteen'
       />
       <Switch
         checked={active}

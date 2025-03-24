@@ -22,7 +22,7 @@ const Menu : FunctionComponent = () => {
   });
   const page = useSearchParamValue<number>('page');
   const type = useSearchParamValue<string>('type');
-  const categoryId = useArraySearchParamValue<number>('category', (s) => +s);
+  const categoryId = useSearchParamValue<string>('category');
   const destination = useAppSelector(selectDeliveryDestination);
   const { data, error, isFetching, refetch } = useGetActualMenuQuery({
       page: page ? +page: undefined,

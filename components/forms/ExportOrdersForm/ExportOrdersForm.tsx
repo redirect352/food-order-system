@@ -78,7 +78,6 @@ const ExportOrdersForm = (props: ExportOrdersFormProps) => {
       />
       <OfficeSelect 
         label='Выберите целевой филиал заказов'
-        isCanteen={false}
         inputProps={form.getInputProps('deliveryDestinationId')}  
         inputKey={form.key('deliveryDestinationId')} 
       />

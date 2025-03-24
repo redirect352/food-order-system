@@ -1,14 +1,16 @@
 'use client';
 
-import { Flex } from "@mantine/core";
+import { ComboboxData, Flex } from "@mantine/core";
 import classes from './styles.module.scss';
 import { Select } from "@/UI";
 import { orderOptions, sortFieldsOptions } from "./selectOptions";
 import { useSearchParamState } from "@/shared/hooks";
-interface AdminFiltersBarProps {
-  
+import OfficeFilter from "../OfficeFilter";
+interface SortOrderFilterBarProps {
+  orderOptionsDef?: ComboboxData,
+  sortFieldsOptionsDef?: ComboboxData,
 }
-const AdminFiltersBar = (props: AdminFiltersBarProps) => {
+const SortOrderFilterBar = ({orderOptionsDef, sortFieldsOptionsDef, children}: React.PropsWithChildren<SortOrderFilterBarProps>) => {
   const [sort, setSort]= useSearchParamState('sort');
   const [sortOrder, setSortOrder]= useSearchParamState('order');
   return (
@@ -18,18 +20,18 @@ const AdminFiltersBar = (props: AdminFiltersBarProps) => {
         onChange={(val) => setSortOrder(val ?? 'desc')}
         className={classes.select}
         label='Порядок сортировки'
-        data={orderOptions}
+        data={orderOptionsDef ?? orderOptions}
       />
       <Select
         value={sort}
         onChange={(val) => setSort(val ?? 'id')}
         className={classes.select}
         label='Поле сортировки'
-        data={sortFieldsOptions}
+        data={sortFieldsOptionsDef ?? sortFieldsOptions}
       />
-
+      {children}
     </Flex>  
   );
 };
 
-export default AdminFiltersBar;
+export default SortOrderFilterBar;

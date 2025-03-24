@@ -3,6 +3,7 @@ export type SearchUsersQueryParams = {
   pageSize: number;
   destinationOfficeId?: number;
   s?:string;
+  active?: boolean;
   sortOrder?: string;
   orderBy?: string ;
 };
