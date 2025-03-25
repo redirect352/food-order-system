@@ -1,5 +1,5 @@
 import { baseApiWithAuth, transformErrorResponse, transformFileResponse } from "@/lib/api/baseApi";
-import { GetOfficeFullInfoListParams, SearchUsersQueryParams, UpdateBranchOfficeBody, UpdateUserPasswordParams, UpdateUserQueryParams } from "./types";
+import { CreateBranchOfficeBody, GetOfficeFullInfoListParams, SearchUsersQueryParams, UpdateBranchOfficeBody, UpdateUserPasswordParams, UpdateUserQueryParams } from "./types";
 import { ResponseWithPagination } from "@/shared/types/menu-position.dto";
 import { UserMainInfoDto } from "@/shared/types/user";
 import { EmployeeFullInfoDto } from "@/shared/types/employee/employee-full-info.dto";
@@ -72,6 +72,15 @@ export const moderatorApi = baseApiWithAuth.injectEndpoints({
       transformErrorResponse,
       invalidatesTags: ['BranchOfficeFullInfo']
     }),
+    createBranchOffice: builder.mutation<number, CreateBranchOfficeBody>({
+      query: (body) => ({
+        url:`/branch-office/create`,
+        method: 'POST',
+        body,
+      }),
+      transformErrorResponse,
+      invalidatesTags: ['BranchOfficeFullInfo']
+    }),
   }),
 })
 
@@ -86,4 +95,5 @@ export const {
   useGetOfficeFullInfoListQuery,
   useUpdateBranchOfficeMutation,
   useDeleteBranchOfficeMutation,
+  useCreateBranchOfficeMutation,
 } = moderatorApi;

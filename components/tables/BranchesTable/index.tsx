@@ -1,23 +1,22 @@
 'use client';
 
 import { OfficeFullInfoDto } from "@/shared/types";
-import { ActionIcon, Checkbox, Table, Text, TextInput } from "@mantine/core";
+import { ActionIcon, Button, Checkbox, Table, Text, TextInput } from "@mantine/core";
 import SampleTable from "../SampleTable";
 import { formatDate } from "@/shared/helpers/formatHelper";
 import { useForm } from "@mantine/form";
-import { IconDeviceFloppy, IconTrash } from "@tabler/icons-react";
+import { IconDeviceFloppy, IconPlus, IconTrash } from "@tabler/icons-react";
 import classes from './styles.module.scss';
 import { useDeleteBranchOfficeMutation, useUpdateBranchOfficeMutation } from "@/lib/api/adminApi";
 import { ModalService, NotificationService } from "@/shared/services";
+import { useDisclosure } from "@mantine/hooks";
+import CreateBranchOfficeModal from "../../modals/CreateBranchOfficeModal";
+import { typesLabels } from "@/shared/types/branch-office/office-types";
 
 interface BranchesTableProps {
   items: OfficeFullInfoDto[]
 }
-const typesLabels = {
-  'canteen':'Столовая',
-  'branch':'Филиал',
-  'special':'Специальный'
-}
+
 const BranchesTable = ({items}: BranchesTableProps) => {
   const THead = () =>{
       return(
@@ -42,6 +41,7 @@ const BranchesTable = ({items}: BranchesTableProps) => {
       items={items}
       makeRow={(item)=>(<TableRow item={item} key={item.id} />)}
       className=""
+      extraRows={<AddRowButton />}
     />
   );
 };
@@ -147,4 +147,28 @@ const TableRow = ({item}:{item: OfficeFullInfoDto}) => {
     </Table.Tr> 
   );
 };
+
+const AddRowButton = () => {
+  const [opened, { open, close }] = useDisclosure(false);
+  return(
+    <Table.Tr>
+      <Table.Td colSpan={10}>
+        <Button 
+          variant="transparent"
+          fullWidth
+          leftSection={<IconPlus />}
+          onClick={open}
+        >
+          Создать филиал
+        </Button>
+        <CreateBranchOfficeModal
+          opened={opened}
+          onClose={close}
+        />
+      </Table.Td>
+      
+    </Table.Tr>
+  )
+};
+
 export default BranchesTable;

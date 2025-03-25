@@ -34,6 +34,7 @@ export type UpdateBranchOfficeBody ={
   name?: string;
   address?: string;
   officeType?: officeTypes;
+  isAvailable?: boolean;
   servingCanteenId?: number;
 }
 
@@ -43,3 +44,11 @@ export type GetOfficeFullInfoListParams = {
   sortOrder?: string;
   orderBy?: string ;
 };
+
+export type CreateBranchOfficeBody ={
+  name: string;
+  address: string;
+  officeType: officeTypes;
+  isAvailable: boolean;
+  servingCanteenId?: number;
+}

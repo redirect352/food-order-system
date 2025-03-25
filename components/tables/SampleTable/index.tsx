@@ -1,14 +1,15 @@
-import { Table, TableProps } from "@mantine/core";
+import { Button, Table, TableProps } from "@mantine/core";
 import classes from './styles.module.scss';
 import React from "react";
 
 interface SampleTableProps<Item> extends TableProps {
   headerContent: React.ReactNode,
   items: Item[],
-  makeRow: (i: Item) => React.ReactNode
+  makeRow: (i: Item) => React.ReactNode,
+  extraRows?: React.ReactNode
 }
 
-export function SampleTable<T>({headerContent, items, makeRow,...props}: SampleTableProps<T>){
+export function SampleTable<T>({headerContent, items, makeRow, extraRows, ...props}: SampleTableProps<T>){
   return (
       <Table 
         striped 
@@ -23,6 +24,7 @@ export function SampleTable<T>({headerContent, items, makeRow,...props}: SampleT
         </Table.Thead>
         <Table.Tbody>
           { items.map(makeRow) }
+          {extraRows}
         </Table.Tbody>
       </Table>
     );
