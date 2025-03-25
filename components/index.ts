@@ -34,3 +34,4 @@ export { default as EmployeeList } from './lists/EmployeeList';
 export { default as EmployeeStatusFilter } from './filters/EmployeeStatusFilter';
 export { default as BranchesTable } from './tables/BranchesTable';
 export { default as BranchOfficeList } from './lists/BranchOfficeList';
+export { default as CreateEmployeeButton } from './inputs/CreateEmployeeButton';

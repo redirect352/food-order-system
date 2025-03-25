@@ -35,7 +35,7 @@ const EmployeesTable = ({items}: EmployeesTableProps) => {
 export default EmployeesTable;
 
 const TableRow = ({item}:{item: EmployeeFullInfoDto}) => {
-  const {id, personnelNumber, active ,office} = item;
+  const {id, personnelNumber, active ,office, changed, created} = item;
   return (
     <Table.Tr>
       <Table.Td>{id}</Table.Td>
@@ -43,8 +43,8 @@ const TableRow = ({item}:{item: EmployeeFullInfoDto}) => {
       <Table.Td>{personnelNumber}</Table.Td>
       <Table.Td>{active? 'Работает' : 'Уволен'}</Table.Td>
       <Table.Td>{office.name}</Table.Td>
-      <Table.Td>{formatDate(new Date())}</Table.Td>
-      <Table.Td>{formatDate(new Date())}</Table.Td>
+      <Table.Td>{formatDate(changed)}</Table.Td>
+      <Table.Td>{formatDate(created)}</Table.Td>
     </Table.Tr> 
   );
 };

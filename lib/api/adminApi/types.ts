@@ -52,3 +52,12 @@ export type CreateBranchOfficeBody ={
   isAvailable: boolean;
   servingCanteenId?: number;
 }
+
+export type CreateEmployeeBody = {
+  name: string;
+  surname: string;
+  patronymic: string;
+  personnelNumber: string;
+  active: boolean;
+  officeId: number;
+}

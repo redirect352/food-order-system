@@ -1,4 +1,4 @@
-import { SortOrderFilterBar , SearchInput, EmployeeList, OfficeFilter, EmployeeStatusFilter } from "@/components";
+import { SortOrderFilterBar , SearchInput, EmployeeList, OfficeFilter, EmployeeStatusFilter, CreateEmployeeButton } from "@/components";
 import classes from './styles.module.scss';
 import commonClasses from '../styles.module.scss';
 
@@ -19,6 +19,7 @@ const Employees = () => {
         placeholder="Введите строку для поиска"
         className={commonClasses.searchInput}  
       />
+      <CreateEmployeeButton />
       <EmployeeList />
     </div>
   )

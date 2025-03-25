@@ -8,4 +8,6 @@ export type EmployeeFullInfoDto = {
   patronymic: string;
   office: OfficeDto;
   active: boolean;
+  changed: Date;
+  created: Date;
 }
