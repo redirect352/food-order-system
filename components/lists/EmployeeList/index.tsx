@@ -6,8 +6,8 @@ import { ErrorPage, Pagination } from "@/UI";
 import searchEmpty from '@/public/search_state.gif';
 import { LoadingOverlay, Title } from "@mantine/core";
 import Image from "next/image";
-import classes from './styles.module.scss';
 import EmployeesTable from "../../tables/EmployeesTable";
+import commonClasses from '../styles.module.scss';
 
 interface EmployeeListProps {
   
@@ -35,7 +35,7 @@ const EmployeeList = (props: EmployeeListProps) => {
   }
   if(isFetching || data?.data.length===0){
     return (
-      <div className={classes.loadingBox}>
+      <div className={commonClasses.loadingBox}>
         {
           isFetching ?
           <LoadingOverlay visible />
@@ -51,7 +51,7 @@ const EmployeeList = (props: EmployeeListProps) => {
   return (
     <>
       <EmployeesTable items={data?.data ?? []}/>
-      {data && <div className={classes.pagination}><Pagination total={data.totalPages}/></div>}
+      {data && <div className={commonClasses.pagination}><Pagination total={data.totalPages}/></div>}
     </>
   )
 };

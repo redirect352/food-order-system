@@ -1,4 +1,4 @@
-import { OfficeDto } from "./office.dto";
+import { OfficeDto } from "./branch-office/office.dto";
 
 export type OrderMainInfoDto = {
    number: number;

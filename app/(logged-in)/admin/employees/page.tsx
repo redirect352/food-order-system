@@ -1,9 +1,10 @@
 import { SortOrderFilterBar , SearchInput, EmployeeList, OfficeFilter, EmployeeStatusFilter } from "@/components";
 import classes from './styles.module.scss';
+import commonClasses from '../styles.module.scss';
 
 const Employees = () => {
   return (
-    <div className={classes.pageContainer}>
+    <div className={commonClasses.pageContainer}>
       <EmployeeStatusFilter children={undefined} className={classes.employeeFilter}/>
       <SortOrderFilterBar 
         sortFieldsOptionsDef={[
@@ -16,7 +17,7 @@ const Employees = () => {
       </SortOrderFilterBar>
       <SearchInput 
         placeholder="Введите строку для поиска"
-        className={classes.searchInput}  
+        className={commonClasses.searchInput}  
       />
       <EmployeeList />
     </div>

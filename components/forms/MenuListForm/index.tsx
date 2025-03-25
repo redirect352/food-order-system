@@ -1,5 +1,5 @@
-import { Box, Flex, Group, Skeleton, Text, Title } from "@mantine/core";
-import { useGetMenuListQuery, useLazyGetMenuListQuery } from "@/lib/api/moderatorApi";
+import { Box, Group, Skeleton, Title } from "@mantine/core";
+import { useLazyGetMenuListQuery } from "@/lib/api/moderatorApi";
 import MenuListTable from "@/components/tables/MenuListTable";
 import { ErrorPage, Pagination, Select } from "@/UI";
 import { useForm } from "@mantine/form";

@@ -1,5 +1,5 @@
 import { EmployeeInfoDto } from "../employee/employee-info.dto";
-import { OfficeDto } from "../office.dto";
+import { OfficeDto } from "../branch-office/office.dto";
 
 export type UserOwnInfoDto = {
   id: number;

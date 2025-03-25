@@ -32,3 +32,5 @@ export { default as SearchInput } from './inputs/SearchInput';
 export { default as AdminUserList } from './lists/AdminUserList';
 export { default as EmployeeList } from './lists/EmployeeList';
 export { default as EmployeeStatusFilter } from './filters/EmployeeStatusFilter';
+export { default as BranchesTable } from './tables/BranchesTable';
+export { default as BranchOfficeList } from './lists/BranchOfficeList';

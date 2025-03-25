@@ -1,9 +1,9 @@
 import { baseApiWithAuth, transformErrorResponse, transformFileResponse } from "@/lib/api/baseApi";
-import { SearchUsersQueryParams, UpdateUserPasswordParams, UpdateUserQueryParams } from "./types";
+import { GetOfficeFullInfoListParams, SearchUsersQueryParams, UpdateBranchOfficeBody, UpdateUserPasswordParams, UpdateUserQueryParams } from "./types";
 import { ResponseWithPagination } from "@/shared/types/menu-position.dto";
 import { UserMainInfoDto } from "@/shared/types/user";
 import { EmployeeFullInfoDto } from "@/shared/types/employee/employee-full-info.dto";
-import { OfficeDto } from "@/shared/types";
+import { OfficeDto, OfficeFullInfoDto } from "@/shared/types";
 
 export const moderatorApi = baseApiWithAuth.injectEndpoints({
   overrideExisting: true,
@@ -48,6 +48,30 @@ export const moderatorApi = baseApiWithAuth.injectEndpoints({
       query: () => '/branch-office/all',
       transformErrorResponse,
     }),
+    getOfficeFullInfoList: builder.query<ResponseWithPagination<OfficeFullInfoDto[]>, GetOfficeFullInfoListParams>({
+      query: (params) => ({
+        url: '/branch-office/all/full-info',
+        params
+      }),
+      providesTags:['BranchOfficeFullInfo']
+    }),
+    updateBranchOffice: builder.mutation<any, UpdateBranchOfficeBody>({
+      query: (body) => ({
+        url:`/branch-office/update`,
+        method: 'PATCH',
+        body
+      }),
+      transformErrorResponse,
+      invalidatesTags: ['BranchOfficeFullInfo']
+    }),
+    deleteBranchOffice: builder.mutation<any, number>({
+      query: (id) => ({
+        url:`/branch-office/delete/${id}`,
+        method: 'DELETE',
+      }),
+      transformErrorResponse,
+      invalidatesTags: ['BranchOfficeFullInfo']
+    }),
   }),
 })
 
@@ -59,4 +83,7 @@ export const {
   useUpdateUserPasswordMutation,
   useSearchEmployeesQuery,
   useGetFullOfficeListQuery,
+  useGetOfficeFullInfoListQuery,
+  useUpdateBranchOfficeMutation,
+  useDeleteBranchOfficeMutation,
 } = moderatorApi;

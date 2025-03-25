@@ -1,14 +1,14 @@
 'use client';
 
 import classes from './styles.module.scss';
-import { Button, ComboboxData, ComboboxItem, Flex, Group, Modal, ModalProps, Skeleton, Stack, Title } from "@mantine/core";
-import { ErrorPage, Select } from "../../UI";
+import { Button, ComboboxData, Flex, Group, Modal, ModalProps, Skeleton, Stack, Title } from "@mantine/core";
+import { ErrorPage, Select } from "@/UI";
 import { useForm } from "@mantine/form";
 import { useGetDeliveryPointsQuery } from "@/lib/api/menuApi";
 import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../shared/hooks";
-import { OfficeDto } from "../../shared/types";
-import { changeDeliveryDestination, selectDeliveryDestination } from "../../lib/features/cart/cartSlice";
+import { useAppDispatch, useAppSelector } from "@/shared/hooks";
+import { OfficeDto } from "@/shared/types";
+import { changeDeliveryDestination, selectDeliveryDestination } from "@/lib/features/cart/cartSlice";
 
 interface DestinationInputModalProps extends ModalProps {
   

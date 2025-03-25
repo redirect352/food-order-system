@@ -1,3 +1,5 @@
+import officeTypes from "@/shared/types/branch-office/office-types";
+
 export type SearchUsersQueryParams = {
   page: number;
   pageSize: number;
@@ -26,3 +28,18 @@ export type UpdateUserPasswordParams = {
     newPassword:string,
   }
 }
+
+export type UpdateBranchOfficeBody ={
+  officeId: number;
+  name?: string;
+  address?: string;
+  officeType?: officeTypes;
+  servingCanteenId?: number;
+}
+
+export type GetOfficeFullInfoListParams = {
+  page: number;
+  pageSize: number;
+  sortOrder?: string;
+  orderBy?: string ;
+};

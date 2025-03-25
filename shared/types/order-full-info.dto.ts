@@ -1,5 +1,5 @@
 import { MenuPositionDto } from './menu-position.dto';
-import { OfficeDto } from './office.dto';
+import { OfficeDto } from './branch-office/office.dto';
 
 export type OrderFullInfoDto = {
   number: number;

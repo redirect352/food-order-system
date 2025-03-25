@@ -66,6 +66,7 @@ export const baseApiWithoutAuth = createApi({
 export const baseApiWithAuth = createApi({
   reducerPath: 'baseApiWithAuth',
   baseQuery: baseQueryWithExpire,
+  tagTypes: ['BranchOfficeFullInfo'],
   endpoints: (builder) => ({
 
   }),

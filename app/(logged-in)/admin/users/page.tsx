@@ -1,4 +1,5 @@
 import { SortOrderFilterBar, OfficeFilter, SearchInput, AdminUserList } from "@/components";
+import commonClasses from '../styles.module.scss';
 import classes from './styles.module.scss';
 
 const Users = () => {
@@ -9,7 +10,7 @@ const Users = () => {
       </SortOrderFilterBar>
       <SearchInput 
         placeholder="Введите строку для поиска"
-        className={classes.searchInput}  
+        className={commonClasses.searchInput}  
       />
       <AdminUserList />
     </div>

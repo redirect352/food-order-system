@@ -1,0 +1,16 @@
+.loadingBox{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 50dvh;
+  position: relative;
+  gap: 1rem;
+}
+.pagination{
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  justify-content: flex-end;
+}
