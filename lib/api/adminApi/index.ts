@@ -1,5 +1,5 @@
 import { baseApiWithAuth, transformErrorResponse, transformFileResponse } from "@/lib/api/baseApi";
-import { CreateBranchOfficeBody, CreateEmployeeBody, GetOfficeFullInfoListParams, SearchUsersQueryParams, UpdateBranchOfficeBody, UpdateUserPasswordParams, UpdateUserQueryParams } from "./types";
+import { CreateBranchOfficeBody, CreateEmployeeBody, GetOfficeFullInfoListParams, SearchUsersQueryParams, UpdateBranchOfficeBody, UpdateEmployeeBody, UpdateUserPasswordParams, UpdateUserQueryParams } from "./types";
 import { ResponseWithPagination } from "@/shared/types/menu-position.dto";
 import { UserMainInfoDto } from "@/shared/types/user";
 import { EmployeeFullInfoDto } from "@/shared/types/employee/employee-full-info.dto";
@@ -91,6 +91,23 @@ export const moderatorApi = baseApiWithAuth.injectEndpoints({
       transformErrorResponse,
       invalidatesTags: ['EmployeeList'],
     }),
+    updateEmployee: builder.mutation<any, {id: number, body: UpdateEmployeeBody}>({
+      query: ({id, body}) => ({
+        url:`/employee/update/${id}`,
+        method: 'PATCH',
+        body
+      }),
+      transformErrorResponse,
+      invalidatesTags: ['EmployeeList']
+    }),
+    deleteEmployee: builder.mutation<any, number>({
+      query: (id) => ({
+        url:`/employee/delete/${id}`,
+        method: 'DELETE',
+      }),
+      transformErrorResponse,
+      invalidatesTags: ['EmployeeList']
+    }),
   }),
 })
 
@@ -107,4 +124,6 @@ export const {
   useDeleteBranchOfficeMutation,
   useCreateBranchOfficeMutation,
   useCreateEmployeeMutation,
+  useUpdateEmployeeMutation,
+  useDeleteEmployeeMutation,
 } = moderatorApi;

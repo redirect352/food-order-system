@@ -1,0 +1,6 @@
+.saveBtn{
+  color: var(--mantine-color-green-6);
+}
+.saveBtn[data-disabled="true"]{
+  color: var(--mantine-color-grey-4);
+}

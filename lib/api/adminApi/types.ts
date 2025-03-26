@@ -61,3 +61,11 @@ export type CreateEmployeeBody = {
   active: boolean;
   officeId: number;
 }
+export type UpdateEmployeeBody = {
+  name?: string;
+  surname?: string;
+  patronymic?: string;
+  personnelNumber?: string;
+  active?: boolean;
+  officeId?: number;
+}
