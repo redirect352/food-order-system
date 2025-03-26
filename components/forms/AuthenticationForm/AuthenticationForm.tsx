@@ -42,9 +42,8 @@ export function AuthenticationForm({ onFirstAuth, ...props }
       if (res.error) {
         // eslint-disable-next-line prefer-destructuring
         const error: any = res.error;
-        const errorMessage = error.statusCode === 401 || error.statusCode === 403 
-        ? 'Ошибка авторизации неверный логин или пароль' :
-        (res.error as any).message || 'Неизвестная ошибка авторизации';
+        console.log(error)
+        const errorMessage = (res.error as any).message ?? 'Неизвестная ошибка авторизации';
         form.setErrors({ password: errorMessage });
       } else if (res.data.statusCode === 200) {
         const {access_token, refresh_token, role} = res.data;
@@ -102,7 +101,7 @@ export function AuthenticationForm({ onFirstAuth, ...props }
               Зарегистрироваться
             </Anchor>
           </Link>
-          <Button type="submit" radius="xl" loading={result.isLoading}>
+          <Button type="submit" radius="xl" loading={result.isLoading || result.isSuccess}>
             Войти
           </Button>
         </Group>
