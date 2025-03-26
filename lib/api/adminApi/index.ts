@@ -1,5 +1,5 @@
 import { baseApiWithAuth, transformErrorResponse, transformFileResponse } from "@/lib/api/baseApi";
-import { CreateBranchOfficeBody, CreateEmployeeBody, GetOfficeFullInfoListParams, SearchUsersQueryParams, UpdateBranchOfficeBody, UpdateEmployeeBody, UpdateUserPasswordParams, UpdateUserQueryParams } from "./types";
+import { CreateBranchOfficeBody, CreateEmployeeBody, GetOfficeFullInfoListParams, SearchUsersQueryParams, UpdateBranchOfficeBody, UpdateBranchOfficeEmployeesParams, UpdateEmployeeBody, UpdateUserPasswordParams, UpdateUserQueryParams } from "./types";
 import { ResponseWithPagination } from "@/shared/types/menu-position.dto";
 import { UserMainInfoDto } from "@/shared/types/user";
 import { EmployeeFullInfoDto } from "@/shared/types/employee/employee-full-info.dto";
@@ -108,6 +108,23 @@ export const moderatorApi = baseApiWithAuth.injectEndpoints({
       transformErrorResponse,
       invalidatesTags: ['EmployeeList']
     }),
+    updateBranchOfficeEmployees: builder.mutation<any, UpdateBranchOfficeEmployeesParams>({
+      query: ({file,...body}) => {
+        const bodyFormData = new FormData();
+        bodyFormData.append('file', file as Blob);
+        for(let [key, value] of Object.entries(body)){
+          if(!!value)
+            bodyFormData.append(key, value?.toString());
+        }        
+        return ({
+          method: "POST",
+          url:'/employee/update/list-in-office',
+          body: bodyFormData,
+          formData:true,
+        })
+      },
+      transformErrorResponse,
+    }),
   }),
 })
 
@@ -126,4 +143,5 @@ export const {
   useCreateEmployeeMutation,
   useUpdateEmployeeMutation,
   useDeleteEmployeeMutation,
+  useUpdateBranchOfficeEmployeesMutation,
 } = moderatorApi;

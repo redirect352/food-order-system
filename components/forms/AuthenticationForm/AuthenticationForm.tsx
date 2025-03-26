@@ -17,7 +17,6 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useLogin } from '@/shared/hooks';
 import { useSignInMutation } from '@/lib/api/authApi';
-import { log } from 'node:console';
 
 export function AuthenticationForm({ onFirstAuth, ...props }
   :{ onFirstAuth: () => void } & PaperProps) {

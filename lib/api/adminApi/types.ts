@@ -69,3 +69,7 @@ export type UpdateEmployeeBody = {
   active?: boolean;
   officeId?: number;
 }
+export type UpdateBranchOfficeEmployeesParams = {
+  file: File,
+  officeId: number,
+}

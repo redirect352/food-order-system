@@ -1,11 +1,15 @@
-import { SortOrderFilterBar , SearchInput, EmployeeList, OfficeFilter, EmployeeStatusFilter, CreateEmployeeButton } from "@/components";
+import { SortOrderFilterBar , SearchInput, EmployeeList, OfficeFilter, EmployeeStatusFilter, CreateEmployeeButton, UpdateEmployeeListButton } from "@/components";
 import classes from './styles.module.scss';
 import commonClasses from '../styles.module.scss';
+import { Group } from "@mantine/core";
 
 const Employees = () => {
   return (
     <div className={commonClasses.pageContainer}>
-      <EmployeeStatusFilter children={undefined} className={classes.employeeFilter}/>
+      <Group justify='space-between'>
+        <UpdateEmployeeListButton />
+        <EmployeeStatusFilter children={undefined} className={classes.employeeFilter}/>
+      </Group>
       <SortOrderFilterBar 
         sortFieldsOptionsDef={[
           {label:'id', 'value':'id'},

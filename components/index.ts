@@ -35,3 +35,5 @@ export { default as EmployeeStatusFilter } from './filters/EmployeeStatusFilter'
 export { default as BranchesTable } from './tables/BranchesTable';
 export { default as BranchOfficeList } from './lists/BranchOfficeList';
 export { default as CreateEmployeeButton } from './inputs/CreateEmployeeButton';
+export { default as OfficeSelect } from './OfficeSelect/OfficeSelect';
+export { default as  UpdateEmployeeListButton } from './inputs/UpdateEmployeeListButton'
