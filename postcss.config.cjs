@@ -11,6 +11,5 @@ module.exports = {
       },
       'avif-in-css':{ modules: true },
     },
-    
   },
 };

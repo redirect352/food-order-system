@@ -23,6 +23,7 @@ const DesktopModal: FunctionComponent<DesktopModalProps> = ({
     order?.number ?? -1,
     order?.issued ?? ""
   );
+  
   return (
     <Modal.Root {...modalProps} size="auto" centered>
       <Modal.Overlay />
@@ -41,7 +42,7 @@ const DesktopModal: FunctionComponent<DesktopModalProps> = ({
           />
         }
         {
-          (IsLoading || order) &&
+          !error && (IsLoading || order) &&
         <>
         <Modal.Header bg="var(--mantine-color-background)">
           <Modal.Title fz="h3" fw={500}>
@@ -51,43 +52,54 @@ const DesktopModal: FunctionComponent<DesktopModalProps> = ({
         </Modal.Header>
         <Modal.Body className={classes.modalBody}>
           <Grid gutter="xl">
-              <GridCol span={4} className={classes.gridCaption}>
-                Сумма заказа
-              </GridCol>
-              <GridCol span={8} className={classes.importantInfo}>
-                <NumberFormatter value={(order?.fullPrice ?? 0) / 100} decimalScale={2} suffix=" руб." />
-              </GridCol>
-              <GridCol span={4} className={classes.gridCaption}>
-                Место доставки
-              </GridCol>
-              <GridCol span={8} className={classes.importantInfo}>
-                {order?.deliveryDestination.name ?? '-'}
-              </GridCol>
-              <GridCol span={4} className={classes.gridCaption}>
-                Статус заказа
-              </GridCol>
-              <GridCol span={8} className={classes.statusContainer}>
-                <Badge color={orderStatusColor(order?.status)} size="lg">
-                  {order?.status}
-                </Badge>
-              </GridCol>
-              <GridCol span={4} className={classes.gridCaption}>
-                Изменен
-              </GridCol>
-              <GridCol span={8}>
-                { moment(order?.updated).format('HH:mm, DD.MM.YYYY') }
-              </GridCol>
-              <GridCol span={4} className={classes.gridCaption}>
-                Создан
-              </GridCol>
-              <GridCol span={8}>
-                { moment(order?.created).format('HH:mm, DD.MM.YYYY') }
-              </GridCol>
-              <GridCol
-                span={12}
-                className={classes.gridSubheading}>
-                Состав заказа:
-              </GridCol>
+            <GridCol span={4} className={classes.gridCaption}>
+              Сумма заказа
+            </GridCol>
+            <GridCol span={8} className={classes.importantInfo}>
+              <NumberFormatter value={(order?.fullPrice ?? 0) / 100} decimalScale={2} suffix=" руб." />
+            </GridCol>
+            <GridCol span={4} className={classes.gridCaption}>
+              Место доставки
+            </GridCol>
+            <GridCol span={8} className={classes.importantInfo}>
+              {order?.deliveryDestination.name ?? '-'}
+            </GridCol>
+            <GridCol span={4} className={classes.gridCaption}>
+              Статус заказа
+            </GridCol>
+            <GridCol span={8} className={classes.statusContainer}>
+              <Badge color={orderStatusColor(order?.status)} size="lg">
+                {order?.status}
+              </Badge>
+            </GridCol>
+            <GridCol span={4} className={classes.gridCaption}>
+              Изменен
+            </GridCol>
+            <GridCol span={8}>
+              { moment(order?.updated).format('HH:mm, DD.MM.YYYY') }
+            </GridCol>
+            <GridCol span={4} className={classes.gridCaption}>
+              Создан
+            </GridCol>
+            <GridCol span={8}>
+              { moment(order?.created).format('HH:mm, DD.MM.YYYY') }
+            </GridCol>
+            {
+              order?.userLabel
+              && 
+              <>
+                <GridCol span={4} className={classes.gridCaption}>
+                  Автор
+                </GridCol><GridCol span={8}>
+                  {order.userLabel}
+                </GridCol>
+              </>
+            }
+            <GridCol
+              span={12}
+              className={classes.gridSubheading}>
+              Состав заказа:
+            </GridCol>
           </Grid>
           <OrderPositionsTable
             orderPositions={order?.orderPositions}

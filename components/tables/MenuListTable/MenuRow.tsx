@@ -1,5 +1,7 @@
+'use client';
+
 import { Table } from "@mantine/core";
-import { MenuListItem } from "../../../shared/types/menu/menu-list.dto";
+import { MenuListItem } from "@/shared/types";
 import {  useState } from "react";
 import React from "react";
 import MenuInfoModal from "@/components/cards/MenuInfoCard";

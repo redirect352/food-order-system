@@ -35,7 +35,6 @@ const CreateEmployeeModal = ({...modalProps}: CreateEmployeeModalProps) => {
   }
   const onSubmit = () =>{
    if(form.validate().hasErrors) return;
-   console.log(form.getValues());
    const values = form.getValues();
    triggerCreate({
     ...values,

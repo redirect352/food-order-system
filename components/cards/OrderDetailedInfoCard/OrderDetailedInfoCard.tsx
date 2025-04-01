@@ -20,7 +20,7 @@ const OrderDetailedInfoCard: FunctionComponent<OrderDetailedInfoCardProps> =
   const [trigger, { data, error, isFetching }]
   = useLazyGetOrderInfoQuery();
   useEffect(() => {
-    if (!data && modalProps.opened) trigger({ number: orderNumber, issued: orderIssued });
+    if (modalProps.opened) trigger({ number: orderNumber, issued: orderIssued });
   }, [modalProps.opened]);
   const issuedLabel = data?.issued ? moment(data.issued).format('DD.MM.YYYY'): '';
   return (

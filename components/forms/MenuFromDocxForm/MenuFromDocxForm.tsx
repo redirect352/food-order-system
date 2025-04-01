@@ -1,16 +1,16 @@
 'use client'
 
+import { FormEvent, useEffect, useState } from "react";
 import { Stack, FileInput, Title, Fieldset, Switch, Collapse, Button, TextInput } from "@mantine/core";
 import { DateTimePicker } from "@mantine/dates";
 import { useForm } from "@mantine/form";
 import { IconFile } from "@tabler/icons-react";
-import dayjs from "dayjs";
-import { FormEvent, useEffect, useState } from "react";
-import OfficeSelect from "../../OfficeSelect/OfficeSelect";
+import { OfficeSelect } from '@/components';
+import { useUploadWordMenuMutation } from "@/lib/api/moderatorApi";
+import { NotificationService } from "@/shared/services";
 import { File } from "buffer";
 import path from "path";
-import { useUploadWordMenuMutation } from "../../../lib/api/moderatorApi";
-import { NotificationService } from "../../../shared/services";
+import dayjs from "dayjs";
 
 interface MenuFromDocxFormProps {
   

@@ -41,7 +41,6 @@ export function AuthenticationForm({ onFirstAuth, ...props }
       if (res.error) {
         // eslint-disable-next-line prefer-destructuring
         const error: any = res.error;
-        console.log(error)
         const errorMessage = (res.error as any).message ?? 'Неизвестная ошибка авторизации';
         form.setErrors({ password: errorMessage });
       } else if (res.data.statusCode === 200) {

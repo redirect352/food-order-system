@@ -47,7 +47,6 @@ const BranchesTable = ({items}: BranchesTableProps) => {
 };
 const TableRow = ({item}:{item: OfficeFullInfoDto}) => {
   const { id, name, address, officeType,changed, created, isAvailable, servingCanteen } = item;
-  console.log(isAvailable)
   const form = useForm({
     mode: 'uncontrolled',
     initialValues:{
@@ -65,7 +64,6 @@ const TableRow = ({item}:{item: OfficeFullInfoDto}) => {
   const updateOffice = ()=>{
     if(form.validate().hasErrors) return;
     const values = form.getValues();
-    console.log(values);
     triggerUpdate({
       officeId: id,
       ...values,

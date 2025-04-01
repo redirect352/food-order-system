@@ -1,9 +1,9 @@
 'use client';
 
-import {  Button, Flex, Grid, GridCol, LoadingOverlay, Modal, ModalProps, NumberFormatter } from '@mantine/core';
-import { FunctionComponent, useContext } from 'react';
+import {  Button, Flex, Grid, GridCol, LoadingOverlay, Modal, ModalProps } from '@mantine/core';
+import { FunctionComponent } from 'react';
 import { ErrorPage } from '@/UI';
-import { useGetMenuByIdQuery } from '../../../lib/api/moderatorApi';
+import { useGetMenuByIdQuery } from '@/lib/api/moderatorApi';
 import MenuPositionsTable from './MenuPositionsTable';
 import { formatDate } from '@/shared/helpers/formatHelper';
 import classes from './styles.module.scss';

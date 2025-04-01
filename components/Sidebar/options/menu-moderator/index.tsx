@@ -1,4 +1,4 @@
-import { IconPhotoPlus, IconTable, IconTablePlus, IconTransferIn, IconUserCircle } from "@tabler/icons-react";
+import { IconPaperBag, IconPhotoPlus, IconTable, IconTablePlus, IconTransferIn, IconUserCircle } from "@tabler/icons-react";
 import { SidebarOptionDefinition } from "../../options";
 
 const  menuModeratorOptions: SidebarOptionDefinition[] = [
@@ -14,8 +14,13 @@ const  menuModeratorOptions: SidebarOptionDefinition[] = [
   },
   {
     href: '/menu-moderator/get-orders',
-    label: 'Заказы пользователей',
+    label: 'Выгрузка заказов',
     leftSection: (<IconTransferIn size={20} />),
+  },
+  {
+    href: '/menu-moderator/orders?order=desc&sort=id',
+    label: 'Список заказов',
+    leftSection: (<IconPaperBag size={20} />),
   },
   {
     href: '/menu-moderator/menu-list',

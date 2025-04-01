@@ -1,9 +1,8 @@
 import { baseApiWithAuth, transformErrorResponse, transformFileResponse } from "@/lib/api/baseApi";
 import { CreateBranchOfficeBody, CreateEmployeeBody, GetOfficeFullInfoListParams, SearchUsersQueryParams, UpdateBranchOfficeBody, UpdateBranchOfficeEmployeesParams, UpdateEmployeeBody, UpdateUserPasswordParams, UpdateUserQueryParams } from "./types";
-import { ResponseWithPagination } from "@/shared/types/menu-position.dto";
 import { UserMainInfoDto } from "@/shared/types/user";
 import { EmployeeFullInfoDto } from "@/shared/types/employee/employee-full-info.dto";
-import { OfficeDto, OfficeFullInfoDto } from "@/shared/types";
+import { OfficeDto, OfficeFullInfoDto, ResponseWithPagination } from "@/shared/types";
 
 export const moderatorApi = baseApiWithAuth.injectEndpoints({
   overrideExisting: true,

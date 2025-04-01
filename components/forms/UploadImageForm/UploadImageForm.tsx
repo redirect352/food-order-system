@@ -1,12 +1,12 @@
 'use client';
 
 import { Button, Stack, StackProps, Title } from "@mantine/core";
-import ImageDropzone from "../../../UI/ImageDropzone/ImageDropzone";
+import { ImageDropzone } from "@/UI";
 import ImageTagsInput from "./ImageTagsInput";
 import { useField, useForm } from "@mantine/form";
 import { FileWithPath, IMAGE_MIME_TYPE } from "@mantine/dropzone";
-import { NotificationService } from "../../../shared/services";
-import { useUploadImagesMutation } from "../../../lib/api/moderatorApi";
+import { NotificationService } from "@/shared/services";
+import { useUploadImagesMutation } from "@/lib/api/moderatorApi";
 
 export type UploadImageFormProps = {
 

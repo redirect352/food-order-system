@@ -1,13 +1,14 @@
-import { Box, Group, Skeleton, Title } from "@mantine/core";
-import { useLazyGetMenuListQuery } from "@/lib/api/moderatorApi";
-import MenuListTable from "@/components/tables/MenuListTable";
-import { ErrorPage, Pagination, Select } from "@/UI";
-import { useForm } from "@mantine/form";
-import OfficeSelect from "@/components/OfficeSelect/OfficeSelect";
-import classes from './styles.module.scss';
+'use client';
+
 import { useEffect } from "react";
+import { Box, Group, Skeleton, Title } from "@mantine/core";
+import { useForm } from "@mantine/form";
+import { useLazyGetMenuListQuery } from "@/lib/api/moderatorApi";
+import { ErrorPage, Pagination, Select } from "@/UI";
+import { OfficeSelect, MenuListTable } from "@/components";
 import { IconSpider } from "@tabler/icons-react";
 import { useSearchParamValue } from "@/shared/hooks";
+import classes from './styles.module.scss';
 
 interface MenuListFormProps {
   

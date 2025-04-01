@@ -13,6 +13,7 @@ export { default as PFCLabel } from './PFCLabel/PFCLabel';
 export { MultiSelect } from './MultiSelect/MultiSelect';
 export { ErrorPage } from './ErrorPage/ErrorPage';
 export { PasswordStrength } from './PasswordWithStrengthMeter/PasswordWithStrengthMeter'
+export { default as ImageDropzone } from './ImageDropzone/ImageDropzone'
 export {
   Select,
   MobilePillsInput,

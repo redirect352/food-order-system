@@ -1,8 +1,7 @@
 import { TagsInput, TagsInputProps } from "@mantine/core";
-import { data } from "framer-motion/dist/client";
 import { useState } from "react";
-import { useSearchImageTagsQuery } from "../../../lib/api/moderatorApi";
-import { useDebounce } from "../../../shared/hooks";
+import { useSearchImageTagsQuery } from "@/lib/api/moderatorApi";
+import { useDebounce } from "@/shared/hooks";
 
 interface ImageTagsInputProps extends TagsInputProps {
   

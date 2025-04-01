@@ -42,7 +42,6 @@ const UpdateBranchOfficeEmployeesModal = ({...modalProps}: UpdateBranchOfficeEmp
       file: values.file!
     })
     .then(({data, error})=>{
-      console.log({data, error})
       if(data){
         NotificationService.showSuccessNotification({
           title: 'Список пользователей филиала обновлен.',

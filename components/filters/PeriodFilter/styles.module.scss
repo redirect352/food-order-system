@@ -1,0 +1,12 @@
+.popoverButton{
+  width: rem(300px);
+  border-color: var(--mantine-color-gray-4);
+  color: var(--input-color);
+  font-weight: 400;
+  &:hover{
+    border-color: red;
+  }
+  &:active{
+    transform: none;
+  }
+}

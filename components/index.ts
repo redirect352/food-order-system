@@ -37,3 +37,8 @@ export { default as BranchOfficeList } from './lists/BranchOfficeList';
 export { default as CreateEmployeeButton } from './inputs/CreateEmployeeButton';
 export { default as OfficeSelect } from './OfficeSelect/OfficeSelect';
 export { default as  UpdateEmployeeListButton } from './inputs/UpdateEmployeeListButton'
+export { default as MenuListTable } from './tables/MenuListTable'
+export { default as OrdersTable } from './tables/OrdersTable'
+export { default as OrdersSearchList } from './lists/OrdersSearchList';
+export { default as PeriodFilter } from './filters/PeriodFilter';
+export  {default as OrderDetailedInfoCard } from './cards/OrderDetailedInfoCard/OrderDetailedInfoCard';

@@ -11,6 +11,7 @@ export type OrderFullInfoDto = {
   created: Date;
   orderPositions: Array<OrderPositionFullInfoDto>;
   deliveryDestination: OfficeDto;
+  userLabel?: string;
 };
 
 export type OrderPositionFullInfoDto = {

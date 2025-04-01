@@ -14,9 +14,10 @@ export function formatOffice(office?: OfficeDto){
   return name
 }
 
-export function formatDate (date: Date,variant: 'default' | 'with-sec' = 'default'){
+export function formatDate (date: Date,variant: 'default' | 'with-sec' | 'issued' = 'default'){
   switch(variant){
     case 'default': return moment(date).format('YYYY-MM-DD HH:mm')
     case 'with-sec': return moment(date).format('YYYY-MM-DD HH:mm:ss')
+    case 'issued': return moment(date).format('DD.MM.YYYY')
   }
 }

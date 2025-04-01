@@ -1,9 +1,7 @@
-import { baseApiWithAuth, baseQueryWithExpire, transformErrorResponse, transformFileResponse } from "./baseApi";
-import { ImageDto, OfficeDto } from "../../shared/types";
-import dayjs from "dayjs";
-import { ImageTagDto } from "../../shared/types/image-tag.dto";
-import { MenuListDto } from "../../shared/types/menu/menu-list.dto";
-import { MenuInfoDto } from "../../shared/types/menu/menu-info.dto";
+import { baseApiWithAuth, transformErrorResponse, transformFileResponse } from "../baseApi";
+import { ImageDto, ImageTagDto, MenuInfoDto, MenuListDto, OfficeDto } from "@/shared/types";
+import { CreateMenuFromDocxDto, SearchImageTagDto, UploadImagesDto, ExportOrdersDocxDto, GetMenuListParams, SearchOrdersParams, SearchOrderItemDto, } from "./types";
+import { ResponseWithPagination } from "@/shared/types";
 
 export const moderatorApi = baseApiWithAuth.injectEndpoints({
   overrideExisting: true,
@@ -76,38 +74,15 @@ export const moderatorApi = baseApiWithAuth.injectEndpoints({
       }),
       transformErrorResponse,
     }),
+    searchOrders: builder.query<ResponseWithPagination<SearchOrderItemDto[]>, SearchOrdersParams>({
+      query: (params) => ({
+        url:`/order/search`,
+        params,
+      }),
+      transformErrorResponse,
+    }),
   }),
 })
-
-type CreateMenuFromDocxDto = {
-  file: Blob,
-  providingCanteenId: string,
-  servedOffices: string[],
-  name?: string,
-  relevantFrom: dayjs.Dayjs | null,
-  expire:  dayjs.Dayjs | null,
-}
-type SearchImageTagDto = {
-  searchString?: string,
-  page?: number,
-  pageSize?: number,
-}
-type GetMenuListParams = {
-  page?: number,
-  pageSize?: number,
-  destinationOfficeId: number;
-}
-type UploadImagesDto = {
-  files: File[],
-  tags: string[],
-  name?: string,
-}
-
-type ExportOrdersDocxDto = {
-  periodStart: string,
-  periodEnd: string,
-  deliveryDestinationId: string,
-}
 
 export const periodStringFormat = 'YYYY-MM-DD HH:mm';
 export const {
@@ -119,4 +94,5 @@ export const {
   useGetMenuListQuery,
   useLazyGetMenuListQuery,
   useGetMenuByIdQuery,
+  useSearchOrdersQuery,
 } = moderatorApi;

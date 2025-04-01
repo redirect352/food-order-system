@@ -3,11 +3,11 @@
 import { Stack, Title, Button, StackProps } from "@mantine/core";
 import { DateTimePicker } from "@mantine/dates";
 import { useForm } from "@mantine/form";
+import { useLazyOrderExportDocxQuery, periodStringFormat } from "@/lib/api/moderatorApi";
+import { NotificationService } from "@/shared/services";
+import { OfficeSelect } from "@/components";
 import dayjs from "dayjs";
-import { useLazyOrderExportDocxQuery, periodStringFormat } from "../../../lib/api/moderatorApi";
 import classes from './styles.module.scss';
-import { NotificationService } from "../../../shared/services";
-import OfficeSelect from "../../OfficeSelect/OfficeSelect";
 
 interface ExportOrdersFormProps extends StackProps {} 
 
