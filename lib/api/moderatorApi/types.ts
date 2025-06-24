@@ -21,7 +21,7 @@ export type GetMenuListParams = {
 }
 export type UploadImagesDto = {
   files: File[],
-  tags: string[],
+  tags: CreateImageTagDto[],
   name?: string,
 }
 
@@ -52,4 +52,8 @@ export type SearchOrderItemDto = {
   orderPositionsCount: number;
   clientName: string;
   clientPersonnelNumber: string;
+}
+export type CreateImageTagDto ={
+  tagName: string;
+  officeId?: number;
 }

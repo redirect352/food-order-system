@@ -40,7 +40,7 @@ export const moderatorApi = baseApiWithAuth.injectEndpoints({
         files.forEach((file) => bodyFormData.append('files', file as Blob));
         for(let [key, value] of Object.entries(body)){
           if(!!value)
-            bodyFormData.append(key, value?.toString());
+            bodyFormData.append(key, JSON.stringify(value));
         }        
         return ({
           method: "POST",

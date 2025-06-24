@@ -16,7 +16,7 @@ const ExportOrdersForm = (props: ExportOrdersFormProps) => {
   const form = useForm({
     mode:'uncontrolled',
     initialValues: {
-      periodStart: dayjs(new Date()).set('h', 8).set('m', 15).toDate(),
+      periodStart: dayjs(new Date()).set('h', 7).set('m', 0).toDate(),
       periodEnd: dayjs(new Date()).set('m', 60).toDate(),
       deliveryDestinationId: '',
     },

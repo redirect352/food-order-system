@@ -7,6 +7,7 @@ import { useField, useForm } from "@mantine/form";
 import { FileWithPath, IMAGE_MIME_TYPE } from "@mantine/dropzone";
 import { NotificationService } from "@/shared/services";
 import { useUploadImagesMutation } from "@/lib/api/moderatorApi";
+import { OfficeSelect } from "@/components";
 
 export type UploadImageFormProps = {
 
@@ -18,9 +19,11 @@ const UploadImageForm = (props : UploadImageFormProps) => {
     mode:'uncontrolled',
     initialValues: {
       imageTags: [] as string[],
+      canteenId: ''
     },
     validate: {
       imageTags: (val) => val.length === 0 ? "Добавите хотя-бы 1 подсказку" : null,
+      canteenId: (val) => !val ? 'Выберите место доставки' : null,
     }
   })
   const filesField = useField({
@@ -45,9 +48,11 @@ const UploadImageForm = (props : UploadImageFormProps) => {
       return;
     }
     const files = filesField.getValue();
+    const { imageTags, canteenId } = form.getValues();
+    const tags = imageTags.map(tag =>({tagName:tag, officeId:+canteenId}));
     upload({
       files: files as File[],
-      tags: form.getValues().imageTags,
+      tags,
     })
     .then(({data, error}) =>{
       if(error){
@@ -77,6 +82,13 @@ const UploadImageForm = (props : UploadImageFormProps) => {
         key={form.key('imageTags')}
         {...form.getInputProps('imageTags')}
         disabled= {result.isLoading}
+      />
+      <OfficeSelect
+        label='Выберите столовую' 
+        placeholder="Столовая НС-33"
+        inputProps={form.getInputProps('canteenId')}
+        inputKey={form.key('canteenId')}
+        officeType='canteen'
       />
       <ImageDropzone 
         files={filesField.getValue()}

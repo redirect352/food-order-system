@@ -10,7 +10,7 @@ interface ImageTagsInputProps extends TagsInputProps {
 const ImageTagsInput = (props: ImageTagsInputProps) => {
   const [searchString, setSearchValue] = useState('');
   const debouncedSearchString = useDebounce(searchString, 300);
-  const {data} = useSearchImageTagsQuery({ searchString : debouncedSearchString});
+  const { data } = useSearchImageTagsQuery({ searchString : debouncedSearchString});
   return (
     <TagsInput
       searchValue={searchString}
