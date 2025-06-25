@@ -1,10 +1,14 @@
 .table{
-  width: 90%;
-  @media(min-width: 1500px){
-    width:  1280px;
-  }
+  width: 100%;
 }
 .header{
   background: var(--mantine-color-background);
   height: 80px;
+}
+
+.date-input{
+  [data-dirty="true"]{
+    border-color: var(--mantine-color-yellow-7);
+    background-color: var(--mantine-color-yellow-0);
+  }
 }

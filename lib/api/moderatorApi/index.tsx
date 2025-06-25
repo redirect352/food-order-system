@@ -1,6 +1,6 @@
 import { baseApiWithAuth, transformErrorResponse, transformFileResponse } from "../baseApi";
 import { ImageDto, ImageTagDto, MenuInfoDto, MenuListDto, OfficeDto } from "@/shared/types";
-import { CreateMenuFromDocxDto, SearchImageTagDto, UploadImagesDto, ExportOrdersDocxDto, GetMenuListParams, SearchOrdersParams, SearchOrderItemDto, } from "./types";
+import { CreateMenuFromDocxDto, SearchImageTagDto, UploadImagesDto, ExportOrdersDocxDto, GetMenuListParams, SearchOrdersParams, SearchOrderItemDto, UpdateMenuParams, } from "./types";
 import { ResponseWithPagination } from "@/shared/types";
 
 export const moderatorApi = baseApiWithAuth.injectEndpoints({
@@ -81,6 +81,14 @@ export const moderatorApi = baseApiWithAuth.injectEndpoints({
       }),
       transformErrorResponse,
     }),
+     updateMenu: builder.mutation<any, UpdateMenuParams>({
+      query: ({id,body}) => ({
+        url:`/menu/${id}`,
+        method: 'PATCH',
+        body
+      }),
+      transformErrorResponse,
+    }),
   }),
 })
 
@@ -95,4 +103,5 @@ export const {
   useLazyGetMenuListQuery,
   useGetMenuByIdQuery,
   useSearchOrdersQuery,
+  useUpdateMenuMutation
 } = moderatorApi;

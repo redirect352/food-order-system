@@ -3,6 +3,7 @@ import { Table } from "@mantine/core";
 import React from "react";
 import TableRow from "./MenuRow";
 import SampleTable from "../SampleTable";
+import classes from './styles.module.scss';
 
 interface MenuListTableProps {
   items: MenuListItem[];
@@ -20,11 +21,13 @@ const MenuListTable = ({items}: MenuListTableProps) => {
         <Table.Th>Столовая</Table.Th>
         <Table.Th>Автор</Table.Th>
         <Table.Th>Добавлено</Table.Th>
+        <Table.Th></Table.Th>
       </Table.Tr>
     )
   }
   return (
     <SampleTable
+      className={classes.table}
       headerContent={<THead />}
       items={items}
       makeRow={(item)=><TableRow key={item.id} {...item}/>}

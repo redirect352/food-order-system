@@ -57,3 +57,10 @@ export type CreateImageTagDto ={
   tagName: string;
   officeId?: number;
 }
+export type UpdateMenuParams = {
+  id:number,
+  body:{
+    expire?:Date,
+    relevantFrom?:Date,
+  }
+}
