@@ -10,6 +10,7 @@ import { useDeleteEmployeeMutation, useUpdateEmployeeMutation } from "../../../l
 import { ModalService, NotificationService } from "../../../shared/services";
 import classes from '../styles.module.scss';
 import { IconDeviceFloppy, IconTrash } from "@tabler/icons-react";
+import ControlCols from "../SampleTable/ControlCols";
 
 interface EmployeesTableProps {
   items: EmployeeFullInfoDto[];
@@ -140,26 +141,13 @@ const TableRow = ({item}:{item: EmployeeFullInfoDto}) => {
       </Table.Td>
       <Table.Td>{formatDate(changed)}</Table.Td>
       <Table.Td>{formatDate(created)}</Table.Td>
-      <Table.Td>
-        <ActionIcon 
-          className={classes.saveBtn}
-          size={24} 
-          variant='transparent' 
-          disabled={!form.isDirty()}
-          onClick={onUpdate}
-        >
-          <IconDeviceFloppy size={24}/>
-        </ActionIcon>
-      </Table.Td>
-      <Table.Td>{ 
-        <ActionIcon 
-          size={24} 
-          variant='transparent' 
-          onClick={onDelete}
-        >
-          <IconTrash size={24}/>
-        </ActionIcon> }
-      </Table.Td> 
+      <ControlCols
+        onDelete={onDelete}
+        onUpdate={onUpdate}
+        disabled={{
+          update: !form.isDirty()
+        }}
+      />
     </Table.Tr> 
   );
 };
