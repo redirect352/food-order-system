@@ -66,6 +66,7 @@ export const moderatorApi = baseApiWithAuth.injectEndpoints({
         url:'/menu/list',
         params,
       }),
+      providesTags: ['MenuList'],
       transformErrorResponse,
     }),
     getMenuById : builder.query<MenuInfoDto, {id: number}>({
@@ -81,12 +82,20 @@ export const moderatorApi = baseApiWithAuth.injectEndpoints({
       }),
       transformErrorResponse,
     }),
-     updateMenu: builder.mutation<any, UpdateMenuParams>({
+    updateMenu: builder.mutation<any, UpdateMenuParams>({
       query: ({id,body}) => ({
         url:`/menu/${id}`,
         method: 'PATCH',
         body
       }),
+      transformErrorResponse,
+    }),
+    deleteMenu: builder.mutation<any, {id: number}>({
+      query: ({id}) => ({
+        url:`/menu/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['MenuList'],
       transformErrorResponse,
     }),
   }),
@@ -103,5 +112,6 @@ export const {
   useLazyGetMenuListQuery,
   useGetMenuByIdQuery,
   useSearchOrdersQuery,
-  useUpdateMenuMutation
+  useUpdateMenuMutation,
+  useDeleteMenuMutation,
 } = moderatorApi;

@@ -92,25 +92,25 @@ const TableRow = ({item}:{item: EmployeeFullInfoDto}) => {
   };
 
   const onDelete = () => {
-      ModalService.openDeleteModal(
-        {
-          children: (
-            <Text size="sm">
-              Вы точно хотите удалить указанный элемент? Удаление сотрудника будет невозможно, в случае если на него содержатся ссылки других элементов базы данных. В общем случае возможно удалить только недавно созданного сотрудника.
-            </Text>
-          ),
-          onConfirm:()=>{
-            triggerDelete(id).then(res =>{
-              if(res.data){
-                NotificationService.showSuccessNotification({message:`Сотрудник с ${id} удален`})
-              }else{
-                NotificationService.showErrorNotification({message:'Удаление сотрудника невозможно ' + ((res.error as any).message)})
-              }
-            })
-          }
+    ModalService.openDeleteModal(
+      {
+        children: (
+          <Text size="sm">
+            Вы точно хотите удалить указанный элемент? Удаление сотрудника будет невозможно, в случае если на него содержатся ссылки других элементов базы данных. В общем случае возможно удалить только недавно созданного сотрудника.
+          </Text>
+        ),
+        onConfirm:()=>{
+          triggerDelete(id).then(res =>{
+            if(res.data){
+              NotificationService.showSuccessNotification({message:`Сотрудник с ${id} удален`})
+            }else{
+              NotificationService.showErrorNotification({message:'Удаление сотрудника невозможно ' + ((res.error as any).message)})
+            }
+          })
         }
-      );
-    };
+      }
+    );
+  };
   return (
     <Table.Tr>
       <Table.Td>{id}</Table.Td>

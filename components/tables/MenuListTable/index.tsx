@@ -22,6 +22,7 @@ const MenuListTable = ({items}: MenuListTableProps) => {
         <Table.Th>Автор</Table.Th>
         <Table.Th>Добавлено</Table.Th>
         <Table.Th></Table.Th>
+        <Table.Th></Table.Th>
       </Table.Tr>
     )
   }

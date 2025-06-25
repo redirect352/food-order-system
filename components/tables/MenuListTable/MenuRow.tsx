@@ -1,6 +1,6 @@
 'use client';
 
-import { Table } from "@mantine/core";
+import { Table, Text } from "@mantine/core";
 import { MenuListItem } from "@/shared/types";
 import {  useState } from "react";
 import React from "react";
@@ -10,8 +10,8 @@ import { DateTimePicker } from "@mantine/dates";
 import { useForm } from "@mantine/form";
 import classes from './styles.module.scss';
 import ControlCols from "../SampleTable/ControlCols";
-import { useUpdateMenuMutation } from "@/lib/api/moderatorApi";
-import { NotificationService } from "@/shared/services";
+import { useDeleteMenuMutation, useUpdateMenuMutation } from "@/lib/api/moderatorApi";
+import { ModalService, NotificationService } from "@/shared/services";
 
 const TableRow = (item: MenuListItem) => {
   const {id, name, relevantFrom, expire, menuPositionsCount, author, providingCanteen, created} = item;
@@ -22,26 +22,52 @@ const TableRow = (item: MenuListItem) => {
       expire: new Date(expire)
     }
   });
-  const [updateMenu, result]= useUpdateMenuMutation();
+  const [updateMenu, result] = useUpdateMenuMutation();
+  const [deleteMenu, deleteResult] = useDeleteMenuMutation();
   const stopPropagation = (e: any) => e.stopPropagation();
-  const onUpdate=  (e: any) =>{
+  const onUpdate=  (e: any) => {
     e.stopPropagation();
-    updateMenu({id, body: {
-      ...form.getValues()
-    }}).then((data) => {
-      console.log(data);
+    updateMenu({
+      id, 
+      body: {
+        ...form.getValues()
+      }
+    })
+    .then(() => {
       NotificationService.showSuccessNotification({
         title: `Данные меню ${id} успешно изменены изменены!`,
         message: ''
       })
       form.resetDirty();
-    }).catch((err)=>{
+    })
+    .catch((err)=>{
       NotificationService.showErrorNotification({
         title: 'Ошибка обновления данных меню!',
         message: err?.message
       })
-      console.log(err);
     })
+  }
+  const onDelete=  (e: any) =>{
+    e.stopPropagation();
+    ModalService.openDeleteModal(
+      {
+        children: (
+          <Text size="sm">
+            Вы точно хотите удалить указанный элемент? Удаление меню приведет к <strong>полной потере данных</strong> меню.
+          </Text>
+        ),
+        onConfirm:()=>{
+          deleteMenu({id})
+          .then(res =>{
+            if(res.data){
+              NotificationService.showSuccessNotification({message:`Меню с ${id} удален`})
+            }else{
+              NotificationService.showErrorNotification({message:'Удаление меню невозможно ' + ((res.error as any).message)})
+            }
+          })
+        }
+      }
+    );
   }
   return (
     <React.Fragment>
@@ -80,6 +106,7 @@ const TableRow = (item: MenuListItem) => {
         <Table.Td>{formatDate(created)}</Table.Td>
         <ControlCols
           onUpdate={onUpdate}
+          onDelete={onDelete}
           disabled={{
             update: !form.isDirty()
           }}
