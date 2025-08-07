@@ -17,10 +17,14 @@ export async function handleLogin(token : string, refreshToken: string, role?: s
     maxAge: accessTokenExpireIn, 
     path: '/',
   };
+  const longTokenOptions = {
+    ...cookieOptions,
+    maxAge: refreshTokenExpireIn,
+  };
   const cookieStore = await cookies();
   cookieStore.set('token', tokenData, cookieOptions);
-  cookieStore.set('role', roleData, cookieOptions);
-  cookieStore.set('refresh-token', refreshTokenData,cookieOptions);
+  cookieStore.set('role', roleData, longTokenOptions);
+  cookieStore.set('refresh-token', refreshTokenData, longTokenOptions);
   return { statusCode: 200 };
 }
 export async function getToken() {
