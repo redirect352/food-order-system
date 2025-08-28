@@ -4,16 +4,18 @@ import React, { Suspense } from 'react';
 import Link from 'next/link';
 import classes from './styles.module.scss';
 import logo from '@/public/logo.png';
+import logo2 from '@/app/icon.png';
 
 export default function LoginLayout({ children }: { children: any }) {
   return (
     <AppShell header={{ height: 80 }} padding="md">
       <AppShellHeader>
        <Link href="/" style={{ textDecoration: 'none', color:'inherit' }}>
-          <Group h="100%" p="md" ml="lg">
-            <Image src={logo} alt="" width={37} height={52} />
-            <Title visibleFrom="sm" order={3}>Система заказа питания</Title>
-            <Title hiddenFrom="sm" order={5}>Система заказа питания</Title>
+          <Group h="100%" ml="lg">
+            {/* <Image src={logo} alt="" width={37} height={52} /> */}
+            <Image src={logo2} alt="" width={40} height={40} />
+            <Title visibleFrom="sm" order={3} pt={7}>Заказ питания</Title>
+            <Title hiddenFrom="sm" order={3} pt={7}>Заказ питания</Title>
           </Group>
        </Link>
       </AppShellHeader>

@@ -10,10 +10,12 @@ import { ColorSchemeScript } from '@mantine/core';
 import { Roboto } from 'next/font/google';
 import { Notifications } from '@mantine/notifications';
 import { RootProvider } from '@/components/providers';
+import favicon from './favicon.ico';
+import { icons } from '@tabler/icons-react';
 
 export const metadata = {
-  title: 'Система заказа',
-  description: 'Система автоматизированного заказа товаров государственного предприятия "Минсктранс"',
+  title: 'Заказ питания Минсктранс',
+  description: 'Система автоматизированного заказа питания для сотрудников государственного предприятия "Минсктранс"'
 };
 // const roboto = Roboto({
 //   weight: ['300', '400', '500', '700'],
@@ -39,7 +41,13 @@ export default function RootLayout({ children }: { children: any }) {
             />
           </>
         )}
-        <link rel="shortcut icon" href="/favicon.svg" />
+        {/* <link rel="shortcut icon" href="/favicon.ico" sizes="any" /> */}
+        <link
+          rel="icon"
+          href="/icon?<generated>"
+          type="image/<generated>"
+          sizes="<generated>"
+        />
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
