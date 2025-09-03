@@ -14,11 +14,11 @@ export function useDebouncedSearchParamState(
   useEffect(()=>{
     if(searchQueryParam!==debouncedValue){
       if(!resetParams || resetParams.length===0)
-        updateURL(key,debouncedValue);
+        updateURL(key,debouncedValue ?? '');
       else
         updateURL(
           [key, ...resetParams.map((item) => item[0])], 
-          [debouncedValue, ...resetParams.map((item) => item[1])]
+          [debouncedValue ?? '', ...resetParams.map((item) => item[1])]
         );
     }
   },[debouncedValue])
@@ -33,11 +33,11 @@ export function useSearchParamState(key: string, resetParams?: [string,string][]
   useEffect(()=>{
     if(searchQueryParam !== searchString){
       if(!resetParams || resetParams.length===0)
-        updateURL(key,searchString);
+        updateURL(key,searchString ?? '');
       else
         updateURL(
           [key, ...resetParams.map((item) => item[0])], 
-          [searchString, ...resetParams.map((item) => item[1])]
+          [searchString ?? '', ...resetParams.map((item) => item[1])]
         );
     }
   },[searchString])

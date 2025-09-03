@@ -19,11 +19,14 @@ interface ImageListProps {
 }
 
 const ImageList = (props: ImageListProps) => {
-  const [page,s, order, sort, office] = useSearchParamValues(['page','s','order','sort', 'office']);
+  const [page,s, sortOrder, orderBy, office] = useSearchParamValues(['page','s','order','sort', 'office']);
   const { data, isLoading, isFetching } = useGetImageListQuery({
     page: +(page ?? 1), 
     pageSize: 20,
     s,
+    orderBy,
+    sortOrder,
+    canteenId: office? +office: undefined,
   });
   const images = data?.data;
   const [picked, setPicked] = useState<number[]>([]);
@@ -32,7 +35,7 @@ const ImageList = (props: ImageListProps) => {
     else setPicked([...picked, id])
   }
   const [{opened, coordinates}, toggleOpened] = useState({opened: false, coordinates: {x:0, y:0}});
-  useEffect(()=>setPicked([]),[s])
+  useEffect(()=>setPicked([]),[s, orderBy, sortOrder, office])
   const [{editModalOpened, img}, setEditModalState] = useState({
     editModalOpened: false, 
     img: null as ImageFullInfoDto | null

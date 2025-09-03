@@ -1,3 +1,16 @@
+.pageBox{
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .search{
-  min-width: 50rem;
+  width: 100%;
+  flex-grow: 1;
+}
+.filterBox{
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 }
