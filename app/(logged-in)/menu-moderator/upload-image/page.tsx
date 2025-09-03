@@ -3,7 +3,7 @@ import UploadImageForm from "../../../../components/forms/UploadImageForm/Upload
 const GetOrdersPage = () => {
 
   return(
-    <UploadImageForm gap={'md'}/>
+    <UploadImageForm />
   )
 };
 

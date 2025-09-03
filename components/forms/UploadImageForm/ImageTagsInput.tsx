@@ -11,6 +11,7 @@ const ImageTagsInput = (props: ImageTagsInputProps) => {
   const [searchString, setSearchValue] = useState('');
   const debouncedSearchString = useDebounce(searchString, 300);
   const { data } = useSearchImageTagsQuery({ searchString : debouncedSearchString});
+  console.log({data});
   return (
     <TagsInput
       searchValue={searchString}

@@ -1,4 +1,4 @@
-import { AppShell, AppShellFooter, AppShellHeader, AppShellMain, Flex, Group, NavLink, rem, Text, Title } from '@mantine/core';
+import { AppShell, AppShellFooter, AppShellHeader, AppShellMain, Box, Flex, Group, NavLink, rem, Text, Title } from '@mantine/core';
 import Image from 'next/image';
 import React, { Suspense } from 'react';
 import Link from 'next/link';
@@ -24,13 +24,10 @@ export default function LoginLayout({ children }: { children: any }) {
         className={classes.mainBg}
       >
         <Suspense>
-          <Flex
-            align="center"
-            justify="center"
-            mt="xl"
-          >
+          <Box className={classes.formBox}>
             {children}
-          </Flex>
+          </Box>
+          <div className={classes.overlay}></div>
         </Suspense>
       </AppShellMain>
       <AppShellFooter p="md">

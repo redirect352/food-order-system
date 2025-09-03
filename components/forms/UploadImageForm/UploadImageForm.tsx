@@ -62,7 +62,7 @@ const UploadImageForm = (props : UploadImageFormProps) => {
       if(data){
         NotificationService.showSuccessNotification({title: 'Картинки успешно добавлены', message: `Добавлено ${data?.length} картинок с id: ${data.map(({id})=>id).join(', ')}`})
         filesField.reset();
-        form.reset();
+        form.setFieldValue('imageTags', []);
         return;
       }
     });
@@ -70,7 +70,7 @@ const UploadImageForm = (props : UploadImageFormProps) => {
   }
 
   return(
-    <Stack {...props}>
+    <Stack gap={'md'} {...props}>
       <Title order={2}> 
         Загрузить картинку
       </Title>
