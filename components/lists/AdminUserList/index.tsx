@@ -3,12 +3,12 @@
 import UserCard from "@/components/cards/UserCard";
 import { useSearchUsersQuery } from "@/lib/api/adminApi";
 import { ErrorPage, Pagination } from "@/UI";
-import { LoadingOverlay, Skeleton, Title } from "@mantine/core";
+import { LoadingOverlay, } from "@mantine/core";
 import { FunctionComponent } from "react";
 import { useSearchParamValues } from "@/shared/hooks";
 import classes from './styles.module.scss';
-import Image from "next/image";
 import searchEmpty from '@/public/search_state.gif';
+import NoContentPage from "../../NoContentPage/NoContentPage";
 
 interface AdminUserListProps {
   
@@ -35,10 +35,11 @@ const AdminUserList: FunctionComponent<AdminUserListProps> = () => {
           isFetching ?
           <LoadingOverlay visible />
           :
-          <>
-            <Image src={searchEmpty} width={250} height={250} alt="Nothing found"/>
-                <Title order={3}>По вашему запросу ничего не найдено</Title>
-          </>
+          <NoContentPage
+            label="По вашему запросу ничего не найдено :("
+            img={searchEmpty}
+            size='sm'
+          />
         }
       </div>
     )

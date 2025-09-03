@@ -9,13 +9,14 @@ interface EmptyDishListProps {
   label: string,
   buttonLabel?: string,
   href?: string,
-  img: string | StaticImport
+  img: string | StaticImport,
+  size?: 'sm' | 'md',
 }
 
 const NoContentPage: FunctionComponent<EmptyDishListProps> =
-  ({ label, buttonLabel, href, img }) => (
+  ({ label, buttonLabel, href, img, size = 'md' }) => (
     <Flex direction="column" gap="48px" justify="flex-start" align="center">
-      <Box className={classes.noDishPicture} pos="relative">
+      <Box className={classes.noDishPicture} data-size = {size}>
         <ImageWithFallback
           sizes="(max-width: 460px) 300px 300px, (max-width: 564px) 400px 400px, (min-width: 565px) 500px 500px"
           src={img}

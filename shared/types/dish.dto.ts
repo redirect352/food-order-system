@@ -1,5 +1,5 @@
 import { DishCategoryDto } from './dish-category.dto';
-import { ImageDto } from './image.dto';
+import { ImageDto } from './image/image.dto';
 
 export type DishDto = {
   id: number,

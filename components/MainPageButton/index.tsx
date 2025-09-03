@@ -21,7 +21,6 @@ const MainPageButton = (props: MainPageButtonProps) => {
         variant="gradient"
         gradient={{ from: 'red', to: 'yellow' }}
         size="xl"
-        mt={40}
         {...props}
         loading={isLoggedIn===undefined}
       >

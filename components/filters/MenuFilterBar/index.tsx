@@ -1,7 +1,7 @@
 'use client';
 
-import { ActionIcon, Affix, CloseButton, ComboboxItem, Flex, Title, useMantineTheme } from '@mantine/core';
-import { createContext, Dispatch, FunctionComponent, SetStateAction } from 'react';
+import { ActionIcon, Affix, CloseButton, ComboboxItem, Flex, Stack, Title, useMantineTheme } from '@mantine/core';
+import { createContext, FunctionComponent } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { IconFilter, IconFilterFilled } from '@tabler/icons-react';
 import classes from './styles.module.scss';
@@ -26,17 +26,18 @@ const MenuFilterBar: FunctionComponent<MenuFilterBarProps> = () => {
     <FilterContext.Provider value={filters}>
       <Flex className={classes.filtersBox}>
         <DeliveryDestinationInput />
-        <Flex className={classes.filterBarContainer} gap={24} justify="flex-end" align="flex-start">
-          <Flex direction="column" gap={8}>
+        <Flex className={classes.filterBarContainer}>
+          <Stack className={classes.filter}>
             <Title order={4}>Тип продукции</Title>
             <MultiSelect
               className={classes.select}
               data={typeOptions}
               value={typeValue}
               onChange={changeType}
+              placeholder='Вид продукции'
             />
-          </Flex>
-          <Flex direction="column" gap={8}>
+          </Stack>
+          <Stack className={classes.filter}>
             <Title order={4}>Тип блюда</Title>
             <MultiSelect
               className={classes.select}
@@ -44,16 +45,17 @@ const MenuFilterBar: FunctionComponent<MenuFilterBarProps> = () => {
               value={categoryValue}
               onChange={changeCategory}
               disabled={categoryOptions.length === 0}
+              placeholder='Тип блюда'
             />
-          </Flex>
-          <Flex direction="column" gap={8}>
+          </Stack>
+          <Stack className={classes.filter}>
             <Title order={4} className={classes.resetButtonHeader}>ы</Title>
             <CloseButton
               disabled={isFiltersActive}
               onClick={resetFilters}
               className={classes.resetButton}
             />
-          </Flex>
+          </Stack>
         </Flex>
         <FilterModal
           opened={opened}

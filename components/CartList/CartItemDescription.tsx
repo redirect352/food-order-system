@@ -32,7 +32,7 @@ const CartItemDescription: FunctionComponent<CartItemDescriptionProps> = () => {
         <Text className={classes.cartItemHeader}>{name}</Text>
         <Text
           className={classes.cartItemDescription}
-          lineClamp={isMobile ? 2 : 4}
+          lineClamp={isMobile ? 2 : 3}
         >
           {description}
         </Text>

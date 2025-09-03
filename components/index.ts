@@ -42,3 +42,4 @@ export { default as OrdersTable } from './tables/OrdersTable'
 export { default as OrdersSearchList } from './lists/OrdersSearchList';
 export { default as PeriodFilter } from './filters/PeriodFilter';
 export  {default as OrderDetailedInfoCard } from './cards/OrderDetailedInfoCard/OrderDetailedInfoCard';
+export { default as ImageList } from './lists/ImagesList';

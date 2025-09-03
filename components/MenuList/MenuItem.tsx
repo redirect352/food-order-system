@@ -16,11 +16,11 @@ const MenuListItem: FunctionComponent<MenuListItemProps> = (props) => {
   const { quantity, name, description } = props.menuPosition.dish;
   return (
     <MenuListItemContext.Provider value={props.menuPosition}>
-      <Paper className={classes.menuItemBox} p="md">
+      <Paper className={classes.menuItemBox}>
         <Flex direction="column" align="center" justify="space-between" h="100%">
           <Flex direction="column" gap={8} maw="100%">
             <MenuItemClickableImage />
-            <Flex align="flex-start" w="100%" direction="column" gap={8}>
+            <Flex align="flex-start" w="100%" direction="column" gap={8} pl={'md'} pr={'md'}>
               <Box w="100%">
                 <Title order={3} lineClamp={2}>{name}</Title>
               </Box>

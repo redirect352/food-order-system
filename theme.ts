@@ -1,10 +1,10 @@
 'use client';
 
-import { Button, CSSVariablesResolver, Input, Loader, LoadingOverlay, MantineColorsTuple, Overlay, colorsTuple, createTheme, rem } from '@mantine/core';
+import {  CSSVariablesResolver, LoadingOverlay, MantineColorsTuple, colorsTuple, createTheme, rem } from '@mantine/core';
 
 const greyScale: MantineColorsTuple = [
     '#FFFFFF',
-    '#f3f3fe',
+    '#F3F4F6',
     '#e4e6ed',
     '#c8cad3',
     '#a9adb9',
@@ -157,7 +157,9 @@ export const resolver: CSSVariablesResolver = (theme) => ({
         '--app-shell-navbar-z-index':'300',
     },
     light: {
-        '--mantine-color-background': '#FCEDEF',
+        // '--mantine-color-background': '#FCEDEF',
+        '--mantine-color-background': '#FAFAFA',
+
     },
     dark: {
       '--text-color':'white',

@@ -34,7 +34,7 @@ const CartItem: FunctionComponent<CartItemProps> =
   return (
     <>
     <CartItemContext.Provider value={cartItem}>
-      <ScalingCard className={classes.cartItemContainer} shadow='md' onClick={open}>
+      <ScalingCard className={classes.cartItemContainer} onClick={open} animationType='up'>
         <Box className={classes.image} data-modal-opened={opened}>
           <ImageWithFallback
             style={{ borderRadius: '10px' }}

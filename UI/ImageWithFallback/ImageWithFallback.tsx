@@ -20,6 +20,7 @@ export default function ImageWithFallback(props : ImageProps) {
           h={boxHeight}
           style={{ flexShrink: 0 }}
           bg="var(--mantine-color-body)"
+          className={props.className}
         >
           <NoImage variant={variant} />
         </Box>

@@ -1,7 +1,8 @@
 import { baseApiWithAuth, transformErrorResponse, transformFileResponse } from "../baseApi";
 import { ImageDto, ImageTagDto, MenuInfoDto, MenuListDto, OfficeDto } from "@/shared/types";
-import { CreateMenuFromDocxDto, SearchImageTagDto, UploadImagesDto, ExportOrdersDocxDto, GetMenuListParams, SearchOrdersParams, SearchOrderItemDto, UpdateMenuParams, } from "./types";
+import { CreateMenuFromDocxDto, SearchImageTagDto, UploadImagesDto, ExportOrdersDocxDto, GetMenuListParams, SearchOrdersParams, SearchOrderItemDto, UpdateMenuParams, SearchImageParams, UpdateImageTagsParams, DeleteImagesParams, } from "./types";
 import { ResponseWithPagination } from "@/shared/types";
+import { ImageFullInfoDto } from "@/shared/types/image/image-full-info.dto";
 
 export const moderatorApi = baseApiWithAuth.injectEndpoints({
   overrideExisting: true,
@@ -49,6 +50,7 @@ export const moderatorApi = baseApiWithAuth.injectEndpoints({
           formData:true,
         })
       },
+      invalidatesTags:['Images'],
       transformErrorResponse,
     }),
     orderExportDocx:  builder.query<any, ExportOrdersDocxDto>({
@@ -98,6 +100,41 @@ export const moderatorApi = baseApiWithAuth.injectEndpoints({
       invalidatesTags: ['MenuList'],
       transformErrorResponse,
     }),
+    getImageList: builder.query<ResponseWithPagination<ImageFullInfoDto[]>, SearchImageParams>({
+      query: (params) => ({
+        url:`/image/list`,
+        params,
+      }),
+      providesTags:['Images'],
+      transformErrorResponse,
+    }),
+    updateImageTags: builder.mutation<any, UpdateImageTagsParams>({
+      query: ({id,body}) => ({
+        url:`/image/${id}/update/tags`,
+        method: 'PATCH',
+        body
+      }),
+      // invalidatesTags:['Images'],
+      transformErrorResponse,
+    }),
+    deleteImages: builder.mutation<any, DeleteImagesParams>({
+      query: ({body}) => ({
+        url:`/image/delete`,
+        method: 'DELETE',
+        body
+      }),
+      invalidatesTags:['Images'],
+      transformErrorResponse,
+    }),
+    deleteImagesTags: builder.mutation<any, DeleteImagesParams>({
+      query: ({body}) => ({
+        url:`/image/tags/clear`,
+        method: 'PATCH',
+        body
+      }),
+      invalidatesTags:['Images'],
+      transformErrorResponse,
+    }),
   }),
 })
 
@@ -114,4 +151,8 @@ export const {
   useSearchOrdersQuery,
   useUpdateMenuMutation,
   useDeleteMenuMutation,
+  useGetImageListQuery,
+  useUpdateImageTagsMutation,
+  useDeleteImagesMutation,
+  useDeleteImagesTagsMutation,
 } = moderatorApi;

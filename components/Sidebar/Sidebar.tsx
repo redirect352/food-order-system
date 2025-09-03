@@ -5,7 +5,7 @@ import { IconLogout2 } from '@tabler/icons-react';
 import SidebarOption from './SidebarOption';
 import { useAppSelector, useLogout } from '@/shared/hooks';
 import { roleOptions, commonOptions } from './options';
-import { selectUserInterface } from '../../lib/features/user/userSlice';
+import { selectUserInterface } from '@/lib/features/user/userSlice';
 
 export default function Sidebar() {
   const { logout } = useLogout();

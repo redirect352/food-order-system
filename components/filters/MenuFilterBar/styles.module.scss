@@ -1,6 +1,12 @@
 .filterBarContainer{
+  gap: rem(24px);
+  justify-content: flex-end;
+  align-items: flex-start;
   @media (max-width:$mantine-breakpoint-sm ){
     display: none
+  }
+  .filter{
+    gap: rem(4px);
   }
 }
 .resetButton{

@@ -1,5 +1,7 @@
 .cartTotalContainer{
   background-color: var(--mantine-color-background) ;
+  box-shadow: var(--mantine-shadow-md);
+  border: 1px solid #e5e7eb; 
   border-radius: 48px;
   .header{
     font-size: var((--mantine-h1-font-size));

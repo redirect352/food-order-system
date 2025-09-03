@@ -64,3 +64,29 @@ export type UpdateMenuParams = {
     relevantFrom?:Date,
   }
 }
+
+export type SearchImageParams = {
+  canteenId?: number;
+  s?: string;
+  page?: number;
+  pageSize?: number;
+  sortOrder?: string;
+  orderBy?: string;
+}
+export type UpdateImageTagsParams = {
+   id:number,
+  body:{
+    tags: Array<{
+      id: string;
+      tagName: string;
+      canteenId: string;
+      type: string;
+      action: string;
+    }>
+  }
+}
+export type DeleteImagesParams = {
+  body:{
+    ids:number[],
+  }
+}

@@ -1,9 +1,11 @@
 import { ImageList, SearchInput } from "@/components"
+import classes from './styles.module.scss';
 
 const ImagesPage = () => {
   return (
     <>
-      <SearchInput 
+      <SearchInput
+        className={classes.search}
         placeholder="Введите подсказки изображения"
       />
       <ImageList />

@@ -1,15 +1,19 @@
 .noDishPicture{
   position: relative;
-  &{
+  &[data-size=md]{
     width: 500px;
     height: 500px;
+    @media (min-width: $mantine-breakpoint-xs) and (max-width:$mantine-breakpoint-md) {
+      width: 400px;
+      height: 400px;
+    }
+    @media (max-width: $mantine-breakpoint-xs) {
+      width: 300px;
+      height: 300px;
+    }
   }
-  @media (min-width: $mantine-breakpoint-xs) and (max-width:$mantine-breakpoint-md) {
-    width: 400px;
-    height: 400px;
-  }
-  @media (max-width: $mantine-breakpoint-xs) {
-    width: 300px;
-    height: 300px;
+  &[data-size=sm]{
+    width: 250px;
+    height: 250px;
   }
 }

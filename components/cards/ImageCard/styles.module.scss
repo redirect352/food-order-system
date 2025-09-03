@@ -1,0 +1,52 @@
+.imageCardBox{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 266px;
+  height: 380px;
+
+  padding-top: 0;
+  gap: 8px;
+  background: var(--mantine-color-background);
+  border: 1px solid #e5e7eb; 
+  border-radius: 0.75rem;       
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08); 
+  position: relative;
+  .imageBox{
+    width: 264px;
+    height: 264px;
+    border-radius: 0.75rem;       
+    flex-shrink: 0;
+    position: relative;
+  }
+  .imageInfo{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .imageInfoLine{
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    .infoContent{
+      font-size: var(--mantine-font-size-sm);
+      line-clamp: 1;
+    }
+    .infoLabel{
+      color: var(--mantine-color-dimmed);
+      font-size: var(--mantine-font-size-sm);
+    }
+  }
+  .checkedIndicator{
+    position: absolute;
+    right: 0rem;
+    top: 0rem;
+    z-index: 30;
+    border-radius: var(--mantine-radius-xl);
+    display: none;
+    &[data-picked='true']{
+      display: unset;
+    }
+  }
+}

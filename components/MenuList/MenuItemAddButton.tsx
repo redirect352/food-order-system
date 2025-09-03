@@ -24,7 +24,7 @@ const MenuItemAddButton: FunctionComponent<MenuItemAddButtonProps> = () => {
     newCount,
   }));
   return (
-    <Flex justify="space-between" align="center" w="100%">
+    <Flex justify="space-between" align="center" w="100%" p={'md'}>
       {
       count > 0
       ?

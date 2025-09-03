@@ -1,10 +1,16 @@
 .hoverCardWrapper{
-  &:hover{
-    scale: 1.05;
-    transition: 0.3s;
+  transition: 0.3s;
+  &:hover[data-animation=up]{
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+    border-color: var(--mantine-color-red-4); 
+    transform: translateY(-4px); 
   }
-  &:not(hover){
-    scale: 1;
-    transition: 0.3s;
+  &[data-animation=scale]{
+    &:hover{
+      scale: 1.05;
+    }
+    &:not(hover){
+      scale: 1;
+    }
   }
 }

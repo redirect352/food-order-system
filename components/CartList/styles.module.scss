@@ -6,15 +6,16 @@
   align-items: stretch;
   justify-items: flex-start;
   flex-wrap: nowrap;
-  background: var(--mantine-color-grey-1);
+  // background: var(--mantine-color-grey-1);
   padding: var(--mantine-spacing-md);
-  .centralSegment{
-    
-  }
+  box-shadow: var(--mantine-shadow-md);
+  border: 1px solid #e5e7eb; 
+  border-radius: 2rem;       
   .image{
+    border-radius: 2rem;       
     align-self: flex-start;
     width: 180px;
-    height: 240px;
+    height: 200px;
     position: relative;
     flex-shrink: 0;
   }
