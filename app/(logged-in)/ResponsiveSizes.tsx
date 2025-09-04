@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { Sidebar, UserAvatar } from '@/components';
 import logo2 from '@/app/icon.png';
 import classes from './styles.module.scss';
+import Link from 'next/link';
 
 function ResponsiveSizes({ children, className }: { children: any, className?: string }) {
   const [opened, { toggle }] = useDisclosure();
@@ -21,17 +22,19 @@ function ResponsiveSizes({ children, className }: { children: any, className?: s
       className={classes.bodyColor}
     >
       <AppShell.Header className={classes.header}>
-        <Group align="center" justify="space-between" h="100%">
-          <Group px="md" visibleFrom="sm" pl="lg" align='center'>
-              {/* <Image src={logo} alt="" width={37} height={52} /> */}
-              <Image src={logo2} alt="" width={40} height={40} />
-              <Title order={3} pt={7}>Заказ питания</Title>
+        <Link href="/" style={{ textDecoration: 'none', color:'inherit' }}>
+          <Group align="center" justify="space-between" h="100%">
+            <Group px="md" visibleFrom="sm" pl="lg" align='center'>
+                {/* <Image src={logo} alt="" width={37} height={52} /> */}
+                <Image src={logo2} alt="" width={40} height={40} />
+                <Title order={3} pt={7}>Заказ питания</Title>
+            </Group>
+            <UserAvatar px="md" visibleFrom="sm" pl="lg" />
+            <Group h="100%" px="md" hiddenFrom="sm">
+              <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+            </Group>
           </Group>
-          <UserAvatar px="md" visibleFrom="sm" pl="lg" />
-          <Group h="100%" px="md" hiddenFrom="sm">
-            <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-          </Group>
-        </Group>
+        </Link>
       </AppShell.Header>
       <AppShell.Navbar className={classes.navbar}>
         <AppShell.Section>

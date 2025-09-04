@@ -1,9 +1,9 @@
 .bodyColor{
-  background-color: light-dark(var(--mantine-color-white), var(--mantine-color-black));;
+  background-color: var(--mantine-color-body);
 }
 .navbar{
   padding: var(--mantine-spacing-md);
-  background-color: light-dark(var(--mantine-color-grey-1), var(--mantine-color-black));
+  background-color: var(--mantine-color-navbar);
   box-shadow: 2px 1px 3px rgba(0, 0, 0, 0.1); 
   @media(max-width:$mantine-breakpoint-sm){
     z-index: 300;
@@ -16,6 +16,6 @@
   color: var(--mantine-color-dimmed);
 }
 .header{
-  background: light-dark(var(--mantine-color-grey-1), var(--mantine-color-black));
+  background-color: var(--mantine-color-navbar);
   box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1); 
 }

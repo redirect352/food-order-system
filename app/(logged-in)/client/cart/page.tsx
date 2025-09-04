@@ -28,7 +28,7 @@ const Cart : FunctionComponent<CartProps> = () => {
             <Stack gap={0}>
               <Group justify="space-between">
                 <Title order={1}>Корзина <Text c="dimmed" span fz="h2">{cartCount}</Text></Title>
-                <Button variant="white" size="lg" visibleFrom="sm">
+                <Button variant="transparent" size="lg" visibleFrom="sm">
                   Выбрать всё
                 </Button>
               </Group>

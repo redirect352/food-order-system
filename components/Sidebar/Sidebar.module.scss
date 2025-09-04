@@ -4,16 +4,19 @@
 	text-align: left;
 	text-decoration: none;
 	color: light-dark(var(--mantine-color-black), var(--mantine-color-grey-1));
+	border-radius: 0.75rem;
 }
 
 .option:hover{
 	transition: 0.2s ease-in all;
 	color: var(--mantine-color-primary-7);
+  @mixin dark {
+    background-color: #3A3A3A;
+  }
 }
 .optionActive, .optionActive:hover{
-	border-radius: 12px;
-	color: light-dark(var(--mantine-color-primary-4), var(--mantine-color-white));
 	font-weight: 700;
+	color: light-dark(var(--mantine-color-primary-4), var(--mantine-color-white));
 	background: light-dark(var(--mantine-color-primary-1), var(--mantine-color-primary-7)) ;
 	font-weight: 700;
 }

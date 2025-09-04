@@ -2,21 +2,22 @@
   width: 250px;
   height: 420px;
   background: var(--mantine-color-background);
-  border: 1px solid #e5e7eb; 
-  border-radius: 0.75rem;       
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08); 
+  border: 1px solid light-dark(#e5e7eb, var(--mantine-color-grey-8)); 
+  box-shadow: 0 3px 10px light-dark(rgba(0, 0, 0, 0.08), rgba(255, 255, 255, 0.08)); 
   transition: all 0.3s;
+  border-radius: 0.75rem;       
 
   .imageBox{
     width: 248px;
     height: 250px;
     border-radius: 12px 12px 0 0  ;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid light-dark(#e5e7eb, var(--mantine-color-grey-8));
   }
   
   &:has(.imageBox:hover), &:has(.imageBox[data-modal-opened=true]){
     box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
-    border-color: var(--mantine-color-red-4); 
+    border-color: light-dark(var(--mantine-color-red-4),
+    var(--mantine-color-primary-5));
     transform: translateY(-4px); 
   }
   &:not(hover){

@@ -157,12 +157,14 @@ export const resolver: CSSVariablesResolver = (theme) => ({
         '--app-shell-navbar-z-index':'300',
     },
     light: {
-        // '--mantine-color-background': '#FCEDEF',
-        '--mantine-color-background': '#FAFAFA',
-
+      '--mantine-color-background': '#FAFAFA',
+      '--mantine-color-body': 'white',
+      '--mantine-color-navbar':theme.colors.grey[1],
     },
     dark: {
       '--text-color':'white',
-      '--mantine-color-background': theme.colors.dark[5],
+      '--mantine-color-background': '#3A3A3A',
+      '--mantine-color-body': '#1F1F1F',
+      '--mantine-color-navbar':'#2B2B2B'
     },
     });

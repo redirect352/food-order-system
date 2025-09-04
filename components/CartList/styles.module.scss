@@ -9,7 +9,7 @@
   // background: var(--mantine-color-grey-1);
   padding: var(--mantine-spacing-md);
   box-shadow: var(--mantine-shadow-md);
-  border: 1px solid #e5e7eb; 
+  border: 1px solid light-dark(#e5e7eb, var(--mantine-color-grey-8)); 
   border-radius: 2rem;       
   .image{
     border-radius: 2rem;       

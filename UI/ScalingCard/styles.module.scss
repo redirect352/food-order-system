@@ -2,7 +2,8 @@
   transition: 0.3s;
   &:hover[data-animation=up]{
     box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
-    border-color: var(--mantine-color-red-4); 
+    border-color: light-dark(var(--mantine-color-red-4),
+    var(--mantine-color-primary-5));
     transform: translateY(-4px); 
   }
   &[data-animation=scale]{

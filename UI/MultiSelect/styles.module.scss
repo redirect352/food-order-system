@@ -4,7 +4,9 @@
 }
 .selectOption:hover{
 	color: var(--mantine-color-black);
-	background-color: var(--mantine-color-primary-1);
+	background-color: light-dark(var(--mantine-color-primary-1),
+    var(--mantine-color-primary-5)
+  );
 	transition: 0.4s ease all;
 }
 
@@ -12,5 +14,7 @@
 	color: var(--mantine-color-primary-5);
 }
 .pill{
-	background-color: var(--mantine-color-primary-1);
+  background-color: light-dark(var(--mantine-color-primary-1),
+    var(--mantine-color-primary-5)
+  );
 }

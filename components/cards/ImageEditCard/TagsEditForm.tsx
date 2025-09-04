@@ -9,9 +9,9 @@ import OfficeSelect from "../../OfficeSelect/OfficeSelect";
 import classes from './styles.module.scss';
 import { useEffect } from "react";
 import { useUpdateImageTagsMutation } from "@/lib/api/moderatorApi";
-import { NotificationService } from "../../../shared/services";
-import { baseApiWithAuth } from "../../../lib/api/baseApi";
-import { useAppDispatch } from "../../../shared/hooks";
+import { NotificationService } from "@/shared/services";
+import { baseApiWithAuth } from "@/lib/api/baseApi";
+import { useAppDispatch } from "@/shared/hooks";
 
 interface TagsEditFormProps {
   tags?: ImageTagDto[],
